@@ -148,6 +148,12 @@ const PEN={illegal:{v:92,c:"#ff4d2e"},lowthc:{v:62,c:"#e0792e"},med:{v:38,c:"#c7
 const IBO={active:{v:90,c:"#1fd6b4"},considering:{v:50,c:"#13806f"},none:{v:8,c:"#2c302c"}};
 const KET={open:{v:70,c:"#29b6d8"},clinic:{v:34,c:"#26606e"}};
 const MDMA={trial:{v:88,c:"#e0529c"},rtt:{v:50,c:"#9a4f78"},none:{v:10,c:"#332e36"}};
+const RSCH={active:{v:90,c:"#f2c14e"},emerging:{v:48,c:"#8a6d2e"},none:{v:8,c:"#2e2e28"}};
+const RSCHL={active:"Active research center",emerging:"Emerging program",none:"None yet"};
+const SSPL={yes:"Authorized",limited:"Limited / local",no:"Not authorized"};
+const GSLL={yes:"Yes",limited:"Limited",no:"No"};
+const hrColor=d3.scaleLinear().domain([0,50,100]).range(["#3a3a34","#2f8f9c","#36c8d8"]).interpolate(d3.interpolateLab).clamp(true);
+function hrScore(n){var d=STATES[n];var f=d.fts==="legal"?1:0;var s=d.ssp==="yes"?1:(d.ssp==="limited"?0.5:0);var g=d.gsl==="yes"?1:(d.gsl==="limited"?0.5:0);return Math.round((f+s+g)/3*100);}
 function sw(c,round){return "<span class='sw' style='background:"+c+(round?";border-radius:50%":"")+"'></span>";}
 const LAYERS={
  overall:{t:"Overall openness",m:function(n){return{v:STATES[n].o,c:oColor(STATES[n].o)};},
@@ -167,14 +173,19 @@ const LAYERS={
  mdma:{t:"MDMA & trials",m:function(n){var k=MDMA[STATES[n].mdma];return{v:k.v,c:k.c};},
    lg:sw("#e0529c")+"Trial site "+sw("#9a4f78")+"Right-to-try "+sw("#332e36")+"None  ·  Schedule I"},
  penalty:{t:"Possession penalties",m:function(n){var k=PEN[STATES[n].can];return{v:k.v,c:k.c};},
-   lg:sw("#ff4d2e")+"Felony "+sw("#e0792e")+"Misdemeanor "+sw("#c79a55")+"Low/civil "+sw("#4a4a40")+"Legal"}
+   lg:sw("#ff4d2e")+"Felony "+sw("#e0792e")+"Misdemeanor "+sw("#c79a55")+"Low/civil "+sw("#4a4a40")+"Legal"},
+ harm:{t:"Harm-reduction index",m:function(n){var v=hrScore(n);return{v:v,c:hrColor(v)};},
+   lg:sw("#36c8d8")+"Strong "+sw("#2f8f9c")+"Partial "+sw("#3a3a34")+"Minimal  ·  test strips + syringe services + Good Samaritan"},
+ research:{t:"Psychedelic research",m:function(n){var k=RSCH[STATES[n].rsch];return{v:k.v,c:k.c};},
+   lg:sw("#f2c14e")+"Active center "+sw("#8a6d2e")+"Emerging "+sw("#2e2e28")+"None  ·  university trials & programs"}
 };
 const GROUPS=[
  {h:"Index",items:[["overall","Overall openness","#e8ff45",0]]},
  {h:"Cannabis",items:[["cannabis","Cannabis status","#38b25a",0]]},
  {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["ketamine","Ketamine access","#29b6d8",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},
- {h:"Health",items:[["harm","Harm reduction","#36c8d8","soon"],["research","Research programs","#e8ff45","soon"]]}
+ {h:"Harm reduction",items:[["harm","Harm-reduction index","#36c8d8",0]]},
+ {h:"Research",items:[["research","Psychedelic research","#f2c14e",0]]}
 ];
 const WAVES={recY:{col:"#38b25a",min:2011,label:"recreational cannabis"},medY:{col:"#86c994",min:1996,label:"medical cannabis"},psiY:{col:"#6a5cff",min:2018,label:"psilocybin reform"}};
 
@@ -191,7 +202,7 @@ GROUPS.forEach(function(g){h+='<div class="grp"><div class="gh">'+g.h+'</div>';g
 rail.innerHTML=h;
 rail.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){if(b.classList.contains("soon")){toast(b.dataset.layer);return;}setLayer(b.dataset.layer);clearHi();});});
 
-const EX=["Where can I legally do psilocybin therapy?","Worst place to get caught with mushrooms?","Where's cannabis legal for adults?","Which states are warming up fastest?","Where is ibogaine research happening?","Where can a church legally serve ayahuasca?"];
+const EX=["Where can I legally do psilocybin therapy?","Worst place to get caught with mushrooms?","Where's cannabis legal for adults?","Which states are warming up fastest?","Where is ibogaine research happening?","Where's harm reduction strongest?","Where is psychedelic research happening?","Where can a church legally serve ayahuasca?"];
 document.getElementById("exrow").innerHTML=EX.map(function(e){return '<span class="ex">'+e+'</span>';}).join("");
 document.querySelectorAll("#exrow .ex").forEach(function(s){s.addEventListener("click",function(){ask(s.textContent);});});
 document.getElementById("aiGo").addEventListener("click",function(){ask(document.getElementById("aiIn").value);});
@@ -237,6 +248,8 @@ function showTip(ev,n){
  else if(layer==="mdma")line="MDMA: "+MDMAL[d.mdma];
  else if(layer==="citydecrim")line="Reform here is city-level — see the dots";
  else if(layer==="ayahuasca")line=d.rfra?"State RFRA on the books":"No state RFRA";
+ else if(layer==="harm")line="Harm reduction "+hrScore(n)+"/100";
+ else if(layer==="research")line=RSCHL[d.rsch]+(d.rschN?" · "+d.rschN:"");
  else line="Openness "+d.o+"/100";
  tipShow(ev,"<b>"+n+"</b><br><span>"+line+"</span>");
 }
@@ -258,6 +271,9 @@ function openDetail(n){
   '<div class="drow"><span class="k">MDMA</span><span class="v">'+pill(MDMAL[d.mdma],MDMA[d.mdma].c)+'</span></div>'+
   '<div class="drow"><span class="k">Penalty (proxy)</span><span class="v">'+pill(PENL[d.can],PEN[d.can].c)+'</span></div>'+
   '<div class="drow"><span class="k">State RFRA</span><span class="v">'+(d.rfra?"On the books":"None")+'</span></div>'+
+  '<div class="drow"><span class="k">Harm reduction</span><span class="v">'+pill(hrScore(n)+" / 100",hrColor(hrScore(n)))+'</span></div>'+
+  '<div class="drow"><span class="k" style="padding-left:10px">strips · syringe · Good Sam</span><span class="v" style="font-weight:500;color:#b8b8b0">'+(d.fts==="legal"?"strips legal":"strips restricted")+' · '+SSPL[d.ssp].toLowerCase()+' · '+GSLL[d.gsl].toLowerCase()+'</span></div>'+
+  '<div class="drow"><span class="k">Psychedelic research</span><span class="v">'+pill(RSCHL[d.rsch],RSCH[d.rsch].c)+(d.rschN?' <span style="color:#8a8a82">'+d.rschN+'</span>':'')+'</span></div>'+
   '<p class="blurb">'+blurb+'</p>'+
   '<div class="src"><b>Sources</b><br>Psychedelic Alpha · NORML · MPP <span style="opacity:.6">(stub)</span><br>Last updated: illustrative</div>';
 }
@@ -283,6 +299,13 @@ function ask(text){
    r={layer:"ketamine",states:[],a:"Ketamine is the easy one — medically legal in every state. The real difference is access: most allow telehealth + clinic, a handful are in-person clinic only. So it's about how easy it is to get, not whether it's legal."};}
  else if(has("mdma","molly","ecstasy")){
    var s=Object.keys(STATES).filter(function(k){return STATES[k].mdma==="trial";});r={layer:"mdma",states:s,a:"MDMA is still Schedule I, so there's no legal access anywhere — but active trial sites run in "+s.join(", ")+", and a few states have right-to-try laws."};}
+ else if(has("harm reduction","test strip","fentanyl test","syringe","needle exchange","naloxone","narcan","overdose","good samaritan","safe supply")){
+   var strong=Object.keys(STATES).filter(function(k){return k!=="District of Columbia"&&hrScore(k)>=85;});
+   var worst=Object.keys(STATES).filter(function(k){return k!=="District of Columbia";}).sort(function(a,b){return hrScore(a)-hrScore(b);}).slice(0,3);
+   r={layer:"harm",states:strong,a:strong.length+" states score top marks on harm reduction — fentanyl test strips legal, plus syringe-services and Good Samaritan laws all on the books. The thinnest safety nets: "+worst.join(", ")+", where test strips can still count as paraphernalia."};}
+ else if(has("research","studies","university","universities","clinical","trial site","study","science","johns hopkins")){
+   var act=Object.keys(STATES).filter(function(k){return STATES[k].rsch==="active";});
+   r={layer:"research",states:act,a:"The active psychedelic-research hubs: "+act.map(function(k){return k+(STATES[k].rschN?" ("+STATES[k].rschN+")":"");}).join(", ")+". A second wave of emerging university programs is forming behind them."};}
  else if(has("recreational","legal weed","legal cannabis","legal marijuana","adult use","adults")){
    var s=recStates();r={layer:"cannabis",states:s.filter(function(k){return k!=="District of Columbia";}),a:(s.length-1)+" states plus DC — the whole West Coast, the Northeast, and a growing wedge of the Midwest."};}
  else if(has("medical")){
