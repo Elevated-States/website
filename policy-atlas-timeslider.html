@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Wave — Recreational Cannabis 2012–2026 | Elevated States Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0e0e;--paper:#f4f1ea;--acc:#e8ff45;--acc2:#ff4d2e;--mute:#8a8a82;--line:#2c2c28}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Archivo,system-ui,sans-serif;background:var(--ink);color:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+.blk{font-family:'Archivo Black',sans-serif}
+header.top{border-bottom:2px solid var(--line);padding:20px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;font-family:'Archivo Black';font-size:15px;text-transform:uppercase}
+.brand span{color:var(--acc2)}
+.hero{padding:44px 0 8px}
+.eyebrow{display:inline-block;background:var(--acc);color:var(--ink);padding:5px 12px;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px}
+h1{font-family:'Archivo Black';font-size:clamp(36px,7vw,72px);line-height:.94;letter-spacing:-.03em;text-transform:uppercase}
+h1 .hl{color:var(--acc)}
+.sub{font-size:18px;color:var(--mute);max-width:60ch;margin-top:18px}
+/* control bar */
+.controls{display:flex;align-items:center;gap:22px;margin:30px 0 4px;flex-wrap:wrap}
+.play{font:inherit;font-family:'Archivo Black';font-size:15px;text-transform:uppercase;letter-spacing:.03em;background:var(--acc);color:var(--ink);border:2px solid var(--acc);padding:12px 24px;cursor:pointer}
+.play:hover{background:var(--paper);border-color:var(--paper)}
+.year{font-family:'Archivo Black';font-size:clamp(40px,7vw,72px);line-height:1;color:var(--acc);min-width:3.5ch}
+.counter{font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
+.counter b{font-family:'Archivo Black';color:var(--paper);font-size:30px;display:block;line-height:1.1}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:#2a2a26;outline:none;margin:18px 0 6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--acc);border:2px solid var(--ink);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;background:var(--acc);border:2px solid var(--ink);cursor:pointer;border-radius:0}
+.ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);letter-spacing:.04em;font-weight:600}
+.mapbox{position:relative;margin-top:10px}
+.mapbox svg{width:100%;height:auto;display:block}
+.tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:8px 11px;font-size:13px;line-height:1.4;max-width:230px;z-index:5}
+.tip b{font-family:'Archivo Black';text-transform:uppercase;font-size:13px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-top:12px;align-items:center}
+.legend .sw{width:14px;height:14px;display:inline-block;margin-right:6px;vertical-align:-2px}
+.foot{border-top:2px solid var(--line);margin-top:26px;padding:24px 0 50px;color:var(--mute);font-size:13px;line-height:1.6;max-width:84ch}
+.foot b{color:var(--acc);text-transform:uppercase;letter-spacing:.04em;font-size:12px}
+.poc{display:inline-block;border:2px solid var(--acc2);color:var(--acc2);font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.1em;padding:4px 10px;margin-bottom:18px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand">Elevated States <span>Project</span></a></div></header>
+
+<div class="wrap">
+<section class="hero">
+  <span class="poc">Proof of concept</span><br>
+  <span class="eyebrow">The Atlas · Time Machine</span>
+  <h1>Watch the <span class="hl">wave.</span></h1>
+  <p class="sub">Recreational cannabis, 2012–2026. Two states became twenty-five in fourteen years. Hit play — or drag the slider — and watch it spread.</p>
+</section>
+
+<div class="controls">
+  <button class="play" id="play">▶ Play</button>
+  <div class="year" id="year">2011</div>
+  <div class="counter"><b id="count">0</b> states legal for adults</div>
+</div>
+<input type="range" id="slider" min="2011" max="2026" value="2011" step="1" />
+<div class="ticks"><span>2011</span><span>2014</span><span>2018</span><span>2022</span><span>2026</span></div>
+
+<div class="mapbox"><div id="map"></div><div class="tip" id="tip"></div></div>
+<div class="legend">
+  <span><span class="sw" style="background:#e8ff45"></span>Recreational legal</span>
+  <span><span class="sw" style="background:#33332e"></span>Not yet</span>
+</div>
+
+<div class="foot">
+  <b>About this proof of concept</b><br>
+  An illustrative animation of recreational-cannabis legalization by state, 2012–2026. Passage years are approximate and meant to tell the story of the wave — this is one layer of the planned policy atlas. Future layers: medical cannabis, psychedelic reform (Denver 2019, Oregon 2020, Colorado 2022…), penalties, research, and harm-reduction laws — plus filters and a natural-language "ask the map" feature. Educational only, not legal advice.
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
+const REC={"Colorado":2012,"Washington":2012,"Alaska":2014,"Oregon":2014,"District of Columbia":2014,"California":2016,"Maine":2016,"Massachusetts":2016,"Nevada":2016,"Michigan":2018,"Vermont":2018,"Illinois":2019,"Arizona":2020,"Montana":2020,"New Jersey":2020,"New York":2021,"New Mexico":2021,"Virginia":2021,"Connecticut":2021,"Rhode Island":2022,"Maryland":2022,"Missouri":2022,"Ohio":2023,"Minnesota":2023,"Delaware":2023};
+const W=960,H=620,MAXLIFT=46,YMIN=2011,YMAX=2026;
+const proj=d3.geoAlbersUsa().scale(1180).translate([W/2,H/2+12]);
+const pathGen=d3.geoPath(proj);
+const tip=document.getElementById("tip"),mapDiv=document.getElementById("map").parentNode;
+let features=[],year=YMIN,timer=null;
+const svg=d3.select("#map").append("svg").attr("viewBox","0 0 "+W+" "+H).attr("width","100%").attr("role","img").attr("aria-label","Animated map of recreational cannabis legalization by year");
+d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
+  features=topojson.feature(us,us.objects.states).features.filter(function(f){return proj(d3.geoCentroid(f))!==null;});
+  features.forEach(function(f){f._cy=pathGen.centroid(f)[1]||0;});
+  features.sort(function(a,b){return a._cy-b._cy;});
+  render(year);
+});
+function legal(name,y){return REC[name]!==undefined && y>=REC[name];}
+function render(y){
+  svg.selectAll("*").remove();
+  features.forEach(function(f){
+    var name=f.properties.name,isL=legal(name,y);
+    var col=isL?"#e8ff45":"#33332e",lift=isL?MAXLIFT:5;
+    var justLit=isL&&REC[name]===y;
+    var wall=d3.color(col).darker(0.95).formatHex();
+    var g=svg.append("g");
+    g.append("path").attr("d",pathGen(f)).attr("fill","rgba(0,0,0,0.4)").attr("transform","translate(2.5,3)");
+    for(var i=lift;i>=0;i-=1.6){g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-i)+")").attr("fill",i<1.6?col:wall);}
+    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","none").attr("stroke",justLit?"#fff":"rgba(255,255,255,0.16)").attr("stroke-width",justLit?1.6:0.7);
+    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","transparent").style("cursor","pointer")
+      .on("mousemove",function(ev){showTip(ev,name);}).on("mouseleave",function(){tip.style.opacity=0;});
+  });
+  var n=Object.keys(REC).filter(function(k){return k!=="District of Columbia"&&REC[k]<=y;}).length;
+  document.getElementById("count").textContent=n;
+  document.getElementById("year").textContent=y;
+  document.getElementById("slider").value=y;
+}
+function showTip(ev,name){
+  var rect=mapDiv.getBoundingClientRect(),y=year;
+  var status=legal(name,y)?("Recreational legal since "+REC[name]):(REC[name]!==undefined?("Legalizes in "+REC[name]):"Not legal in this period");
+  tip.innerHTML="<b>"+name+"</b><br><span>"+status+"</span>";
+  tip.style.opacity=1;
+  var x=ev.clientX-rect.left+14,ty=ev.clientY-rect.top+14;
+  if(x>rect.width-230)x=ev.clientX-rect.left-240;
+  tip.style.left=x+"px";tip.style.top=ty+"px";
+}
+function setYear(y){year=Math.max(YMIN,Math.min(YMAX,y));render(year);}
+document.getElementById("slider").addEventListener("input",function(e){stop();setYear(+e.target.value);});
+function stop(){if(timer){clearInterval(timer);timer=null;document.getElementById("play").textContent="▶ Play";}}
+function play(){
+  if(timer){stop();return;}
+  if(year>=YMAX)setYear(YMIN);
+  document.getElementById("play").textContent="❚❚ Pause";
+  timer=setInterval(function(){
+    if(year>=YMAX){stop();return;}
+    setYear(year+1);
+  },900);
+}
+document.getElementById("play").addEventListener("click",play);
+</script>
+</body>
+</html>

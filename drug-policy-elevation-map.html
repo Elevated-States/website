@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Landscape — U.S. Drug-Policy Openness | Elevated States Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0e0e;--panel:#161614;--paper:#f4f1ea;--acc:#e8ff45;--acc2:#ff4d2e;--mute:#8a8a82;--line:#2c2c28}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Archivo,system-ui,sans-serif;background:var(--ink);color:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+a{color:inherit;text-decoration:none;cursor:pointer}
+.blk{font-family:'Archivo Black',sans-serif}
+header.top{border-bottom:2px solid var(--line);padding:22px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;font-family:'Archivo Black';font-size:15px;text-transform:uppercase;letter-spacing:-.01em}
+.brand span{color:var(--acc2)}
+.hero{padding:54px 0 26px}
+.eyebrow{display:inline-block;background:var(--acc);color:var(--ink);padding:5px 12px;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:22px}
+h1{font-family:'Archivo Black';font-size:clamp(38px,7vw,76px);line-height:.94;letter-spacing:-.03em;text-transform:uppercase}
+h1 .hl{color:var(--acc)}
+.sub{font-size:19px;color:var(--mute);max-width:60ch;margin-top:22px}
+.mapctl{display:flex;width:max-content;max-width:100%;border:2px solid var(--acc);margin:30px 0 4px;flex-wrap:wrap}
+.mbtn{font:inherit;font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.04em;padding:10px 22px;background:transparent;color:var(--paper);border:none;border-right:2px solid var(--acc);cursor:pointer}
+.mbtn:last-child{border-right:none}
+.mbtn.on{background:var(--acc);color:var(--ink)}
+.mapbox{position:relative;margin-top:6px}
+.mapbox svg{width:100%;height:auto;display:block}
+.tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:9px 12px;font-size:13px;line-height:1.42;max-width:240px;z-index:5}
+.tip b{font-family:'Archivo Black';text-transform:uppercase;font-size:13px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-top:16px;align-items:center}
+.legend .it{display:flex;align-items:center;gap:6px}
+.legend .sw{width:14px;height:14px;display:inline-block}
+.rank{padding:40px 0 20px}
+.rank h2{font-family:'Archivo Black';font-size:22px;text-transform:uppercase;border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:18px}
+.bars{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}
+.bar{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.bar .nm{width:120px;flex:none;color:var(--paper);font-weight:600}
+.bar .track{flex:1;height:11px;background:#2a2a26;overflow:hidden}
+.bar .fill{display:block;height:100%}
+.bar .v{width:26px;text-align:right;color:var(--mute);font-weight:700}
+.foot{border-top:2px solid var(--line);margin-top:30px;padding:26px 0 50px;color:var(--mute);font-size:13px;line-height:1.6;max-width:80ch}
+.foot b{color:var(--acc);text-transform:uppercase;letter-spacing:.04em;font-size:12px}
+@media(max-width:680px){.bars{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand">Elevated States <span>Project</span></a></div></header>
+
+<div class="wrap">
+<section class="hero">
+  <span class="eyebrow">The Landscape</span>
+  <h1>Where America<br>stands on <span class="hl">drugs.</span></h1>
+  <p class="sub">Every state rises to its level of openness. The taller and brighter, the more permissive the policy. Switch the view to re-shape the terrain by cannabis status or psychedelic reform.</p>
+</section>
+
+<div class="mapctl" id="mapctl">
+  <button class="mbtn on" data-view="overall">Overall</button>
+  <button class="mbtn" data-view="cannabis">Cannabis</button>
+  <button class="mbtn" data-view="psych">Psychedelics</button>
+</div>
+<div class="mapbox"><div id="map"></div><div class="tip" id="tip"></div></div>
+<div class="legend" id="legend"></div>
+
+<section class="rank">
+  <h2 id="rankTitle">Most open → least open</h2>
+  <div class="bars" id="bars"></div>
+</section>
+
+<div class="foot">
+  <b>About this index</b><br>
+  An illustrative composite built from 2026 cannabis and psychedelic-reform status. Scores are a directional index for education and communication — not legal advice, and not an official ranking. Cannabis and psychedelic laws change frequently; verify current status before relying on it.
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
+const DATA={"Alabama":{o:36,c:"medical",p:"none"},"Alaska":{o:74,c:"recreational",p:"none"},"Arizona":{o:70,c:"recreational",p:"none"},"Arkansas":{o:42,c:"medical",p:"none"},"California":{o:88,c:"recreational",p:"decrim"},"Colorado":{o:98,c:"recreational",p:"legal"},"Connecticut":{o:76,c:"recreational",p:"decrim"},"Delaware":{o:70,c:"recreational",p:"none"},"District of Columbia":{o:82,c:"recreational",p:"decrim"},"Florida":{o:48,c:"medical",p:"none"},"Georgia":{o:30,c:"lowthc",p:"none"},"Hawaii":{o:48,c:"medical",p:"none"},"Idaho":{o:8,c:"illegal",p:"none"},"Illinois":{o:75,c:"recreational",p:"none"},"Indiana":{o:20,c:"illegal",p:"none"},"Iowa":{o:26,c:"lowthc",p:"none"},"Kansas":{o:15,c:"illegal",p:"none"},"Kentucky":{o:38,c:"medical",p:"none"},"Louisiana":{o:44,c:"medical",p:"none"},"Maine":{o:76,c:"recreational",p:"none"},"Maryland":{o:72,c:"recreational",p:"none"},"Massachusetts":{o:84,c:"recreational",p:"decrim"},"Michigan":{o:80,c:"recreational",p:"decrim"},"Minnesota":{o:80,c:"recreational",p:"decrim"},"Mississippi":{o:38,c:"medical",p:"none"},"Missouri":{o:70,c:"recreational",p:"none"},"Montana":{o:70,c:"recreational",p:"none"},"Nebraska":{o:40,c:"medical",p:"none"},"Nevada":{o:76,c:"recreational",p:"none"},"New Hampshire":{o:46,c:"medical",p:"none"},"New Jersey":{o:74,c:"recreational",p:"decrim"},"New Mexico":{o:88,c:"recreational",p:"legal"},"New York":{o:78,c:"recreational",p:"none"},"North Carolina":{o:22,c:"illegal",p:"none"},"North Dakota":{o:38,c:"medical",p:"none"},"Ohio":{o:68,c:"recreational",p:"none"},"Oklahoma":{o:52,c:"medical",p:"none"},"Oregon":{o:100,c:"recreational",p:"legal"},"Pennsylvania":{o:50,c:"medical",p:"none"},"Rhode Island":{o:74,c:"recreational",p:"none"},"South Carolina":{o:18,c:"illegal",p:"none"},"South Dakota":{o:40,c:"medical",p:"none"},"Tennessee":{o:22,c:"lowthc",p:"none"},"Texas":{o:28,c:"lowthc",p:"none"},"Utah":{o:38,c:"medical",p:"none"},"Vermont":{o:78,c:"recreational",p:"none"},"Virginia":{o:66,c:"recreational",p:"none"},"Washington":{o:85,c:"recreational",p:"decrim"},"West Virginia":{o:40,c:"medical",p:"none"},"Wisconsin":{o:24,c:"illegal",p:"none"},"Wyoming":{o:14,c:"illegal",p:"none"}};
+const CAN={recreational:{v:92,col:"#e8ff45",label:"Recreational legal"},medical:{v:52,col:"#f0a02e",label:"Medical only"},lowthc:{v:30,col:"#b9742e",label:"Low-THC / CBD"},illegal:{v:12,col:"#ff4d2e",label:"No broad program"}};
+const PSY={legal:{v:94,col:"#e8ff45",label:"Legal therapy"},decrim:{v:55,col:"#a6b53a",label:"Decriminalized / pilot"},none:{v:15,col:"#6b6960",label:"No reform yet"}};
+const W=960,H=640,MAXLIFT=50;
+const proj=d3.geoAlbersUsa().scale(1230).translate([W/2,H/2+18]);
+const pathGen=d3.geoPath(proj);
+const oColor=d3.scaleLinear().domain([5,35,65,100]).range(["#6b6960","#9a9a45","#cfe23e","#e8ff45"]).interpolate(d3.interpolateLab).clamp(true);
+function metric(name,view){const d=DATA[name];if(view==="cannabis"){const k=CAN[d.c];return{v:k.v,col:k.col};}if(view==="psych"){const k=PSY[d.p];return{v:k.v,col:k.col};}return{v:d.o,col:oColor(d.o)};}
+const tip=document.getElementById("tip"),mapDiv=document.getElementById("map").parentNode;
+let features=[];
+const svg=d3.select("#map").append("svg").attr("viewBox","0 0 "+W+" "+H).attr("width","100%").attr("role","img").attr("aria-label","US states extruded by drug-policy openness");
+d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
+  features=topojson.feature(us,us.objects.states).features.filter(function(f){return DATA[f.properties.name]!==undefined;});
+  features.forEach(function(f){f._cy=pathGen.centroid(f)[1]||0;});
+  features.sort(function(a,b){return a._cy-b._cy;});
+  render("overall");
+});
+function render(view){
+  svg.selectAll("*").remove();
+  features.forEach(function(f){
+    var name=f.properties.name,m=metric(name,view),lift=(m.v/100)*MAXLIFT;
+    var wall=d3.color(m.col).darker(0.95).formatHex();
+    var g=svg.append("g");
+    g.append("path").attr("d",pathGen(f)).attr("fill","rgba(0,0,0,0.4)").attr("transform","translate(2.5,3)");
+    for(var i=lift;i>=0;i-=1.6){g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-i)+")").attr("fill",i<1.6?m.col:wall);}
+    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","none").attr("stroke","rgba(255,255,255,0.18)").attr("stroke-width",0.7);
+    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","transparent").style("cursor","pointer")
+      .on("mousemove",function(ev){showTip(ev,name);}).on("mouseleave",function(){tip.style.opacity=0;});
+  });
+  buildLegend(view);buildBars(view);
+}
+function showTip(ev,name){
+  var d=DATA[name],rect=mapDiv.getBoundingClientRect();
+  tip.innerHTML="<b>"+name+"</b><br><span>Openness index: <b style='color:#7a8a1a'>"+d.o+"</b>/100</span><br><span>Cannabis: "+CAN[d.c].label+"</span><br><span>Psychedelics: "+PSY[d.p].label+"</span>";
+  tip.style.opacity=1;
+  var x=ev.clientX-rect.left+14,y=ev.clientY-rect.top+14;
+  if(x>rect.width-240)x=ev.clientX-rect.left-250;
+  tip.style.left=x+"px";tip.style.top=y+"px";
+}
+function sw(c){return "<span class='sw' style='background:"+c+"'></span>";}
+function buildLegend(view){
+  var el=document.getElementById("legend");
+  if(view==="overall"){el.innerHTML="<span class='it'>"+sw("#e8ff45")+"Most open</span><span class='it'>"+sw("#cfe23e")+"</span><span class='it'>"+sw("#9a9a45")+"</span><span class='it'>"+sw("#6b6960")+"Most restrictive</span>";document.getElementById("rankTitle").textContent="Most open → least open (overall index)";}
+  else if(view==="cannabis"){el.innerHTML=Object.keys(CAN).map(function(k){return "<span class='it'>"+sw(CAN[k].col)+CAN[k].label+"</span>";}).join("");document.getElementById("rankTitle").textContent="States ranked by cannabis access";}
+  else{el.innerHTML=Object.keys(PSY).map(function(k){return "<span class='it'>"+sw(PSY[k].col)+PSY[k].label+"</span>";}).join("");document.getElementById("rankTitle").textContent="States ranked by psychedelic reform";}
+}
+function buildBars(view){
+  var rows=Object.keys(DATA).map(function(name){var m=metric(name,view);return {name:name,v:m.v,col:m.col,o:DATA[name].o};});
+  rows.sort(function(a,b){return b.v-a.v||b.o-a.o;});
+  document.getElementById("bars").innerHTML=rows.map(function(r){return "<div class='bar'><span class='nm'>"+r.name+"</span><span class='track'><span class='fill' style='width:"+r.v+"%;background:"+r.col+"'></span></span><span class='v'>"+(view==="overall"?r.o:"")+"</span></div>";}).join("");
+}
+document.querySelectorAll(".mbtn").forEach(function(b){b.addEventListener("click",function(){
+  document.querySelectorAll(".mbtn").forEach(function(x){x.classList.remove("on");});
+  b.classList.add("on");render(b.dataset.view);
+});});
+</script>
+</body>
+</html>

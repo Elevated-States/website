@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Elevated States Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0e0e;--paper:#f4f1ea;--acc:#e8ff45;--acc2:#ff4d2e;--mute:#5a5a55;--line:#0e0e0e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Archivo,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.blk{font-family:'Archivo Black',sans-serif;font-weight:400}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+a{color:inherit;text-decoration:none;cursor:pointer}
+.label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+nav{border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:10}
+.navin{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:'Archivo Black';font-size:17px;letter-spacing:-.02em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
+.logo span{color:var(--acc2)}
+.logo svg{flex:none}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.nav-links a:hover,.nav-links a.on{color:var(--acc2)}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:11px 22px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.03em;border:2px solid var(--ink);transition:.15s}
+.btn:hover{background:var(--acc);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn.acc{background:var(--acc);color:var(--ink);border-color:var(--acc)}
+.btn.acc:hover{background:var(--paper);border-color:var(--paper)}
+.hero{padding:70px 0 50px;border-bottom:2px solid var(--ink)}
+.eyebrow{display:inline-block;background:var(--acc);padding:6px 12px;margin-bottom:26px;font-weight:700}
+h1{font-family:'Archivo Black';font-size:clamp(44px,9vw,120px);line-height:.92;letter-spacing:-.03em;text-transform:uppercase}
+h1 .hl{color:var(--acc2)}
+.heromid{display:flex;justify-content:space-between;gap:40px;align-items:flex-end;margin-top:34px;flex-wrap:wrap}
+.lead{font-size:21px;max-width:48ch;font-weight:500}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.eventbar{border-top:2px solid var(--ink);background:var(--ink);color:var(--paper)}
+.eventbar .inner{display:flex;align-items:center;gap:18px;padding:16px 0;flex-wrap:wrap}
+.eventbar .pill{background:var(--acc);color:var(--ink);font-weight:700;font-size:13px;padding:5px 12px;text-transform:uppercase}
+.eventbar strong{text-transform:uppercase;letter-spacing:.02em;font-size:15px}
+.eventbar a{margin-left:auto;color:var(--acc);font-weight:700;text-transform:uppercase;font-size:14px}
+section{padding:64px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.sec-head h2{font-family:'Archivo Black';font-size:clamp(24px,3vw,34px);text-transform:uppercase;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:repeat(2,1fr)}
+.card{border-bottom:2px solid var(--ink);padding:34px 0;display:grid;grid-template-columns:64px 1fr;gap:20px}
+.card:nth-child(odd){border-right:2px solid var(--ink);padding-right:40px}
+.card:nth-child(even){padding-left:40px}
+.card .n{font-family:'Archivo Black';font-size:30px;color:var(--acc2);line-height:1}
+.card h3{font-size:21px;font-weight:700;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:8px}
+.card p{color:var(--mute);font-size:15.5px}
+.about-band{background:var(--ink);color:var(--paper)}
+.about-band .label{color:var(--acc)}
+.about-band h2{font-family:'Archivo Black';font-size:clamp(28px,5vw,56px);text-transform:uppercase;line-height:.98;max-width:20ch;margin:18px 0}
+.about-band p{color:#cfcfca;max-width:58ch;font-size:18px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.chip{border:2px solid var(--acc);color:var(--acc);padding:8px 16px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.02em}
+.join{text-align:center;padding:90px 0}
+.join h2{font-family:'Archivo Black';font-size:clamp(34px,6vw,72px);text-transform:uppercase;line-height:.95;max-width:18ch;margin:0 auto 24px}
+.join .hl{color:var(--acc2)}
+footer{border-top:2px solid var(--ink);padding:34px 0;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.footin{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+/* featured event */
+.feature{background:var(--ink);color:var(--paper);padding:40px 36px;margin-top:8px}
+.feature .pill{background:var(--acc);color:var(--ink);font-weight:700;font-size:13px;padding:5px 12px;text-transform:uppercase;display:inline-block}
+.feature h3{font-family:'Archivo Black';font-size:clamp(28px,4.5vw,48px);text-transform:uppercase;line-height:1;margin:16px 0 12px}
+.feature p{color:#cfcfca;font-size:17px;max-width:62ch}
+.feature .panels{margin:18px 0 24px;color:var(--acc);font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.03em;line-height:1.9}
+.spkgrid{display:grid;grid-template-columns:repeat(2,1fr)}
+.spk{border-bottom:2px solid var(--ink);padding:22px 0}
+.spk:nth-child(odd){border-right:2px solid var(--ink);padding-right:40px}
+.spk:nth-child(even){padding-left:40px}
+.spk h4{font-size:19px;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
+.spk span{color:var(--mute);font-size:14px}
+.note{color:var(--mute);font-size:13px;margin-top:18px;font-style:italic}
+.amts{display:flex;flex-wrap:wrap;margin:24px 0 22px;border:2px solid var(--acc);width:max-content;max-width:100%}
+.amt{font:inherit;font-weight:700;font-size:15px;padding:12px 24px;background:transparent;color:var(--paper);border:none;border-right:2px solid var(--acc);cursor:pointer;text-transform:uppercase}
+.amt:last-child{border-right:none}
+.amt.on,.amt:hover{background:var(--acc);color:var(--ink)}
+/* map */
+.map-band{background:var(--ink);color:var(--paper)}
+.map-band .sec-head{border-color:#333}
+.map-band .sec-head h2{color:var(--paper)}
+.mapctl{display:flex;width:max-content;max-width:100%;border:2px solid var(--acc);margin:26px 0 6px;flex-wrap:wrap}
+.mbtn{font:inherit;font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.04em;padding:9px 20px;background:transparent;color:var(--paper);border:none;border-right:2px solid var(--acc);cursor:pointer}
+.mbtn:last-child{border-right:none}
+.mbtn.on{background:var(--acc);color:var(--ink)}
+.mapbox{position:relative;margin-top:6px}
+.mapbox svg{width:100%;height:auto;display:block}
+.tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:9px 12px;font-size:13px;line-height:1.42;max-width:240px;z-index:5}
+.tip b{font-family:'Archivo Black';text-transform:uppercase;font-size:13px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#cfcfca;margin-top:16px;align-items:center}
+.legend .it{display:flex;align-items:center;gap:6px}
+.legend .sw{width:14px;height:14px;display:inline-block}
+.mapcap{margin-top:18px;color:#cfcfca;font-size:15px;max-width:62ch}
+.mapcap a{color:var(--acc);font-weight:700;text-transform:uppercase;font-size:13px;white-space:nowrap}
+.notes{background:#0e0e0e;color:#d6d6cf;font-size:13.5px;line-height:1.55;border-top:4px solid var(--acc)}
+.notes .wrap{padding:24px 32px}
+.notes b{color:var(--acc);letter-spacing:.06em;text-transform:uppercase;font-size:12px}
+.notes ul{margin:10px 0 0 18px}.notes li{margin:5px 0}
+@media(max-width:720px){.grid,.spkgrid{grid-template-columns:1fr}.card:nth-child(odd),.spk:nth-child(odd){border-right:none;padding-right:0}.card:nth-child(even),.spk:nth-child(even){padding-left:0}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap navin">
+  <a class="logo" onclick="show('home')">
+    <svg width="30" height="26" viewBox="0 0 30 26" aria-hidden="true"><rect x="0" y="17" width="6" height="9" fill="#0e0e0e"/><rect x="8" y="12" width="6" height="14" fill="#0e0e0e"/><rect x="16" y="7" width="6" height="19" fill="#0e0e0e"/><rect x="24" y="0" width="6" height="26" fill="#ff4d2e"/></svg>
+    Elevated States <span>Project</span>
+  </a>
+  <div class="nav-links"><a onclick="show('home')" id="l-home" class="on">Home</a><a onclick="show('home')">Work</a><a onclick="show('events')" id="l-events">Events</a><a onclick="show('about')" id="l-about">About</a><a onclick="show('involved')" id="l-involved">Get Involved</a></div>
+  <a class="btn" onclick="show('involved')">Donate</a>
+</div></nav>
+
+<main id="home">
+<header class="hero"><div class="wrap">
+  <span class="eyebrow label">Honest, engaging drug science</span>
+  <h1>Elevating self<br>&amp; <span class="hl">society.</span></h1>
+  <div class="heromid">
+    <p class="lead">We make the science of altered states genuinely engaging — and bring the right people together to turn curiosity into research, safer experiences, and smarter policy.</p>
+    <div class="cta-row"><a class="btn" onclick="show('involved')">Get involved</a><a class="btn ghost" onclick="show('about')">About</a></div>
+  </div>
+</div>
+<div class="eventbar"><div class="wrap"><div class="inner"><span class="pill">Upcoming</span><strong>Conscious Community Forum — Fort Lauderdale</strong><a onclick="show('events')">Learn more →</a></div></div></div>
+</header>
+
+<section><div class="wrap">
+  <div class="sec-head"><h2>The Work</h2><span class="label">Four fronts</span></div>
+  <div class="grid">
+    <div class="card"><div class="n">01</div><div><h3>Research</h3><p>Supporting and translating real science on psychedelics and consciousness — and making it make sense.</p></div></div>
+    <div class="card"><div class="n">02</div><div><h3>Harm reduction</h3><p>Practical, judgment-free guidance that keeps people safer and helps them get more from the experience.</p></div></div>
+    <div class="card"><div class="n">03</div><div><h3>Policy</h3><p>Convening researchers, clinicians, and advocates to move drug policy toward evidence and away from stigma.</p></div></div>
+    <div class="card"><div class="n">04</div><div><h3>Education</h3><p>Using altered states as a doorway to teach how science actually works — engaging, never dry.</p></div></div>
+  </div>
+</div></section>
+
+<section class="map-band"><div class="wrap">
+  <div class="sec-head"><h2>The Landscape</h2><span class="label" style="color:var(--acc)">Drug-policy openness by state</span></div>
+  <div class="mapctl" id="mapctl">
+    <button class="mbtn on" data-view="overall">Overall</button>
+    <button class="mbtn" data-view="cannabis">Cannabis</button>
+    <button class="mbtn" data-view="psych">Psychedelics</button>
+  </div>
+  <div class="mapbox"><div id="map"></div><div id="tip" class="tip"></div></div>
+  <div id="legend" class="legend"></div>
+  <p class="mapcap">Each state rises to its level of openness — this is the terrain we work in, and why education and policy matter. Hover any state. <a href="drug-policy-elevation-map.html" target="_blank">Explore the full map →</a></p>
+</div></section>
+
+<section class="about-band"><div class="wrap">
+  <span class="label">Who we are</span>
+  <h2>Psychedelic edutainment that brings the right people together.</h2>
+  <p>Science communicators, researchers, and skeptics with a sense of humor — working at the intersection of curiosity, evidence, freedom, and growth, for personal and public elevation.</p>
+</div></section>
+
+<section class="join"><div class="wrap">
+  <h2>Bring <span class="hl">curiosity</span> and evidence to the conversation.</h2>
+  <div class="cta-row" style="justify-content:center"><a class="btn" onclick="show('involved')">Donate</a><a class="btn ghost">Join the newsletter</a></div>
+</div></section>
+</main>
+
+<main id="events" style="display:none">
+<header class="hero"><div class="wrap">
+  <span class="eyebrow label">Events</span>
+  <h1>Off the page,<br>into the <span class="hl">room.</span></h1>
+  <div class="heromid">
+    <p class="lead">We bring the science to life as engaging public forums — and use them to put the right people in the same room.</p>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="sec-head"><h2>Next up</h2><span class="label">Coming soon</span></div>
+  <div class="feature">
+    <span class="pill">Fort Lauderdale, FL</span>
+    <h3>Conscious Community Forum</h3>
+    <p>A one-day forum that brings leading researchers, clinicians, and harm-reduction voices together with a curious public — moderated conversations, not lectures.</p>
+    <div class="panels">Addiction &amp; treatment&nbsp; ·&nbsp; Harm reduction &amp; experience optimization&nbsp; ·&nbsp; Psychedelics for mental health&nbsp; ·&nbsp; The new science of psychedelics</div>
+    <a class="btn acc">Tickets &amp; info →</a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><h2>Featured voices</h2><span class="label">Announced soon</span></div>
+  <p style="font-size:19px;max-width:66ch;margin-top:24px;font-weight:500">We're assembling leading researchers, clinicians, and harm-reduction voices from across Florida and the Southeast — the University of Miami, FIU, UCF, Nova Southeastern, and beyond. The full lineup will be announced as speakers are confirmed.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><h2>On the horizon</h2><span class="label">2026–27</span></div>
+  <div class="grid">
+    <div class="card"><div class="n">↗</div><div><h3>Fort Wayne &amp; Bloomington, IN</h3><p>Two day-long conferences, Fall 2026. Dates to be announced.</p></div></div>
+    <div class="card"><div class="n">↗</div><div><h3>Indianapolis — weekend flagship</h3><p>A multi-day gathering, Spring 2027. Dates to be announced.</p></div></div>
+  </div>
+</div></section>
+
+<section class="join"><div class="wrap">
+  <h2>Host. Speak. <span class="hl">Sponsor.</span></h2>
+  <p style="max-width:50ch;margin:0 auto 24px;font-weight:500;text-transform:none;letter-spacing:0">Want to bring a forum to your city, join a panel, or support the work? Let's talk.</p>
+  <div class="cta-row" style="justify-content:center"><a class="btn">Get in touch</a><a class="btn ghost" onclick="show('home')">Back to home</a></div>
+</div></section>
+</main>
+
+<main id="about" style="display:none">
+<header class="hero"><div class="wrap">
+  <span class="eyebrow label">About</span>
+  <h1>Curiosity,<br><span class="hl">made useful.</span></h1>
+  <div class="heromid">
+    <p class="lead">The Elevated States Project is psychedelic edutainment with a purpose: make the science engaging, then bring the right people together to turn it into real change.</p>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="sec-head"><h2>Why we exist</h2><span class="label">The middle ground</span></div>
+  <p style="font-size:20px;max-width:64ch;margin-top:28px;font-weight:500">There's never been more interest in altered states — or more noise around them. The conversation swings between hype and fear, and the real science gets lost in the middle. We make that science engaging and accessible, and connect the people who can turn understanding into safer experiences and smarter policy.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><h2>How we work</h2><span class="label">Two engines</span></div>
+  <div class="grid">
+    <div class="card"><div class="n">A</div><div><h3>Edutainment</h3><p>We turn dense science into events, talks, and content people actually enjoy — because curiosity is the gateway to literacy.</p></div></div>
+    <div class="card"><div class="n">B</div><div><h3>Convening</h3><p>We put researchers, clinicians, funders, artists, and advocates in one room, then help good ideas become research, programs, and policy.</p></div></div>
+  </div>
+</div></section>
+
+<section class="about-band"><div class="wrap">
+  <span class="label">What we believe</span>
+  <h2>At the intersection of curiosity, evidence, freedom &amp; growth.</h2>
+  <div class="chips"><span class="chip">Curiosity</span><span class="chip">Evidence</span><span class="chip">Freedom</span><span class="chip">Growth</span></div>
+</div></section>
+
+<section class="join"><div class="wrap">
+  <h2>Founded 2026. <span class="hl">Just getting started.</span></h2>
+  <p style="max-width:50ch;margin:0 auto 24px;font-weight:500;text-transform:none;letter-spacing:0">Built by science communicators and event producers who love this space enough to be honest about it.</p>
+  <div class="cta-row" style="justify-content:center"><a class="btn" onclick="show('involved')">Get involved</a><a class="btn ghost" onclick="show('home')">Back to home</a></div>
+</div></section>
+</main>
+
+<main id="involved" style="display:none">
+<header class="hero"><div class="wrap">
+  <span class="eyebrow label">Get involved</span>
+  <h1>Be part<br>of <span class="hl">it.</span></h1>
+  <div class="heromid">
+    <p class="lead">However you show up — funding, expertise, or just curiosity — there's a real way to help build this.</p>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="sec-head"><h2>Ways to help</h2><span class="label">Pick your lane</span></div>
+  <div class="grid">
+    <div class="card"><div class="n">$</div><div><h3>Donate</h3><p>Fund the events, research translation, and harm-reduction education. Every gift is tax-deductible.</p></div></div>
+    <div class="card"><div class="n">◇</div><div><h3>Partner or sponsor</h3><p>Back a forum, host one in your city, or put your clinic or brand in front of an engaged audience.</p></div></div>
+    <div class="card"><div class="n">✦</div><div><h3>Lend expertise</h3><p>Researchers, clinicians, and advocates — join a panel or help shape the programming.</p></div></div>
+    <div class="card"><div class="n">→</div><div><h3>Stay close</h3><p>Come to an event, join the newsletter, and help spread better information.</p></div></div>
+  </div>
+</div></section>
+
+<section class="about-band"><div class="wrap">
+  <span class="label">Donate</span>
+  <h2>Fuel the work.</h2>
+  <p>The Elevated States Project is a 501(c)(3) nonprofit — your gift is tax-deductible and goes straight into events, education, and research.</p>
+  <div class="amts"><button class="amt">$25</button><button class="amt">$50</button><button class="amt on">$100</button><button class="amt">$250</button><button class="amt">Other</button></div>
+  <div><a class="btn acc">Donate now →</a></div>
+</div></section>
+
+<section class="join"><div class="wrap">
+  <h2>Tell us how you<br>want to <span class="hl">show up.</span></h2>
+  <p style="max-width:50ch;margin:0 auto 24px;font-weight:500;text-transform:none;letter-spacing:0">Funders, speakers, hosts, and the merely curious — we'd love to hear from you.</p>
+  <div class="cta-row" style="justify-content:center"><a class="btn">Get in touch</a><a class="btn ghost" onclick="show('home')">Back to home</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap footin">
+  <div>© 2026 Elevated States Project — 501(c)(3)</div>
+  <div>Instagram — YouTube — Contact</div>
+</div></footer>
+
+<div class="notes" style="display:none"><div class="wrap">
+  <b>▸ Design &amp; copy notes — not part of the page</b>
+  <ul>
+    <li><strong>Vibe #4 — Bold editorial,</strong> now with a logo mark (ascending bars = "elevation," top bar in red), a full <strong>Events page</strong>, and the state map worked in as "The Landscape."</li>
+    <li><strong>Live nav tabs:</strong> Home · Events · About all switch in place. The map's "Explore the full map" link opens the standalone interactive version (drug-policy-elevation-map.html — keep both files in the same folder).</li>
+    <li><strong>Events page:</strong> featured FL forum, a "featured voices" lineup (marked in-progress — these are proposed, not confirmed), and upcoming Indiana events.</li>
+    <li><strong>Map colors:</strong> chartreuse = most open, red = most restrictive. The openness index is our own illustrative composite — label it as such publicly.</li>
+    <li><strong>Still placeholder:</strong> real ticket/donate links, team bios, final logo polish, photography.</li>
+  </ul>
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
+function show(p){['home','events','about','involved'].forEach(function(id){document.getElementById(id).style.display=id===p?'block':'none';});[['l-home','home'],['l-events','events'],['l-about','about'],['l-involved','involved']].forEach(function(x){var el=document.getElementById(x[0]);if(el)el.classList.toggle('on',x[1]===p);});window.scrollTo(0,0);}
+
+const DATA={"Alabama":{o:36,c:"medical",p:"none"},"Alaska":{o:74,c:"recreational",p:"none"},"Arizona":{o:70,c:"recreational",p:"none"},"Arkansas":{o:42,c:"medical",p:"none"},"California":{o:88,c:"recreational",p:"decrim"},"Colorado":{o:98,c:"recreational",p:"legal"},"Connecticut":{o:76,c:"recreational",p:"decrim"},"Delaware":{o:70,c:"recreational",p:"none"},"District of Columbia":{o:82,c:"recreational",p:"decrim"},"Florida":{o:48,c:"medical",p:"none"},"Georgia":{o:30,c:"lowthc",p:"none"},"Hawaii":{o:48,c:"medical",p:"none"},"Idaho":{o:8,c:"illegal",p:"none"},"Illinois":{o:75,c:"recreational",p:"none"},"Indiana":{o:20,c:"illegal",p:"none"},"Iowa":{o:26,c:"lowthc",p:"none"},"Kansas":{o:15,c:"illegal",p:"none"},"Kentucky":{o:38,c:"medical",p:"none"},"Louisiana":{o:44,c:"medical",p:"none"},"Maine":{o:76,c:"recreational",p:"none"},"Maryland":{o:72,c:"recreational",p:"none"},"Massachusetts":{o:84,c:"recreational",p:"decrim"},"Michigan":{o:80,c:"recreational",p:"decrim"},"Minnesota":{o:80,c:"recreational",p:"decrim"},"Mississippi":{o:38,c:"medical",p:"none"},"Missouri":{o:70,c:"recreational",p:"none"},"Montana":{o:70,c:"recreational",p:"none"},"Nebraska":{o:40,c:"medical",p:"none"},"Nevada":{o:76,c:"recreational",p:"none"},"New Hampshire":{o:46,c:"medical",p:"none"},"New Jersey":{o:74,c:"recreational",p:"decrim"},"New Mexico":{o:88,c:"recreational",p:"legal"},"New York":{o:78,c:"recreational",p:"none"},"North Carolina":{o:22,c:"illegal",p:"none"},"North Dakota":{o:38,c:"medical",p:"none"},"Ohio":{o:68,c:"recreational",p:"none"},"Oklahoma":{o:52,c:"medical",p:"none"},"Oregon":{o:100,c:"recreational",p:"legal"},"Pennsylvania":{o:50,c:"medical",p:"none"},"Rhode Island":{o:74,c:"recreational",p:"none"},"South Carolina":{o:18,c:"illegal",p:"none"},"South Dakota":{o:40,c:"medical",p:"none"},"Tennessee":{o:22,c:"lowthc",p:"none"},"Texas":{o:28,c:"lowthc",p:"none"},"Utah":{o:38,c:"medical",p:"none"},"Vermont":{o:78,c:"recreational",p:"none"},"Virginia":{o:66,c:"recreational",p:"none"},"Washington":{o:85,c:"recreational",p:"decrim"},"West Virginia":{o:40,c:"medical",p:"none"},"Wisconsin":{o:24,c:"illegal",p:"none"},"Wyoming":{o:14,c:"illegal",p:"none"}};
+const CAN={recreational:{v:92,col:"#e8ff45",label:"Recreational legal"},medical:{v:52,col:"#f0a02e",label:"Medical only"},lowthc:{v:30,col:"#b9742e",label:"Low-THC / CBD"},illegal:{v:12,col:"#ff4d2e",label:"No broad program"}};
+const PSY={legal:{v:94,col:"#e8ff45",label:"Legal therapy"},decrim:{v:55,col:"#a6b53a",label:"Decriminalized / pilot"},none:{v:15,col:"#6b6960",label:"No reform yet"}};
+const W=960,H=620,MAXLIFT=46;
+const proj=d3.geoAlbersUsa().scale(1180).translate([W/2,H/2+14]);
+const pathGen=d3.geoPath(proj);
+const oColor=d3.scaleLinear().domain([5,35,65,100]).range(["#6b6960","#9a9a45","#cfe23e","#e8ff45"]).interpolate(d3.interpolateLab).clamp(true);
+function metric(name,view){const d=DATA[name];if(view==="cannabis"){const k=CAN[d.c];return{v:k.v,col:k.col};}if(view==="psych"){const k=PSY[d.p];return{v:k.v,col:k.col};}return{v:d.o,col:oColor(d.o)};}
+const tip=document.getElementById("tip"),mapDiv=document.getElementById("map").parentNode;
+let features=[];
+const svg=d3.select("#map").append("svg").attr("viewBox","0 0 "+W+" "+H).attr("width","100%").attr("role","img").attr("aria-label","US states extruded by drug-policy openness");
+d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
+  features=topojson.feature(us,us.objects.states).features.filter(function(f){return DATA[f.properties.name]!==undefined;});
+  features.forEach(function(f){f._cy=pathGen.centroid(f)[1]||0;});
+  features.sort(function(a,b){return a._cy-b._cy;});
+  render("overall");
+});
+function render(view){
+  svg.selectAll("*").remove();
+  features.forEach(function(f){
+    var name=f.properties.name,m=metric(name,view),lift=(m.v/100)*MAXLIFT;
+    var wall=d3.color(m.col).darker(0.9).formatHex();
+    var g=svg.append("g");
+    g.append("path").attr("d",pathGen(f)).attr("fill","rgba(0,0,0,0.35)").attr("transform","translate(2.5,3)");
+    for(var i=lift;i>=0;i-=1.6){g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-i)+")").attr("fill",i<1.6?m.col:wall);}
+    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","none").attr("stroke","rgba(255,255,255,0.18)").attr("stroke-width",0.7);
+    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","transparent").style("cursor","pointer")
+      .on("mousemove",function(ev){showTip(ev,name);}).on("mouseleave",function(){tip.style.opacity=0;});
+  });
+  buildLegend(view);
+}
+function showTip(ev,name){
+  var d=DATA[name],rect=mapDiv.getBoundingClientRect();
+  tip.innerHTML="<b>"+name+"</b><br><span>Openness index: <b style='color:#7a8a1a'>"+d.o+"</b>/100</span><br><span>Cannabis: "+CAN[d.c].label+"</span><br><span>Psychedelics: "+PSY[d.p].label+"</span>";
+  tip.style.opacity=1;
+  var x=ev.clientX-rect.left+14,y=ev.clientY-rect.top+14;
+  if(x>rect.width-240)x=ev.clientX-rect.left-250;
+  tip.style.left=x+"px";tip.style.top=y+"px";
+}
+function sw(c){return "<span class='sw' style='background:"+c+"'></span>";}
+function buildLegend(view){
+  var el=document.getElementById("legend");
+  if(view==="overall"){el.innerHTML="<span class='it'>"+sw("#e8ff45")+"Most open</span><span class='it'>"+sw("#cfe23e")+"</span><span class='it'>"+sw("#9a9a45")+"</span><span class='it'>"+sw("#6b6960")+"Most restrictive</span>";}
+  else if(view==="cannabis"){el.innerHTML=Object.keys(CAN).map(function(k){return "<span class='it'>"+sw(CAN[k].col)+CAN[k].label+"</span>";}).join("");}
+  else{el.innerHTML=Object.keys(PSY).map(function(k){return "<span class='it'>"+sw(PSY[k].col)+PSY[k].label+"</span>";}).join("");}
+}
+document.querySelectorAll(".mbtn").forEach(function(b){b.addEventListener("click",function(){
+  document.querySelectorAll(".mbtn").forEach(function(x){x.classList.remove("on");});
+  b.classList.add("on");render(b.dataset.view);
+});});
+document.querySelectorAll(".amt").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".amt").forEach(function(x){x.classList.remove("on");});b.classList.add("on");});});
+</script>
+</body>
+</html>
