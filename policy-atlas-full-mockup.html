@@ -150,6 +150,8 @@ const KET={open:{v:70,c:"#29b6d8"},clinic:{v:34,c:"#26606e"}};
 const MDMA={trial:{v:88,c:"#e0529c"},rtt:{v:50,c:"#9a4f78"},none:{v:10,c:"#332e36"}};
 const RSCH={active:{v:90,c:"#f2c14e"},emerging:{v:48,c:"#8a6d2e"},none:{v:8,c:"#2e2e28"}};
 const RSCHL={active:"Active research center",emerging:"Emerging program",none:"None yet"};
+const MOM={high:{v:92,c:"#ff8c42"},med:{v:58,c:"#cf7a2e"},low:{v:30,c:"#7a5a30"},none:{v:12,c:"#3a352e"},na:{v:6,c:"#2a2a26"}};
+const MOML={high:"Advancing / enacting",med:"Building",low:"Early",none:"None",na:"Not yet sourced"};
 const SSPL={yes:"Authorized",limited:"Limited / local",no:"Not authorized"};
 const GSLL={yes:"Yes",limited:"Limited",no:"No"};
 const hrColor=d3.scaleLinear().domain([0,50,100]).range(["#3a3a34","#2f8f9c","#36c8d8"]).interpolate(d3.interpolateLab).clamp(true);
@@ -177,7 +179,9 @@ const LAYERS={
  harm:{t:"Harm-reduction index",m:function(n){var v=hrScore(n);return{v:v,c:hrColor(v)};},
    lg:sw("#36c8d8")+"Strong "+sw("#2f8f9c")+"Partial "+sw("#3a3a34")+"Minimal  ·  test strips + syringe services + Good Samaritan"},
  research:{t:"Psychedelic research",m:function(n){var k=RSCH[STATES[n].rsch];return{v:k.v,c:k.c};},
-   lg:sw("#f2c14e")+"Active center "+sw("#8a6d2e")+"Emerging "+sw("#2e2e28")+"None  ·  university trials & programs"}
+   lg:sw("#f2c14e")+"Active center "+sw("#8a6d2e")+"Emerging "+sw("#2e2e28")+"None  ·  university trials & programs"},
+ momentum:{t:"Reform momentum",m:function(n){var k=MOM[STATES[n].mom||"na"];return{v:k.v,c:k.c};},
+   lg:sw("#ff8c42")+"Advancing "+sw("#cf7a2e")+"Building "+sw("#7a5a30")+"Early "+sw("#3a352e")+"None "+sw("#2a2a26")+"Not yet sourced  ·  pending bills & trajectory"}
 };
 const GROUPS=[
  {h:"Index",items:[["overall","Overall openness","#e8ff45",0]]},
@@ -185,7 +189,8 @@ const GROUPS=[
  {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["ketamine","Ketamine access","#29b6d8",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},
  {h:"Harm reduction",items:[["harm","Harm-reduction index","#36c8d8",0]]},
- {h:"Research",items:[["research","Psychedelic research","#f2c14e",0]]}
+ {h:"Research",items:[["research","Psychedelic research","#f2c14e",0]]},
+ {h:"Reform trajectory",items:[["momentum","Reform momentum","#ff8c42",0]]}
 ];
 const WAVES={recY:{col:"#38b25a",min:2011,label:"recreational cannabis"},medY:{col:"#86c994",min:1996,label:"medical cannabis"},psiY:{col:"#6a5cff",min:2018,label:"psilocybin reform"}};
 
@@ -250,6 +255,7 @@ function showTip(ev,n){
  else if(layer==="ayahuasca")line=d.rfra?"State RFRA on the books":"No state RFRA";
  else if(layer==="harm")line="Harm reduction "+hrScore(n)+"/100";
  else if(layer==="research")line=RSCHL[d.rsch]+(d.rschN?" · "+d.rschN:"");
+ else if(layer==="momentum")line="Momentum: "+MOML[d.mom||"na"];
  else line="Openness "+d.o+"/100";
  tipShow(ev,"<b>"+n+"</b><br><span>"+line+"</span>");
 }
@@ -263,6 +269,7 @@ function openDetail(n){
  else if(d.o>=38)blurb="Medical access exists, but recreational and psychedelics remain off the table.";
  else blurb="A holdout — little or no cannabis program and no psychedelic reform. The conversation matters most here.";
  document.getElementById("detail").innerHTML='<div class="st">'+n+'</div>'+
+  (d.verified?'<div style="color:#7bbf5a;font-size:11.5px;margin:-6px 0 12px">✓ Verified · '+d.updated+'</div>':'<div style="color:#8a8a82;font-size:11.5px;margin:-6px 0 12px">◦ Illustrative — not yet sourced</div>')+
   '<div class="drow"><span class="k">Openness index</span><span class="v">'+d.o+' / 100</span></div>'+
   '<div class="drow"><span class="k">Cannabis</span><span class="v">'+pill(CANL[d.can],CAN[d.can].c)+(d.recY?' <span style="color:#8a8a82">since '+d.recY+'</span>':(d.medY?' <span style="color:#8a8a82">med '+d.medY+'</span>':''))+'</span></div>'+
   '<div class="drow"><span class="k">Psilocybin</span><span class="v">'+pill(PSIL[d.psi],PSI[d.psi].c)+(d.psiY?' <span style="color:#8a8a82">'+d.psiY+'</span>':'')+'</span></div>'+
@@ -274,8 +281,11 @@ function openDetail(n){
   '<div class="drow"><span class="k">Harm reduction</span><span class="v">'+pill(hrScore(n)+" / 100",hrColor(hrScore(n)))+'</span></div>'+
   '<div class="drow"><span class="k" style="padding-left:10px">strips · syringe · Good Sam</span><span class="v" style="font-weight:500;color:#b8b8b0">'+(d.fts==="legal"?"strips legal":"strips restricted")+' · '+SSPL[d.ssp].toLowerCase()+' · '+GSLL[d.gsl].toLowerCase()+'</span></div>'+
   '<div class="drow"><span class="k">Psychedelic research</span><span class="v">'+pill(RSCHL[d.rsch],RSCH[d.rsch].c)+(d.rschN?' <span style="color:#8a8a82">'+d.rschN+'</span>':'')+'</span></div>'+
+  '<div class="drow"><span class="k">Reform momentum</span><span class="v">'+pill(MOML[d.mom||"na"],MOM[d.mom||"na"].c)+'</span></div>'+
+  (d.momN?'<div class="drow"><span class="k" style="padding-left:10px">what\'s moving</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.momN+'</span></div>':'')+
+  (d.tribal?'<div class="drow"><span class="k">Tribal / local</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.tribalN+'</span></div>':'')+
   '<p class="blurb">'+blurb+'</p>'+
-  '<div class="src"><b>Sources</b><br>Psychedelic Alpha · NORML · MPP <span style="opacity:.6">(stub)</span><br>Last updated: illustrative</div>';
+  '<div class="src"><b>Sources</b><br>'+(d.verified?d.src+'<br>Last updated: '+d.updated:'Illustrative — not yet sourced (see the data-schema doc)')+'</div>';
 }
 function setLayer(l){layer=l;tl=false;stop();document.getElementById("yr").textContent="—";document.getElementById("layerTitle").textContent=LAYERS[l].t;rail.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",c.dataset.layer===l);});render();}
 function clearHi(){highlight=[];document.getElementById("answer").classList.remove("show");render();}
