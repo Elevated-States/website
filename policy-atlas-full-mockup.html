@@ -279,7 +279,7 @@ function openDetail(n){
   '<div class="drow"><span class="k">Penalty (proxy)</span><span class="v">'+pill(PENL[d.can],PEN[d.can].c)+'</span></div>'+
   '<div class="drow"><span class="k">State RFRA</span><span class="v">'+(d.rfra?"On the books":"None")+'</span></div>'+
   '<div class="drow"><span class="k">Harm reduction</span><span class="v">'+pill(hrScore(n)+" / 100",hrColor(hrScore(n)))+'</span></div>'+
-  '<div class="drow"><span class="k" style="padding-left:10px">strips · syringe · Good Sam</span><span class="v" style="font-weight:500;color:#b8b8b0">'+(d.fts==="legal"?"strips legal":"strips restricted")+' · '+SSPL[d.ssp].toLowerCase()+' · '+GSLL[d.gsl].toLowerCase()+'</span></div>'+
+  '<div class="drow"><span class="k" style="padding-left:10px">strips · syringe · Samaritan</span><span class="v" style="font-weight:500;color:#b8b8b0">'+(d.fts==="legal"?"strips legal":"strips restricted")+' · '+SSPL[d.ssp].toLowerCase()+' · '+GSLL[d.gsl].toLowerCase()+'</span></div>'+
   '<div class="drow"><span class="k">Psychedelic research</span><span class="v">'+pill(RSCHL[d.rsch],RSCH[d.rsch].c)+(d.rschN?' <span style="color:#8a8a82">'+d.rschN+'</span>':'')+'</span></div>'+
   '<div class="drow"><span class="k">Reform momentum</span><span class="v">'+pill(MOML[d.mom||"na"],MOM[d.mom||"na"].c)+'</span></div>'+
   (d.momN?'<div class="drow"><span class="k" style="padding-left:10px">what\'s moving</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.momN+'</span></div>':'')+
