@@ -1,345 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="robots" content="noindex, nofollow"/>
-<title>Elevated States Project</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Elevated States Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0e0e0e;--paper:#f4f1ea;--acc:#e8ff45;--acc2:#ff4d2e;--mute:#5a5a55;--line:#0e0e0e}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Archivo,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
-.blk{font-family:'Archivo Black',sans-serif;font-weight:400}
-.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
-a{color:inherit;text-decoration:none;cursor:pointer}
-.label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
-nav{border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:10}
-.navin{display:flex;align-items:center;justify-content:space-between;height:70px}
-.logo{font-family:'Archivo Black';font-size:17px;letter-spacing:-.02em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
-.logo span{color:var(--acc2)}
-.logo svg{flex:none}
-.nav-links{display:flex;gap:28px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.02em}
-.nav-links a:hover,.nav-links a.on{color:var(--acc2)}
-.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:11px 22px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.03em;border:2px solid var(--ink);transition:.15s}
-.btn:hover{background:var(--acc);color:var(--ink)}
-.btn.ghost{background:transparent;color:var(--ink)}
-.btn.ghost:hover{background:var(--ink);color:var(--paper)}
-.btn.acc{background:var(--acc);color:var(--ink);border-color:var(--acc)}
-.btn.acc:hover{background:var(--paper);border-color:var(--paper)}
-.hero{padding:70px 0 50px;border-bottom:2px solid var(--ink)}
-.eyebrow{display:inline-block;background:var(--acc);padding:6px 12px;margin-bottom:26px;font-weight:700}
-h1{font-family:'Archivo Black';font-size:clamp(44px,9vw,120px);line-height:.92;letter-spacing:-.03em;text-transform:uppercase}
-h1 .hl{color:var(--acc2)}
-.heromid{display:flex;justify-content:space-between;gap:40px;align-items:flex-end;margin-top:34px;flex-wrap:wrap}
-.lead{font-size:21px;max-width:48ch;font-weight:500}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap}
-.eventbar{border-top:2px solid var(--ink);background:var(--ink);color:var(--paper)}
-.eventbar .inner{display:flex;align-items:center;gap:18px;padding:16px 0;flex-wrap:wrap}
-.eventbar .pill{background:var(--acc);color:var(--ink);font-weight:700;font-size:13px;padding:5px 12px;text-transform:uppercase}
-.eventbar strong{text-transform:uppercase;letter-spacing:.02em;font-size:15px}
-.eventbar a{margin-left:auto;color:var(--acc);font-weight:700;text-transform:uppercase;font-size:14px}
-section{padding:64px 0}
-.sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:14px}
-.sec-head h2{font-family:'Archivo Black';font-size:clamp(24px,3vw,34px);text-transform:uppercase;letter-spacing:-.01em}
-.grid{display:grid;grid-template-columns:repeat(2,1fr)}
-.card{border-bottom:2px solid var(--ink);padding:34px 0;display:grid;grid-template-columns:64px 1fr;gap:20px}
-.card:nth-child(odd){border-right:2px solid var(--ink);padding-right:40px}
-.card:nth-child(even){padding-left:40px}
-.card .n{font-family:'Archivo Black';font-size:30px;color:var(--acc2);line-height:1}
-.card h3{font-size:21px;font-weight:700;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:8px}
-.card p{color:var(--mute);font-size:15.5px}
-.about-band{background:var(--ink);color:var(--paper)}
-.about-band .label{color:var(--acc)}
-.about-band h2{font-family:'Archivo Black';font-size:clamp(28px,5vw,56px);text-transform:uppercase;line-height:.98;max-width:20ch;margin:18px 0}
-.about-band p{color:#cfcfca;max-width:58ch;font-size:18px}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.chip{border:2px solid var(--acc);color:var(--acc);padding:8px 16px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.02em}
-.join{text-align:center;padding:90px 0}
-.join h2{font-family:'Archivo Black';font-size:clamp(34px,6vw,72px);text-transform:uppercase;line-height:.95;max-width:18ch;margin:0 auto 24px}
-.join .hl{color:var(--acc2)}
-footer{border-top:2px solid var(--ink);padding:34px 0;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.02em}
-.footin{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
-/* featured event */
-.feature{background:var(--ink);color:var(--paper);padding:40px 36px;margin-top:8px}
-.feature .pill{background:var(--acc);color:var(--ink);font-weight:700;font-size:13px;padding:5px 12px;text-transform:uppercase;display:inline-block}
-.feature h3{font-family:'Archivo Black';font-size:clamp(28px,4.5vw,48px);text-transform:uppercase;line-height:1;margin:16px 0 12px}
-.feature p{color:#cfcfca;font-size:17px;max-width:62ch}
-.feature .panels{margin:18px 0 24px;color:var(--acc);font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.03em;line-height:1.9}
-.spkgrid{display:grid;grid-template-columns:repeat(2,1fr)}
-.spk{border-bottom:2px solid var(--ink);padding:22px 0}
-.spk:nth-child(odd){border-right:2px solid var(--ink);padding-right:40px}
-.spk:nth-child(even){padding-left:40px}
-.spk h4{font-size:19px;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
-.spk span{color:var(--mute);font-size:14px}
-.note{color:var(--mute);font-size:13px;margin-top:18px;font-style:italic}
-.amts{display:flex;flex-wrap:wrap;margin:24px 0 22px;border:2px solid var(--acc);width:max-content;max-width:100%}
-.amt{font:inherit;font-weight:700;font-size:15px;padding:12px 24px;background:transparent;color:var(--paper);border:none;border-right:2px solid var(--acc);cursor:pointer;text-transform:uppercase}
-.amt:last-child{border-right:none}
-.amt.on,.amt:hover{background:var(--acc);color:var(--ink)}
-/* map */
-.map-band{background:var(--ink);color:var(--paper)}
-.map-band .sec-head{border-color:#333}
-.map-band .sec-head h2{color:var(--paper)}
-.mapctl{display:flex;width:max-content;max-width:100%;border:2px solid var(--acc);margin:26px 0 6px;flex-wrap:wrap}
-.mbtn{font:inherit;font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.04em;padding:9px 20px;background:transparent;color:var(--paper);border:none;border-right:2px solid var(--acc);cursor:pointer}
-.mbtn:last-child{border-right:none}
-.mbtn.on{background:var(--acc);color:var(--ink)}
-.mapbox{position:relative;margin-top:6px}
-.mapbox svg{width:100%;height:auto;display:block}
-.tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:9px 12px;font-size:13px;line-height:1.42;max-width:240px;z-index:5}
-.tip b{font-family:'Archivo Black';text-transform:uppercase;font-size:13px}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#cfcfca;margin-top:16px;align-items:center}
-.legend .it{display:flex;align-items:center;gap:6px}
-.legend .sw{width:14px;height:14px;display:inline-block}
-.mapcap{margin-top:18px;color:#cfcfca;font-size:15px;max-width:62ch}
-.mapcap a{color:var(--acc);font-weight:700;text-transform:uppercase;font-size:13px;white-space:nowrap}
-.notes{background:#0e0e0e;color:#d6d6cf;font-size:13.5px;line-height:1.55;border-top:4px solid var(--acc)}
-.notes .wrap{padding:24px 32px}
-.notes b{color:var(--acc);letter-spacing:.06em;text-transform:uppercase;font-size:12px}
-.notes ul{margin:10px 0 0 18px}.notes li{margin:5px 0}
-@media(max-width:720px){.grid,.spkgrid{grid-template-columns:1fr}.card:nth-child(odd),.spk:nth-child(odd){border-right:none;padding-right:0}.card:nth-child(even),.spk:nth-child(even){padding-left:0}.nav-links{display:none}}
-</style>
-</head>
-<body>
+  :root{--ink:#171326;--paper:#FAF4E9;--card:#fff;--twilight:#241a44;--twilight2:#170f2e;--gold:#B8893C;--gold2:#D9B26A;--accent:#CF6A2E;--moss:#6F7F4F;--mute:#6B6558;--line:#E6DAC4;--shade:#F1E7D3;}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}
+  .serif{font-family:'Cormorant Garamond',serif;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  /* NAV */
+  nav{position:sticky;top:0;z-index:20;background:rgba(23,15,46,.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(217,178,106,.25);}
+  .navin{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-family:'Fraunces';font-weight:700;font-size:19px;color:#F7F0E4;}
+  .logo em{color:var(--gold2);font-style:normal;}
+  .nav-links{display:flex;gap:24px;font-size:13.5px;color:#C7B8E6;font-weight:500;}
+  .nav-links a:hover{color:var(--gold2);}
+  .nav-links .cta{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10;padding:8px 16px;border-radius:999px;font-weight:600;}
+  /* HERO */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:74px 0 88px;color:#F7F0E4;background:linear-gradient(180deg,var(--twilight2),var(--twilight) 55%,#3a2a52 100%);}
+  .hero .halo{position:absolute;width:560px;height:560px;left:50%;top:-260px;transform:translateX(-50%);background:radial-gradient(circle,rgba(217,178,106,.16),transparent 62%);}
+  .hero .horizon{position:absolute;left:0;right:0;bottom:0;height:100px;background:linear-gradient(180deg,transparent,rgba(250,244,233,.14));}
+  .stars circle{fill:#EAD3A0;}
+  .kick{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#C7B8E6;margin-bottom:14px;}
+  .hero h1{font-family:'Fraunces';font-weight:700;font-size:60px;line-height:1.02;letter-spacing:-.5px;}
+  .hero h1 em{font-style:normal;background:linear-gradient(180deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero .tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;color:#EAD3A0;margin-top:16px;}
+  .orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0;}
+  .orn .l{height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold2));}.orn .l.r{background:linear-gradient(90deg,var(--gold2),transparent);}.orn .d{color:var(--gold2);font-size:12px;}
+  .btn{display:inline-block;padding:13px 27px;border-radius:999px;font-weight:600;font-size:14px;margin:22px 7px 0;}
+  .btn-p{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10;}
+  .btn-g{border:1px solid rgba(217,178,106,.4);color:#F7F0E4;}
+  section{padding:56px 0;}
+  .eyebrow{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--gold);margin-bottom:10px;text-align:center;}
+  h2{font-family:'Fraunces';font-weight:700;font-size:36px;margin-bottom:14px;text-align:center;}
+  .lead{font-family:'Fraunces';font-size:18px;color:#3a352c;max-width:720px;margin:0 auto 24px;text-align:center;}
+  /* EVENT FEATURE */
+  .feature{background:linear-gradient(180deg,var(--twilight),var(--twilight2));color:#F7F0E4;border-radius:20px;padding:40px;text-align:center;position:relative;overflow:hidden;}
+  .feature .halo{position:absolute;width:400px;height:400px;left:50%;top:-220px;transform:translateX(-50%);background:radial-gradient(circle,rgba(217,178,106,.16),transparent 62%);}
+  .feature .badge{display:inline-block;border:1px solid var(--gold2);color:var(--gold2);font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 15px;border-radius:999px;margin-bottom:16px;}
+  .feature h3{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:#fff;margin-bottom:8px;}
+  .feature .when{font-size:14px;color:#C7B8E6;letter-spacing:.04em;margin-bottom:12px;}
+  .feature p{color:#e2d9c6;max-width:560px;margin:0 auto 8px;font-size:15.5px;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 3px 14px rgba(120,90,30,.06);}
+  .card h3{font-family:'Fraunces';font-weight:700;font-size:20px;color:var(--ink);margin-bottom:7px;}.card h3 span{color:var(--gold);}
+  .card p{font-size:14px;color:#39332c;}
+  .pill3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  .p3{text-align:center;background:var(--shade);border-radius:14px;padding:22px 18px;}
+  .p3 .dot{width:44px;height:44px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 9px;font-family:'Fraunces';font-weight:700;}
+  .p3 h4{font-family:'Fraunces';font-size:17px;margin-bottom:4px;}.p3 p{font-size:12.5px;color:var(--mute);}
+  .atlas{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;background:var(--shade);border-radius:16px;padding:30px;}
+  .atlas h3{font-family:'Fraunces';font-size:26px;margin-bottom:8px;}.atlas p{font-size:14.5px;color:#39332c;margin-bottom:14px;}
+  .atlas .mapart{height:150px;border-radius:12px;background:linear-gradient(135deg,#9a7fe0,#3FB65C 45%,#E8C23E 72%,#D6462A);opacity:.85;}
+  .why{background:linear-gradient(180deg,var(--twilight),var(--twilight2));color:#EAD3A0;border-radius:16px;padding:34px;text-align:center;}
+  .why .eyebrow{color:var(--gold2);}.why h2{color:#F7F0E4;}
+  .stats{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:14px;}
+  .stat{flex:1;min-width:160px;background:rgba(255,255,255,.05);border:1px solid rgba(217,178,106,.22);border-radius:12px;padding:18px;}
+  .stat b{font-family:'Fraunces';font-size:28px;color:var(--gold2);display:block;}.stat span{font-size:12px;color:#d7c9ac;}
+  .involve{text-align:center;}
+  footer{background:var(--twilight2);color:#EAD3A0;padding:40px 0 30px;text-align:center;border-top:1px solid rgba(217,178,106,.22);}
+  footer .cta{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--gold2);margin-bottom:8px;}
+  footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin:12px 0;}
+  footer .c{font-size:12.5px;color:var(--mute);}
+  @media(max-width:720px){.hero h1{font-size:42px;}.two,.pill3,.atlas{grid-template-columns:1fr;}.nav-links{gap:14px;font-size:12px;}.nav-links .about{display:none;}}
+</style></head><body>
 <nav><div class="wrap navin">
-  <a class="logo" onclick="show('home')">
-    <svg width="30" height="26" viewBox="0 0 30 26" aria-hidden="true"><rect x="0" y="17" width="6" height="9" fill="#0e0e0e"/><rect x="8" y="12" width="6" height="14" fill="#0e0e0e"/><rect x="16" y="7" width="6" height="19" fill="#0e0e0e"/><rect x="24" y="0" width="6" height="26" fill="#ff4d2e"/></svg>
-    Elevated States <span>Project</span>
-  </a>
-  <div class="nav-links"><a onclick="show('home')" id="l-home" class="on">Home</a><a onclick="show('home')">Work</a><a onclick="show('events')" id="l-events">Events</a><a onclick="show('about')" id="l-about">About</a><a onclick="show('involved')" id="l-involved">Get Involved</a></div>
-  <a class="btn" onclick="show('involved')">Donate</a>
+  <div class="logo">Elevated <em>States</em></div>
+  <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a class="about" href="about.html">About</a><a class="cta" href="get-involved.html">Get Involved</a></div>
 </div></nav>
 
-<main id="home">
-<header class="hero"><div class="wrap">
-  <span class="eyebrow label">Honest, engaging drug science</span>
-  <h1>Elevating self<br>&amp; <span class="hl">society.</span></h1>
-  <div class="heromid">
-    <p class="lead">We make the science of altered states genuinely engaging — and bring the right people together to turn curiosity into research, safer experiences, and smarter policy.</p>
-    <div class="cta-row"><a class="btn" onclick="show('involved')">Get involved</a><a class="btn ghost" onclick="show('about')">About</a></div>
+<div class="hero">
+  <div class="halo"></div>
+  <svg class="stars" style="position:absolute;inset:0" viewBox="0 0 100 100" preserveAspectRatio="none"><g><circle cx="16" cy="20" r=".24"/><circle cx="82" cy="16" r=".2"/><circle cx="60" cy="26" r=".16"/><circle cx="36" cy="30" r=".2"/><circle cx="90" cy="34" r=".22"/><circle cx="49" cy="14" r=".28"/><circle cx="24" cy="52" r=".16"/><circle cx="88" cy="55" r=".18"/></g></svg>
+  <div class="wrap" style="position:relative">
+    <div class="kick">Science · Culture · Curiosity</div>
+    <h1>The <em>Elevated</em> States Project</h1>
+    <div class="orn"><span class="l"></span><span class="d serif">✦</span><span class="l r"></span></div>
+    <div class="tag">Psychedelic science, lifted from hype to wonder.</div>
+    <div><a class="btn btn-p" href="tripping-ball-asheville.html">Explore A Tripping Ball</a><a class="btn btn-g" href="atlas.html">See the Atlas</a></div>
   </div>
+  <div class="horizon"></div>
 </div>
-<div class="eventbar"><div class="wrap"><div class="inner"><span class="pill">Upcoming</span><strong>Conscious Community Forum — Fort Lauderdale</strong><a onclick="show('events')">Learn more →</a></div></div></div>
-</header>
 
 <section><div class="wrap">
-  <div class="sec-head"><h2>The Work</h2><span class="label">Four fronts</span></div>
-  <div class="grid">
-    <div class="card"><div class="n">01</div><div><h3>Research</h3><p>Supporting and translating real science on psychedelics and consciousness — and making it make sense.</p></div></div>
-    <div class="card"><div class="n">02</div><div><h3>Harm reduction</h3><p>Practical, judgment-free guidance that keeps people safer and helps them get more from the experience.</p></div></div>
-    <div class="card"><div class="n">03</div><div><h3>Policy</h3><p>Convening researchers, clinicians, and advocates to move drug policy toward evidence and away from stigma.</p></div></div>
-    <div class="card"><div class="n">04</div><div><h3>Education</h3><p>Using altered states as a doorway to teach how science actually works — engaging, never dry.</p></div></div>
+  <div class="eyebrow">What we do</div>
+  <h2>Trip on ideas, not substances.</h2>
+  <p class="lead">We bring the science of psychedelics and the mind to the public through upscale live events, original content, and grounded education — hosted by comedian and science communicator Shane Mauss.</p>
+  <div class="two">
+    <div class="card"><h3>The Flagship <span>·</span></h3><p><b>A Tripping Ball</b> — an elegant evening of comedy, science, a candlelit dinner, live music, and a headline conversation with a genuine legend. A touring event that lands in a new city and returns.</p></div>
+    <div class="card"><h3>The Engine <span>·</span></h3><p>Every event is captured multi-camera and becomes social, a podcast, and a documentary — a growing library that compounds our audience city to city.</p></div>
   </div>
 </div></section>
 
-<section class="map-band"><div class="wrap">
-  <div class="sec-head"><h2>The Landscape</h2><span class="label" style="color:var(--acc)">Drug-policy openness by state</span></div>
-  <div class="mapctl" id="mapctl">
-    <button class="mbtn on" data-view="overall">Overall</button>
-    <button class="mbtn" data-view="cannabis">Cannabis</button>
-    <button class="mbtn" data-view="psych">Psychedelics</button>
-  </div>
-  <div class="mapbox"><div id="map"></div><div id="tip" class="tip"></div></div>
-  <div id="legend" class="legend"></div>
-  <p class="mapcap">Each state rises to its level of openness — this is the terrain we work in, and why education and policy matter. Hover any state. <a href="policy-atlas-full-mockup.html" target="_blank">Explore the full atlas →</a></p>
-</div></section>
-
-<section class="about-band"><div class="wrap">
-  <span class="label">Who we are</span>
-  <h2>Psychedelic edutainment that brings the right people together.</h2>
-  <p>Science communicators, researchers, and skeptics with a sense of humor — working at the intersection of curiosity, evidence, freedom, and growth, for personal and public elevation.</p>
-</div></section>
-
-<section class="join"><div class="wrap">
-  <h2>Bring <span class="hl">curiosity</span> and evidence to the conversation.</h2>
-  <div class="cta-row" style="justify-content:center"><a class="btn" onclick="show('involved')">Donate</a><a class="btn ghost">Join the newsletter</a></div>
-</div></section>
-</main>
-
-<main id="events" style="display:none">
-<header class="hero"><div class="wrap">
-  <span class="eyebrow label">Events</span>
-  <h1>Off the page,<br>into the <span class="hl">room.</span></h1>
-  <div class="heromid">
-    <p class="lead">We bring the science to life as engaging public forums — and use them to put the right people in the same room.</p>
-  </div>
-</div></header>
-
-<section><div class="wrap">
-  <div class="sec-head"><h2>Next up</h2><span class="label">Coming soon</span></div>
+<section style="padding-top:0"><div class="wrap">
   <div class="feature">
-    <span class="pill">Fort Lauderdale, FL</span>
-    <h3>Conscious Community Forum</h3>
-    <p>A one-day forum that brings leading researchers, clinicians, and harm-reduction voices together with a curious public — moderated conversations, not lectures.</p>
-    <div class="panels">Addiction &amp; treatment&nbsp; ·&nbsp; Harm reduction &amp; experience optimization&nbsp; ·&nbsp; Psychedelics for mental health&nbsp; ·&nbsp; The new science of psychedelics</div>
-    <a class="btn acc">Tickets &amp; info →</a>
+    <div class="halo"></div>
+    <div class="badge">Now announcing · Founding Circle open</div>
+    <h3 class="serif">A Tripping Ball · Asheville</h3>
+    <div class="when">Saturday, April 17, 2027 · Bicycle Day weekend</div>
+    <p>The first Ball. An enchanted evening of science, comedy, dinner, live music, and a headline conversation — built to travel city to city from here.</p>
+    <div><a class="btn btn-p" href="tripping-ball-asheville.html">Founding tickets &amp; details</a></div>
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <div class="sec-head"><h2>Featured voices</h2><span class="label">Announced soon</span></div>
-  <p style="font-size:19px;max-width:66ch;margin-top:24px;font-weight:500">We're assembling leading researchers, clinicians, and harm-reduction voices from across Florida and the Southeast — the University of Miami, FIU, UCF, Nova Southeastern, and beyond. The full lineup will be announced as speakers are confirmed.</p>
-</div></section>
-
-<section><div class="wrap">
-  <div class="sec-head"><h2>On the horizon</h2><span class="label">2026–27</span></div>
-  <div class="grid">
-    <div class="card"><div class="n">↗</div><div><h3>Fort Wayne &amp; Bloomington, IN</h3><p>Two day-long conferences, Fall 2026. Dates to be announced.</p></div></div>
-    <div class="card"><div class="n">↗</div><div><h3>Indianapolis — weekend flagship</h3><p>A multi-day gathering, Spring 2027. Dates to be announced.</p></div></div>
+<section style="padding-top:0"><div class="wrap">
+  <div class="eyebrow">What we stand for</div>
+  <div class="pill3">
+    <div class="p3"><div class="dot" style="background:var(--accent)">1</div><h4>Science literacy</h4><p>Turning curiosity into real understanding — through the most fascinating subject there is.</p></div>
+    <div class="p3"><div class="dot" style="background:var(--moss)">2</div><h4>Harm reduction</h4><p>Modeling a responsible, informed culture — safety-first, and it discourages use.</p></div>
+    <div class="p3"><div class="dot" style="background:var(--gold)">3</div><h4>Honest advocacy</h4><p>Holding the excitement and the evidence at once — no woo, no boosterism.</p></div>
   </div>
 </div></section>
 
-<section class="join"><div class="wrap">
-  <h2>Host. Speak. <span class="hl">Sponsor.</span></h2>
-  <p style="max-width:50ch;margin:0 auto 24px;font-weight:500;text-transform:none;letter-spacing:0">Want to bring a forum to your city, join a panel, or support the work? Let's talk.</p>
-  <div class="cta-row" style="justify-content:center"><a class="btn">Get in touch</a><a class="btn ghost" onclick="show('home')">Back to home</a></div>
-</div></section>
-</main>
-
-<main id="about" style="display:none">
-<header class="hero"><div class="wrap">
-  <span class="eyebrow label">About</span>
-  <h1>Curiosity,<br><span class="hl">made useful.</span></h1>
-  <div class="heromid">
-    <p class="lead">The Elevated States Project is psychedelic edutainment with a purpose: make the science engaging, then bring the right people together to turn it into real change.</p>
+<section style="padding-top:0"><div class="wrap"><div class="atlas">
+  <div>
+    <div class="eyebrow" style="text-align:left">The Policy Atlas</div>
+    <h3>Where the country actually stands.</h3>
+    <p>An interactive map of psychedelic and cannabis policy, research, and harm reduction across all 51 states — with each state's rank and the small steps it could take to rise.</p>
+    <a class="btn btn-p" style="margin-top:0" href="atlas.html">Open the Atlas</a>
   </div>
-</div></header>
+  <div class="mapart"></div>
+</div></div></section>
 
-<section><div class="wrap">
-  <div class="sec-head"><h2>Why we exist</h2><span class="label">The middle ground</span></div>
-  <p style="font-size:20px;max-width:64ch;margin-top:28px;font-weight:500">There's never been more interest in altered states — or more noise around them. The conversation swings between hype and fear, and the real science gets lost in the middle. We make that science engaging and accessible, and connect the people who can turn understanding into safer experiences and smarter policy.</p>
-</div></section>
+<section style="padding-top:0"><div class="wrap"><div class="feature">
+  <div class="halo"></div>
+  <div class="badge">The flywheel</div>
+  <h3 class="serif">Get the Ball to make the trip to you.</h3>
+  <p>Each year, the state that climbs the rankings the most earns <b>A Tripping Ball</b>. Move your state up — pass a reform, fund the research, expand harm reduction — and you don't just change the map, you win the night. The Atlas is the scoreboard; the Ball is the prize.</p>
+  <div style="margin-top:8px"><a class="btn btn-g" href="atlas.html">See the standings</a></div>
+</div></div></section>
 
-<section><div class="wrap">
-  <div class="sec-head"><h2>How we work</h2><span class="label">Two engines</span></div>
-  <div class="grid">
-    <div class="card"><div class="n">A</div><div><h3>Edutainment</h3><p>We turn dense science into events, talks, and content people actually enjoy — because curiosity is the gateway to literacy.</p></div></div>
-    <div class="card"><div class="n">B</div><div><h3>Convening</h3><p>We put researchers, clinicians, funders, artists, and advocates in one room, then help good ideas become research, programs, and policy.</p></div></div>
+<section style="padding-top:0"><div class="wrap"><div class="why">
+  <div class="eyebrow">Why now</div>
+  <h2 style="font-family:Fraunces">The moment is here.</h2>
+  <div class="stats">
+    <div class="stat"><b>$3.8B</b><span>Eli Lilly's 2026 psychedelics bet — the field's biggest ever.</span></div>
+    <div class="stat"><b>2 states</b><span>Oregon &amp; Colorado run legal, regulated programs.</span></div>
+    <div class="stat"><b>FDA</b><span>fast-tracking psychedelic therapies toward approval.</span></div>
   </div>
+</div></div></section>
+
+<section style="padding-top:0"><div class="wrap involve">
+  <div class="eyebrow">Be part of it</div>
+  <h2>Attend, sponsor, or support the launch.</h2>
+  <p class="lead">Founding supporters get in at the ground floor of something built to grow. There's a place for you — as a guest, a sponsor, or a patron.</p>
+  <a class="btn btn-p" href="get-involved.html">Get involved</a>
 </div></section>
 
-<section class="about-band"><div class="wrap">
-  <span class="label">What we believe</span>
-  <h2>At the intersection of curiosity, evidence, freedom &amp; growth.</h2>
-  <div class="chips"><span class="chip">Curiosity</span><span class="chip">Evidence</span><span class="chip">Freedom</span><span class="chip">Growth</span></div>
-</div></section>
-
-<section class="join"><div class="wrap">
-  <h2>Founded 2026. <span class="hl">Just getting started.</span></h2>
-  <p style="max-width:50ch;margin:0 auto 24px;font-weight:500;text-transform:none;letter-spacing:0">Built by science communicators and event producers who love this space enough to be honest about it.</p>
-  <div class="cta-row" style="justify-content:center"><a class="btn" onclick="show('involved')">Get involved</a><a class="btn ghost" onclick="show('home')">Back to home</a></div>
-</div></section>
-</main>
-
-<main id="involved" style="display:none">
-<header class="hero"><div class="wrap">
-  <span class="eyebrow label">Get involved</span>
-  <h1>Be part<br>of <span class="hl">it.</span></h1>
-  <div class="heromid">
-    <p class="lead">However you show up — funding, expertise, or just curiosity — there's a real way to help build this.</p>
-  </div>
-</div></header>
-
-<section><div class="wrap">
-  <div class="sec-head"><h2>Ways to help</h2><span class="label">Pick your lane</span></div>
-  <div class="grid">
-    <div class="card"><div class="n">$</div><div><h3>Donate</h3><p>Fund the events, research translation, and harm-reduction education. Every gift is tax-deductible.</p></div></div>
-    <div class="card"><div class="n">◇</div><div><h3>Partner or sponsor</h3><p>Back a forum, host one in your city, or put your clinic or brand in front of an engaged audience.</p></div></div>
-    <div class="card"><div class="n">✦</div><div><h3>Lend expertise</h3><p>Researchers, clinicians, and advocates — join a panel or help shape the programming.</p></div></div>
-    <div class="card"><div class="n">→</div><div><h3>Stay close</h3><p>Come to an event, join the newsletter, and help spread better information.</p></div></div>
-  </div>
-</div></section>
-
-<section class="about-band"><div class="wrap">
-  <span class="label">Donate</span>
-  <h2>Fuel the work.</h2>
-  <p>The Elevated States Project is a 501(c)(3) nonprofit — your gift is tax-deductible and goes straight into events, education, and research.</p>
-  <div class="amts"><button class="amt">$25</button><button class="amt">$50</button><button class="amt on">$100</button><button class="amt">$250</button><button class="amt">Other</button></div>
-  <div><a class="btn acc">Donate now →</a></div>
-</div></section>
-
-<section class="join"><div class="wrap">
-  <h2>Tell us how you<br>want to <span class="hl">show up.</span></h2>
-  <p style="max-width:50ch;margin:0 auto 24px;font-weight:500;text-transform:none;letter-spacing:0">Funders, speakers, hosts, and the merely curious — we'd love to hear from you.</p>
-  <div class="cta-row" style="justify-content:center"><a class="btn">Get in touch</a><a class="btn ghost" onclick="show('home')">Back to home</a></div>
-</div></section>
-</main>
-
-<footer><div class="wrap footin">
-  <div>© 2026 Elevated States Project — 501(c)(3)</div>
-  <div>Instagram — YouTube — Contact</div>
+<footer><div class="wrap">
+  <div class="cta serif">Grounded science. Good company. A night that travels.</div>
+  <div class="links"><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="get-involved.html">Get Involved</a><a href="about.html">About</a></div>
+  <div class="c">The Elevated States Project · shanetmauss@gmail.com</div>
 </div></footer>
-
-<div class="notes" style="display:none"><div class="wrap">
-  <b>▸ Design &amp; copy notes — not part of the page</b>
-  <ul>
-    <li><strong>Vibe #4 — Bold editorial,</strong> now with a logo mark (ascending bars = "elevation," top bar in red), a full <strong>Events page</strong>, and the state map worked in as "The Landscape."</li>
-    <li><strong>Live nav tabs:</strong> Home · Events · About all switch in place. The map's "Explore the full map" link opens the standalone interactive version (drug-policy-elevation-map.html — keep both files in the same folder).</li>
-    <li><strong>Events page:</strong> featured FL forum, a "featured voices" lineup (marked in-progress — these are proposed, not confirmed), and upcoming Indiana events.</li>
-    <li><strong>Map colors:</strong> chartreuse = most open, red = most restrictive. The openness index is our own illustrative composite — label it as such publicly.</li>
-    <li><strong>Still placeholder:</strong> real ticket/donate links, team bios, final logo polish, photography.</li>
-  </ul>
-</div></div>
-
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
-<script>
-function show(p){['home','events','about','involved'].forEach(function(id){document.getElementById(id).style.display=id===p?'block':'none';});[['l-home','home'],['l-events','events'],['l-about','about'],['l-involved','involved']].forEach(function(x){var el=document.getElementById(x[0]);if(el)el.classList.toggle('on',x[1]===p);});window.scrollTo(0,0);}
-
-const DATA={"Alabama":{o:36,c:"medical",p:"none"},"Alaska":{o:74,c:"recreational",p:"none"},"Arizona":{o:70,c:"recreational",p:"none"},"Arkansas":{o:42,c:"medical",p:"none"},"California":{o:88,c:"recreational",p:"decrim"},"Colorado":{o:98,c:"recreational",p:"legal"},"Connecticut":{o:76,c:"recreational",p:"decrim"},"Delaware":{o:70,c:"recreational",p:"none"},"District of Columbia":{o:82,c:"recreational",p:"decrim"},"Florida":{o:48,c:"medical",p:"none"},"Georgia":{o:30,c:"lowthc",p:"none"},"Hawaii":{o:48,c:"medical",p:"none"},"Idaho":{o:8,c:"illegal",p:"none"},"Illinois":{o:75,c:"recreational",p:"none"},"Indiana":{o:20,c:"illegal",p:"none"},"Iowa":{o:26,c:"lowthc",p:"none"},"Kansas":{o:15,c:"illegal",p:"none"},"Kentucky":{o:38,c:"medical",p:"none"},"Louisiana":{o:44,c:"medical",p:"none"},"Maine":{o:76,c:"recreational",p:"none"},"Maryland":{o:72,c:"recreational",p:"none"},"Massachusetts":{o:84,c:"recreational",p:"decrim"},"Michigan":{o:80,c:"recreational",p:"decrim"},"Minnesota":{o:80,c:"recreational",p:"decrim"},"Mississippi":{o:38,c:"medical",p:"none"},"Missouri":{o:70,c:"recreational",p:"none"},"Montana":{o:70,c:"recreational",p:"none"},"Nebraska":{o:40,c:"medical",p:"none"},"Nevada":{o:76,c:"recreational",p:"none"},"New Hampshire":{o:46,c:"medical",p:"none"},"New Jersey":{o:74,c:"recreational",p:"decrim"},"New Mexico":{o:88,c:"recreational",p:"legal"},"New York":{o:78,c:"recreational",p:"none"},"North Carolina":{o:22,c:"illegal",p:"none"},"North Dakota":{o:38,c:"medical",p:"none"},"Ohio":{o:68,c:"recreational",p:"none"},"Oklahoma":{o:52,c:"medical",p:"none"},"Oregon":{o:100,c:"recreational",p:"legal"},"Pennsylvania":{o:50,c:"medical",p:"none"},"Rhode Island":{o:74,c:"recreational",p:"none"},"South Carolina":{o:18,c:"illegal",p:"none"},"South Dakota":{o:40,c:"medical",p:"none"},"Tennessee":{o:22,c:"lowthc",p:"none"},"Texas":{o:28,c:"lowthc",p:"none"},"Utah":{o:38,c:"medical",p:"none"},"Vermont":{o:78,c:"recreational",p:"none"},"Virginia":{o:66,c:"recreational",p:"none"},"Washington":{o:85,c:"recreational",p:"decrim"},"West Virginia":{o:40,c:"medical",p:"none"},"Wisconsin":{o:24,c:"illegal",p:"none"},"Wyoming":{o:14,c:"illegal",p:"none"}};
-const CAN={recreational:{v:92,col:"#e8ff45",label:"Recreational legal"},medical:{v:52,col:"#f0a02e",label:"Medical only"},lowthc:{v:30,col:"#b9742e",label:"Low-THC / CBD"},illegal:{v:12,col:"#ff4d2e",label:"No broad program"}};
-const PSY={legal:{v:94,col:"#e8ff45",label:"Legal therapy"},decrim:{v:55,col:"#a6b53a",label:"Decriminalized / pilot"},none:{v:15,col:"#6b6960",label:"No reform yet"}};
-const W=960,H=620,MAXLIFT=46;
-const proj=d3.geoAlbersUsa().scale(1180).translate([W/2,H/2+14]);
-const pathGen=d3.geoPath(proj);
-const oColor=d3.scaleLinear().domain([5,35,65,100]).range(["#6b6960","#9a9a45","#cfe23e","#e8ff45"]).interpolate(d3.interpolateLab).clamp(true);
-function metric(name,view){const d=DATA[name];if(view==="cannabis"){const k=CAN[d.c];return{v:k.v,col:k.col};}if(view==="psych"){const k=PSY[d.p];return{v:k.v,col:k.col};}return{v:d.o,col:oColor(d.o)};}
-const tip=document.getElementById("tip"),mapDiv=document.getElementById("map").parentNode;
-let features=[];
-const svg=d3.select("#map").append("svg").attr("viewBox","0 0 "+W+" "+H).attr("width","100%").attr("role","img").attr("aria-label","US states extruded by drug-policy openness");
-d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
-  features=topojson.feature(us,us.objects.states).features.filter(function(f){return DATA[f.properties.name]!==undefined;});
-  features.forEach(function(f){f._cy=pathGen.centroid(f)[1]||0;});
-  features.sort(function(a,b){return a._cy-b._cy;});
-  render("overall");
-});
-function render(view){
-  svg.selectAll("*").remove();
-  features.forEach(function(f){
-    var name=f.properties.name,m=metric(name,view),lift=(m.v/100)*MAXLIFT;
-    var wall=d3.color(m.col).darker(0.9).formatHex();
-    var g=svg.append("g");
-    g.append("path").attr("d",pathGen(f)).attr("fill","rgba(0,0,0,0.35)").attr("transform","translate(2.5,3)");
-    for(var i=lift;i>=0;i-=1.6){g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-i)+")").attr("fill",i<1.6?m.col:wall);}
-    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","none").attr("stroke","rgba(255,255,255,0.18)").attr("stroke-width",0.7);
-    g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","transparent").style("cursor","pointer")
-      .on("mousemove",function(ev){showTip(ev,name);}).on("mouseleave",function(){tip.style.opacity=0;});
-  });
-  buildLegend(view);
-}
-function showTip(ev,name){
-  var d=DATA[name],rect=mapDiv.getBoundingClientRect();
-  tip.innerHTML="<b>"+name+"</b><br><span>Openness index: <b style='color:#7a8a1a'>"+d.o+"</b>/100</span><br><span>Cannabis: "+CAN[d.c].label+"</span><br><span>Psychedelics: "+PSY[d.p].label+"</span>";
-  tip.style.opacity=1;
-  var x=ev.clientX-rect.left+14,y=ev.clientY-rect.top+14;
-  if(x>rect.width-240)x=ev.clientX-rect.left-250;
-  tip.style.left=x+"px";tip.style.top=y+"px";
-}
-function sw(c){return "<span class='sw' style='background:"+c+"'></span>";}
-function buildLegend(view){
-  var el=document.getElementById("legend");
-  if(view==="overall"){el.innerHTML="<span class='it'>"+sw("#e8ff45")+"Most open</span><span class='it'>"+sw("#cfe23e")+"</span><span class='it'>"+sw("#9a9a45")+"</span><span class='it'>"+sw("#6b6960")+"Most restrictive</span>";}
-  else if(view==="cannabis"){el.innerHTML=Object.keys(CAN).map(function(k){return "<span class='it'>"+sw(CAN[k].col)+CAN[k].label+"</span>";}).join("");}
-  else{el.innerHTML=Object.keys(PSY).map(function(k){return "<span class='it'>"+sw(PSY[k].col)+PSY[k].label+"</span>";}).join("");}
-}
-document.querySelectorAll(".mbtn").forEach(function(b){b.addEventListener("click",function(){
-  document.querySelectorAll(".mbtn").forEach(function(x){x.classList.remove("on");});
-  b.classList.add("on");render(b.dataset.view);
-});});
-document.querySelectorAll(".amt").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".amt").forEach(function(x){x.classList.remove("on");});b.classList.add("on");});});
-</script>
-</body>
-</html>
+</body></html>

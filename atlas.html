@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow">
+<title>The Policy Atlas — The Elevated States Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#171326;--paper:#FAF4E9;--card:#fff;--twilight:#241a44;--twilight2:#170f2e;--gold:#B8893C;--gold2:#D9B26A;--accent:#CF6A2E;--moss:#6F7F4F;--mute:#6B6558;--line:#E6DAC4;--shade:#F1E7D3;}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}.serif{font-family:'Cormorant Garamond',serif;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  nav{position:sticky;top:0;z-index:20;background:rgba(23,15,46,.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(217,178,106,.25);}
+  .navin{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-family:'Fraunces';font-weight:700;font-size:19px;color:#F7F0E4;}.logo em{color:var(--gold2);font-style:normal;}
+  .nav-links{display:flex;gap:24px;font-size:13.5px;color:#C7B8E6;font-weight:500;}.nav-links a:hover{color:var(--gold2);}
+  .hero{text-align:center;padding:54px 0 34px;color:#F7F0E4;background:linear-gradient(180deg,var(--twilight2),var(--twilight));position:relative;overflow:hidden;}
+  .hero .halo{position:absolute;width:520px;height:520px;left:50%;top:-250px;transform:translateX(-50%);background:radial-gradient(circle,rgba(217,178,106,.15),transparent 62%);}
+  .kick{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#C7B8E6;margin-bottom:10px;}
+  .hero h1{font-family:'Fraunces';font-weight:700;font-size:46px;}
+  .hero p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#EAD3A0;margin-top:10px;max-width:640px;margin-left:auto;margin-right:auto;}
+  .stat-row{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:22px;}
+  .st{background:rgba(255,255,255,.05);border:1px solid rgba(217,178,106,.22);border-radius:12px;padding:12px 20px;}
+  .st b{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold2);display:block;line-height:1;}
+  .st span{font-size:11px;color:#C7B8E6;letter-spacing:.04em;}
+  section{padding:44px 0;}
+  .eyebrow{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--gold);margin-bottom:10px;}
+  h2{font-family:'Fraunces';font-weight:700;font-size:30px;margin-bottom:8px;}
+  .sub{color:var(--mute);font-size:15px;margin-bottom:20px;max-width:720px;}
+  .mapframe{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 26px rgba(120,90,30,.10);background:var(--twilight2);}
+  .mapframe iframe{width:100%;height:760px;border:0;display:block;}
+  .maplinks{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;}
+  .btn{display:inline-block;padding:11px 22px;border-radius:999px;font-weight:600;font-size:14px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10;}
+  .btn-o{border:1px solid var(--gold);color:var(--gold);background:none;}
+  /* updates */
+  .updates{background:var(--shade);border-radius:16px;padding:30px;}
+  .headlines{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+  .hl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .hl .tag{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:5px;}
+  .hl p{font-size:14px;color:#39332c;}
+  .feed{margin-top:10px;}
+  .fitem{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);}
+  .fitem:last-child{border-bottom:0;}
+  .fitem .stt{flex:none;width:150px;font-family:'Fraunces';font-weight:600;font-size:15px;color:var(--ink);}
+  .fitem .mv{font-size:13.5px;color:#4a453c;}
+  .badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:1px;}
+  .b-high{background:#e9f3e6;color:#3f7a44;}.b-med{background:#fdf0e2;color:#b7752e;}
+  .note{font-size:12.5px;color:var(--mute);font-style:italic;margin-top:16px;}
+  footer{background:var(--twilight2);color:#EAD3A0;padding:34px 0;text-align:center;border-top:1px solid rgba(217,178,106,.22);}
+  footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin-bottom:8px;}
+  footer .c{font-size:12.5px;color:var(--mute);}
+  @media(max-width:720px){.headlines{grid-template-columns:1fr;}.mapframe iframe{height:560px;}.fitem .stt{width:110px;font-size:14px;}}
+</style></head><body>
+<nav><div class="wrap navin">
+  <div class="logo"><a href="index.html">Elevated <em>States</em></a></div>
+  <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="get-involved.html">Get Involved</a><a href="about.html">About</a><a href="index.html">Home</a></div>
+</div></nav>
+
+<div class="hero"><div class="halo"></div><div class="wrap" style="position:relative">
+  <div class="kick">Science · Policy · Reform</div>
+  <h1 class="serif">The Policy Atlas</h1>
+  <p>Where the country actually stands on psychedelics — policy, research, and harm reduction, state by state.</p>
+  <div class="stat-row">
+    <div class="st"><b>51</b><span>states &amp; DC mapped</span></div>
+    <div class="st"><b>23</b><span>active research states</span></div>
+    <div class="st"><b>4</b><span>legal psilocybin states</span></div>
+  </div>
+</div></div>
+
+<section><div class="wrap">
+  <div class="eyebrow">The interactive map</div>
+  <h2>Explore every state.</h2>
+  <div class="sub">Switch layers (cannabis, psilocybin, research, harm reduction, momentum), play the time-lapse, and click any state for its rank and the small steps it could take to rise.</div>
+  <div class="mapframe"><iframe src="policy-atlas-full-mockup.html" title="Elevated States Policy Atlas" loading="lazy"></iframe></div>
+  <div class="maplinks">
+    <a class="btn" href="policy-atlas-full-mockup.html" target="_blank">Open full-screen ↗</a>
+    <a class="btn-o btn" href="index.html">Back to home</a>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap"><div class="updates" style="background:linear-gradient(180deg,var(--twilight),var(--twilight2));color:#EAD3A0;">
+  <div class="eyebrow" style="color:var(--gold2)">The prize</div>
+  <h2 style="color:#F7F0E4">Each year, the most elevated state earns the Ball.</h2>
+  <div class="sub" style="color:#d7c9ac;max-width:660px">This is a scoreboard, not just a map. The state that climbs the rankings the most in a year becomes a finalist to host <b style="color:#fff">A Tripping Ball</b> — an upscale night of science, comedy, and celebration. Move your state up, and you earn it. Here's how to climb: open any state on the map for its exact next steps.</div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap"><div class="updates">
+  <div class="eyebrow">Updates from around the country</div>
+  <h2>What's moving right now.</h2>
+  <div class="sub">The national picture is shifting fast. Here's the headline momentum, plus a live pull of what's in motion in each active state.</div>
+
+  <div class="headlines">
+    <div class="hl"><div class="tag">Industry</div><p>Eli Lilly places a <b>$3.8B</b> bet on psychedelics — the field's largest pharma investment yet.</p></div>
+    <div class="hl"><div class="tag">Colorado</div><p>Regulated <b>psilocybin healing centers</b> are now operational under the state's Natural Medicine program.</p></div>
+    <div class="hl"><div class="tag">North Carolina</div><p>Lawmakers advance a <b>$4.2M</b> university psychedelic-research bill (Duke / UNC), alongside UNC's $26.9M DARPA program.</p></div>
+    <div class="hl"><div class="tag">Arizona</div><p>The state funds <b>$5M for ibogaine</b> and <b>$5M for psilocybin</b> research — among the largest public commitments yet.</p></div>
+    <div class="hl"><div class="tag">Research</div><p><b>23 states</b> now host active psychedelic research programs — from Johns Hopkins to UW–Madison to UNM's Phase 3 trials.</p></div>
+    <div class="hl"><div class="tag">FDA</div><p>Regulators continue <b>fast-tracking</b> psychedelic therapies, with multiple Phase 3 programs in progress.</p></div>
+  </div>
+
+  <div style="margin-top:26px" class="eyebrow">On the move · by state</div>
+  <div class="feed" id="feed"></div>
+  <div class="note">Educational only, not legal advice. State movement is pulled from the atlas dataset; figures are best-effort and should be verified against primary sources (Psychedelic Alpha, MPP, NORML) before relying on them. This feed refreshes as the underlying data is updated.</div>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="links"><a href="tripping-ball-asheville.html">The Ball</a><a href="get-involved.html">Get Involved</a><a href="about.html">About</a><a href="index.html">Home</a></div>
+  <div class="c">The Elevated States Project · shanetmauss@gmail.com</div>
+</div></footer>
+
+<script src="atlas-data.js"></script>
+<script>
+(function(){
+  if(typeof STATES==="undefined"){document.getElementById("feed").innerHTML="<div class='fitem'><div class='mv'>Live feed loads with the dataset.</div></div>";return;}
+  var order={high:0,med:1,low:2,none:3,na:4};
+  var rows=Object.keys(STATES).filter(function(k){var d=STATES[k];return (d.mom==="high"||d.mom==="med")&&d.momN;});
+  rows.sort(function(a,b){return (order[STATES[a].mom]-order[STATES[b].mom])||a.localeCompare(b);});
+  var html=rows.map(function(k){
+    var d=STATES[k];
+    var badge=d.mom==="high"?"<span class='badge b-high'>Advancing</span>":"<span class='badge b-med'>Building</span>";
+    return "<div class='fitem'><div class='stt'>"+k+badge+"</div><div class='mv'>"+d.momN+"</div></div>";
+  }).join("");
+  document.getElementById("feed").innerHTML=html;
+})();
+</script>
+</body></html>

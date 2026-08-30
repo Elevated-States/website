@@ -18,20 +18,6 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .brand{display:inline-flex;align-items:center;gap:10px;font-family:'Archivo Black';font-size:15px;text-transform:uppercase}
 .brand span{color:var(--acc2)}
 .poc{border:2px solid var(--acc2);color:var(--acc2);font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.1em;padding:4px 9px}
-.aibar{border-bottom:2px solid var(--line);padding:14px 22px;background:#121210}
-.aiwrap{max-width:1320px;margin:0 auto}
-.airow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.ai-in{flex:1;min-width:240px;background:#000;border:2px solid var(--acc);color:var(--paper);font:inherit;font-size:15px;padding:11px 16px}
-.ai-in::placeholder{color:#6f6f68}
-.ai-go{font-family:'Archivo Black';background:var(--acc);color:var(--ink);border:2px solid var(--acc);padding:11px 20px;text-transform:uppercase;font-size:13px;cursor:pointer}
-.exrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.ex{font-size:12.5px;border:1px solid var(--line);color:var(--mute);padding:6px 12px;cursor:pointer}
-.ex:hover{border-color:var(--acc);color:var(--paper)}
-.answer{display:none;margin-top:14px;border-left:4px solid var(--acc);background:#191917;padding:13px 18px}
-.answer.show{display:block}
-.answer .q{color:var(--acc);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.04em}
-.answer .a{font-size:15.5px;margin-top:6px}
-.answer .clr{color:var(--mute);font-size:12px;text-transform:uppercase;cursor:pointer;margin-top:8px;display:inline-block}
 .atlas{display:grid;grid-template-columns:228px 1fr 330px;max-width:1320px;margin:0 auto;min-height:560px}
 .rail{border-right:2px solid var(--line);padding:16px 0;overflow-y:auto}
 .rail .grp{padding:0 16px;margin-bottom:14px}
@@ -39,7 +25,7 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .chip{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:transparent;border:1px solid var(--line);color:var(--paper);font:inherit;font-size:13.5px;font-weight:600;padding:8px 11px;margin-bottom:6px;cursor:pointer;transition:.12s}
 .chip:hover{border-color:var(--mute)}
 .chip.on{background:#1c1c19;border-color:var(--paper)}
-.chip .dot{width:13px;height:13px;flex:none;border:1px solid rgba(255,255,255,.25)}
+.chip .dot{width:14px;height:14px;flex:none;border:1px solid rgba(255,255,255,.25);border-radius:50%}
 .chip.soon{opacity:.5}
 .chip .tag{margin-left:auto;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
 .stage{padding:14px 18px;border-right:2px solid var(--line)}
@@ -72,6 +58,11 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .detail .st{font-family:'Archivo Black';font-size:23px;text-transform:uppercase;line-height:1;margin-bottom:12px}
 .drow{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:9px 0;font-size:13px}
 .drow .k{color:var(--mute);text-transform:uppercase;font-size:11px;letter-spacing:.04em;padding-top:2px}
+.steps{margin:15px 0 4px;background:#1c1c19;border-left:3px solid var(--acc);padding:12px 14px}
+.steps-h{font-family:'Archivo Black';text-transform:uppercase;font-size:12px;color:var(--acc);margin-bottom:8px;letter-spacing:.04em}
+.step{font-size:12.5px;color:#d8d8d0;padding:4px 0;line-height:1.45;display:flex;gap:8px}
+.step .ar{color:var(--acc);font-weight:700;flex:none}
+.rankbig{font-family:'Archivo Black';color:var(--acc)}
 .drow .v{text-align:right;font-weight:600;max-width:60%}
 .dpill{display:inline-block;padding:3px 9px;font-size:11px;font-weight:700;text-transform:uppercase}
 .blurb{font-size:13.5px;color:#d6d6cf;margin:13px 0;line-height:1.55}
@@ -88,20 +79,11 @@ footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing
   <span class="poc">Concept · illustrative data</span>
 </nav>
 
-<div class="aibar"><div class="aiwrap">
-  <div class="airow">
-    <input class="ai-in" id="aiIn" placeholder="Ask the map:  where can I legally do psilocybin therapy?" />
-    <button class="ai-go" id="aiGo">Ask →</button>
-  </div>
-  <div class="exrow" id="exrow"></div>
-  <div class="answer" id="answer"><div class="q" id="aQ"></div><div class="a" id="aA"></div><span class="clr" id="aClr">✕ clear highlight</span></div>
-</div></div>
-
 <div class="atlas">
   <aside class="rail" id="rail"></aside>
   <main class="stage">
     <div class="stagehead">
-      <h2 id="layerTitle">Overall openness</h2>
+      <h2 id="layerTitle">Policy overview</h2>
       <div class="viewtog"><button class="vbtn on" data-v="relief">Relief</button><button class="vbtn" data-v="flat">Flat</button></div>
     </div>
     <div class="mapbox"><div id="map"></div><div class="tip" id="tip"></div></div>
@@ -122,13 +104,13 @@ footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing
     </div>
   </main>
   <aside class="detail" id="detail">
-    <p class="hint">Click any state for its full profile across every layer.<br><br>Switch layers in the rail, scrub the timeline to watch a wave roll out, or use "ask the map" above.</p>
+    <p class="hint">Click any state for its full profile across every layer.<br><br>Switch layers in the rail, or scrub the timeline to watch a wave roll out.</p>
   </aside>
 </div>
 
 <footer>
   <b>Concept mockup — illustrative data</b><br>
-  A working prototype of the Elevated States Project policy atlas. Every layer, the timeline, and "ask the map" read from one shared dataset (atlas-data.js). Values are best-effort and must be verified against sources (Psychedelic Alpha, NORML, MPP) before public use. Educational only, not legal advice.
+  The Elevated States Project policy atlas. Every layer and the timeline read from one shared dataset (atlas-data.js). Values are best-effort and should be verified against sources (Psychedelic Alpha, NORML, MPP). Educational only, not legal advice.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -141,7 +123,7 @@ const IBOL={active:"Active research",considering:"Considering",none:"None"};
 const KETL={open:"Telehealth + clinic",clinic:"In-person clinic only"};
 const MDMAL={trial:"Active trial site",rtt:"Right-to-try law",none:"None"};
 const PENL={illegal:"Felony exposure",lowthc:"Misdemeanor",med:"Low / civil",rec:"Legal for adults"};
-const oColor=d3.scaleLinear().domain([5,35,65,100]).range(["#6b6960","#9a9a45","#cfe23e","#e8ff45"]).interpolate(d3.interpolateLab).clamp(true);
+const oColor=d3.scaleThreshold().domain([32,48,66]).range(["#D6462A","#E8C23E","#3FB65C","#9a7fe0"]);
 const CAN={rec:{v:92,c:"#38b25a"},med:{v:55,c:"#86c994"},lowthc:{v:35,c:"#c2d9a6"},illegal:{v:10,c:"#3a3a34"}};
 const PSI={legal:{v:94,c:"#6a5cff"},decrim:{v:55,c:"#9b8ff2"},none:{v:12,c:"#34343c"}};
 const PEN={illegal:{v:92,c:"#ff4d2e"},lowthc:{v:62,c:"#e0792e"},med:{v:38,c:"#c79a55"},rec:{v:12,c:"#4a4a40"}};
@@ -156,10 +138,47 @@ const SSPL={yes:"Authorized",limited:"Limited / local",no:"Not authorized"};
 const GSLL={yes:"Yes",limited:"Limited",no:"No"};
 const hrColor=d3.scaleLinear().domain([0,50,100]).range(["#3a3a34","#2f8f9c","#36c8d8"]).interpolate(d3.interpolateLab).clamp(true);
 function hrScore(n){var d=STATES[n];var f=d.fts==="legal"?1:0;var s=d.ssp==="yes"?1:(d.ssp==="limited"?0.5:0);var g=d.gsl==="yes"?1:(d.gsl==="limited"?0.5:0);return Math.round((f+s+g)/3*100);}
+// ---- openness RANK (competition ranking; #1 = most open) ----
+var NSTATES=Object.keys(STATES).length;
+var RANK=(function(){var ks=Object.keys(STATES).slice().sort(function(a,b){return STATES[b].o-STATES[a].o;});var r={},i,rank=0,prev=null;for(i=0;i<ks.length;i++){if(STATES[ks[i]].o!==prev){rank=i+1;prev=STATES[ks[i]].o;}r[ks[i]]=rank;}return r;})();
+function rankStr(n){return "#"+RANK[n]+" of "+NSTATES;}
+// ---- data-driven "small steps to level up" ----
+function improvementSteps(n){var d=STATES[n],s=[];
+ if(d.can==="illegal")s.push("Pass a medical-cannabis program");
+ else if(d.can==="lowthc")s.push("Grow low-THC into a full medical program");
+ else if(d.can==="med")s.push("Move toward regulated adult-use cannabis");
+ if(d.psi==="none")s.push("Decriminalize psilocybin or authorize supervised therapeutic access");
+ else if(d.psi==="decrim")s.push("Stand up a regulated therapeutic psilocybin program (OR/CO model)");
+ if(d.fts!=="legal")s.push("Legalize fentanyl test strips");
+ if(d.ssp!=="yes")s.push("Authorize and fund syringe-services programs");
+ if(d.gsl!=="yes")s.push("Strengthen the Good Samaritan overdose-immunity law");
+ if(d.rsch==="none")s.push("Seed university or clinical psychedelic research");
+ else if(d.rsch==="emerging")s.push("Grow research into active clinical-trial sites");
+ if(!s.length){s.push("Protect and refine existing programs — expand access and equity");s.push("Keep funding harm reduction and public education");}
+ return s.slice(0,3);}
 function sw(c,round){return "<span class='sw' style='background:"+c+(round?";border-radius:50%":"")+"'></span>";}
+// Categorical "policy status" — each state colored by its most progressive standing (purple = psychedelic reform, green = cannabis, amber/red = restrictive).
+const STATUS={
+ psiLegal:{c:"#8B6CFF",l:"Psychedelic therapy legal"},
+ psiDecrim:{c:"#B9AEF7",l:"Psychedelics decriminalized"},
+ rec:{c:"#3FB65C",l:"Recreational cannabis"},
+ med:{c:"#8FCB9B",l:"Medical cannabis"},
+ lowthc:{c:"#CBD7A2",l:"Low-THC only"},
+ restrictive:{c:"#E0862E",l:"Restrictive"},
+ hardline:{c:"#D6462A",l:"Most restrictive"}
+};
+function statusCat(n){var d=STATES[n];
+ if(d.psi==="legal")return"psiLegal";
+ if(d.psi==="decrim")return"psiDecrim";
+ if(d.can==="rec")return"rec";
+ if(d.can==="med")return"med";
+ if(d.can==="lowthc")return"lowthc";
+ return d.o<18?"hardline":"restrictive";}
 const LAYERS={
+ status:{t:"Policy overview",m:function(n){return{v:STATES[n].o,c:STATUS[statusCat(n)].c};},dots:CITIES,dotcol:"#FFD23F",
+   lg:sw("#8B6CFF")+"Psychedelic therapy "+sw("#B9AEF7")+"Decriminalized "+sw("#3FB65C")+"Rec cannabis "+sw("#8FCB9B")+"Medical "+sw("#CBD7A2")+"Low-THC "+sw("#E0862E")+"Restrictive "+sw("#D6462A")+"Most restrictive "+sw("#FFD23F",1)+"Decrim city"},
  overall:{t:"Overall openness",m:function(n){return{v:STATES[n].o,c:oColor(STATES[n].o)};},
-   lg:sw("#e8ff45")+"Most open "+sw("#cfe23e")+sw("#9a9a45")+sw("#6b6960")+"Most restrictive"},
+   lg:sw("#9a7fe0")+"Most open "+sw("#3FB65C")+"Open "+sw("#E8C23E")+"Limited "+sw("#D6462A")+"Alert · most restrictive"},
  cannabis:{t:"Cannabis status",m:function(n){var k=CAN[STATES[n].can];return{v:k.v,c:k.c};},
    lg:sw("#38b25a")+"Recreational "+sw("#86c994")+"Medical "+sw("#c2d9a6")+"Low-THC "+sw("#3a3a34")+"None"},
  psych:{t:"Psilocybin",m:function(n){var k=PSI[STATES[n].psi];return{v:k.v,c:k.c};},
@@ -184,7 +203,7 @@ const LAYERS={
    lg:sw("#ff8c42")+"Advancing "+sw("#cf7a2e")+"Building "+sw("#7a5a30")+"Early "+sw("#3a352e")+"None "+sw("#2a2a26")+"Not yet sourced  ·  pending bills & trajectory"}
 };
 const GROUPS=[
- {h:"Index",items:[["overall","Overall openness","#e8ff45",0]]},
+ {h:"Index",items:[["status","Policy overview","conic-gradient(#8B6CFF 0 20%,#B9AEF7 20% 30%,#3FB65C 30% 62%,#8FCB9B 62% 76%,#E0862E 76% 90%,#D6462A 90% 100%)",0],["overall","Overall openness","conic-gradient(#9a7fe0 0 25%,#3FB65C 25% 50%,#E8C23E 50% 75%,#D6462A 75% 100%)",0]]},
  {h:"Cannabis",items:[["cannabis","Cannabis status","#38b25a",0]]},
  {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["ketamine","Ketamine access","#29b6d8",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},
@@ -194,7 +213,7 @@ const GROUPS=[
 ];
 const WAVES={recY:{col:"#38b25a",min:2011,label:"recreational cannabis"},medY:{col:"#86c994",min:1996,label:"medical cannabis"},psiY:{col:"#6a5cff",min:2018,label:"psilocybin reform"}};
 
-var layer="overall",flat=false,highlight=[],tl=false,wave="recY",year=2026,timer=null;
+var layer="status",flat=false,highlight=[],tl=false,wave="recY",year=2026,timer=null;
 const W=900,H=560,MAXLIFT=44;
 const proj=d3.geoAlbersUsa().scale(1080).translate([W/2,H/2+8]);
 const pathGen=d3.geoPath(proj);
@@ -205,14 +224,7 @@ const svg=d3.select("#map").append("svg").attr("viewBox","0 0 "+W+" "+H).attr("w
 var rail=document.getElementById("rail"),h="";
 GROUPS.forEach(function(g){h+='<div class="grp"><div class="gh">'+g.h+'</div>';g.items.forEach(function(it){h+='<button class="chip'+(it[3]?' soon':'')+(it[0]===layer?' on':'')+'" data-layer="'+it[0]+'"><span class="dot" style="background:'+it[2]+'"></span>'+it[1]+(it[3]?'<span class="tag">soon</span>':'')+'</button>';});h+='</div>';});
 rail.innerHTML=h;
-rail.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){if(b.classList.contains("soon")){toast(b.dataset.layer);return;}setLayer(b.dataset.layer);clearHi();});});
-
-const EX=["Where can I legally do psilocybin therapy?","Worst place to get caught with mushrooms?","Where's cannabis legal for adults?","Which states are warming up fastest?","Where is ibogaine research happening?","Where's harm reduction strongest?","Where is psychedelic research happening?","Where can a church legally serve ayahuasca?"];
-document.getElementById("exrow").innerHTML=EX.map(function(e){return '<span class="ex">'+e+'</span>';}).join("");
-document.querySelectorAll("#exrow .ex").forEach(function(s){s.addEventListener("click",function(){ask(s.textContent);});});
-document.getElementById("aiGo").addEventListener("click",function(){ask(document.getElementById("aiIn").value);});
-document.getElementById("aiIn").addEventListener("keydown",function(e){if(e.key==="Enter")ask(e.target.value);});
-document.getElementById("aClr").addEventListener("click",clearHi);
+rail.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){setLayer(b.dataset.layer);clearHi();});});
 
 d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
  features=topojson.feature(us,us.objects.states).features.filter(function(f){return STATES[f.properties.name]!==undefined;});
@@ -221,12 +233,14 @@ d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function
  render();
 });
 
+function starPath(cx,cy,ro,ri,n){n=n||5;var s="";for(var i=0;i<n*2;i++){var r=(i%2)?ri:ro;var a=Math.PI/n*i-Math.PI/2;s+=(i?"L":"M")+(cx+Math.cos(a)*r).toFixed(2)+","+(cy+Math.sin(a)*r).toFixed(2);}return s+"Z";}
 function cellColor(n){
  if(tl){var yv=STATES[n][wave];var on=yv!==null&&yv<=year;return{v:on?90:8,c:on?WAVES[wave].col:"#2f2f2b"};}
  return LAYERS[layer].m(n);
 }
 function render(){
  svg.selectAll("*").remove();
+ svg.append("defs").html('<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="4.5" flood-color="#cbb2ff" flood-opacity="0.9"/></filter><filter id="starGlow" x="-140%" y="-140%" width="380%" height="380%"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ffe6a0" flood-opacity="0.95"/></filter>');
  var hl=highlight.length>0;
  features.forEach(function(f){
   var n=f.properties.name,m=cellColor(n),col=m.c,v=m.v,on=true;
@@ -234,11 +248,13 @@ function render(){
   var lift=flat?0:(v/100)*MAXLIFT,wall=d3.color(col).darker(0.95).formatHex(),g=svg.append("g");
   if(!flat)g.append("path").attr("d",pathGen(f)).attr("fill","rgba(0,0,0,0.4)").attr("transform","translate(2,2.5)");
   for(var i=lift;i>=0;i-=1.6){g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-i)+")").attr("fill",i<1.6?col:wall);}
+  var glowOn=!flat&&!tl&&on&&((layer==="overall"&&v>=66)||(layer==="status"&&STATES[n].psi==="legal"));
+  if(glowOn)g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill",col).attr("filter","url(#glow)").style("pointer-events","none");
   g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","none").attr("stroke",(hl&&on)?"#fff":"rgba(255,255,255,0.16)").attr("stroke-width",(hl&&on)?1.6:0.7);
   g.append("path").attr("d",pathGen(f)).attr("transform","translate(0,"+(-lift)+")").attr("fill","transparent").style("cursor","pointer")
     .on("mousemove",function(ev){showTip(ev,n);}).on("mouseleave",function(){tip.style.opacity=0;}).on("click",function(){openDetail(n);});
  });
- if(!tl&&LAYERS[layer].dots){LAYERS[layer].dots.forEach(function(p){var xy=proj([p.lon,p.lat]);if(!xy)return;svg.append("circle").attr("cx",xy[0]).attr("cy",xy[1]).attr("r",5).attr("fill",LAYERS[layer].dotcol).attr("stroke","#0e0e0e").attr("stroke-width",2).style("cursor","pointer").on("mousemove",function(ev){dotTip(ev,p);}).on("mouseleave",function(){tip.style.opacity=0;});svg.append("circle").attr("cx",xy[0]).attr("cy",xy[1]).attr("r",5.6).attr("fill","none").attr("stroke","#fff").attr("stroke-width",1).style("pointer-events","none");});}
+ if(!tl&&LAYERS[layer].dots){var useStar=LAYERS[layer].dots===CITIES;LAYERS[layer].dots.forEach(function(p){var xy=proj([p.lon,p.lat]);if(!xy)return;if(useStar){svg.append("path").attr("d",starPath(xy[0],xy[1],6.6,2.8,5)).attr("fill",LAYERS[layer].dotcol).attr("stroke","#2a2000").attr("stroke-width",0.7).attr("filter","url(#starGlow)").style("cursor","pointer").on("mousemove",function(ev){dotTip(ev,p);}).on("mouseleave",function(){tip.style.opacity=0;});}else{svg.append("circle").attr("cx",xy[0]).attr("cy",xy[1]).attr("r",5).attr("fill",LAYERS[layer].dotcol).attr("stroke","#0e0e0e").attr("stroke-width",2).style("cursor","pointer").on("mousemove",function(ev){dotTip(ev,p);}).on("mouseleave",function(){tip.style.opacity=0;});svg.append("circle").attr("cx",xy[0]).attr("cy",xy[1]).attr("r",5.6).attr("fill","none").attr("stroke","#fff").attr("stroke-width",1).style("pointer-events","none");}});}
  document.getElementById("legend").innerHTML=tl?(sw(WAVES[wave].col)+"In effect "+sw("#2f2f2b")+"Not yet"):LAYERS[layer].lg;
  if(tl){var c=Object.keys(STATES).filter(function(k){return k!=="District of Columbia"&&STATES[k][wave]!==null&&STATES[k][wave]<=year;}).length;document.getElementById("tlcount").textContent=c;document.getElementById("tllabel").textContent="states · "+WAVES[wave].label;}
 }
@@ -256,7 +272,8 @@ function showTip(ev,n){
  else if(layer==="harm")line="Harm reduction "+hrScore(n)+"/100";
  else if(layer==="research")line=RSCHL[d.rsch]+(d.rschN?" · "+d.rschN:"");
  else if(layer==="momentum")line="Momentum: "+MOML[d.mom||"na"];
- else line="Openness "+d.o+"/100";
+ else if(layer==="status")line=STATUS[statusCat(n)].l+" · openness rank "+rankStr(n);
+ else line="Openness rank "+rankStr(n);
  tipShow(ev,"<b>"+n+"</b><br><span>"+line+"</span>");
 }
 function dotTip(ev,p){tipShow(ev,"<b>"+p.n+"</b><br><span>"+(layer==="ayahuasca"?"Recognized exemption · "+p.y:"Decriminalized · "+p.y)+"</span>");}
@@ -270,7 +287,7 @@ function openDetail(n){
  else blurb="A holdout — little or no cannabis program and no psychedelic reform. The conversation matters most here.";
  document.getElementById("detail").innerHTML='<div class="st">'+n+'</div>'+
   (d.verified?'<div style="color:#7bbf5a;font-size:11.5px;margin:-6px 0 12px">✓ Verified · '+d.updated+'</div>':'<div style="color:#8a8a82;font-size:11.5px;margin:-6px 0 12px">◦ Illustrative — not yet sourced</div>')+
-  '<div class="drow"><span class="k">Openness index</span><span class="v">'+d.o+' / 100</span></div>'+
+  '<div class="drow"><span class="k">Openness rank</span><span class="v"><span class="rankbig">'+rankStr(n)+'</span> <span style="color:#8a8a82">('+d.o+'/100)</span></span></div>'+
   '<div class="drow"><span class="k">Cannabis</span><span class="v">'+pill(CANL[d.can],CAN[d.can].c)+(d.recY?' <span style="color:#8a8a82">since '+d.recY+'</span>':(d.medY?' <span style="color:#8a8a82">med '+d.medY+'</span>':''))+'</span></div>'+
   '<div class="drow"><span class="k">Psilocybin</span><span class="v">'+pill(PSIL[d.psi],PSI[d.psi].c)+(d.psiY?' <span style="color:#8a8a82">'+d.psiY+'</span>':'')+'</span></div>'+
   '<div class="drow"><span class="k">Ibogaine research</span><span class="v">'+pill(IBOL[d.ibo],IBO[d.ibo].c)+'</span></div>'+
@@ -284,49 +301,12 @@ function openDetail(n){
   '<div class="drow"><span class="k">Reform momentum</span><span class="v">'+pill(MOML[d.mom||"na"],MOM[d.mom||"na"].c)+'</span></div>'+
   (d.momN?'<div class="drow"><span class="k" style="padding-left:10px">what\'s moving</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.momN+'</span></div>':'')+
   (d.tribal?'<div class="drow"><span class="k">Tribal / local</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.tribalN+'</span></div>':'')+
+  '<div class="steps"><div class="steps-h">Small steps to level up</div>'+improvementSteps(n).map(function(x){return '<div class="step"><span class="ar">→</span><span>'+x+'</span></div>';}).join('')+'</div>'+
   '<p class="blurb">'+blurb+'</p>'+
   '<div class="src"><b>Sources</b><br>'+(d.verified?d.src+'<br>Last updated: '+d.updated:'Illustrative — not yet sourced (see the data-schema doc)')+'</div>';
 }
 function setLayer(l){layer=l;tl=false;stop();document.getElementById("yr").textContent="—";document.getElementById("layerTitle").textContent=LAYERS[l].t;rail.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",c.dataset.layer===l);});render();}
-function clearHi(){highlight=[];document.getElementById("answer").classList.remove("show");render();}
-function toast(w){document.getElementById("aQ").textContent="Layer in progress";document.getElementById("aA").textContent="The "+w+" layer needs its own sourced dataset (e.g. fentanyl-test-strip legality and syringe-services for harm reduction, or active research programs). It's mapped in the data schema and slots in next.";document.getElementById("answer").classList.add("show");}
-
-function recStates(){return Object.keys(STATES).filter(function(k){return STATES[k].can==="rec";});}
-function ask(text){
- if(!text||!text.trim())return;text=text.trim();var q=text.toLowerCase(),r=null;
- var has=function(){for(var i=0;i<arguments.length;i++)if(q.indexOf(arguments[i])>=0)return true;return false;};
- if(has("psilocybin therapy","legal psilocybin","mushroom therapy","psilocybin program")){
-   var s=Object.keys(STATES).filter(function(k){return STATES[k].psi==="legal";});r={layer:"psych",states:s,a:"Three so far — "+s.join(", ")+" run legal psilocybin-therapy programs. Everywhere else it's decriminalized at best, or fully off-limits."};}
- else if(has("worst","hardest","caught","felony","strictest","toughest")){
-   var s=Object.keys(STATES).filter(function(k){return k!=="District of Columbia";}).sort(function(a,b){return STATES[a].o-STATES[b].o;}).slice(0,3);r={layer:"penalty",states:s,a:s[0]+" takes it — rock bottom on every measure: no cannabis program, zero psychedelic reform, real felony exposure. "+s[1]+" and "+s[2]+" aren't far behind."};}
- else if(has("warming up","fastest","recent","newest","latest","momentum")){
-   var s=Object.keys(STATES).filter(function(k){return STATES[k].recY&&STATES[k].recY>=2022;});r={layer:"cannabis",states:s,a:"The 2022–23 class: "+s.join(", ")+" all flipped recreational. The Midwest and mid-Atlantic are the new frontier."};}
- else if(has("ibogaine")){
-   var act=Object.keys(STATES).filter(function(k){return STATES[k].ibo==="active";}),con=Object.keys(STATES).filter(function(k){return STATES[k].ibo==="considering";});r={layer:"ibogaine",states:act.concat(con),a:(act.length?act.join(", ")+" "+(act.length>1?"have":"has")+" active ibogaine research; ":"")+con.join(", ")+" "+(con.length>1?"are":"is")+" considering it. It's an emerging, early story."};}
- else if(has("ayahuasca","religious","church","rfra","peyote")){
-   r={layer:"ayahuasca",states:["New Mexico","Oregon"],a:"Ayahuasca isn't legal by state — it runs on federal religious exemptions granted church-by-church (the UDV in New Mexico, Santo Daime in Oregon). "+Object.keys(STATES).filter(function(k){return STATES[k].rfra;}).length+" states also have their own RFRA laws that strengthen a religious defense."};}
- else if(has("ketamine")){
-   r={layer:"ketamine",states:[],a:"Ketamine is the easy one — medically legal in every state. The real difference is access: most allow telehealth + clinic, a handful are in-person clinic only. So it's about how easy it is to get, not whether it's legal."};}
- else if(has("mdma","molly","ecstasy")){
-   var s=Object.keys(STATES).filter(function(k){return STATES[k].mdma==="trial";});r={layer:"mdma",states:s,a:"MDMA is still Schedule I, so there's no legal access anywhere — but active trial sites run in "+s.join(", ")+", and a few states have right-to-try laws."};}
- else if(has("harm reduction","test strip","fentanyl test","syringe","needle exchange","naloxone","narcan","overdose","good samaritan","safe supply")){
-   var strong=Object.keys(STATES).filter(function(k){return k!=="District of Columbia"&&hrScore(k)>=85;});
-   var worst=Object.keys(STATES).filter(function(k){return k!=="District of Columbia";}).sort(function(a,b){return hrScore(a)-hrScore(b);}).slice(0,3);
-   r={layer:"harm",states:strong,a:strong.length+" states score top marks on harm reduction — fentanyl test strips legal, plus syringe-services and Good Samaritan laws all on the books. The thinnest safety nets: "+worst.join(", ")+", where test strips can still count as paraphernalia."};}
- else if(has("research","studies","university","universities","clinical","trial site","study","science","johns hopkins")){
-   var act=Object.keys(STATES).filter(function(k){return STATES[k].rsch==="active";});
-   r={layer:"research",states:act,a:"The active psychedelic-research hubs: "+act.map(function(k){return k+(STATES[k].rschN?" ("+STATES[k].rschN+")":"");}).join(", ")+". A second wave of emerging university programs is forming behind them."};}
- else if(has("recreational","legal weed","legal cannabis","legal marijuana","adult use","adults")){
-   var s=recStates();r={layer:"cannabis",states:s.filter(function(k){return k!=="District of Columbia";}),a:(s.length-1)+" states plus DC — the whole West Coast, the Northeast, and a growing wedge of the Midwest."};}
- else if(has("medical")){
-   var s=Object.keys(STATES).filter(function(k){return STATES[k].can==="med";});r={layer:"cannabis",states:s,a:"These run medical-only programs (no adult-use yet): "+s.join(", ")+"."};}
- else if(has("most open","best","freest","leader")){
-   var s=Object.keys(STATES).sort(function(a,b){return STATES[b].o-STATES[a].o;}).slice(0,4);r={layer:"overall",states:s,a:s.join(", ")+" top the openness index — recreational cannabis plus real psychedelic reform."};}
- document.getElementById("aQ").textContent=text;
- if(r){setLayer(r.layer);highlight=r.states.slice();document.getElementById("aA").textContent=r.a;render();}
- else{document.getElementById("aA").textContent="I can answer questions about cannabis, psilocybin, ibogaine, ketamine, MDMA, ayahuasca/religious freedom, penalties, and which states are most/least open. (In the live version this routes to an LLM reading the full dataset — see the Netlify Function recipe in the repo.) Try one of the examples above.";highlight=[];render();}
- document.getElementById("answer").classList.add("show");
-}
+function clearHi(){highlight=[];render();}
 
 document.querySelectorAll(".vbtn").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".vbtn").forEach(function(x){x.classList.remove("on");});b.classList.add("on");flat=b.dataset.v==="flat";render();});});
 document.querySelectorAll(".wbtn").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".wbtn").forEach(function(x){x.classList.remove("on");});b.classList.add("on");wave=b.dataset.wave;stop();var mn=WAVES[wave].min;var sl=document.getElementById("slider");sl.min=mn;sl.value=2026;year=2026;tl=true;document.getElementById("yr").textContent=year;render();});});

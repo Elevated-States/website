@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Elevated States Project — Mockup C · Warm Blend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#171326;--paper:#FAF4E9;--card:#fff;--twilight:#241a44;--twilight2:#170f2e;--gold:#B8893C;--gold2:#D9B26A;--accent:#CF6A2E;--moss:#6F7F4F;--mute:#6B6558;--line:#E6DAC4;--shade:#F1E7D3;}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;}
+  .serif{font-family:'Cormorant Garamond',serif;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+  .badge-mock{position:fixed;top:12px;right:12px;background:var(--gold);color:#fff;font:600 11px Inter;padding:6px 12px;border-radius:999px;z-index:20;letter-spacing:.04em;}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;}
+  nav .logo{font-family:'Fraunces';font-weight:700;font-size:21px;color:var(--ink);}
+  nav .logo em{color:var(--gold);font-style:normal;}
+  nav .links{display:flex;gap:26px;font-size:13.5px;color:var(--mute);font-weight:500;}
+  /* hero: twilight rising into warm paper */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:64px 0 78px;color:#F7F0E4;
+    background:linear-gradient(180deg,var(--twilight2),var(--twilight) 55%,#3a2a52 100%);border-radius:0 0 20px 20px;}
+  .hero .halo{position:absolute;width:520px;height:520px;left:50%;top:-250px;transform:translateX(-50%);background:radial-gradient(circle,rgba(217,178,106,.16),transparent 62%);}
+  .hero .horizon{position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(180deg,transparent,rgba(250,244,233,.12));}
+  .stars circle{fill:#EAD3A0;}
+  .kick{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#C7B8E6;margin-bottom:13px;}
+  .hero h1{font-family:'Fraunces';font-weight:700;font-size:56px;line-height:1.02;letter-spacing:-.5px;}
+  .hero h1 em{font-style:normal;background:linear-gradient(180deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero .tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#EAD3A0;margin-top:14px;}
+  .orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px 0;}
+  .orn .l{height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold2));}.orn .l.r{background:linear-gradient(90deg,var(--gold2),transparent);}.orn .d{color:var(--gold2);font-size:12px;}
+  .btn{display:inline-block;padding:13px 27px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;margin:22px 7px 0;}
+  .btn-p{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10;}
+  .btn-g{border:1px solid rgba(217,178,106,.4);color:#F7F0E4;}
+  section{padding:52px 0;}
+  .eyebrow{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--gold);margin-bottom:10px;text-align:center;}
+  h2{font-family:'Fraunces';font-weight:700;font-size:36px;margin-bottom:14px;text-align:center;}
+  .lead{font-family:'Fraunces';font-size:18px;color:#3a352c;max-width:700px;margin:0 auto 22px;text-align:center;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 3px 14px rgba(120,90,30,.06);}
+  .card h3{font-family:'Fraunces';font-weight:700;font-size:20px;color:var(--ink);margin-bottom:7px;}.card h3 span{color:var(--gold);}
+  .card p{font-size:14px;color:#39332c;}
+  .pill3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  .p3{text-align:center;background:var(--shade);border-radius:14px;padding:22px 18px;}
+  .p3 .dot{width:44px;height:44px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 9px;font-family:'Fraunces';font-weight:700;}
+  .p3 h4{font-family:'Fraunces';font-size:17px;margin-bottom:4px;}.p3 p{font-size:12.5px;color:var(--mute);}
+  .why{background:linear-gradient(180deg,var(--twilight),var(--twilight2));color:#EAD3A0;border-radius:16px;padding:34px;text-align:center;}
+  .why .eyebrow{color:var(--gold2);}
+  .why h2{color:#F7F0E4;}
+  .stats{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:14px;}
+  .stat{flex:1;min-width:160px;background:rgba(255,255,255,.05);border:1px solid rgba(217,178,106,.22);border-radius:12px;padding:18px;}
+  .stat b{font-family:'Fraunces';font-size:28px;color:var(--gold2);display:block;}.stat span{font-size:12px;color:#cbb;color:#d7c9ac;}
+  footer{text-align:center;padding:40px 0 30px;}
+  footer .cta{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--gold);margin-bottom:6px;}footer .c{font-size:12.5px;color:var(--mute);}
+  @media(max-width:720px){.hero h1{font-size:40px;}.two,.pill3{grid-template-columns:1fr;}nav .links{display:none;}}
+</style></head><body>
+<div class="badge-mock">Mockup C · Warm Blend</div>
+<div class="wrap"><nav><div class="logo">Elevated <em>States</em> Project</div><div class="links"><span>The Ball</span><span>The Atlas</span><span>Get Involved</span><span>About</span></div></nav></div>
+<div class="hero">
+  <div class="halo"></div>
+  <svg class="stars" style="position:absolute;inset:0" viewBox="0 0 100 100" preserveAspectRatio="none"><g><circle cx="16" cy="20" r=".24"/><circle cx="82" cy="16" r=".2"/><circle cx="60" cy="26" r=".16"/><circle cx="36" cy="30" r=".2"/><circle cx="90" cy="34" r=".22"/><circle cx="49" cy="14" r=".28"/></g></svg>
+  <div class="wrap" style="position:relative">
+    <div class="kick">Science · Culture · Curiosity</div>
+    <h1>The <em>Elevated</em> States Project</h1>
+    <div class="orn"><span class="l"></span><span class="d serif">✦</span><span class="l r"></span></div>
+    <div class="tag">Psychedelic science, lifted from hype to wonder.</div>
+    <div><a class="btn btn-p" href="#">Explore A Tripping Ball</a><a class="btn btn-g" href="#">See the Atlas</a></div>
+  </div>
+  <div class="horizon"></div>
+</div>
+<section><div class="wrap">
+  <div class="eyebrow">What we do</div>
+  <h2>Trip on ideas, not substances.</h2>
+  <p class="lead">We bring the science of psychedelics and the mind to the public through upscale live events, original content, and grounded education — hosted by comedian and science communicator Shane Mauss.</p>
+  <div class="two">
+    <div class="card"><h3>The Flagship <span>·</span></h3><p><b>A Tripping Ball</b> — an elegant evening of comedy, science, a candlelit dinner, live music, and a headline conversation with a genuine legend. A touring event that lands in a new city and returns.</p></div>
+    <div class="card"><h3>The Engine <span>·</span></h3><p>Every event is captured multi-camera and becomes social, a podcast, and a documentary — a growing library that compounds our audience city to city.</p></div>
+  </div>
+</div></section>
+<section style="padding-top:0"><div class="wrap">
+  <div class="eyebrow">What we stand for</div>
+  <div class="pill3">
+    <div class="p3"><div class="dot" style="background:var(--accent)">1</div><h4>Science literacy</h4><p>Turning curiosity into real understanding — through the most fascinating subject there is.</p></div>
+    <div class="p3"><div class="dot" style="background:var(--moss)">2</div><h4>Harm reduction</h4><p>Modeling a responsible, informed culture — safety-first, and it discourages use.</p></div>
+    <div class="p3"><div class="dot" style="background:var(--gold)">3</div><h4>Honest advocacy</h4><p>Holding the excitement and the evidence at once — no woo, no boosterism.</p></div>
+  </div>
+</div></section>
+<section style="padding-top:0"><div class="wrap"><div class="why">
+  <div class="eyebrow">Why now</div>
+  <h2 class="serif" style="font-family:Fraunces">The moment is here.</h2>
+  <div class="stats">
+    <div class="stat"><b>$3.8B</b><span>Eli Lilly's 2026 psychedelics bet — the field's biggest ever.</span></div>
+    <div class="stat"><b>2 states</b><span>Oregon &amp; Colorado run legal, regulated programs.</span></div>
+    <div class="stat"><b>FDA</b><span>fast-tracking psychedelic therapies toward approval.</span></div>
+  </div>
+</div></div></section>
+<footer><div class="wrap"><div class="cta serif">Grounded science. Good company. A night that travels.</div><div class="c">The Elevated States Project · shanetmauss@gmail.com</div></div></footer>
+</body></html>
