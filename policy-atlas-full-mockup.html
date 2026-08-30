@@ -69,6 +69,15 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .sc .scr{font-family:'Archivo Black';font-size:15px;min-width:3ch}
 .sc .scl{font-size:12px;font-weight:600;flex:1}
 .sc .scv{font-size:11px;color:var(--mute);font-weight:600}
+.orgwrap{margin:15px 0 4px;background:#1a1a17;border-left:3px solid #6F7F4F;padding:12px 14px}
+.orgwrap .steps-h{color:#a7c07f}
+.orggrp{margin-bottom:9px}
+.orggrp:last-child{margin-bottom:0}
+.orggh{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);font-weight:700;margin:6px 0 4px}
+.org{display:block;font-size:12.5px;color:#e2e2da;padding:2px 0;line-height:1.35}
+.org a{color:#cfe0b8;font-weight:600;border-bottom:1px dotted rgba(207,224,184,.4)}
+.org a:hover{color:#eaffcf}
+.org .oc{color:#8a8a82;font-size:11px}
 .drow .v{text-align:right;font-weight:600;max-width:60%}
 .dpill{display:inline-block;padding:3px 9px;font-size:11px;font-weight:700;text-transform:uppercase}
 .blurb{font-size:13.5px;color:#d6d6cf;margin:13px 0;line-height:1.55}
@@ -123,6 +132,7 @@ footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="atlas-data.js"></script>
 <script src="atlas-scores.js"></script>
+<script src="atlas-orgs.js"></script>
 <script>
 const CANL={rec:"Recreational legal",med:"Medical only",lowthc:"Low-THC / CBD",illegal:"No broad program"};
 const PSIL={legal:"Legal therapy program",decrim:"Decriminalized / pilot",none:"No reform yet"};
@@ -164,6 +174,21 @@ function improvementSteps(n){var d=STATES[n],s=[];
  if(!s.length){s.push("Protect and refine existing programs — expand access and equity");s.push("Keep funding harm reduction and public education");}
  return s.slice(0,3);}
 function sw(c,round){return "<span class='sw' style='background:"+c+(round?";border-radius:50%":"")+"'></span>";}
+// ---- local-resource directory block ----
+function orgsBlock(n){
+ if(typeof ORGS==="undefined"||!ORGS[n]||!ORGS[n].length)return "";
+ var list=ORGS[n],by={};list.forEach(function(o){(by[o.cat]=by[o.cat]||[]).push(o);});
+ var h='<div class="orgwrap"><div class="steps-h">Local resources · '+list.length+' organizations</div>';
+ ORG_CAT_ORDER.forEach(function(cat){
+  if(!by[cat])return;
+  h+='<div class="orggrp"><div class="orggh">'+ORG_CATS[cat].label+'</div>';
+  by[cat].forEach(function(o){
+   h+='<span class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>'+(o.city&&o.city!=="Statewide"?' <span class="oc">· '+o.city+'</span>':(o.city==="Statewide"?' <span class="oc">· statewide</span>':''))+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
+  });
+  h+='</div>';
+ });
+ return h+'<div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">Verified live 2026 · not an endorsement. Suggest an org via Get Involved.</div></div>';
+}
 // Categorical "policy status" — each state colored by its most progressive standing (purple = psychedelic reform, green = cannabis, amber/red = restrictive).
 const STATUS={
  psiLegal:{c:"#8B6CFF",l:"Psychedelic therapy legal"},
@@ -318,6 +343,7 @@ function openDetail(n){
   (d.tribal?'<div class="drow"><span class="k">Tribal / local</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.tribalN+'</span></div>':'')+
   '<div class="steps"><div class="steps-h">Small steps to level up</div>'+improvementSteps(n).map(function(x){return '<div class="step"><span class="ar">→</span><span>'+x+'</span></div>';}).join('')+'</div>'+
   '<p class="blurb">'+blurb+'</p>'+
+  orgsBlock(n)+
   '<div class="src"><b>Sources</b><br>'+(d.verified?d.src+'<br>Last updated: '+d.updated:'Illustrative — not yet sourced (see the data-schema doc)')+'</div>';
 }
 function setLayer(l){layer=l;tl=false;stop();document.getElementById("yr").textContent="—";document.getElementById("layerTitle").textContent=LAYERS[l].t;rail.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",c.dataset.layer===l);});render();}

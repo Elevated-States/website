@@ -61,6 +61,21 @@
   .lbbarfill{height:100%;border-radius:999px;}
   .lbscore{font-size:12px;color:var(--mute);width:2.6ch;text-align:right;flex:none;}
   @media(max-width:720px){.lb{column-count:1;}}
+  /* directory */
+  .dirbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+  .dirbar select,.dirbar input{font:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);}
+  .dirbar select{min-width:190px;}.dirbar input{flex:1;min-width:180px;}
+  .catchips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;}
+  .catchip{border:1px solid var(--line);background:#fff;color:var(--mute);font:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;}
+  .catchip.on{color:#fff;border-color:transparent;}
+  .dircount{font-size:13px;color:var(--mute);margin-bottom:14px;}
+  .orgcard{background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+  .orgcard h4{font-family:'Fraunces';font-weight:600;font-size:16px;margin:0;}
+  .orgcard h4 a{color:var(--twilight);}.orgcard h4 a:hover{color:var(--accent);}
+  .orgmeta{font-size:12px;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin:3px 0;}
+  .orgcard p{font-size:14px;color:#4a453c;margin:2px 0 0;}
+  .orgcard .ext{font-size:12px;color:var(--gold);}
+  .dirgroup-h{font-family:'Fraunces';font-weight:700;font-size:18px;margin:22px 0 10px;color:var(--twilight);}
   footer{background:var(--twilight2);color:#EAD3A0;padding:34px 0;text-align:center;border-top:1px solid rgba(217,178,106,.22);}
   footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin-bottom:8px;}
   footer .c{font-size:12.5px;color:var(--mute);}
@@ -103,6 +118,20 @@
   <div class="note">Each board is a transparent 0–100 index built from sourced fields, then ranked #1–#51 (ties share a rank). Ketamine is excluded — it's legal in every state, so it can't separate them. Educational only, not legal advice.</div>
 </div></section>
 
+<section style="padding-top:0"><div class="wrap">
+  <div class="eyebrow">Local resources</div>
+  <h2>Find your people.</h2>
+  <div class="sub">A directory of <b id="orgtotal">460+</b> real organizations across all 51 jurisdictions — reform and decriminalization groups, harm-reduction services, research centers, psychedelic societies, veteran programs, and more. Pick your state, or search by name or city.</div>
+  <div class="dirbar">
+    <select id="dirstate"></select>
+    <input id="dirsearch" type="search" placeholder="Search organizations, cities…" aria-label="Search organizations">
+  </div>
+  <div class="catchips" id="dirchips"></div>
+  <div class="dircount" id="dircount"></div>
+  <div id="dirresults"></div>
+  <div class="note">Every organization was verified to have a live web presence in 2026. Listing is informational, not an endorsement, and not legal advice. Know a group we missed? Tell us on <a href="get-involved.html" style="color:var(--gold);border-bottom:1px solid var(--gold)">Get Involved</a>.</div>
+</div></section>
+
 <section style="padding-top:0"><div class="wrap"><div class="updates" style="background:linear-gradient(180deg,var(--twilight),var(--twilight2));color:#EAD3A0;">
   <div class="eyebrow" style="color:var(--gold2)">The prize</div>
   <h2 style="color:#F7F0E4">Each year, the most elevated state earns the Ball.</h2>
@@ -135,6 +164,7 @@
 
 <script src="atlas-data.js"></script>
 <script src="atlas-scores.js"></script>
+<script src="atlas-orgs.js"></script>
 <script>
 /* ---- Scoreboard: 5 tabbed leaderboards ---- */
 (function(){
@@ -153,6 +183,47 @@
   }
   tabs.addEventListener("click",function(e){var b=e.target.closest(".tab");if(!b)return;cur=b.dataset.k;paint();});
   paint();
+})();
+/* ---- Local resources directory ---- */
+(function(){
+  if(typeof ORGS==="undefined")return;
+  var states=Object.keys(ORGS).sort();
+  var total=0;states.forEach(function(s){total+=ORGS[s].length;});
+  var tEl=document.getElementById("orgtotal");if(tEl)tEl.textContent=total;
+  var sel=document.getElementById("dirstate"),search=document.getElementById("dirsearch"),
+      chips=document.getElementById("dirchips"),results=document.getElementById("dirresults"),countEl=document.getElementById("dircount");
+  var curState="",curCat="",query="";
+  sel.innerHTML="<option value=''>Choose a state…</option>"+states.map(function(s){return "<option value='"+s+"'>"+s+" ("+ORGS[s].length+")</option>";}).join("");
+  chips.innerHTML="<button class='catchip on' data-c=''>All categories</button>"+ORG_CAT_ORDER.map(function(c){return "<button class='catchip' data-c='"+c+"' style=''>"+ORG_CATS[c].label+"</button>";}).join("");
+  function card(o,st){var col=ORG_CATS[o.cat].color;
+    return "<div class='orgcard' style='border-left-color:"+col+"'><h4><a href='"+o.u+"' target='_blank' rel='noopener'>"+o.n+" <span class='ext'>↗</span></a></h4><div class='orgmeta' style='color:"+col+"'>"+ORG_CATS[o.cat].label+(o.city?" · "+o.city:"")+(st?" · "+st:"")+"</div>"+(o.note?"<p>"+o.note+"</p>":"")+"</div>";}
+  function matchCat(o){return !curCat||o.cat===curCat;}
+  function matchQ(o,st){if(!query)return true;var q=query.toLowerCase();return (o.n+" "+(o.city||"")+" "+(o.note||"")+" "+st).toLowerCase().indexOf(q)>=0;}
+  function render(){
+    var html="",n=0;
+    if(query){
+      states.forEach(function(st){
+        var hits=ORGS[st].filter(function(o){return matchCat(o)&&matchQ(o,st);});
+        if(hits.length){html+="<div class='dirgroup-h'>"+st+"</div>"+hits.map(function(o){return card(o,"");}).join("");n+=hits.length;}
+      });
+      countEl.textContent=n+" match"+(n===1?"":"es")+' for "'+query+'"'+(curCat?" in "+ORG_CATS[curCat].label:"");
+      results.innerHTML=html||"<p class='sub'>No matches. Try a different term or clear the category filter.</p>";
+    }else if(curState){
+      var by={};ORGS[curState].filter(matchCat).forEach(function(o){(by[o.cat]=by[o.cat]||[]).push(o);n++;});
+      ORG_CAT_ORDER.forEach(function(c){if(by[c])html+="<div class='dirgroup-h'>"+ORG_CATS[c].label+"</div>"+by[c].map(function(o){return card(o,"");}).join("");});
+      countEl.textContent=n+" organization"+(n===1?"":"s")+" in "+curState+(curCat?" · "+ORG_CATS[curCat].label:"");
+      results.innerHTML=html||"<p class='sub'>No organizations in that category here yet.</p>";
+    }else{
+      countEl.textContent="";
+      results.innerHTML="<p class='sub'>Choose your state above, or type to search across all "+total+" organizations.</p>";
+    }
+  }
+  sel.addEventListener("change",function(){curState=sel.value;query="";search.value="";render();});
+  search.addEventListener("input",function(){query=search.value.trim();render();});
+  chips.addEventListener("click",function(e){var b=e.target.closest(".catchip");if(!b)return;curCat=b.dataset.c;
+    chips.querySelectorAll(".catchip").forEach(function(x){var on=x.dataset.c===curCat;x.classList.toggle("on",on);x.style.background=on&&curCat?ORG_CATS[curCat].color:"#fff";});
+    render();});
+  render();
 })();
 (function(){
   if(typeof STATES==="undefined"){document.getElementById("feed").innerHTML="<div class='fitem'><div class='mv'>Live feed loads with the dataset.</div></div>";return;}
