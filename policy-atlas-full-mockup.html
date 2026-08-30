@@ -133,6 +133,7 @@ footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing
 <script src="atlas-data.js"></script>
 <script src="atlas-scores.js"></script>
 <script src="atlas-orgs.js"></script>
+<script src="atlas-ketamine.js"></script>
 <script>
 const CANL={rec:"Recreational legal",med:"Medical only",lowthc:"Low-THC / CBD",illegal:"No broad program"};
 const PSIL={legal:"Legal therapy program",decrim:"Decriminalized / pilot",none:"No reform yet"};
@@ -188,6 +189,16 @@ function orgsBlock(n){
   h+='</div>';
  });
  return h+'<div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">Verified live 2026 · not an endorsement. Suggest an org via Get Involved.</div></div>';
+}
+// ---- ketamine clinics block ----
+function ketamineBlock(n){
+ if(typeof KETAMINE==="undefined"||!KETAMINE[n]||!KETAMINE[n].length)return "";
+ var list=KETAMINE[n];
+ var h='<div class="orgwrap" style="border-left-color:#29b6d8"><div class="steps-h" style="color:#8fd8e6">Ketamine clinics · '+list.length+' in-person providers</div><div class="orggrp">';
+ list.forEach(function(o){
+  h+='<span class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>'+(o.city?' <span class="oc">· '+o.city+'</span>':'')+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
+ });
+ return h+'</div><div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">In-person clinics, verified 2026. Informational only — not an endorsement or medical advice.</div></div>';
 }
 // Categorical "policy status" — each state colored by its most progressive standing (purple = psychedelic reform, green = cannabis, amber/red = restrictive).
 const STATUS={
@@ -344,6 +355,7 @@ function openDetail(n){
   '<div class="steps"><div class="steps-h">Small steps to level up</div>'+improvementSteps(n).map(function(x){return '<div class="step"><span class="ar">→</span><span>'+x+'</span></div>';}).join('')+'</div>'+
   '<p class="blurb">'+blurb+'</p>'+
   orgsBlock(n)+
+  ketamineBlock(n)+
   '<div class="src"><b>Sources</b><br>'+(d.verified?d.src+'<br>Last updated: '+d.updated:'Illustrative — not yet sourced (see the data-schema doc)')+'</div>';
 }
 function setLayer(l){layer=l;tl=false;stop();document.getElementById("yr").textContent="—";document.getElementById("layerTitle").textContent=LAYERS[l].t;rail.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",c.dataset.layer===l);});render();}
