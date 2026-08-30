@@ -15,7 +15,7 @@
      Good Samaritan 20 · naloxone access 20 · (minus) drug-induced-homicide 20
    RESEARCH       : program tier 50 · named institutions 36 · MDMA/psi bonus 14
    THERAPEUTIC    : cannabis access 45 · legal/decrim psilocybin 38 · MDMA access 17
-   DECRIMINALIZATION : hard-drug possession penalty 60 · cannabis possession 40
+   DECRIMINALIZATION : hard-drug possession penalty 50 · cannabis possession 30 · psychedelics decriminalized 20
    EQUITY & REPAIR : expungement 45 · social-equity licensing 27 · revenue reinvestment 28
 
    Sources per state are carried in each table's "src" for the scorecard.
@@ -212,9 +212,10 @@ function esMedical(n){var s=STATES[n]||{},v=0;
   v+=(s.psi==="legal")?38:(s.psi==="decrim")?13:0;
   v+=(s.mdma==="rtt")?17:(s.mdma==="trial")?9:0;
   return Math.min(v,100);}
-function esDecrim(n){var d=DEC[n]||{},v=0;
-  v+=(d.decrim==="decrim")?60:(d.decrim==="defelonized")?35:0;
-  v+=(d.cannPos==="legal")?40:(d.cannPos==="decrim")?25:(d.cannPos==="medical-only")?10:0;
+function esDecrim(n){var d=DEC[n]||{},s=STATES[n]||{},v=0;
+  v+=(d.decrim==="decrim")?50:(d.decrim==="defelonized")?28:0;      // hard-drug possession penalty
+  v+=(d.cannPos==="legal")?30:(d.cannPos==="decrim")?18:(d.cannPos==="medical-only")?7:0; // cannabis possession
+  v+=(s.psi==="legal")?20:(s.psi==="decrim")?12:0;                  // psychedelics decriminalized (breaks the reform-leader tie)
   return v;}
 function esEquity(n){var e=EQ[n]||{},v=0;
   v+=(e.expunge==="automatic")?45:(e.expunge==="petition")?20:0;
@@ -231,7 +232,7 @@ var ES_CATS = [
  {key:"medical",  label:"Therapeutic Access", fn:esMedical,  tbl:null, color:"#E0862E",
   blurb:"What a patient can actually access today: cannabis, legal or decriminalized psilocybin, and MDMA access. (Ketamine excluded — legal everywhere.)"},
  {key:"decrim",   label:"Decriminalization", fn:esDecrim,   tbl:DEC, color:"#2F9E9E",
-  blurb:"The criminal penalty for personal possession — a jail cell versus a fine — for both hard drugs and cannabis."},
+  blurb:"The criminal penalty for personal possession — a jail cell versus a fine — across hard drugs, cannabis, and psychedelics."},
  {key:"equity",   label:"Equity & Repair",   fn:esEquity,   tbl:EQ,  color:"#C8497A",
   blurb:"Repairing the drug war: record expungement, social-equity business licensing, and reinvestment of revenue into harmed communities."}
 ];
@@ -242,7 +243,8 @@ var ES_INDEX = {};
   var names = Object.keys(STATES);
   ES_CATS.forEach(function(c){
     var sc={}; names.forEach(function(n){sc[n]=c.fn(n);});
-    var ks=names.slice().sort(function(a,b){return sc[b]-sc[a];});
+    // primary: score; deterministic tie-order by overall openness, then name
+    var ks=names.slice().sort(function(a,b){return (sc[b]-sc[a]) || (((STATES[b]||{}).o||0)-((STATES[a]||{}).o||0)) || a.localeCompare(b);});
     var rank={},prev=null,r=0;
     for(var i=0;i<ks.length;i++){if(sc[ks[i]]!==prev){r=i+1;prev=sc[ks[i]];}rank[ks[i]]=r;}
     ES_INDEX[c.key]={label:c.label,blurb:c.blurb,color:c.color,score:sc,rank:rank,order:ks};
