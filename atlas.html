@@ -76,6 +76,9 @@
   .orgcard p{font-size:14px;color:#4a453c;margin:2px 0 0;}
   .orgcard .ext{font-size:12px;color:var(--gold);}
   .dirgroup-h{font-family:'Fraunces';font-weight:700;font-size:18px;margin:22px 0 10px;color:var(--twilight);}
+  .statehero{position:relative;border-radius:16px;overflow:hidden;margin-bottom:18px;box-shadow:0 6px 22px rgba(120,90,30,.14);}
+  .statehero img{width:100%;height:230px;object-fit:cover;display:block;}
+  .statehero .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 20px 14px;background:linear-gradient(180deg,transparent,rgba(23,15,46,.86));color:#F7F0E4;font-family:'Fraunces';font-weight:700;font-size:26px;}
   footer{background:var(--twilight2);color:#EAD3A0;padding:34px 0;text-align:center;border-top:1px solid rgba(217,178,106,.22);}
   footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin-bottom:8px;}
   footer .c{font-size:12.5px;color:var(--mute);}
@@ -223,10 +226,11 @@
       countEl.textContent=n+" match"+(n===1?"":"es")+' for "'+query+'"'+(curCat?" in "+ORG_CATS[curCat].label:"");
       results.innerHTML=html||"<p class='sub'>No matches. Try a different term or clear the category filter.</p>";
     }else if(curState){
+      var hero="<div class='statehero'><img src='plates/"+curState.toLowerCase().replace(/ /g,'_')+".png' alt='' onerror='this.parentNode.style.display=\"none\"'><div class='cap'>"+curState+"</div></div>";
       var by={};ORGS[curState].filter(matchCat).forEach(function(o){(by[o.cat]=by[o.cat]||[]).push(o);n++;});
       ORG_CAT_ORDER.forEach(function(c){if(by[c])html+="<div class='dirgroup-h'>"+ORG_CATS[c].label+"</div>"+by[c].map(function(o){return card(o,"");}).join("");});
       countEl.textContent=n+" organization"+(n===1?"":"s")+" in "+curState+(curCat?" · "+ORG_CATS[curCat].label:"");
-      results.innerHTML=html||"<p class='sub'>No organizations in that category here yet.</p>";
+      results.innerHTML=hero+(html||"<p class='sub'>No organizations in that category here yet.</p>");
     }else{
       countEl.textContent="";
       results.innerHTML="<p class='sub'>Choose your state above, or type to search across all "+total+" organizations.</p>";

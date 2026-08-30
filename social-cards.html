@@ -36,6 +36,13 @@
   .card.down .halo{background:radial-gradient(circle,rgba(240,161,132,.20),transparent 62%);}
   .silo{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
   .silo path{stroke-linejoin:round;}
+  .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);z-index:0;}
+  .scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(18,10,38,.62) 0%,rgba(18,10,38,.12) 26%,rgba(18,10,38,.30) 55%,rgba(18,10,38,.86) 82%,rgba(18,10,38,.97) 100%);}
+  .card.up .scrim{box-shadow:inset 0 4px 0 var(--up2);}
+  .card.level .scrim{box-shadow:inset 0 4px 0 var(--lvl2);}
+  .card.down .scrim{box-shadow:inset 0 4px 0 var(--down2);}
+  .miniplate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);z-index:0;}
+  .miniscrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(18,10,38,.35),rgba(18,10,38,.9));}
   .card .tone,.card .state,.card .statusline{text-shadow:0 2px 12px rgba(8,5,20,.6);}
   .card .news{text-shadow:0 2px 9px rgba(8,5,20,.55);}
   .stardiv{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold2);font-size:13px;margin:16px 0 4px;}
@@ -70,7 +77,7 @@
   .mini.up{background:linear-gradient(165deg,#1c2b1f,var(--twilight2));}
   .mini.level{background:linear-gradient(165deg,#16292e,var(--twilight2));}
   .mini.down{background:linear-gradient(165deg,#2e1712,var(--twilight2));}
-  .mini .mp{padding:14px;height:100%;display:flex;flex-direction:column;}
+  .mini .mp{padding:14px;height:100%;display:flex;flex-direction:column;position:relative;z-index:2;}
   .mini .mt{font-size:11px;font-weight:700;letter-spacing:.04em;}
   .mini.up .mt{color:var(--up2);}.mini.level .mt{color:var(--lvl2);}.mini.down .mt{color:var(--down2);}
   .mini .ms{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;line-height:1;margin-top:6px;}
@@ -90,8 +97,8 @@
   <div class="stage">
     <div class="cardwrap">
       <div class="card up" id="card">
-        <div class="halo"></div>
-        <svg class="silo" id="silo" preserveAspectRatio="xMidYMid meet"></svg>
+        <img class="plate" id="plate" alt="" />
+        <div class="scrim"></div>
         <div class="pad">
           <div class="brand">The Elevated States Project</div>
           <div class="tone" id="cTone"><span class="arrow">↑</span><span id="cToneTxt">ELEVATED</span></div>
@@ -119,8 +126,6 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="atlas-data.js"></script>
 <script>
 var canL={rec:"Recreational cannabis",med:"Medical cannabis",lowthc:"Low-THC only",illegal:"No cannabis program"};
@@ -166,45 +171,10 @@ var state="Colorado", toneMode="auto", fmt="portrait";
 
 function toneFor(k){return toneMode==="auto"?autoTone(k):toneMode;}
 
-// ---- state silhouette (loaded from us-atlas, keyed by properties.name) ----
-var FEAT={};
-if(window.d3&&window.topojson){
-  d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
-    topojson.feature(us,us.objects.states).features.forEach(function(f){FEAT[f.properties.name]=f;});
-    drawSilo();
-  }).catch(function(){});
-}
-function drawSilo(){
-  var svg=document.getElementById("silo"); if(!svg) return;
-  var f=FEAT[state]; if(!f||!window.d3){svg.innerHTML="";return;}
-  var W=432, H=(fmt==="square")?432:540, pad=(fmt==="square")?26:32;
-  svg.setAttribute("viewBox","0 0 "+W+" "+H);
-  var proj=d3.geoAlbersUsa().fitExtent([[pad,pad],[W-pad,H-pad]],f);
-  var d=d3.geoPath(proj)(f); if(!d){svg.innerHTML="";return;}
-  var t=toneFor(state);
-  var glow = t==="up" ? "rgba(150,230,175,.55)" : (t==="level" ? "rgba(120,205,205,.5)" : "rgba(240,150,120,.55)");
-  var edge = t==="up" ? "rgba(220,244,214,.9)"  : (t==="level" ? "rgba(205,240,240,.9)" : "rgba(247,206,182,.9)");
-  var defs=""
-   +"<defs>"
-   +"<linearGradient id='gfill' x1='0' y1='0' x2='0' y2='1'>"
-     +"<stop offset='0' stop-color='#4a7ba0' stop-opacity='.92'/>"
-     +"<stop offset='.5' stop-color='#28507a' stop-opacity='.9'/>"
-     +"<stop offset='1' stop-color='#15304e' stop-opacity='.95'/>"
-   +"</linearGradient>"
-   +"<filter id='soften' x='-40%' y='-40%' width='180%' height='180%'><feGaussianBlur stdDeviation='6'/></filter>"
-   +"<filter id='bevel' x='-25%' y='-25%' width='150%' height='150%'>"
-     +"<feGaussianBlur in='SourceAlpha' stdDeviation='2.4' result='b'/>"
-     +"<feSpecularLighting in='b' surfaceScale='4.5' specularConstant='.85' specularExponent='16' lighting-color='#e6f2ff' result='s'>"
-        +"<fePointLight x='-140' y='-180' z='260'/>"
-     +"</feSpecularLighting>"
-     +"<feComposite in='s' in2='SourceAlpha' operator='in' result='sc'/>"
-     +"<feComposite in='SourceGraphic' in2='sc' operator='arithmetic' k1='0' k2='1' k3='.92' k4='0'/>"
-   +"</filter>"
-   +"</defs>";
-  svg.innerHTML=defs
-   +"<path d='"+d+"' fill='none' stroke='"+glow+"' stroke-width='11' filter='url(#soften)' opacity='.85'/>"   // outer glow
-   +"<path d='"+d+"' fill='url(#gfill)' stroke='"+edge+"' stroke-width='2.4' stroke-linejoin='round' filter='url(#bevel)'/>";  // beveled glass
-}
+// ---- state art plate (AI beveled-glass tiles in /plates) ----
+function plateFile(k){return "plates/"+k.toLowerCase().replace(/ /g,"_")+".png";}
+function setPlate(){var img=document.getElementById("plate"); if(!img)return;
+  img.style.display=""; img.onerror=function(){img.style.display="none";}; img.src=plateFile(state);}
 
 function render(){
   if(!STATES[state]){return;}
@@ -227,7 +197,7 @@ function render(){
            :("How "+state+" climbs the rankings: "+steps.join("; ")+".");
   var cap=T.cap+" "+T.label+": "+state+" "+T.lead+"\n\n"+(d.momN||"")+"\n\nOpenness rank #"+RANK[state]+" of "+NST+" · "+statusOf(state)+".\n\n"+climb+"\n\nEach year the most-elevated state earns A Tripping Ball. Want it to be yours? Climb the rankings — follow along and tell your reps. #psychedelics #drugpolicy #harmreduction #"+state.replace(/\s+/g,"")+" #ElevatedStates";
   document.getElementById("caption").textContent=cap;
-  drawSilo();
+  setPlate();
 }
 sel.addEventListener("change",function(){state=sel.value;render();});
 document.getElementById("toneSeg").addEventListener("click",function(e){if(e.target.dataset.t){toneMode=e.target.dataset.t;[].forEach.call(this.children,function(b){b.classList.toggle("on",b.dataset.t===toneMode);});render();}});
@@ -246,7 +216,7 @@ document.getElementById("copyBtn").addEventListener("click",function(){navigator
   var order={high:0,med:1}; movers.sort(function(a,b){return (order[STATES[a].mom]-order[STATES[b].mom])||a.localeCompare(b);});
   var pick=movers.slice(0,7);
   var strip=document.getElementById("weekStrip");
-  strip.innerHTML=pick.map(function(k){var t=autoTone(k);return "<div class='mini "+t+"' data-k='"+k+"'><div class='mp'><div class='mt'>"+(TONE[t].label+" "+TONE[t].arrow)+"</div><div class='ms'>"+k+"</div><div class='mn'>"+(STATES[k].momN||"").slice(0,90)+"…</div></div></div>";}).join("");
+  strip.innerHTML=pick.map(function(k){var t=autoTone(k);return "<div class='mini "+t+"' data-k='"+k+"'><img class='miniplate' src='"+plateFile(k)+"' alt='' onerror='this.style.display=\"none\"'><div class='miniscrim'></div><div class='mp'><div class='mt'>"+(TONE[t].label+" "+TONE[t].arrow)+"</div><div class='ms'>"+k+"</div><div class='mn'>"+(STATES[k].momN||"").slice(0,90)+"…</div></div></div>";}).join("");
   strip.addEventListener("click",function(e){var m=e.target.closest(".mini"); if(m){state=m.dataset.k;sel.value=state;toneMode="auto";[].forEach.call(document.querySelectorAll("#toneSeg button"),function(b){b.classList.toggle("on",b.dataset.t==="auto");});render();window.scrollTo({top:0,behavior:"smooth"});}});
 })();
 render();

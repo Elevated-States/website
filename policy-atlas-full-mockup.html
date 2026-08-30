@@ -55,6 +55,7 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .tlnote b{color:var(--paper);font-family:'Archivo Black';font-size:14px}
 .detail{padding:16px 16px 28px;overflow-y:auto}
 .detail .hint{color:var(--mute);font-size:14px;line-height:1.6}
+.detail .statehero{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;display:block;margin-bottom:13px;border:1px solid rgba(255,255,255,.1)}
 .detail .st{font-family:'Archivo Black';font-size:23px;text-transform:uppercase;line-height:1;margin-bottom:12px}
 .drow{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:9px 0;font-size:13px}
 .drow .k{color:var(--mute);text-transform:uppercase;font-size:11px;letter-spacing:.04em;padding-top:2px}
@@ -175,6 +176,7 @@ function improvementSteps(n){var d=STATES[n],s=[];
  if(!s.length){s.push("Protect and refine existing programs — expand access and equity");s.push("Keep funding harm reduction and public education");}
  return s.slice(0,3);}
 function sw(c,round){return "<span class='sw' style='background:"+c+(round?";border-radius:50%":"")+"'></span>";}
+function plateFile(n){return "plates/"+n.toLowerCase().replace(/ /g,"_")+".png";}
 // ---- local-resource directory block ----
 function orgsBlock(n){
  if(typeof ORGS==="undefined"||!ORGS[n]||!ORGS[n].length)return "";
@@ -335,7 +337,7 @@ function openDetail(n){
  else if(d.o>=55)blurb="Middle-to-open: recreational or strong medical access, reform still finding footing.";
  else if(d.o>=38)blurb="Medical access exists, but recreational and psychedelics remain off the table.";
  else blurb="A holdout — little or no cannabis program and no psychedelic reform. The conversation matters most here.";
- document.getElementById("detail").innerHTML='<div class="st">'+n+'</div>'+
+ document.getElementById("detail").innerHTML='<img class="statehero" src="'+plateFile(n)+'" alt="" onerror="this.style.display=\'none\'">'+'<div class="st">'+n+'</div>'+
   (d.verified?'<div style="color:#7bbf5a;font-size:11.5px;margin:-6px 0 12px">✓ Verified · '+d.updated+'</div>':'<div style="color:#8a8a82;font-size:11.5px;margin:-6px 0 12px">◦ Illustrative — not yet sourced</div>')+
   '<div class="drow"><span class="k">Openness rank</span><span class="v"><span class="rankbig">'+rankStr(n)+'</span> <span style="color:#8a8a82">('+d.o+'/100)</span></span></div>'+
   '<div class="scard-h">Leaderboards · where '+n+' ranks</div>'+
