@@ -63,6 +63,12 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .step{font-size:12.5px;color:#d8d8d0;padding:4px 0;line-height:1.45;display:flex;gap:8px}
 .step .ar{color:var(--acc);font-weight:700;flex:none}
 .rankbig{font-family:'Archivo Black';color:var(--acc)}
+.scard-h{font-family:'Archivo Black';text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;color:var(--mute);margin:13px 0 8px}
+.scard{display:grid;grid-template-columns:1fr;gap:5px;margin-bottom:6px}
+.sc{display:flex;align-items:center;gap:9px;background:#1a1a17;border-left:3px solid var(--mute);padding:6px 10px}
+.sc .scr{font-family:'Archivo Black';font-size:15px;min-width:3ch}
+.sc .scl{font-size:12px;font-weight:600;flex:1}
+.sc .scv{font-size:11px;color:var(--mute);font-weight:600}
 .drow .v{text-align:right;font-weight:600;max-width:60%}
 .dpill{display:inline-block;padding:3px 9px;font-size:11px;font-weight:700;text-transform:uppercase}
 .blurb{font-size:13.5px;color:#d6d6cf;margin:13px 0;line-height:1.55}
@@ -116,6 +122,7 @@ footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="atlas-data.js"></script>
+<script src="atlas-scores.js"></script>
 <script>
 const CANL={rec:"Recreational legal",med:"Medical only",lowthc:"Low-THC / CBD",illegal:"No broad program"};
 const PSIL={legal:"Legal therapy program",decrim:"Decriminalized / pilot",none:"No reform yet"};
@@ -202,13 +209,19 @@ const LAYERS={
  momentum:{t:"Reform momentum",m:function(n){var k=MOM[STATES[n].mom||"na"];return{v:k.v,c:k.c};},
    lg:sw("#ff8c42")+"Advancing "+sw("#cf7a2e")+"Building "+sw("#7a5a30")+"Early "+sw("#3a352e")+"None "+sw("#2a2a26")+"Not yet sourced  ·  pending bills & trajectory"}
 };
+// ---- Leaderboard layers: color each state by its category score, tooltip shows 1-of-51 rank ----
+function catColor(cat,v){var c=ES_INDEX[cat].color;return d3.scaleLinear().domain([0,45,100]).range(["#2a2a26",d3.color(c).darker(1.1).formatHex(),c]).interpolate(d3.interpolateLab).clamp(true)(v);}
+ES_CATS.forEach(function(c){
+  LAYERS["lb_"+c.key]={t:c.label+" — leaderboard",cat:c.key,
+    m:function(n){var v=ES_INDEX[c.key].score[n];return{v:v,c:catColor(c.key,v)};},
+    lg:sw(d3.color(c.color).darker(1.6).formatHex())+"Lower "+sw(d3.color(c.color).darker(0.4).formatHex())+"Mid "+sw(c.color)+"Leader  ·  hover for the 1-of-51 rank"};
+});
 const GROUPS=[
  {h:"Index",items:[["status","Policy overview","conic-gradient(#8B6CFF 0 20%,#B9AEF7 20% 30%,#3FB65C 30% 62%,#8FCB9B 62% 76%,#E0862E 76% 90%,#D6462A 90% 100%)",0],["overall","Overall openness","conic-gradient(#9a7fe0 0 25%,#3FB65C 25% 50%,#E8C23E 50% 75%,#D6462A 75% 100%)",0]]},
+ {h:"Leaderboards · 1 of 51",items:[["lb_hr","Harm Reduction","#3FB65C",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0],["lb_equity","Equity & Repair","#C8497A",0]]},
  {h:"Cannabis",items:[["cannabis","Cannabis status","#38b25a",0]]},
  {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["ketamine","Ketamine access","#29b6d8",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},
- {h:"Harm reduction",items:[["harm","Harm-reduction index","#36c8d8",0]]},
- {h:"Research",items:[["research","Psychedelic research","#f2c14e",0]]},
  {h:"Reform trajectory",items:[["momentum","Reform momentum","#ff8c42",0]]}
 ];
 const WAVES={recY:{col:"#38b25a",min:2011,label:"recreational cannabis"},medY:{col:"#86c994",min:1996,label:"medical cannabis"},psiY:{col:"#6a5cff",min:2018,label:"psilocybin reform"}};
@@ -261,6 +274,7 @@ function render(){
 function showTip(ev,n){
  var d=STATES[n],line;
  if(tl){var yv=d[wave];line=yv!==null?(yv<=year?WAVES[wave].label+" since "+yv:"arrives "+yv):"no "+WAVES[wave].label;}
+ else if(layer.indexOf("lb_")===0){var ct=layer.slice(3);line="<b style='color:"+ES_INDEX[ct].color+"'>"+esRankStr(ct,n)+"</b> · "+ES_INDEX[ct].score[n]+"/100 · "+ES_INDEX[ct].label;}
  else if(layer==="cannabis")line=CANL[d.can];
  else if(layer==="psych")line=PSIL[d.psi];
  else if(layer==="penalty")line=PENL[d.can];
@@ -288,6 +302,8 @@ function openDetail(n){
  document.getElementById("detail").innerHTML='<div class="st">'+n+'</div>'+
   (d.verified?'<div style="color:#7bbf5a;font-size:11.5px;margin:-6px 0 12px">✓ Verified · '+d.updated+'</div>':'<div style="color:#8a8a82;font-size:11.5px;margin:-6px 0 12px">◦ Illustrative — not yet sourced</div>')+
   '<div class="drow"><span class="k">Openness rank</span><span class="v"><span class="rankbig">'+rankStr(n)+'</span> <span style="color:#8a8a82">('+d.o+'/100)</span></span></div>'+
+  '<div class="scard-h">Leaderboards · where '+n+' ranks</div>'+
+  '<div class="scard">'+esScorecard(n).map(function(c){return '<div class="sc" style="border-left-color:'+c.color+'" title="'+c.score+'/100"><span class="scr" style="color:'+c.color+'">#'+c.rank+'</span><span class="scl">'+c.label+'</span><span class="scv">'+c.score+'</span></div>';}).join('')+'</div>'+
   '<div class="drow"><span class="k">Cannabis</span><span class="v">'+pill(CANL[d.can],CAN[d.can].c)+(d.recY?' <span style="color:#8a8a82">since '+d.recY+'</span>':(d.medY?' <span style="color:#8a8a82">med '+d.medY+'</span>':''))+'</span></div>'+
   '<div class="drow"><span class="k">Psilocybin</span><span class="v">'+pill(PSIL[d.psi],PSI[d.psi].c)+(d.psiY?' <span style="color:#8a8a82">'+d.psiY+'</span>':'')+'</span></div>'+
   '<div class="drow"><span class="k">Ibogaine research</span><span class="v">'+pill(IBOL[d.ibo],IBO[d.ibo].c)+'</span></div>'+

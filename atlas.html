@@ -47,6 +47,20 @@
   .badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:1px;}
   .b-high{background:#e9f3e6;color:#3f7a44;}.b-med{background:#fdf0e2;color:#b7752e;}
   .note{font-size:12.5px;color:var(--mute);font-style:italic;margin-top:16px;}
+  /* scoreboard */
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+  .tab{border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13px;font-weight:600;padding:8px 15px;border-radius:999px;cursor:pointer;transition:.12s;}
+  .tab.on{color:#fff;border-color:transparent;}
+  .lbdesc{font-size:14px;color:var(--mute);margin:2px 0 18px;max-width:740px;}
+  .lb{column-count:2;column-gap:30px;}
+  .lbrow{display:flex;align-items:center;gap:11px;padding:6px 0;border-bottom:1px solid var(--line);break-inside:avoid;}
+  .lbrank{font-family:'Fraunces';font-weight:700;font-size:15px;width:3ch;text-align:right;color:var(--mute);flex:none;}
+  .lbrow.top .lbrank{color:var(--ink);font-size:17px;}
+  .lbname{font-size:13.5px;font-weight:500;width:130px;flex:none;}
+  .lbbar{flex:1;height:8px;background:var(--shade);border-radius:999px;overflow:hidden;min-width:40px;}
+  .lbbarfill{height:100%;border-radius:999px;}
+  .lbscore{font-size:12px;color:var(--mute);width:2.6ch;text-align:right;flex:none;}
+  @media(max-width:720px){.lb{column-count:1;}}
   footer{background:var(--twilight2);color:#EAD3A0;padding:34px 0;text-align:center;border-top:1px solid rgba(217,178,106,.22);}
   footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin-bottom:8px;}
   footer .c{font-size:12.5px;color:var(--mute);}
@@ -71,12 +85,22 @@
 <section><div class="wrap">
   <div class="eyebrow">The interactive map</div>
   <h2>Explore every state.</h2>
-  <div class="sub">Switch layers (cannabis, psilocybin, research, harm reduction, momentum), play the time-lapse, and click any state for its rank and the small steps it could take to rise.</div>
+  <div class="sub">Switch layers — including five <b>leaderboards</b> (harm reduction, research, therapeutic access, decriminalization, equity), play the time-lapse, and click any state for its full scorecard and the small steps it could take to rise.</div>
   <div class="mapframe"><iframe src="policy-atlas-full-mockup.html" title="Elevated States Policy Atlas" loading="lazy"></iframe></div>
   <div class="maplinks">
     <a class="btn" href="policy-atlas-full-mockup.html" target="_blank">Open full-screen ↗</a>
     <a class="btn-o btn" href="index.html">Back to home</a>
   </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="eyebrow">The scoreboard</div>
+  <h2>Five ways to lead.</h2>
+  <div class="sub">Overall openness is the headline — but a state can lead the country in any one of these. Pick a board and find where your state ranks. Open it on the map above for the exact steps to climb.</div>
+  <div class="tabs" id="lbtabs"></div>
+  <div id="lbdesc" class="lbdesc"></div>
+  <div class="lb" id="lb"></div>
+  <div class="note">Each board is a transparent 0–100 index built from sourced fields, then ranked #1–#51 (ties share a rank). Ketamine is excluded — it's legal in every state, so it can't separate them. Educational only, not legal advice.</div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap"><div class="updates" style="background:linear-gradient(180deg,var(--twilight),var(--twilight2));color:#EAD3A0;">
@@ -110,7 +134,26 @@
 </div></footer>
 
 <script src="atlas-data.js"></script>
+<script src="atlas-scores.js"></script>
 <script>
+/* ---- Scoreboard: 5 tabbed leaderboards ---- */
+(function(){
+  if(typeof ES_CATS==="undefined")return;
+  var tabs=document.getElementById("lbtabs"),lb=document.getElementById("lb"),desc=document.getElementById("lbdesc"),cur=ES_CATS[0].key;
+  tabs.innerHTML=ES_CATS.map(function(c){return "<button class='tab' data-k='"+c.key+"'>"+c.label+"</button>";}).join("");
+  function paint(){
+    var cat=null;ES_CATS.forEach(function(c){if(c.key===cur)cat=c;});
+    var idx=ES_INDEX[cur];
+    tabs.querySelectorAll(".tab").forEach(function(b){var on=b.dataset.k===cur;b.classList.toggle("on",on);b.style.background=on?cat.color:"#fff";});
+    desc.textContent=idx.blurb;
+    lb.innerHTML=idx.order.map(function(n){var v=idx.score[n],r=idx.rank[n],top=r<=3;
+      var medal=r===1?"🥇":r===2?"🥈":r===3?"🥉":("#"+r);
+      return "<div class='lbrow"+(top?" top":"")+"'><span class='lbrank'>"+medal+"</span><span class='lbname'>"+n+"</span><span class='lbbar'><span class='lbbarfill' style='width:"+Math.max(v,2)+"%;background:"+cat.color+"'></span></span><span class='lbscore'>"+v+"</span></div>";
+    }).join("");
+  }
+  tabs.addEventListener("click",function(e){var b=e.target.closest(".tab");if(!b)return;cur=b.dataset.k;paint();});
+  paint();
+})();
 (function(){
   if(typeof STATES==="undefined"){document.getElementById("feed").innerHTML="<div class='fitem'><div class='mv'>Live feed loads with the dataset.</div></div>";return;}
   var order={high:0,med:1,low:2,none:3,na:4};
