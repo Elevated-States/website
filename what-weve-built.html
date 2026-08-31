@@ -36,6 +36,15 @@
   .foot{border-top:1px solid var(--line);margin-top:16px;padding-top:11px;display:flex;justify-content:space-between;font-size:12px;color:var(--mute);}
   .foot a{color:var(--gold);font-weight:600;}
   @media print{body{background:#fff;}.sheet{box-shadow:none;margin:0;max-width:100%;}.cta{display:none;}}
+  @media(max-width:600px){
+    .sheet{margin:0;}
+    .hero{padding:22px 22px 20px;}
+    .hero h1{font-size:24px;}
+    .hero .tag{font-size:16px;}
+    .body{padding:20px 22px 24px;}
+    .built{grid-template-columns:1fr;gap:8px;}
+    .foot{flex-direction:column;gap:6px;}
+  }
 </style></head><body>
 <div class="sheet">
   <div class="hero"><div class="halo"></div>
@@ -75,7 +84,6 @@
 
     <div class="cta">
       <a class="btn btn-p" href="atlas.html">Explore the Policy Atlas →</a>
-      <a class="btn btn-o" href="tripping-ball-asheville.html">See A Tripping Ball →</a>
     </div>
 
     <div class="foot"><span>The Elevated States Project · A Tripping Ball · Shane Mauss</span><a href="index.html">elevatedstatesproject.com</a></div>
