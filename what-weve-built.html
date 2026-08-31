@@ -35,6 +35,13 @@
   .btn-o{border:1px solid var(--gold);color:var(--gold);}
   .foot{border-top:1px solid var(--line);margin-top:16px;padding-top:11px;display:flex;justify-content:space-between;font-size:12px;color:var(--mute);}
   .foot a{color:var(--gold);font-weight:600;}
+  .stops{margin-top:2px;}
+  .stop{display:flex;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);}
+  .stop:last-child{border-bottom:0;}
+  .stop .d{font-family:'Fraunces';font-weight:700;font-size:13px;color:var(--accent);flex:none;width:56px;}
+  .stop .t{font-size:13.5px;color:#33303c;}
+  .stop .t b{color:var(--ink);}
+  .stop .t a{color:var(--gold);font-weight:600;}
   @media print{body{background:#fff;}.sheet{box-shadow:none;margin:0;max-width:100%;}.cta{display:none;}}
   @media(max-width:600px){
     .sheet{margin:0;}
@@ -75,6 +82,13 @@
     <div style="background:var(--shade);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:15px 20px;margin:16px 0 4px;">
       <h2 style="margin-top:0">The map is also a scoreboard</h2>
       <p style="font-size:13.5px;color:#33303c;margin:0;">We're gamifying policy progress. Each year, the <b>states that climb the rankings the most</b> earn <b>A Tripping Ball</b> — a night that lands where the momentum is. It turns a map into a movement: locals get a real reason to improve their state, and we show up to celebrate them when they do.</p>
+    </div>
+
+    <h2>Next stops — spreading the word</h2>
+    <div class="stops">
+      <div class="stop"><span class="d">Sep 10</span><span class="t"><b>Asheville, NC</b> — a VIP &amp; donor reception with The Pearl Institute, with a special talk unveiling A Tripping Ball.</span></div>
+      <div class="stop"><span class="d">Oct 3</span><span class="t"><b>Springfield, MO</b> — the <a href="https://psychedelicsoto.org" target="_blank" rel="noopener">Psychedelic Freedom Conference</a>, connecting with the Ozarks psychedelic community and its regional partners.</span></div>
+      <div class="stop"><span class="d">Oct 11</span><span class="t"><b>Eureka Springs, AR</b> — <a href="https://hillberryfestival.com" target="_blank" rel="noopener">Hillberry: The Harvest Moon Festival</a>.</span></div>
     </div>
 
     <div class="platform">
