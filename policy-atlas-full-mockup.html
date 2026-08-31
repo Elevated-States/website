@@ -158,9 +158,11 @@ const GSLL={yes:"Yes",limited:"Limited",no:"No"};
 const hrColor=d3.scaleLinear().domain([0,50,100]).range(["#3a3a34","#2f8f9c","#36c8d8"]).interpolate(d3.interpolateLab).clamp(true);
 function hrScore(n){var d=STATES[n];var f=d.fts==="legal"?1:0;var s=d.ssp==="yes"?1:(d.ssp==="limited"?0.5:0);var g=d.gsl==="yes"?1:(d.gsl==="limited"?0.5:0);return Math.round((f+s+g)/3*100);}
 // ---- openness RANK (competition ranking; #1 = most open) ----
-var NSTATES=Object.keys(STATES).length;
-var RANK=(function(){var ks=Object.keys(STATES).slice().sort(function(a,b){return STATES[b].o-STATES[a].o;});var r={},i,rank=0,prev=null;for(i=0;i<ks.length;i++){if(STATES[ks[i]].o!==prev){rank=i+1;prev=STATES[ks[i]].o;}r[ks[i]]=rank;}return r;})();
-function rankStr(n){return "#"+RANK[n]+" of "+NSTATES;}
+var DCNAME="District of Columbia";
+var RANKABLE=Object.keys(STATES).filter(function(n){return n!==DCNAME;});
+var NSTATES=RANKABLE.length;
+var RANK=(function(){var ks=RANKABLE.slice().sort(function(a,b){return STATES[b].o-STATES[a].o;});var r={},i,rank=0,prev=null;for(i=0;i<ks.length;i++){if(STATES[ks[i]].o!==prev){rank=i+1;prev=STATES[ks[i]].o;}r[ks[i]]=rank;}r[DCNAME]=null;return r;})();
+function rankStr(n){return RANK[n]==null ? "Not ranked · DC" : "#"+RANK[n]+" of "+NSTATES;}
 // ---- data-driven "small steps to level up" ----
 function improvementSteps(n){var d=STATES[n],s=[];
  if(d.can==="illegal")s.push("Pass a medical-cannabis program");
@@ -176,7 +178,7 @@ function improvementSteps(n){var d=STATES[n],s=[];
  if(!s.length){s.push("Protect and refine existing programs — expand access and equity");s.push("Keep funding harm reduction and public education");}
  return s.slice(0,3);}
 function sw(c,round){return "<span class='sw' style='background:"+c+(round?";border-radius:50%":"")+"'></span>";}
-function plateFile(n){return "plates/"+n.toLowerCase().replace(/ /g,"_")+".png";}
+function plateFile(n){return "plates/"+n.toLowerCase().replace(/ /g,"_")+".jpg";}
 // ---- local-resource directory block ----
 function orgsBlock(n){
  if(typeof ORGS==="undefined"||!ORGS[n]||!ORGS[n].length)return "";
@@ -256,7 +258,7 @@ ES_CATS.forEach(function(c){
 });
 const GROUPS=[
  {h:"Index",items:[["status","Policy overview","conic-gradient(#8B6CFF 0 20%,#B9AEF7 20% 30%,#3FB65C 30% 62%,#8FCB9B 62% 76%,#E0862E 76% 90%,#D6462A 90% 100%)",0],["overall","Overall openness","conic-gradient(#9a7fe0 0 25%,#3FB65C 25% 50%,#E8C23E 50% 75%,#D6462A 75% 100%)",0]]},
- {h:"Leaderboards · 1 of 51",items:[["lb_hr","Harm Reduction","#3FB65C",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0],["lb_equity","Equity & Repair","#C8497A",0]]},
+ {h:"Leaderboards · 1 of 50",items:[["lb_hr","Harm Reduction","#3FB65C",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0],["lb_equity","Equity & Repair","#C8497A",0]]},
  {h:"Cannabis",items:[["cannabis","Cannabis status","#38b25a",0]]},
  {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["ketamine","Ketamine access","#29b6d8",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},
@@ -341,7 +343,7 @@ function openDetail(n){
   (d.verified?'<div style="color:#7bbf5a;font-size:11.5px;margin:-6px 0 12px">✓ Verified · '+d.updated+'</div>':'<div style="color:#8a8a82;font-size:11.5px;margin:-6px 0 12px">◦ Illustrative — not yet sourced</div>')+
   '<div class="drow"><span class="k">Openness rank</span><span class="v"><span class="rankbig">'+rankStr(n)+'</span> <span style="color:#8a8a82">('+d.o+'/100)</span></span></div>'+
   '<div class="scard-h">Leaderboards · where '+n+' ranks</div>'+
-  '<div class="scard">'+esScorecard(n).map(function(c){return '<div class="sc" style="border-left-color:'+c.color+'" title="'+c.score+'/100"><span class="scr" style="color:'+c.color+'">#'+c.rank+'</span><span class="scl">'+c.label+'</span><span class="scv">'+c.score+'</span></div>';}).join('')+'</div>'+
+  '<div class="scard">'+esScorecard(n).map(function(c){return '<div class="sc" style="border-left-color:'+c.color+'" title="'+c.score+'/100"><span class="scr" style="color:'+c.color+'">'+(c.rank==null?'NR':'#'+c.rank)+'</span><span class="scl">'+c.label+'</span><span class="scv">'+c.score+'</span></div>';}).join('')+'</div>'+
   '<div class="drow"><span class="k">Cannabis</span><span class="v">'+pill(CANL[d.can],CAN[d.can].c)+(d.recY?' <span style="color:#8a8a82">since '+d.recY+'</span>':(d.medY?' <span style="color:#8a8a82">med '+d.medY+'</span>':''))+'</span></div>'+
   '<div class="drow"><span class="k">Psilocybin</span><span class="v">'+pill(PSIL[d.psi],PSI[d.psi].c)+(d.psiY?' <span style="color:#8a8a82">'+d.psiY+'</span>':'')+'</span></div>'+
   '<div class="drow"><span class="k">Ibogaine research</span><span class="v">'+pill(IBOL[d.ibo],IBO[d.ibo].c)+'</span></div>'+

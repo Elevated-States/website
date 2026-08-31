@@ -130,8 +130,8 @@
 <script>
 var canL={rec:"Recreational cannabis",med:"Medical cannabis",lowthc:"Low-THC only",illegal:"No cannabis program"};
 var psiL={legal:"Legal psilocybin therapy",decrim:"Psilocybin decriminalized",none:""};
-var KS=(typeof STATES!=="undefined")?Object.keys(STATES):[];
-// rank by openness
+var KS=(typeof STATES!=="undefined")?Object.keys(STATES).filter(function(k){return k!=="District of Columbia";}):[];
+// rank by openness (states only; D.C. excluded from rankings)
 var RANK={},NST=KS.length;
 (function(){var s=KS.slice().sort(function(a,b){return STATES[b].o-STATES[a].o;});var r=0,p=null;s.forEach(function(k,i){if(STATES[k].o!==p){r=i+1;p=STATES[k].o;}RANK[k]=r;});})();
 var NEG=/void|block|barred|\bban\b|strict|reject|rollback|repeal|criminal|felony|halt|stalled|dead|contested|riders/i;
@@ -172,7 +172,7 @@ var state="Colorado", toneMode="auto", fmt="portrait";
 function toneFor(k){return toneMode==="auto"?autoTone(k):toneMode;}
 
 // ---- state art plate (AI beveled-glass tiles in /plates) ----
-function plateFile(k){return "plates/"+k.toLowerCase().replace(/ /g,"_")+".png";}
+function plateFile(k){return "plates/"+k.toLowerCase().replace(/ /g,"_")+".jpg";}
 function setPlate(){var img=document.getElementById("plate"); if(!img)return;
   img.style.display=""; img.onerror=function(){img.style.display="none";}; img.src=plateFile(state);}
 

@@ -237,16 +237,21 @@ var ES_CATS = [
   blurb:"Repairing the drug war: record expungement, social-equity business licensing, and reinvestment of revenue into harmed communities."}
 ];
 
+var ES_DC = "District of Columbia";   // scored & shown, but excluded from the rankings
+var ES_NRANK = 50;
 var ES_INDEX = {};
 (function(){
   if(typeof STATES==="undefined"){return;}
   var names = Object.keys(STATES);
+  var rankable = names.filter(function(n){return n!==ES_DC;});
+  ES_NRANK = rankable.length;
   ES_CATS.forEach(function(c){
-    var sc={}; names.forEach(function(n){sc[n]=c.fn(n);});
-    // primary: score; deterministic tie-order by overall openness, then name
-    var ks=names.slice().sort(function(a,b){return (sc[b]-sc[a]) || (((STATES[b]||{}).o||0)-((STATES[a]||{}).o||0)) || a.localeCompare(b);});
+    var sc={}; names.forEach(function(n){sc[n]=c.fn(n);});   // DC keeps a score to display
+    // primary: score; deterministic tie-order by overall openness, then name — states only
+    var ks=rankable.slice().sort(function(a,b){return (sc[b]-sc[a]) || (((STATES[b]||{}).o||0)-((STATES[a]||{}).o||0)) || a.localeCompare(b);});
     var rank={},prev=null,r=0;
     for(var i=0;i<ks.length;i++){if(sc[ks[i]]!==prev){r=i+1;prev=sc[ks[i]];}rank[ks[i]]=r;}
+    rank[ES_DC]=null;   // DC: not ranked
     ES_INDEX[c.key]={label:c.label,blurb:c.blurb,color:c.color,score:sc,rank:rank,order:ks};
   });
 })();
@@ -257,6 +262,6 @@ function esScorecard(n){
     return {key:c.key,label:c.label,color:c.color,score:ES_INDEX[c.key].score[n],rank:ES_INDEX[c.key].rank[n]};
   });
 }
-function esRankStr(cat,n){var N=(typeof NSTATES!=="undefined")?NSTATES:Object.keys(STATES).length;return "#"+ES_INDEX[cat].rank[n]+" of "+N;}
+function esRankStr(cat,n){var r=ES_INDEX[cat].rank[n];if(r==null)return "Not ranked · DC";return "#"+r+" of "+ES_NRANK;}
 
 if (typeof module!=="undefined"&&module.exports){module.exports={HRX:HRX,DEC:DEC,EQ:EQ,ES_CATS:ES_CATS,ES_INDEX:ES_INDEX,esScorecard:esScorecard};}

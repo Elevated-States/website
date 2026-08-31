@@ -94,7 +94,7 @@
   <h1 class="serif">The Policy Atlas</h1>
   <p>Where the country actually stands on psychedelics — policy, research, and harm reduction, state by state.</p>
   <div class="stat-row">
-    <div class="st"><b>51</b><span>states &amp; DC mapped</span></div>
+    <div class="st"><b>50</b><span>states mapped, plus D.C.</span></div>
     <div class="st"><b>23</b><span>active research states</span></div>
     <div class="st"><b>4</b><span>legal psilocybin states</span></div>
   </div>
@@ -118,13 +118,13 @@
   <div class="tabs" id="lbtabs"></div>
   <div id="lbdesc" class="lbdesc"></div>
   <div class="lb" id="lb"></div>
-  <div class="note">Each board is a transparent 0–100 index built from sourced fields, then ranked #1–#51 (ties share a rank). Ketamine is excluded — it's legal in every state, so it can't separate them. Educational only, not legal advice.</div>
+  <div class="note">Each board is a transparent 0–100 index built from sourced fields, then ranked #1–#50 (ties share a rank; D.C. is shown but not ranked). Ketamine is excluded — it's legal in every state, so it can't separate them. Educational only, not legal advice.</div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
   <div class="eyebrow">Local resources</div>
   <h2>Find your people.</h2>
-  <div class="sub">A directory of <b id="orgtotal">460+</b> real organizations across all 51 jurisdictions — reform and decriminalization groups, harm-reduction services, research centers, psychedelic societies, veteran programs, and more. Pick your state, or search by name or city.</div>
+  <div class="sub">A directory of <b id="orgtotal">460+</b> real organizations across all 50 states plus D.C. — reform and decriminalization groups, harm-reduction services, research centers, psychedelic societies, veteran programs, and more. Pick your state, or search by name or city.</div>
   <div class="dirbar">
     <select id="dirstate"></select>
     <input id="dirsearch" type="search" placeholder="Search organizations, cities…" aria-label="Search organizations">
@@ -226,7 +226,7 @@
       countEl.textContent=n+" match"+(n===1?"":"es")+' for "'+query+'"'+(curCat?" in "+ORG_CATS[curCat].label:"");
       results.innerHTML=html||"<p class='sub'>No matches. Try a different term or clear the category filter.</p>";
     }else if(curState){
-      var hero="<div class='statehero'><img src='plates/"+curState.toLowerCase().replace(/ /g,'_')+".png' alt='' onerror='this.parentNode.style.display=\"none\"'><div class='cap'>"+curState+"</div></div>";
+      var hero="<div class='statehero'><img src='plates/"+curState.toLowerCase().replace(/ /g,'_')+".jpg' alt='' onerror='this.parentNode.style.display=\"none\"'><div class='cap'>"+curState+"</div></div>";
       var by={};ORGS[curState].filter(matchCat).forEach(function(o){(by[o.cat]=by[o.cat]||[]).push(o);n++;});
       ORG_CAT_ORDER.forEach(function(c){if(by[c])html+="<div class='dirgroup-h'>"+ORG_CATS[c].label+"</div>"+by[c].map(function(o){return card(o,"");}).join("");});
       countEl.textContent=n+" organization"+(n===1?"":"s")+" in "+curState+(curCat?" · "+ORG_CATS[curCat].label:"");
