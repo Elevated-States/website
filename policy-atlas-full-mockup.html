@@ -278,8 +278,14 @@ const LAYERS={
    lg:sw("#ff8c42")+"Advancing "+sw("#cf7a2e")+"Building "+sw("#7a5a30")+"Early "+sw("#3a352e")+"None "+sw("#2a2a26")+"Not yet sourced  ·  pending bills & trajectory"}
 };
 // ---- Leaderboard layers: color each state by its category score, tooltip shows 1-of-51 rank ----
+// Harm Reduction gets its own medical white->red scale (distinct from the green cannabis layer).
+var hrRamp=d3.scaleLinear().domain([0,25,50,75,100])
+  .range(["#fbeae4","#f0a488","#e35b3c","#c22a1a","#8d130c"])
+  .interpolate(d3.interpolateLab).clamp(true);
 // Widened ramp: dark (none) -> deep -> base -> bright -> pale highlight, so score bands read clearly.
-function catColor(cat,v){var c=d3.color(ES_INDEX[cat].color);if(v<=0)return "#26261f";
+function catColor(cat,v){
+  if(cat==="hr")return hrRamp(Math.max(0,v));
+  var c=d3.color(ES_INDEX[cat].color);if(v<=0)return "#26261f";
   return d3.scaleLinear()
     .domain([1,20,42,64,84,100])
     .range(["#2f2b3a",
@@ -290,13 +296,16 @@ function catColor(cat,v){var c=d3.color(ES_INDEX[cat].color);if(v<=0)return "#26
             d3.color(c).brighter(1.7).formatHex()])
     .interpolate(d3.interpolateLab).clamp(true)(v);}
 ES_CATS.forEach(function(c){
+  var lg=(c.key==="hr")
+    ? sw("#fbeae4")+"Lower "+sw("#e35b3c")+"Mid "+sw("#8d130c")+"Leader  ·  pale → deep red = higher rank · hover for the 1-of-50 rank"
+    : sw(d3.color(c.color).darker(1.7).formatHex())+"Lower "+sw(c.color)+"Mid "+sw(d3.color(c.color).brighter(1.5).formatHex())+"Leader  ·  taller + brighter = higher rank · hover for the 1-of-50 rank";
   LAYERS["lb_"+c.key]={t:c.label+" — leaderboard",cat:c.key,
     m:function(n){var v=ES_INDEX[c.key].score[n];return{v:v,c:catColor(c.key,v)};},
-    lg:sw(d3.color(c.color).darker(1.7).formatHex())+"Lower "+sw(c.color)+"Mid "+sw(d3.color(c.color).brighter(1.5).formatHex())+"Leader  ·  taller + brighter = higher rank · hover for the 1-of-50 rank"};
+    lg:lg};
 });
 const GROUPS=[
  {h:"Index",items:[["status","Policy overview","conic-gradient(#8B6CFF 0 20%,#B9AEF7 20% 30%,#3FB65C 30% 62%,#8FCB9B 62% 76%,#E0862E 76% 90%,#D6462A 90% 100%)",0],["overall","Overall openness","conic-gradient(#9a7fe0 0 25%,#3FB65C 25% 50%,#E8C23E 50% 75%,#D6462A 75% 100%)",0]]},
- {h:"Leaderboards · 1 of 50",items:[["lb_hr","Harm Reduction","#3FB65C",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0],["lb_equity","Equity & Repair","#C8497A",0]]},
+ {h:"Leaderboards · 1 of 50",items:[["lb_hr","Harm Reduction","#D63A2F",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0],["lb_equity","Equity & Repair","#C8497A",0]]},
  {h:"Cannabis",items:[["cannabis","Cannabis status","#38b25a",0]]},
  {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},

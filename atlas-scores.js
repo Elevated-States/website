@@ -225,7 +225,7 @@ function esEquity(n){var e=EQ[n]||{},v=0;
 
 /* ---------------- categories + computed ranks ---------------- */
 var ES_CATS = [
- {key:"hr",       label:"Harm Reduction",    fn:esHR,       tbl:HRX, color:"#3FB65C",
+ {key:"hr",       label:"Harm Reduction",    fn:esHR,       tbl:HRX, color:"#D63A2F",
   blurb:"Naloxone access, syringe services, fentanyl test strips and Good Samaritan protection — minus drug-induced-homicide laws that deter 911 calls."},
  {key:"research", label:"Research & Trials",  fn:esResearch, tbl:null, color:"#8B6CFF",
   blurb:"Active psychedelic research: university programs, named institutions, and MDMA/psilocybin trials."},
