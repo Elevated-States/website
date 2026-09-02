@@ -80,6 +80,15 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .org a:hover{color:#eaffcf}
 .org .oc{color:#8a8a82;font-size:11px}
 .drow .v{text-align:right;font-weight:600;max-width:60%}
+.harmwrap{margin:15px 0 4px;background:#1c1613;border-left:3px solid #CF6A2E;padding:12px 14px}
+.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hcard{background:#241b16;border-top:2px solid #CF6A2E;border-radius:8px;padding:9px 8px 10px;text-align:center}
+.hcard .hv{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;line-height:1}
+.hcard .hu{font-size:9.5px;color:#8a8a82;margin-top:1px}
+.hcard .hlab{font-size:11.5px;color:#e2e2da;font-weight:600;margin-top:5px}
+.hcard .hsub{font-size:10px;color:#9a938c;margin-top:2px;line-height:1.3}
+.hcontrast{font-size:12px;color:#d8cfc6;line-height:1.45;margin-top:6px;padding:8px 10px;background:#191410;border-radius:6px}
+@media(max-width:520px){.hgrid{grid-template-columns:1fr}}
 .dpill{display:inline-block;padding:3px 9px;font-size:11px;font-weight:700;text-transform:uppercase}
 .blurb{font-size:13.5px;color:#d6d6cf;margin:13px 0;line-height:1.55}
 .src{color:var(--mute);font-size:11.5px;line-height:1.7;border-top:1px solid var(--line);padding-top:11px}
@@ -135,6 +144,7 @@ footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing
 <script src="atlas-scores.js"></script>
 <script src="atlas-orgs.js"></script>
 <script src="atlas-ketamine.js"></script>
+<script src="atlas-harm.js"></script>
 <script>
 const CANL={rec:"Recreational legal",med:"Medical only",lowthc:"Low-THC / CBD",illegal:"No broad program"};
 const PSIL={legal:"Legal therapy program",decrim:"Decriminalized / pilot",none:"No reform yet"};
@@ -203,6 +213,26 @@ function ketamineBlock(n){
   h+='<span class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>'+(o.city?' <span class="oc">· '+o.city+'</span>':'')+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
  });
  return h+'</div><div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">In-person clinics, verified 2026. Informational only — not an endorsement or medical advice.</div></div>';
+}
+// ---- "Reality check": the legal drugs doing the real damage in this state ----
+function harmBlock(n){
+ if(typeof HARM==="undefined"||!HARM[n])return "";
+ var h=HARM[n];
+ function num(x){return x==null?"—":x.toLocaleString();}
+ var rows=[
+  {lab:"Alcohol",v:num(h.ad),u:"deaths / year",sub:(h.bd!=null?h.bd+"% of adults drink excessively":"legal, taxed, advertised"),c:"#CF6A2E"},
+  {lab:"Tobacco",v:num(h.sd),u:"deaths / year",sub:h.sp+"% of adults smoke",c:"#c0603a"},
+  {lab:"Drug overdose",v:num(h.od),u:"deaths / year",sub:"overwhelmingly opioids &amp; fentanyl",c:"#b0472e"}
+ ];
+ var cards=rows.map(function(r){
+  return '<div class="hcard" style="border-top-color:'+r.c+'"><div class="hv" style="color:'+r.c+'">'+r.v+'</div><div class="hu">'+r.u+'</div><div class="hlab">'+r.lab+'</div><div class="hsub">'+r.sub+'</div></div>';
+ }).join('');
+ return '<div class="harmwrap">'+
+  '<div class="steps-h" style="color:#e5a06a">The bigger picture · what actually harms people in '+n+'</div>'+
+  '<div class="hgrid">'+cards+'</div>'+
+  '<div class="hcontrast">Deaths from the direct toxicity of psilocybin or LSD: <b style="color:#8fd8a0">≈0</b> — no established lethal dose in humans. The most dangerous drugs here are the legal, normalized ones.</div>'+
+  '<div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">Alcohol &amp; overdose: CDC (2020-2024). Tobacco: CDC. Toxicity: Nichols, <i>Pharmacological Reviews</i> 2016. <a href="the-bigger-picture.html" style="color:#e5a06a">See how states compare nationally →</a></div>'+
+ '</div>';
 }
 // Categorical "policy status" — each state colored by its most progressive standing (purple = psychedelic reform, green = cannabis, amber/red = restrictive).
 const STATUS={
@@ -358,6 +388,7 @@ function openDetail(n){
   (d.tribal?'<div class="drow"><span class="k">Tribal / local</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.tribalN+'</span></div>':'')+
   '<div class="steps"><div class="steps-h">Small steps to level up</div>'+improvementSteps(n).map(function(x){return '<div class="step"><span class="ar">→</span><span>'+x+'</span></div>';}).join('')+'</div>'+
   '<p class="blurb">'+blurb+'</p>'+
+  harmBlock(n)+
   orgsBlock(n)+
   ketamineBlock(n)+
   '<div class="src"><b>Sources</b><br>'+(d.verified?d.src+'<br>Last updated: '+d.updated:'Illustrative — not yet sourced (see the data-schema doc)')+'</div>';

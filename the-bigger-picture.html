@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow">
+<title>The Bigger Picture — Legal vs. Harm · The Elevated States Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#171326;--paper:#FAF4E9;--card:#fff;--twilight:#241a44;--twilight2:#170f2e;--gold:#B8893C;--gold2:#D9B26A;--accent:#CF6A2E;--moss:#6F7F4F;--mute:#6B6558;--line:#E6DAC4;--shade:#F1E7D3;--safe:#4e9e6a;}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}.serif{font-family:'Cormorant Garamond',serif;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+  nav{position:sticky;top:0;z-index:20;background:rgba(23,15,46,.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(217,178,106,.25);}
+  .navin{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-family:'Fraunces';font-weight:700;font-size:19px;color:#F7F0E4;}.logo em{color:var(--gold2);font-style:normal;}
+  .nav-links{display:flex;gap:22px;font-size:13.5px;color:#C7B8E6;font-weight:500;}.nav-links a:hover{color:var(--gold2);}
+  .hero{text-align:center;padding:60px 0 44px;color:#F7F0E4;background:linear-gradient(180deg,var(--twilight2),var(--twilight));position:relative;overflow:hidden;}
+  .hero .halo{position:absolute;width:520px;height:520px;left:50%;top:-260px;transform:translateX(-50%);background:radial-gradient(circle,rgba(207,106,46,.18),transparent 62%);}
+  .kick{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#e3a878;margin-bottom:10px;}
+  .hero h1{font-family:'Fraunces';font-weight:700;font-size:46px;line-height:1.02;}
+  .hero h1 .amp{color:var(--accent);}
+  .hero p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#EAD3A0;margin-top:12px;max-width:680px;margin-left:auto;margin-right:auto;}
+  section{padding:52px 0;}
+  h2{font-family:'Fraunces';font-weight:700;font-size:30px;text-align:center;margin-bottom:6px;}
+  .sub{text-align:center;color:var(--mute);max-width:680px;margin:0 auto 30px;font-size:15px;}
+  /* national toll */
+  .toll{display:flex;flex-direction:column;gap:14px;max-width:820px;margin:0 auto;}
+  .tbar{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:14px;}
+  .tbar .tl{text-align:right;}
+  .tbar .tl .nm{font-weight:600;font-size:15px;}
+  .tbar .tl .st{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;}
+  .tbar .tr{position:relative;height:40px;background:#efe6d3;border-radius:8px;overflow:hidden;}
+  .tbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;color:#fff;font-weight:700;font-family:'Cormorant Garamond',serif;font-size:20px;min-width:64px;}
+  .tbar .fill.safe{background:linear-gradient(90deg,#3f8a5b,#5bb07c);color:#fff;}
+  .legendline{text-align:center;color:var(--mute);font-size:12.5px;margin-top:16px;}
+  /* nutt */
+  .nutt{max-width:760px;margin:0 auto;}
+  .nrow{display:grid;grid-template-columns:172px 1fr 34px;align-items:center;gap:10px;margin-bottom:5px;}
+  .nrow .nl{font-size:12.5px;text-align:right;color:#2c2740;}
+  .nrow .nbarwrap{background:#efe6d3;border-radius:5px;height:17px;overflow:hidden;}
+  .nrow .nbar{height:100%;border-radius:5px;}
+  .nrow .nsc{font-size:12px;font-weight:600;color:var(--mute);}
+  .nrow.hl-l .nl{font-weight:700;color:#a5461d;}
+  .nrow.hl-s .nl{font-weight:700;color:#2f6a44;}
+  .keyrow{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:12.5px;color:var(--mute);margin-top:16px;}
+  .keyrow span{display:inline-flex;align-items:center;gap:6px;}
+  .sw{width:13px;height:13px;border-radius:3px;display:inline-block;}
+  /* state map */
+  .mapsec{background:var(--twilight2);color:#EAD3A0;}
+  .mapsec h2{color:#fff;}.mapsec .sub{color:#c3b6a0;}
+  .toggle{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
+  .tgl{border:1px solid rgba(217,178,106,.35);background:rgba(255,255,255,.04);color:#e6d8bf;padding:8px 16px;border-radius:999px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;}
+  .tgl.on{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10;border-color:transparent;font-weight:600;}
+  .mapgrid{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;align-items:start;}
+  #hmap{width:100%;}
+  #hmap svg{width:100%;height:auto;}
+  .mtip{position:absolute;pointer-events:none;background:#0e0a1f;border:1px solid rgba(217,178,106,.4);border-radius:8px;padding:7px 10px;font-size:12.5px;color:#f3ead6;opacity:0;transition:opacity .1s;z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.4);}
+  .mtip b{color:#fff;}
+  .ranked{background:rgba(255,255,255,.03);border:1px solid rgba(217,178,106,.18);border-radius:12px;padding:14px 16px;max-height:520px;overflow-y:auto;}
+  .ranked h4{font-family:'Fraunces';font-size:15px;color:#fff;margin-bottom:2px;}
+  .ranked .rsub{font-size:11px;color:#a99a80;margin-bottom:10px;}
+  .rrow{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;font-size:12.5px;padding:3px 0;border-bottom:1px solid rgba(217,178,106,.08);}
+  .rrow .ri{color:#8f8168;font-variant-numeric:tabular-nums;}
+  .rrow .rn{color:#e6d8bf;}
+  .rrow .rv{font-weight:700;color:#e3a878;font-variant-numeric:tabular-nums;}
+  .rrow.me .rn{color:#fff;font-weight:600;}
+  .maplegend{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:14px;font-size:12px;color:#c3b6a0;}
+  .grad{width:180px;height:11px;border-radius:6px;}
+  .mnote{text-align:center;color:#a99a80;font-size:11.5px;margin-top:12px;}
+  /* takeaway */
+  .take{background:var(--shade);border-radius:16px;padding:34px 30px;max-width:860px;margin:0 auto;}
+  .take h2{text-align:left;font-size:26px;margin-bottom:12px;}
+  .take p{font-size:15px;color:#33302a;margin-bottom:12px;}
+  .take .cta{display:inline-block;margin-top:6px;padding:12px 24px;border-radius:999px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10;font-weight:600;font-size:14px;}
+  footer{background:var(--twilight2);color:#EAD3A0;padding:32px 0;text-align:center;border-top:1px solid rgba(217,178,106,.22);}
+  footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin-bottom:8px;}
+  footer .src{font-size:11px;color:#8c8474;max-width:820px;margin:10px auto 0;line-height:1.6;}
+  @media(max-width:760px){.hero h1{font-size:34px;}.mapgrid{grid-template-columns:1fr;}.tbar{grid-template-columns:110px 1fr;}.nrow{grid-template-columns:120px 1fr 30px;}.nrow .nl{font-size:11px;}}
+</style></head><body>
+<nav><div class="wrap navin">
+  <div class="logo"><a href="index.html">Elevated <em>States</em></a></div>
+  <div class="nav-links"><a href="atlas.html">The Atlas</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="about.html">About</a><a href="index.html">Home</a></div>
+</div></nav>
+
+<div class="hero"><div class="halo"></div><div class="wrap" style="position:relative">
+  <div class="kick">The bigger picture</div>
+  <h1 class="serif">Legal <span class="amp">≠</span> Safe</h1>
+  <p>The most harmful drugs in America are the legal, normalized ones. If we ranked drugs by the damage they actually do, the picture would look nothing like the law.</p>
+</div></div>
+
+<section><div class="wrap">
+  <h2 class="serif">America's real drug toll</h2>
+  <div class="sub">Deaths per year in the United States. The two drugs sold on every corner do the most killing — by a wide margin.</div>
+  <div class="toll" id="toll"></div>
+  <div class="legendline">Classic psychedelics have no established lethal dose in humans — deaths from the direct toxicity of psilocybin or LSD are essentially nil.</div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <h2 class="serif">Ranked by actual harm</h2>
+  <div class="sub">A landmark 2010 study in <i>The Lancet</i> scored 20 drugs on 16 measures of harm — to the user and to others. Alcohol came out the single most harmful drug of all. Psychedelics landed at the very bottom.</div>
+  <div class="nutt" id="nutt"></div>
+  <div class="keyrow">
+    <span><i class="sw" style="background:#CF6A2E"></i> Legal &amp; sold openly</span>
+    <span><i class="sw" style="background:#4e9e6a"></i> Psychedelics</span>
+    <span><i class="sw" style="background:#8a8296"></i> Other</span>
+  </div>
+  <div class="legendline" style="margin-top:10px">Nutt, King &amp; Phillips, “Drug harms in the UK: a multicriteria decision analysis,” <i>The Lancet</i>, 2010. Overall harm score, 0–100.</div>
+</div></section>
+
+<section class="mapsec"><div class="wrap">
+  <h2 class="serif">Where the real damage lands</h2>
+  <div class="sub">The same map, a different lens. Pick a harm and see how the states compare — these are the problems worth measuring.</div>
+  <div class="toggle" id="toggle"></div>
+  <div class="mapgrid">
+    <div><div id="hmap" style="position:relative"></div>
+      <div class="maplegend"><span>lower</span><span class="grad" id="grad"></span><span>higher</span></div>
+      <div class="mnote" id="mnote"></div>
+    </div>
+    <div class="ranked"><h4 id="rankh">Highest</h4><div class="rsub" id="ranksub"></div><div id="rankedlist"></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="take">
+  <h2 class="serif">Why we put this next to the policy map</h2>
+  <p>None of this is an argument that any drug is harmless. It's an argument for <b>honesty</b> — for a drug policy that tracks real-world harm instead of history and habit. When the two legal recreational drugs top the harm charts and the safest substances sit in the same legal category as heroin, the labels aren't protecting anyone. They're just out of date.</p>
+  <p>That's the whole premise of The Elevated States Project: bring the science to the public, plainly, and let people see the gap between what's dangerous and what's illegal for themselves. The policy Atlas tracks where the law is finally starting to catch up.</p>
+  <a class="cta" href="atlas.html">Explore the Policy Atlas →</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="links"><a href="atlas.html">The Atlas</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="about.html">About</a><a href="index.html">Home</a></div>
+  <div class="src" id="sources"></div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="atlas-harm.js"></script>
+<script>
+/* ---------- national toll ---------- */
+(function(){
+  var m=HARM_META.natl;
+  var rows=[
+    {nm:"Tobacco",st:"legal",val:m.tobacco,c:"#a5461d",lab:"~480,000"},
+    {nm:"Alcohol",st:"legal",val:m.alcohol,c:"#CF6A2E",lab:"~178,000"},
+    {nm:"Drug overdose",st:"mostly opioids",val:m.overdose,c:"#7c5a8a",lab:"~105,000"},
+    {nm:"Psilocybin / LSD",st:"toxicity deaths",val:600,safe:true,lab:"≈0"}
+  ];
+  var max=m.tobacco;
+  document.getElementById("toll").innerHTML=rows.map(function(r){
+    var w=Math.max(6,(r.val/max)*100);
+    return '<div class="tbar"><div class="tl"><div class="nm">'+r.nm+'</div><div class="st">'+r.st+'</div></div>'+
+      '<div class="tr"><div class="fill'+(r.safe?' safe':'')+'" style="width:'+w+'%;'+(r.safe?'':'background:linear-gradient(90deg,'+d3.color(r.c).darker(0.6).formatHex()+','+r.c+')')+'">'+r.lab+'</div></div></div>';
+  }).join('');
+})();
+
+/* ---------- Nutt ranking ---------- */
+(function(){
+  var data=HARM_META.nutt, max=d3.max(data,function(d){return d[1];});
+  var psy={"LSD":1,"MDMA (Ecstasy)":1,"Psilocybin mushrooms":1};
+  document.getElementById("nutt").innerHTML=data.map(function(d){
+    var name=d[0],score=d[1],legal=d[2]==="legal",isPsy=psy[name];
+    var c=legal?"#CF6A2E":(isPsy?"#4e9e6a":"#8a8296");
+    var cls=legal?"hl-l":(isPsy?"hl-s":"");
+    return '<div class="nrow '+cls+'"><div class="nl">'+name+'</div>'+
+      '<div class="nbarwrap"><div class="nbar" style="width:'+(score/max*100)+'%;background:'+c+'"></div></div>'+
+      '<div class="nsc">'+score+'</div></div>';
+  }).join('');
+})();
+
+/* ---------- state harm map ---------- */
+(function(){
+  var METRICS={
+    alc:{label:"Alcohol deaths",field:"ar",unit:"per 100k/yr",fmt:function(v){return v.toFixed(0);},hi:"#b23b1e",note:"Alcohol-attributable deaths per 100,000 residents (CDC ARDI, 2020-21)."},
+    od:{label:"Overdose deaths",field:"or",unit:"per 100k/yr",fmt:function(v){return v.toFixed(0);},hi:"#7c4a90",note:"Drug overdose deaths per 100,000, age-adjusted (CDC NCHS, 2024)."},
+    smoke:{label:"Adult smoking",field:"sp",unit:"% of adults",fmt:function(v){return v.toFixed(0)+"%";},hi:"#9a5a2a",note:"Share of adults who currently smoke cigarettes (CDC BRFSS, 2024)."}
+  };
+  var cur="alc";
+  var names=Object.keys(HARM);
+  var W=640,H=400;
+  var proj=d3.geoAlbersUsa().scale(760).translate([W/2,H/2]);
+  var pathGen=d3.geoPath(proj);
+  var svg=d3.select("#hmap").append("svg").attr("viewBox","0 0 "+W+" "+H).attr("role","img").attr("aria-label","US harm map");
+  var tip=document.createElement("div");tip.className="mtip";document.getElementById("hmap").appendChild(tip);
+  var features=[];
+  // build toggle
+  var tg=document.getElementById("toggle");
+  tg.innerHTML=Object.keys(METRICS).map(function(k){return '<button class="tgl'+(k===cur?" on":"")+'" data-m="'+k+'">'+METRICS[k].label+'</button>';}).join('');
+  tg.querySelectorAll(".tgl").forEach(function(b){b.addEventListener("click",function(){cur=b.dataset.m;tg.querySelectorAll(".tgl").forEach(function(x){x.classList.toggle("on",x===b);});draw();});});
+
+  function scale(){
+    var f=METRICS[cur].field;
+    var vals=names.map(function(n){return HARM[n][f];}).filter(function(v){return v!=null;});
+    return d3.scaleLinear().domain([d3.min(vals),d3.quantile(vals.slice().sort(d3.ascending),0.5),d3.max(vals)])
+      .range(["#f0e6d2","#e0a86a",METRICS[cur].hi]).interpolate(d3.interpolateLab).clamp(true);
+  }
+  function draw(){
+    var f=METRICS[cur].field,sc=scale(),M=METRICS[cur];
+    svg.selectAll("path").attr("fill",function(d){var v=HARM[d.properties.name]?HARM[d.properties.name][f]:null;return v==null?"#2a2438":sc(v);});
+    document.getElementById("grad").style.background="linear-gradient(90deg,#f0e6d2,#e0a86a,"+M.hi+")";
+    document.getElementById("mnote").innerHTML=M.note;
+    // ranked list (desc)
+    var sorted=names.filter(function(n){return HARM[n][f]!=null;}).sort(function(a,b){return HARM[b][f]-HARM[a][f];});
+    document.getElementById("rankh").textContent="Highest — "+M.label;
+    document.getElementById("ranksub").textContent=M.unit+" · 50 states + D.C.";
+    document.getElementById("rankedlist").innerHTML=sorted.map(function(n,i){
+      return '<div class="rrow"><span class="ri">'+(i+1)+'</span><span class="rn">'+n+'</span><span class="rv">'+M.fmt(HARM[n][f])+'</span></div>';
+    }).join('');
+  }
+  d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
+    features=topojson.feature(us,us.objects.states).features.filter(function(f){return HARM[f.properties.name]!==undefined;});
+    svg.selectAll("path").data(features).enter().append("path").attr("d",pathGen)
+      .attr("stroke","#170f2e").attr("stroke-width",0.6).style("cursor","default")
+      .on("mousemove",function(ev,d){var n=d.properties.name,M=METRICS[cur],v=HARM[n][M.field];
+        var r=document.getElementById("hmap").getBoundingClientRect();
+        tip.innerHTML="<b>"+n+"</b><br>"+M.label+": "+M.fmt(v)+" "+M.unit;
+        tip.style.opacity=1;var x=ev.clientX-r.left+14,y=ev.clientY-r.top+14;if(x>r.width-180)x=ev.clientX-r.left-180;tip.style.left=x+"px";tip.style.top=y+"px";})
+      .on("mouseleave",function(){tip.style.opacity=0;});
+    draw();
+  });
+})();
+
+/* ---------- sources ---------- */
+document.getElementById("sources").innerHTML="<b>Sources.</b> Alcohol deaths &amp; drinking: CDC Alcohol-Related Disease Impact (ARDI), 2020–2021; CDC BRFSS 2024. "+
+  "Tobacco: CDC BRFSS 2024 (prevalence) &amp; CDC Best Practices 2014 (deaths). Drug overdose: CDC NCHS Stats of the States, 2024. "+
+  "Harm ranking: Nutt, King &amp; Phillips, <i>The Lancet</i> 2010. Toxicity: Nichols, <i>Pharmacological Reviews</i> 2016. "+
+  "Figures are for public education, not medical or legal advice.";
+</script>
+</body></html>
