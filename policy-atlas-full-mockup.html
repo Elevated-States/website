@@ -55,7 +55,7 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .tlnote b{color:var(--paper);font-family:'Archivo Black';font-size:14px}
 .detail{padding:16px 16px 28px;overflow-y:auto}
 .detail .hint{color:var(--mute);font-size:14px;line-height:1.6}
-.detail .statehero{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;display:block;margin-bottom:13px;border:1px solid rgba(255,255,255,.1)}
+.detail .statehero{width:100%;max-height:300px;object-fit:contain;border-radius:12px;display:block;margin-bottom:13px;border:1px solid rgba(255,255,255,.1);background:#141019}
 .detail .st{font-family:'Archivo Black';font-size:23px;text-transform:uppercase;line-height:1;margin-bottom:12px}
 .drow{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:9px 0;font-size:13px}
 .drow .k{color:var(--mute);text-transform:uppercase;font-size:11px;letter-spacing:.04em;padding-top:2px}
@@ -208,7 +208,7 @@ function orgsBlock(n){
 function ketamineBlock(n){
  if(typeof KETAMINE==="undefined"||!KETAMINE[n]||!KETAMINE[n].length)return "";
  var list=KETAMINE[n];
- var h='<div class="orgwrap" style="border-left-color:#29b6d8"><div class="steps-h" style="color:#8fd8e6">Ketamine clinics · '+list.length+' in-person providers</div><div class="orggrp">';
+ var h='<div class="orgwrap" style="border-left-color:#29b6d8"><div class="steps-h" style="color:#8fd8e6">Local practitioners · '+list.length+' in-person providers</div><div class="orggrp">';
  list.forEach(function(o){
   h+='<span class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>'+(o.city?' <span class="oc">· '+o.city+'</span>':'')+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
  });
@@ -266,8 +266,6 @@ const LAYERS={
    lg:sw("#caa15a")+"State RFRA "+sw("#ff4d2e",1)+"Church exemption  ·  ayahuasca = federal, not state law"},
  ibogaine:{t:"Ibogaine research",m:function(n){var k=IBO[STATES[n].ibo];return{v:k.v,c:k.c};},
    lg:sw("#1fd6b4")+"Active "+sw("#13806f")+"Considering "+sw("#2c302c")+"None  ·  emerging"},
- ketamine:{t:"Ketamine access",m:function(n){var k=KET[STATES[n].ket];return{v:k.v,c:k.c};},
-   lg:sw("#29b6d8")+"Telehealth + clinic "+sw("#26606e")+"Clinic only  ·  legal nationwide; access varies"},
  mdma:{t:"MDMA & trials",m:function(n){var k=MDMA[STATES[n].mdma];return{v:k.v,c:k.c};},
    lg:sw("#e0529c")+"Trial site "+sw("#9a4f78")+"Right-to-try "+sw("#332e36")+"None  ·  Schedule I"},
  penalty:{t:"Possession penalties",m:function(n){var k=PEN[STATES[n].can];return{v:k.v,c:k.c};},
@@ -280,17 +278,27 @@ const LAYERS={
    lg:sw("#ff8c42")+"Advancing "+sw("#cf7a2e")+"Building "+sw("#7a5a30")+"Early "+sw("#3a352e")+"None "+sw("#2a2a26")+"Not yet sourced  ·  pending bills & trajectory"}
 };
 // ---- Leaderboard layers: color each state by its category score, tooltip shows 1-of-51 rank ----
-function catColor(cat,v){var c=ES_INDEX[cat].color;return d3.scaleLinear().domain([0,45,100]).range(["#2a2a26",d3.color(c).darker(1.1).formatHex(),c]).interpolate(d3.interpolateLab).clamp(true)(v);}
+// Widened ramp: dark (none) -> deep -> base -> bright -> pale highlight, so score bands read clearly.
+function catColor(cat,v){var c=d3.color(ES_INDEX[cat].color);if(v<=0)return "#26261f";
+  return d3.scaleLinear()
+    .domain([1,20,42,64,84,100])
+    .range(["#2f2b3a",
+            d3.color(c).darker(1.7).formatHex(),
+            d3.color(c).darker(0.6).formatHex(),
+            c.formatHex(),
+            d3.color(c).brighter(0.85).formatHex(),
+            d3.color(c).brighter(1.7).formatHex()])
+    .interpolate(d3.interpolateLab).clamp(true)(v);}
 ES_CATS.forEach(function(c){
   LAYERS["lb_"+c.key]={t:c.label+" — leaderboard",cat:c.key,
     m:function(n){var v=ES_INDEX[c.key].score[n];return{v:v,c:catColor(c.key,v)};},
-    lg:sw(d3.color(c.color).darker(1.6).formatHex())+"Lower "+sw(d3.color(c.color).darker(0.4).formatHex())+"Mid "+sw(c.color)+"Leader  ·  hover for the 1-of-51 rank"};
+    lg:sw(d3.color(c.color).darker(1.7).formatHex())+"Lower "+sw(c.color)+"Mid "+sw(d3.color(c.color).brighter(1.5).formatHex())+"Leader  ·  taller + brighter = higher rank · hover for the 1-of-50 rank"};
 });
 const GROUPS=[
  {h:"Index",items:[["status","Policy overview","conic-gradient(#8B6CFF 0 20%,#B9AEF7 20% 30%,#3FB65C 30% 62%,#8FCB9B 62% 76%,#E0862E 76% 90%,#D6462A 90% 100%)",0],["overall","Overall openness","conic-gradient(#9a7fe0 0 25%,#3FB65C 25% 50%,#E8C23E 50% 75%,#D6462A 75% 100%)",0]]},
  {h:"Leaderboards · 1 of 50",items:[["lb_hr","Harm Reduction","#3FB65C",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0],["lb_equity","Equity & Repair","#C8497A",0]]},
  {h:"Cannabis",items:[["cannabis","Cannabis status","#38b25a",0]]},
- {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["ketamine","Ketamine access","#29b6d8",0],["mdma","MDMA & trials","#e0529c",0]]},
+ {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},
  {h:"Reform trajectory",items:[["momentum","Reform momentum","#ff8c42",0]]}
 ];
@@ -349,7 +357,6 @@ function showTip(ev,n){
  else if(layer==="psych")line=PSIL[d.psi];
  else if(layer==="penalty")line=PENL[d.can];
  else if(layer==="ibogaine")line="Ibogaine: "+IBOL[d.ibo];
- else if(layer==="ketamine")line="Ketamine: "+KETL[d.ket];
  else if(layer==="mdma")line="MDMA: "+MDMAL[d.mdma];
  else if(layer==="citydecrim")line="Reform here is city-level — see the dots";
  else if(layer==="ayahuasca")line=d.rfra?"State RFRA on the books":"No state RFRA";
@@ -362,7 +369,7 @@ function showTip(ev,n){
 }
 function dotTip(ev,p){tipShow(ev,"<b>"+p.n+"</b><br><span>"+(layer==="ayahuasca"?"Recognized exemption · "+p.y:"Decriminalized · "+p.y)+"</span>");}
 function tipShow(ev,html){var r=mapDiv.getBoundingClientRect();tip.innerHTML=html;tip.style.opacity=1;var x=ev.clientX-r.left+14,y=ev.clientY-r.top+14;if(x>r.width-240)x=ev.clientX-r.left-250;tip.style.left=x+"px";tip.style.top=y+"px";}
-function pill(t,c){return '<span class="dpill" style="background:'+c+';color:'+d3.color(c).darker(2.2).formatHex()+'">'+t+'</span>';}
+function pill(t,c){var col=d3.color(c),lum=0.2126*col.r+0.7152*col.g+0.0722*col.b;var txt=lum<110?"#f2ece0":d3.color(c).darker(2.4).formatHex();var bd=lum<70?"border:1px solid rgba(255,255,255,.16);":"";return '<span class="dpill" style="background:'+c+';color:'+txt+';'+bd+'">'+t+'</span>';}
 function openDetail(n){
  var d=STATES[n],blurb;
  if(d.o>=80)blurb="One of the most permissive states — recreational cannabis and real psychedelic momentum.";
@@ -377,7 +384,6 @@ function openDetail(n){
   '<div class="drow"><span class="k">Cannabis</span><span class="v">'+pill(CANL[d.can],CAN[d.can].c)+(d.recY?' <span style="color:#8a8a82">since '+d.recY+'</span>':(d.medY?' <span style="color:#8a8a82">med '+d.medY+'</span>':''))+'</span></div>'+
   '<div class="drow"><span class="k">Psilocybin</span><span class="v">'+pill(PSIL[d.psi],PSI[d.psi].c)+(d.psiY?' <span style="color:#8a8a82">'+d.psiY+'</span>':'')+'</span></div>'+
   '<div class="drow"><span class="k">Ibogaine research</span><span class="v">'+pill(IBOL[d.ibo],IBO[d.ibo].c)+'</span></div>'+
-  '<div class="drow"><span class="k">Ketamine</span><span class="v">'+pill(KETL[d.ket],KET[d.ket].c)+'</span></div>'+
   '<div class="drow"><span class="k">MDMA</span><span class="v">'+pill(MDMAL[d.mdma],MDMA[d.mdma].c)+'</span></div>'+
   '<div class="drow"><span class="k">Cannabis penalty</span><span class="v">'+pill(PENL[d.can],PEN[d.can].c)+'</span></div>'+
   '<div class="drow"><span class="k">State RFRA</span><span class="v">'+(d.rfra?"On the books":"None")+'</span></div>'+
