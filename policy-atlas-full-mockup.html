@@ -161,7 +161,7 @@ const KET={open:{v:70,c:"#29b6d8"},clinic:{v:34,c:"#26606e"}};
 const MDMA={trial:{v:88,c:"#e0529c"},rtt:{v:50,c:"#9a4f78"},none:{v:10,c:"#332e36"}};
 const RSCH={active:{v:90,c:"#f2c14e"},emerging:{v:48,c:"#8a6d2e"},none:{v:8,c:"#2e2e28"}};
 const RSCHL={active:"Active research center",emerging:"Emerging program",none:"None yet"};
-const MOM={high:{v:92,c:"#ff8c42"},med:{v:58,c:"#cf7a2e"},low:{v:30,c:"#7a5a30"},none:{v:12,c:"#3a352e"},na:{v:6,c:"#2a2a26"}};
+const MOM={high:{v:92,c:"#FFD24A"},med:{v:58,c:"#EE8E24"},low:{v:30,c:"#C0552A"},none:{v:12,c:"#4a3f34"},na:{v:6,c:"#2a2a26"}};
 const MOML={high:"Advancing / enacting",med:"Building",low:"Early",none:"None",na:"Not yet sourced"};
 const SSPL={yes:"Authorized",limited:"Limited / local",no:"Not authorized"};
 const GSLL={yes:"Yes",limited:"Limited",no:"No"};
@@ -275,33 +275,37 @@ const LAYERS={
  research:{t:"Psychedelic research",m:function(n){var k=RSCH[STATES[n].rsch];return{v:k.v,c:k.c};},
    lg:sw("#f2c14e")+"Active center "+sw("#8a6d2e")+"Emerging "+sw("#2e2e28")+"None  ·  university trials & programs"},
  momentum:{t:"Reform momentum",m:function(n){var k=MOM[STATES[n].mom||"na"];return{v:k.v,c:k.c};},
-   lg:sw("#ff8c42")+"Advancing "+sw("#cf7a2e")+"Building "+sw("#7a5a30")+"Early "+sw("#3a352e")+"None "+sw("#2a2a26")+"Not yet sourced  ·  pending bills & trajectory"}
+   lg:sw("#FFD24A")+"Advancing "+sw("#EE8E24")+"Building "+sw("#C0552A")+"Early "+sw("#4a3f34")+"None "+sw("#2a2a26")+"Not yet sourced  ·  brighter = more momentum"}
 };
 // ---- Leaderboard layers: color each state by its category score, tooltip shows 1-of-51 rank ----
-// Harm Reduction gets its own medical white->red scale (distinct from the green cannabis layer).
+// Harm Reduction: leaders are clean WHITE (medical "all clear"); laggards deep red (alert).
+// Runs red -> orange -> gold -> white so every level is a distinct hue+lightness.
 var hrRamp=d3.scaleLinear().domain([0,25,50,75,100])
-  .range(["#fbeae4","#f0a488","#e35b3c","#c22a1a","#8d130c"])
+  .range(["#a01c10","#e0562a","#f0a52f","#f2d97a","#fbfaf2"])
   .interpolate(d3.interpolateLab).clamp(true);
-// Widened ramp: dark (none) -> deep -> base -> bright -> pale highlight, so score bands read clearly.
+// Decriminalization: dark slate -> teal -> mint -> pale green, real hue movement (not flat teal).
+var decrimRamp=d3.scaleLinear().domain([0,25,50,75,100])
+  .range(["#233743","#2c7f86","#37b09c","#79d68f","#dcf1bf"])
+  .interpolate(d3.interpolateLab).clamp(true);
+// Generic leaderboard ramp: wide lightness sweep + slight hue rotation so score bands read clearly.
 function catColor(cat,v){
   if(cat==="hr")return hrRamp(Math.max(0,v));
-  var c=d3.color(ES_INDEX[cat].color);if(v<=0)return "#26261f";
-  return d3.scaleLinear()
-    .domain([1,20,42,64,84,100])
-    .range(["#2f2b3a",
-            d3.color(c).darker(1.7).formatHex(),
-            d3.color(c).darker(0.6).formatHex(),
-            c.formatHex(),
-            d3.color(c).brighter(0.85).formatHex(),
-            d3.color(c).brighter(1.7).formatHex()])
-    .interpolate(d3.interpolateLab).clamp(true)(v);}
+  if(cat==="decrim")return decrimRamp(Math.max(0,v));
+  if(v<=0)return "#26261f";
+  var base=d3.hsl(ES_INDEX[cat].color);
+  var t=Math.max(0,Math.min(1,v/100));
+  var h=base.h+(t-0.5)*34;
+  var s=Math.max(0.28,Math.min(0.92,base.s*0.85+0.12));
+  var l=0.17+t*0.64;
+  return d3.hsl(h,s,l).formatHex();}
 ES_CATS.forEach(function(c){
-  var lg=(c.key==="hr")
-    ? sw("#fbeae4")+"Lower "+sw("#e35b3c")+"Mid "+sw("#8d130c")+"Leader  ·  pale → deep red = higher rank · hover for the 1-of-50 rank"
-    : sw(d3.color(c.color).darker(1.7).formatHex())+"Lower "+sw(c.color)+"Mid "+sw(d3.color(c.color).brighter(1.5).formatHex())+"Leader  ·  taller + brighter = higher rank · hover for the 1-of-50 rank";
+  var lo=catColor(c.key,10),mid=catColor(c.key,52),hi=catColor(c.key,94);
+  var note=(c.key==="hr")
+    ? "white = strongest harm reduction · red = weakest · hover for the 1-of-50 rank"
+    : "taller + brighter = higher rank · hover for the 1-of-50 rank";
   LAYERS["lb_"+c.key]={t:c.label+" — leaderboard",cat:c.key,
     m:function(n){var v=ES_INDEX[c.key].score[n];return{v:v,c:catColor(c.key,v)};},
-    lg:lg};
+    lg:sw(lo)+"Lower "+sw(mid)+"Mid "+sw(hi)+"Leader  ·  "+note};
 });
 const GROUPS=[
  {h:"Index",items:[["status","Policy overview","conic-gradient(#8B6CFF 0 20%,#B9AEF7 20% 30%,#3FB65C 30% 62%,#8FCB9B 62% 76%,#E0862E 76% 90%,#D6462A 90% 100%)",0],["overall","Overall openness","conic-gradient(#9a7fe0 0 25%,#3FB65C 25% 50%,#E8C23E 50% 75%,#D6462A 75% 100%)",0]]},
