@@ -135,19 +135,6 @@
   <div class="note">Every organization was verified to have a live web presence in 2026. Listing is informational, not an endorsement, and not legal advice. Know a group we missed? Tell us on <a href="get-involved.html" style="color:var(--gold);border-bottom:1px solid var(--gold)">Get Involved</a>.</div>
 </div></section>
 
-<section style="padding-top:0"><div class="wrap">
-  <div class="eyebrow">Ketamine access</div>
-  <h2>Find a ketamine clinic.</h2>
-  <div class="sub">Ketamine is the one psychedelic-adjacent therapy legal and available in all 50 states. Here are <b id="kettotal">390+</b> established in-person providers — IV infusions, ketamine-assisted psychotherapy, and Spravato/esketamine centers. Pick your state or search.</div>
-  <div class="dirbar">
-    <select id="ketstate"></select>
-    <input id="ketsearch" type="search" placeholder="Search clinics, cities…" aria-label="Search ketamine clinics">
-  </div>
-  <div class="dircount" id="ketcount"></div>
-  <div id="ketresults"></div>
-  <div class="note">In-person clinics only (no telehealth), each verified to have a live web presence in 2026. Informational only — not an endorsement or medical advice. Confirm licensure and current status before seeking care.</div>
-</div></section>
-
 <section style="padding-top:0"><div class="wrap"><div class="updates" style="background:linear-gradient(180deg,var(--twilight),var(--twilight2));color:#EAD3A0;">
   <div class="eyebrow" style="color:var(--gold2)">The prize</div>
   <h2 style="color:#F7F0E4">Each year, the most elevated state earns the Ball.</h2>
@@ -181,7 +168,6 @@
 <script src="atlas-data.js"></script>
 <script src="atlas-scores.js"></script>
 <script src="atlas-orgs.js"></script>
-<script src="atlas-ketamine.js"></script>
 <script>
 /* ---- Scoreboard: 5 tabbed leaderboards ---- */
 (function(){
@@ -241,35 +227,6 @@
   chips.addEventListener("click",function(e){var b=e.target.closest(".catchip");if(!b)return;curCat=b.dataset.c;
     chips.querySelectorAll(".catchip").forEach(function(x){var on=x.dataset.c===curCat;x.classList.toggle("on",on);x.style.background=on&&curCat?ORG_CATS[curCat].color:"#fff";});
     render();});
-  render();
-})();
-/* ---- Ketamine access directory ---- */
-(function(){
-  if(typeof KETAMINE==="undefined")return;
-  var states=Object.keys(KETAMINE).sort();
-  var total=0;states.forEach(function(s){total+=KETAMINE[s].length;});
-  var tEl=document.getElementById("kettotal");if(tEl)tEl.textContent=total;
-  var sel=document.getElementById("ketstate"),search=document.getElementById("ketsearch"),
-      results=document.getElementById("ketresults"),countEl=document.getElementById("ketcount");
-  var curState="",query="";
-  sel.innerHTML="<option value=''>Choose a state…</option>"+states.map(function(s){return "<option value='"+s+"'>"+s+" ("+KETAMINE[s].length+")</option>";}).join("");
-  function card(o,st){
-    return "<div class='orgcard' style='border-left-color:#29b6d8'><h4><a href='"+o.u+"' target='_blank' rel='noopener'>"+o.n+" <span class='ext'>↗</span></a></h4><div class='orgmeta' style='color:#1f8f9c'>Ketamine clinic"+(o.city?" · "+o.city:"")+(st?" · "+st:"")+"</div>"+(o.note?"<p>"+o.note+"</p>":"")+"</div>";}
-  function matchQ(o,st){if(!query)return true;var q=query.toLowerCase();return (o.n+" "+(o.city||"")+" "+(o.note||"")+" "+st).toLowerCase().indexOf(q)>=0;}
-  function render(){
-    var html="",n=0;
-    if(query){
-      states.forEach(function(st){var hits=KETAMINE[st].filter(function(o){return matchQ(o,st);});if(hits.length){html+="<div class='dirgroup-h'>"+st+"</div>"+hits.map(function(o){return card(o,"");}).join("");n+=hits.length;}});
-      countEl.textContent=n+" match"+(n===1?"":"es")+' for "'+query+'"';
-      results.innerHTML=html||"<p class='sub'>No matches. Try a different term.</p>";
-    }else if(curState){
-      KETAMINE[curState].forEach(function(o){html+=card(o,"");n++;});
-      countEl.textContent=n+" clinic"+(n===1?"":"s")+" in "+curState;
-      results.innerHTML=html;
-    }else{countEl.textContent="";results.innerHTML="<p class='sub'>Choose your state above, or search across all "+total+" clinics.</p>";}
-  }
-  sel.addEventListener("change",function(){curState=sel.value;query="";search.value="";render();});
-  search.addEventListener("input",function(){query=search.value.trim();render();});
   render();
 })();
 (function(){
