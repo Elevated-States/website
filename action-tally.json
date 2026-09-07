@@ -1,0 +1,5 @@
+{
+  "updated": "2026-09-06",
+  "note": "Static fallback. When the Netlify function is live it supersedes this file.",
+  "counts": {}
+}

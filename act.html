@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow">
+<title>Find your state — The Elevated States Project</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#241a44">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<meta property="og:title" content="Find your state. Do one thing.">
+<meta property="og:description" content="How your state actually treats drugs — and the single highest-leverage thing you can do about it today.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171326;--paper:#FAF4E9;--card:#fff;--twilight:#241a44;--twilight2:#170f2e;--gold:#B8893C;--gold2:#D9B26A;--accent:#CF6A2E;--teal:#2b6a53;--mute:#6B6558;--line:#E6DAC4;--shade:#F1E7D3;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}.serif{font-family:'Cormorant Garamond',serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:20;background:rgba(23,15,46,.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(217,178,106,.25)}
+.navin{display:flex;justify-content:space-between;align-items:center;height:62px}
+.logo{font-family:'Fraunces';font-weight:700;font-size:18px;color:#F7F0E4}.logo em{color:var(--gold2);font-style:normal}
+.nav-links{display:flex;gap:18px;font-size:13px;color:#C7B8E6;font-weight:500;flex-wrap:wrap}.nav-links a:hover{color:var(--gold2)}
+.hero{text-align:center;padding:52px 0 38px;color:#F7F0E4;background:linear-gradient(180deg,var(--twilight2),var(--twilight));position:relative;overflow:hidden}
+.hero .halo{position:absolute;width:480px;height:480px;left:50%;top:-250px;transform:translateX(-50%);background:radial-gradient(circle,rgba(217,178,106,.16),transparent 62%)}
+.kick{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#C7B8E6;margin-bottom:10px}
+.hero h1{font-family:'Fraunces';font-weight:700;font-size:42px;line-height:1.03}
+.hero p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:#EAD3A0;margin-top:10px;max-width:600px;margin-left:auto;margin-right:auto}
+section{padding:34px 0}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font-weight:600;font-size:14.5px;cursor:pointer;border:none;font-family:inherit}
+.btn-p{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10}
+.btn-o{border:1px solid var(--gold);color:var(--gold);background:transparent}
+.locate{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:20px}
+select,input[type=email]{padding:12px 15px;border:1px solid var(--line);border-radius:999px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink);min-width:210px}
+.locnote{font-size:12px;color:#C7B8E6;margin-top:12px;min-height:18px}
+#panel{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 3px 14px rgba(120,90,30,.05);margin-bottom:18px}
+.sthead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+.sthead h2{font-family:'Fraunces';font-size:30px}
+.rankbig{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold)}
+.boards{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.bd{background:var(--shade);border-radius:10px;padding:9px 6px;text-align:center;border-top:3px solid var(--gold)}
+.bd .r{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px;line-height:1}
+.bd .l{font-size:9.5px;color:var(--mute);margin-top:3px;line-height:1.25}
+.action{background:linear-gradient(180deg,#fff,#fdf6e9);border:1px solid var(--gold);border-radius:16px;padding:24px;margin-bottom:18px}
+.action .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px}
+.action h3{font-family:'Fraunces';font-size:23px;margin-bottom:8px}
+.action p{font-size:14px;color:#39332c;margin-bottom:12px}
+.msg{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;font-size:13.5px;line-height:1.6;color:#2c2a33;white-space:pre-wrap;max-height:230px;overflow-y:auto;margin-bottom:12px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.done{display:none;background:#eaf3ec;border:1px solid var(--teal);color:var(--teal);border-radius:10px;padding:10px 14px;font-size:13.5px;font-weight:600;margin-top:12px}
+h2.sec{font-family:'Fraunces';font-size:26px;text-align:center;margin-bottom:6px}
+.sub{text-align:center;color:var(--mute);max-width:600px;margin:0 auto 20px;font-size:14.5px}
+.orgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.org{background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:10px;padding:12px 14px}
+.org a{font-weight:600;color:#2c5e46;border-bottom:1px dotted rgba(44,94,70,.4);font-size:14px}
+.org .m{font-size:11.5px;color:var(--mute);margin-top:3px}
+.lead{background:var(--twilight);color:#EAD3A0;border-radius:16px;padding:24px}
+.lead h2{color:#fff;font-family:'Fraunces';font-size:24px;text-align:center;margin-bottom:4px}
+.lead .sub{color:#c3b6a0}
+.lb{display:grid;grid-template-columns:26px 1fr auto;gap:8px;align-items:center;font-size:13.5px;padding:5px 0;border-bottom:1px solid rgba(217,178,106,.12)}
+.lb .i{color:#8f8168;font-variant-numeric:tabular-nums}.lb .n{color:#e6d8bf}.lb .v{font-weight:700;color:var(--gold2);font-variant-numeric:tabular-nums}
+.mine{background:var(--shade);border-radius:12px;padding:14px 16px;text-align:center;font-size:14px;margin-top:14px;color:#39332c}
+.mine b{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold)}
+.alerts{background:var(--shade);border-radius:16px;padding:26px;text-align:center}
+.alerts h2{font-family:'Fraunces';font-size:24px;margin-bottom:4px}
+footer{background:var(--twilight2);color:#EAD3A0;padding:30px 0;text-align:center;border-top:1px solid rgba(217,178,106,.22);margin-top:24px}
+footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin-bottom:8px}
+footer .c{font-size:12px;color:var(--mute)}
+.hide{display:none!important}
+@media(max-width:700px){.hero h1{font-size:31px}.boards{grid-template-columns:repeat(2,1fr)}.orgs{grid-template-columns:1fr}}
+</style></head><body>
+
+<nav><div class="wrap navin">
+  <div class="logo"><a href="index.html">Elevated <em>States</em></a></div>
+  <div class="nav-links"><a href="atlas.html">The Atlas</a><a href="act.html">Take Action</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="index.html">Home</a></div>
+</div></nav>
+
+<div class="hero"><div class="halo"></div><div class="wrap" style="position:relative">
+  <div class="kick">One state · one action</div>
+  <h1 class="serif">Find your state.<br>Do one thing.</h1>
+  <p>Knowing where your state ranks is interesting. Changing it is the point.</p>
+  <div class="locate">
+    <button class="btn btn-p" id="locBtn">Use my location</button>
+    <select id="statePick"><option value="">or choose your state…</option></select>
+  </div>
+  <div class="locnote" id="locNote"></div>
+</div></div>
+
+<section id="panel"><div class="wrap">
+  <div class="card">
+    <div class="sthead">
+      <h2 class="serif" id="stName">—</h2>
+      <div><span class="rankbig" id="stRank">—</span> <span style="color:var(--mute);font-size:13px">overall openness</span></div>
+    </div>
+    <div class="boards" id="stBoards"></div>
+  </div>
+
+  <div class="action">
+    <div class="eyebrow" id="actKick">Your one thing</div>
+    <h3 class="serif" id="actTitle">—</h3>
+    <p id="actWhy"></p>
+    <div class="msg" id="actMsg"></div>
+    <div class="row">
+      <button class="btn btn-p" id="copyBtn">Copy this message</button>
+      <a class="btn btn-o" id="repLink" href="https://openstates.org/find_your_legislator/" target="_blank" rel="noopener">Find your legislator →</a>
+      <button class="btn btn-o" id="doneBtn">I sent it</button>
+    </div>
+    <div class="done" id="doneMsg">Logged. That's one more for <span id="doneState"></span>.</div>
+  </div>
+
+  <div class="card" id="orgCard">
+    <h2 class="serif" style="font-size:22px;margin-bottom:4px">Or join people already doing this</h2>
+    <div style="font-size:13.5px;color:var(--mute);margin-bottom:14px" id="orgSub"></div>
+    <div class="orgs" id="orgList"></div>
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="lead">
+  <h2 class="serif">The other scoreboard</h2>
+  <div class="sub">The Atlas ranks states on policy. This ranks them on their people. Every action taken here counts toward the state it was taken for.</div>
+  <div id="lbList"></div>
+  <div class="mine" id="mine">You've taken <b id="myCount">0</b> actions. <span id="myState"></span></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="alerts">
+  <h2 class="serif">Get alerts for your state</h2>
+  <div class="sub">When a bill moves, a rank changes, or something happens worth knowing about — we'll tell you. Nothing else.</div>
+  <form name="state-alerts" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="row" style="justify-content:center">
+    <input type="hidden" name="form-name" value="state-alerts">
+    <p class="hide"><label>Skip: <input name="bot-field"></label></p>
+    <input type="email" name="email" placeholder="you@email.com" required>
+    <select name="state" id="alertState" required><option value="">Your state…</option></select>
+    <button class="btn btn-p" type="submit">Keep me posted</button>
+  </form>
+</div></div></section>
+
+<!-- hidden action-logging form (Netlify needs it in static HTML) -->
+<form name="state-action" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hide">
+  <input type="hidden" name="form-name" value="state-action">
+  <input name="bot-field"><input name="state"><input name="action">
+</form>
+
+<footer><div class="wrap">
+  <div class="links"><a href="atlas.html">The Atlas</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="about.html">About</a><a href="index.html">Home</a></div>
+  <div class="c">The Elevated States Project · shanetmauss@gmail.com</div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="atlas-data.js"></script>
+<script src="atlas-scores.js"></script>
+<script src="atlas-orgs.js"></script>
+<script>
+var DC="District of Columbia";
+var NAMES=Object.keys(STATES).sort();
+// ---- rank (50 states, DC unranked) ----
+var RANKABLE=NAMES.filter(function(n){return n!==DC;});
+var ORDER=RANKABLE.slice().sort(function(a,b){return STATES[b].o-STATES[a].o;});
+var RANK={},p=null,pr=0;
+ORDER.forEach(function(n,i){var v=STATES[n].o;if(v!==p){pr=i+1;p=v;}RANK[n]=pr;});
+RANK[DC]=null;
+
+["statePick","alertState"].forEach(function(id){
+  var s=document.getElementById(id);
+  NAMES.forEach(function(n){var o=document.createElement("option");o.value=n;o.textContent=n;s.appendChild(o);});
+});
+
+// ---- decide the one action for a state ----
+// Concrete statutory gaps come first — they make a specific, winnable ask.
+// Live legislation is used as supporting context, or as the ask when no gap remains.
+function pickAction(n){
+  var a=_pick(n), d=STATES[n];
+  if((d.mom==="high"||d.mom==="med") && d.momN && a.k!=="mom"){
+    a.why+=" It's also worth knowing that "+n+" already has movement on drug policy — "+trimPeriod(d.momN)+" — so this is not a legislature that has closed the subject.";
+  }
+  return a;
+}
+function trimPeriod(s){ return String(s).replace(/\.\s*$/,""); }
+function _pick(n){
+  var d=STATES[n], hx=(typeof HRX!=="undefined"&&HRX[n])?HRX[n]:{};
+  if(d.fts!=="legal"){
+    return {kick:"The cheapest life-saving fix",
+      title:"Legalize fentanyl test strips",
+      why:n+" still treats fentanyl test strips as drug paraphernalia. They cost about a dollar, they tell someone whether the thing in their hand will kill them, and more than twenty states have already removed them from paraphernalia law. This is the least controversial reform on the board.",
+      ask:"remove fentanyl test strips from the state's drug-paraphernalia statute"};
+  }
+  if(d.gsl==="limited"){
+    return {kick:"People die from hesitating",
+      title:"Broaden the Good Samaritan law",
+      why:n+"'s overdose Good Samaritan protections are narrow — they don't cover everyone who might be in the room. When callers fear arrest, they wait, and waiting is what turns an overdose into a death. Broad immunity for anyone who calls 911 costs the state nothing.",
+      ask:"broaden overdose Good Samaritan immunity so nobody hesitates to call 911"};
+  }
+  if(d.ssp==="no"||d.ssp==="limited"){
+    return {kick:"Proven, and still restricted",
+      title:"Authorize syringe services statewide",
+      why:"Syringe service programs are among the most heavily studied interventions in public health — they reduce HIV and hepatitis C transmission without increasing drug use. "+n+" still "+(d.ssp==="no"?"does not authorize them":"restricts them to limited settings")+".",
+      ask:"authorize and fund syringe service programs statewide"};
+  }
+  if(hx.dih==="yes"){
+    return {kick:"A law that kills people",
+      title:"Repeal drug-induced homicide charges",
+      why:n+" allows drug-induced-homicide prosecution. The research is consistent: these laws don't deter supply, but they do stop people from calling 911 when a friend is overdosing. They make Good Samaritan protections meaningless.",
+      ask:"repeal or narrow the state's drug-induced-homicide statute"};
+  }
+  if((d.mom==="high"||d.mom==="med") && d.momN){
+    var m=d.momN.toLowerCase();
+    var pending=/moving|pending|filed|introduce|advanc|proposed|committee|ballot|not yet|considering|study/.test(m);
+    if(pending){
+      return {k:"mom",kick:"Something is moving right now",
+        title:"Back the bill already in play",
+        why:n+"'s harm-reduction basics are in place, and there is legislation in motion — "+trimPeriod(d.momN)+". Bills at this stage are decided by whether legislators hear from people back home. There is no higher-leverage moment than an active bill.",
+        ask:"support the drug-policy and psychedelic reform legislation currently before the legislature"};
+    }
+    return {k:"mom",kick:"Defend the thing that already passed",
+      title:"Protect the program you already have",
+      why:n+" is further along than almost anywhere: "+trimPeriod(d.momN)+". Programs like this get rolled back — "+(n==="Oregon"?"as this state's own 2020 decriminalization measure was, four years after it passed":"Oregon's 2020 decriminalization was undone in four years")+" — and they get rolled back quietly, in budget lines and rule changes rather than headline votes. The useful thing you can do here is tell your legislators, before anyone proposes cutting it, that you want it funded and left alone.",
+      ask:"fully fund and protect the state's existing psychedelic and harm-reduction programs against rollback"};
+  }
+  if(d.psi==="none"){
+    return {kick:"Where the science is going",
+      title:"Open the door to psilocybin research",
+      why:n+" has no psilocybin research program or reform pathway. Meanwhile the FDA has granted breakthrough-therapy designation for psilocybin in depression, and states with research programs are attracting the trials, the funding and the expertise.",
+      ask:"establish a state psilocybin research program or advisory board"};
+  }
+  return {kick:"Keep the lead",
+    title:"Protect and extend what's working",
+    why:n+" is ahead of most of the country — which means the job is defending the gains and funding them properly. Leading states are where reform is proven or reversed.",
+    ask:"protect and fully fund the state's existing harm-reduction and psychedelic-research programs"};
+}
+
+function messageFor(n,a){
+  var d=STATES[n], r=RANK[n];
+  return "Dear [Representative / Senator],\n\n"+
+  "I'm a constituent writing about drug policy in "+n+".\n\n"+
+  "I've been looking at how our state compares nationally. "+
+  (r?("On overall openness to evidence-based drug policy, "+n+" currently ranks #"+r+" of 50."):(n+" is tracked alongside the fifty states."))+
+  "\n\nI'm asking you to "+a.ask+".\n\n"+
+  "This isn't about being permissive. It's about the gap between what the evidence shows and what our laws say. Alcohol and tobacco — both legal — kill vastly more Americans every year than the substances we police hardest. Policy that ignores that gap doesn't keep anyone safer.\n\n"+
+  "Could you tell me your position on this, and whether you'd support such a measure this session?\n\n"+
+  "Thank you for your time.\n\n[Your name]\n[Your address — so they know you vote in their district]";
+}
+
+var CUR=null;
+function show(n){
+  CUR=n;
+  document.getElementById("panel").style.display="block";
+  document.getElementById("stName").textContent=n;
+  document.getElementById("stRank").textContent=RANK[n]?("#"+RANK[n]+" of 50"):"Not ranked · D.C.";
+  var bh="";
+  if(typeof esScorecard==="function"){
+    esScorecard(n).forEach(function(c){
+      bh+='<div class="bd" style="border-top-color:'+c.color+'"><div class="r" style="color:'+c.color+'">'+(c.rank==null?"NR":"#"+c.rank)+'</div><div class="l">'+c.label+'</div></div>';
+    });
+  }
+  document.getElementById("stBoards").innerHTML=bh;
+  var a=pickAction(n);
+  document.getElementById("actKick").textContent=a.kick;
+  document.getElementById("actTitle").textContent=a.title;
+  document.getElementById("actWhy").textContent=a.why;
+  document.getElementById("actMsg").textContent=messageFor(n,a);
+  document.getElementById("doneMsg").style.display="none";
+  // orgs
+  var oc=document.getElementById("orgCard");
+  if(typeof ORGS!=="undefined"&&ORGS[n]&&ORGS[n].length){
+    oc.style.display="block";
+    var pri={reform:0,harm:1,community:2,research:3,veterans:4,education:5,church:6};
+    var list=ORGS[n].slice().sort(function(a,b){return (pri[a.cat]==null?9:pri[a.cat])-(pri[b.cat]==null?9:pri[b.cat]);}).slice(0,6);
+    document.getElementById("orgSub").textContent=ORGS[n].length+" organizations are working on this in "+n+". These are a place to start.";
+    document.getElementById("orgList").innerHTML=list.map(function(o){
+      return '<div class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a><div class="m">'+(o.city&&o.city!=="Statewide"?o.city:"Statewide")+(o.note?" · "+o.note:"")+'</div></div>';
+    }).join("");
+  } else { oc.style.display="none"; }
+  document.getElementById("alertState").value=n;
+  renderMine();
+  document.getElementById("panel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+document.getElementById("statePick").addEventListener("change",function(){ if(this.value) show(this.value); });
+
+// deep link: act.html?state=North%20Carolina  (used by the Atlas panel and by shared links)
+(function(){
+  var q=new URLSearchParams(location.search).get("state");
+  if(!q)return;
+  if(!STATES[q]){ var m=NAMES.filter(function(n){return n.toLowerCase()===q.toLowerCase();}); q=m.length?m[0]:null; }
+  if(q){ document.getElementById("statePick").value=q; show(q); }
+})();
+
+// ---- geolocation → state via point-in-polygon on the same topojson the map uses ----
+var FEATURES=null;
+d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us){
+  FEATURES=topojson.feature(us,us.objects.states).features.filter(function(f){return STATES[f.properties.name]!==undefined;});
+});
+document.getElementById("locBtn").addEventListener("click",function(){
+  var note=document.getElementById("locNote");
+  if(!navigator.geolocation){note.textContent="Your browser can't share location — pick your state instead.";return;}
+  note.textContent="Locating…";
+  navigator.geolocation.getCurrentPosition(function(pos){
+    if(!FEATURES){note.textContent="Still loading the map — try again in a second.";return;}
+    var pt=[pos.coords.longitude,pos.coords.latitude],hit=null;
+    FEATURES.forEach(function(f){ if(!hit && d3.geoContains(f,pt)) hit=f.properties.name; });
+    if(hit){note.textContent="";document.getElementById("statePick").value=hit;show(hit);}
+    else note.textContent="Couldn't match that to a state — pick yours below.";
+  },function(){ note.textContent="Location declined — pick your state below."; },{timeout:8000});
+});
+
+// ---- personal tally + citizen leaderboard ----
+function myActions(){ try{ return JSON.parse(localStorage.getItem("es_actions")||"[]"); }catch(e){ return []; } }
+function renderMine(){
+  var m=myActions();
+  document.getElementById("myCount").textContent=m.length;
+  document.getElementById("myState").textContent=m.length?("Most recently for "+m[m.length-1].state+"."):"";
+}
+document.getElementById("copyBtn").addEventListener("click",function(){
+  navigator.clipboard.writeText(document.getElementById("actMsg").textContent).then(function(){
+    var b=document.getElementById("copyBtn");b.textContent="Copied";setTimeout(function(){b.textContent="Copy this message";},1600);
+  });
+});
+document.getElementById("doneBtn").addEventListener("click",function(){
+  if(!CUR)return;
+  var m=myActions(); m.push({state:CUR,at:Date.now()});
+  try{ localStorage.setItem("es_actions",JSON.stringify(m)); }catch(e){}
+  var body=new URLSearchParams({"form-name":"state-action",state:CUR,action:document.getElementById("actTitle").textContent});
+  fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:body.toString()}).catch(function(){});
+  document.getElementById("doneState").textContent=CUR;
+  document.getElementById("doneMsg").style.display="block";
+  renderMine(); loadBoard();
+});
+
+function fetchTally(){
+  return fetch("/api/tally").then(function(r){ if(!r.ok)throw 0; return r.json(); })
+    .then(function(t){ if(t&&t.configured&&t.counts&&Object.keys(t.counts).length)return t; throw 0; })
+    .catch(function(){ return fetch("action-tally.json?cb="+Date.now()).then(function(r){return r.json();}); });
+}
+function loadBoard(){
+  fetchTally().then(function(t){
+    var mine=myActions(), local={};
+    mine.forEach(function(a){ local[a.state]=(local[a.state]||0)+1; });
+    var rows=Object.keys(STATES).map(function(n){ return {n:n,v:(t.counts&&t.counts[n]||0)+(local[n]||0)}; })
+      .filter(function(r){return r.v>0;}).sort(function(a,b){return b.v-a.v;}).slice(0,10);
+    var el=document.getElementById("lbList");
+    if(!rows.length){ el.innerHTML='<div style="text-align:center;font-size:13.5px;color:#c3b6a0;padding:10px 0">No actions logged yet. The first one on this board can be yours.</div>'; return; }
+    el.innerHTML=rows.map(function(r,i){ return '<div class="lb"><span class="i">'+(i+1)+'</span><span class="n">'+r.n+'</span><span class="v">'+r.v+'</span></div>'; }).join("");
+  }).catch(function(){
+    document.getElementById("lbList").innerHTML='<div style="text-align:center;font-size:13.5px;color:#c3b6a0;padding:10px 0">Leaderboard opens when the Atlas goes public.</div>';
+  });
+}
+loadBoard(); renderMine();
+if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").catch(function(){}); }
+</script>
+</body></html>

@@ -1,0 +1,22 @@
+{
+  "name": "The Elevated States Project — Policy Atlas",
+  "short_name": "Policy Atlas",
+  "description": "How every US state actually treats drugs — and one thing you can do about yours.",
+  "start_url": "act.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#170f2e",
+  "theme_color": "#241a44",
+  "categories": ["education", "government", "health"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Find my state", "url": "act.html" },
+    { "name": "The Atlas", "url": "atlas.html" },
+    { "name": "Legal vs. harmful", "url": "the-bigger-picture.html" }
+  ]
+}
