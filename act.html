@@ -119,11 +119,17 @@ footer .c{font-size:12px;color:var(--mute)}
   </div>
 </div></section>
 
-<section><div class="wrap"><div class="lead">
+<!-- Public: personal tally only. -->
+<section id="mineWrap" style="display:none;padding-top:0"><div class="wrap">
+  <div class="mine">You've taken <b id="myCount">0</b> actions. <span id="myState"></span></div>
+</div></section>
+
+<!-- Internal only until there is volume: act.html?scoreboard=1 turns it on for this browser.
+     A public leaderboard reading "3 actions in Ohio" is worse than no leaderboard. -->
+<section id="board" style="display:none"><div class="wrap"><div class="lead">
   <h2 class="serif">The other scoreboard</h2>
-  <div class="sub">The Atlas ranks states on policy. This ranks them on their people. Every action taken here counts toward the state it was taken for.</div>
+  <div class="sub">Internal preview. The Atlas ranks states on policy; this ranks them on their people. Every action taken here counts toward the state it was taken for.</div>
   <div id="lbList"></div>
-  <div class="mine" id="mine">You've taken <b id="myCount">0</b> actions. <span id="myState"></span></div>
 </div></div></section>
 
 <section><div class="wrap"><div class="alerts">
@@ -313,7 +319,19 @@ function renderMine(){
   var m=myActions();
   document.getElementById("myCount").textContent=m.length;
   document.getElementById("myState").textContent=m.length?("Most recently for "+m[m.length-1].state+"."):"";
+  document.getElementById("mineWrap").style.display=m.length?"block":"none";
 }
+
+// The per-state leaderboard stays internal until the numbers are worth showing.
+// ?scoreboard=1 switches it on for this browser and remembers it; ?scoreboard=0 turns it off.
+var SHOW_BOARD=(function(){
+  var q=new URLSearchParams(location.search).get("scoreboard");
+  try{
+    if(q==="1"){ localStorage.setItem("es_board","1"); return true; }
+    if(q==="0"){ localStorage.removeItem("es_board"); return false; }
+    return localStorage.getItem("es_board")==="1";
+  }catch(e){ return q==="1"; }
+})();
 document.getElementById("copyBtn").addEventListener("click",function(){
   navigator.clipboard.writeText(document.getElementById("actMsg").textContent).then(function(){
     var b=document.getElementById("copyBtn");b.textContent="Copied";setTimeout(function(){b.textContent="Copy this message";},1600);
@@ -336,6 +354,8 @@ function fetchTally(){
     .catch(function(){ return fetch("action-tally.json?cb="+Date.now()).then(function(r){return r.json();}); });
 }
 function loadBoard(){
+  if(!SHOW_BOARD)return;
+  document.getElementById("board").style.display="block";
   fetchTally().then(function(t){
     var mine=myActions(), local={};
     mine.forEach(function(a){ local[a.state]=(local[a.state]||0)+1; });
