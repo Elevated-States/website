@@ -183,16 +183,28 @@
       <div class="badge">By invitation · Limited to 50</div>
       <div class="eyebrow">The Founding Circle</div>
       <h2 class="serif">Be one of the first fifty.</h2>
-      <p>Founding invitations are offered only to our earliest guests — before any public release. You claim the finest seats, founding recognition, and a treasured role in a night built to travel city to city.</p>
+      <p>Founding invitations go to our earliest guests — before any public release. The finest seats, founding recognition, and a treasured role in a night built to travel city to city.</p>
       <div class="tiers">
-        <div class="tier"><div class="tprice">$150</div><div class="tname">Founding Ticket</div><div class="tnote">First 50 · below every future price</div></div>
-        <div class="tier tier-gold"><div class="tprice">$300</div><div class="tname">Founding Patron</div><div class="tnote">Best seats · founding recognition</div></div>
+        <div class="tier"><div class="tname" style="font-size:16px">Founding Guest</div><div class="tnote">First 50 · below every future price</div></div>
+        <div class="tier tier-gold"><div class="tname" style="font-size:16px">Founding Patron</div><div class="tnote">Best seats · founding recognition</div></div>
       </div>
-      <p class="reassure">Fully refundable &amp; transferable — reserve now with confidence, even before the lineup is announced.</p>
-      <div class="fgrid">
-        <!-- Replace href with your private (unlisted) Eventbrite link, and swap the QR box for the matching QR image -->
-        <a class="btn btn-primary" href="PASTE_PRIVATE_EVENTBRITE_LINK_HERE" style="font-size:15px;">Claim a Founding invitation</a>
-        <div class="qr">QR to your<br>private founding<br>invitation link</div>
+      <p class="reassure">Invitations aren't open yet. Put your name down and you'll hear from us first — before anything is announced publicly.</p>
+
+      <form id="waitlistForm" name="ticket-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+            class="form-row" style="justify-content:center;max-width:520px;margin:24px auto 0">
+        <input type="hidden" name="form-name" value="ticket-waitlist">
+        <input type="hidden" name="event" value="Asheville — April 17, 2027">
+        <p style="display:none"><label>Skip: <input name="bot-field"></label></p>
+        <input type="email" name="email" placeholder="you@email.com" required aria-label="Your email">
+        <select name="interest" aria-label="What you're interested in" style="padding:12px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(14,9,32,.6);color:var(--cream);font-family:inherit;font-size:14px">
+          <option value="Founding Guest">A founding seat</option>
+          <option value="Founding Patron">A patron seat / table</option>
+          <option value="Just keep me posted">Just keep me posted</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Put me on the list</button>
+      </form>
+      <div id="waitlistOk" style="display:none;margin-top:18px;color:var(--gold-soft);font-size:15px">
+        You're on the list. We'll write to you before invitations open — nothing else.
       </div>
     </div>
   </div>
@@ -204,12 +216,16 @@
     <div class="split">
       <div class="panelc">
         <h3 class="serif">Join the guest list</h3>
-        <p>Not ready to reserve tonight? Leave your email and you'll be first to know as the lineup, venue, and invitations are announced.</p>
-        <!-- Point action at your Mailchimp/embedded form; this is a placeholder -->
-        <form class="form-row" action="PASTE_MAILCHIMP_FORM_ACTION" method="post" target="_blank">
-          <input type="email" name="EMAIL" placeholder="you@email.com" required>
+        <p>Leave your email and you'll be first to know as the lineup, venue, and invitations are announced.</p>
+        <form id="guestForm" name="ticket-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form-row">
+          <input type="hidden" name="form-name" value="ticket-waitlist">
+          <input type="hidden" name="event" value="Asheville — April 17, 2027">
+          <input type="hidden" name="interest" value="Guest list">
+          <p style="display:none"><label>Skip: <input name="bot-field"></label></p>
+          <input type="email" name="email" placeholder="you@email.com" required aria-label="Your email">
           <button class="btn btn-primary" type="submit">Keep me posted</button>
         </form>
+        <div id="guestOk" style="display:none;margin-top:12px;color:var(--gold-soft);font-size:14.5px">You're on the list — thank you.</div>
       </div>
       <div class="panelc">
         <h3 class="serif">Become a patron</h3>
@@ -236,5 +252,23 @@
   </div>
 </footer>
 
+<script>
+// Submit the waitlist forms without leaving the page. Netlify captures them
+// under the form name "ticket-waitlist" (Project > Forms in the Netlify dashboard).
+["waitlist","guest"].forEach(function(k){
+  var f=document.getElementById(k+"Form"), ok=document.getElementById(k+"Ok");
+  if(!f)return;
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var btn=f.querySelector("button"), old=btn.textContent;
+    btn.textContent="Sending…"; btn.disabled=true;
+    fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+      body:new URLSearchParams(new FormData(f)).toString()})
+      .then(function(){ f.style.display="none"; ok.style.display="block"; })
+      .catch(function(){ btn.textContent=old; btn.disabled=false; alert("That didn't send — please email shanetmauss@gmail.com and we'll add you."); });
+  });
+});
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}
+</script>
 </body>
 </html>

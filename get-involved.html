@@ -66,7 +66,7 @@
 <section><div class="wrap">
   <div class="ways">
     <div class="way"><div class="ic serif">✦</div><h3 class="serif">Attend</h3><p>Come to A Tripping Ball — an unforgettable night, and the best way to understand what we're building.</p><a class="btn btn-p" href="tripping-ball-asheville.html">See the Ball</a></div>
-    <div class="way gold"><div class="ic serif">✦</div><h3 class="serif">Founding ticket</h3><p class="price">$150</p><p>Be one of the first 50 — below every future price, with founding recognition. Fully refundable.</p><a class="btn btn-p" href="tripping-ball-asheville.html#founding">Claim yours</a></div>
+    <div class="way gold"><div class="ic serif">✦</div><h3 class="serif">Founding Circle</h3><p>Invitations aren't open yet. Put your name down to be one of the first 50 — below every future price, with founding recognition.</p><a class="btn btn-p" href="tripping-ball-asheville.html#founding">Join the list</a></div>
     <div class="way"><div class="ic serif">✦</div><h3 class="serif">Sponsor</h3><p>Put your name on the launch — recognition, a VIP table, and (for businesses) a likely tax-deductible gift.</p><a class="btn btn-o" href="mailto:shanetmauss@gmail.com?subject=A%20Tripping%20Ball%20—%20Sponsorship">Talk sponsorship</a></div>
   </div>
 </div></section>
@@ -83,17 +83,35 @@
 
 <section style="padding-top:0"><div class="wrap"><div class="join">
   <h2>Join the list</h2>
-  <p>Be first to hear as the lineup, venue, and public tickets are announced.</p>
-  <!-- Point action at your Mailchimp form -->
-  <form class="form-row" action="PASTE_MAILCHIMP_FORM_ACTION" method="post" target="_blank">
-    <input type="email" name="EMAIL" placeholder="you@email.com" required>
-    <button class="btn btn-p" type="submit">Keep me posted</button>
+  <p>Tickets aren't on sale yet. Leave your email and you'll be the first to know when they are — along with the lineup and venue. Nothing else.</p>
+  <form id="giForm" name="ticket-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form-row">
+    <input type="hidden" name="form-name" value="ticket-waitlist">
+    <input type="hidden" name="event" value="Asheville — April 17, 2027">
+    <input type="hidden" name="interest" value="Get Involved page">
+    <p style="display:none"><label>Skip: <input name="bot-field"></label></p>
+    <input type="email" name="email" placeholder="you@email.com" required aria-label="Your email">
+    <button class="btn btn-p" type="submit">Notify me when tickets open</button>
   </form>
+  <div id="giOk" style="display:none;margin-top:12px;font-weight:600">You're on the list — we'll be in touch before tickets go public.</div>
 </div></div></section>
 
 <footer><div class="wrap">
   <div class="links"><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="about.html">About</a><a href="index.html">Home</a></div>
   <div class="c">The Elevated States Project · shanetmauss@gmail.com</div>
 </div></footer>
-<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}</script>
+<script>
+(function(){
+  var f=document.getElementById("giForm"), ok=document.getElementById("giOk");
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var btn=f.querySelector("button"), old=btn.textContent;
+    btn.textContent="Sending…"; btn.disabled=true;
+    fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+      body:new URLSearchParams(new FormData(f)).toString()})
+      .then(function(){ f.style.display="none"; ok.style.display="block"; })
+      .catch(function(){ btn.textContent=old; btn.disabled=false; alert("That didn't send — please email shanetmauss@gmail.com and we'll add you."); });
+  });
+})();
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}
+</script>
 </body></html>
