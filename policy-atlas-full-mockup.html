@@ -17,7 +17,7 @@ a{color:inherit;text-decoration:none;cursor:pointer}
 nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:inline-flex;align-items:center;gap:10px;font-family:'Archivo Black';font-size:15px;text-transform:uppercase}
 .brand span{color:var(--acc2)}
-.poc{border:2px solid var(--acc2);color:var(--acc2);font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.1em;padding:4px 9px}
+.poc{border:1px solid var(--mute);color:var(--mute);font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.1em;padding:4px 9px}
 .atlas{display:grid;grid-template-columns:228px 1fr 330px;max-width:1320px;margin:0 auto;min-height:560px}
 .rail{border-right:2px solid var(--line);padding:16px 0;overflow-y:auto}
 .rail .grp{padding:0 16px;margin-bottom:14px}
@@ -99,13 +99,25 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .src b{color:var(--acc);text-transform:uppercase;font-size:10.5px;letter-spacing:.06em}
 footer{border-top:2px solid var(--line);padding:16px 22px;color:var(--mute);font-size:12px;line-height:1.6}
 footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing:.05em}
-@media(max-width:980px){.atlas{grid-template-columns:1fr}.rail,.stage{border-right:none;border-bottom:2px solid var(--line)}}
+@media(max-width:980px){
+  .atlas{grid-template-columns:1fr;min-height:0}
+  .stage{order:1;border-right:none;border-bottom:2px solid var(--line);padding:12px 14px}
+  .rail{order:2;display:flex;flex-direction:row;align-items:flex-start;gap:0;overflow-x:auto;overflow-y:hidden;padding:10px 12px;border-right:none;border-bottom:2px solid var(--line);scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+  .rail .grp{display:flex;gap:6px;padding:0;margin:0 10px 0 0;flex:none}
+  .rail .gh{display:none}
+  .chip{width:auto;white-space:nowrap;margin:0;padding:7px 10px;font-size:12.5px}
+  .detail{order:3}
+  nav{flex-wrap:nowrap;gap:8px}nav .brand{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.poc{white-space:nowrap;font-size:9px}
+}
+/* ?embed=1 — used when the map sits inside another page of the site */
+body.embed nav,body.embed footer{display:none}
 </style>
 </head>
 <body>
+<script>if(/[?&]embed=1/.test(location.search))document.body.className+=" embed";</script>
 <nav>
   <a class="brand" href="index.html">Elevated States <span>Project</span> · Policy Atlas</a>
-  <span class="poc">Concept · illustrative data</span>
+  <span class="poc">51 jurisdictions · sourced &amp; dated</span>
 </nav>
 
 <div class="atlas">
@@ -138,8 +150,8 @@ footer b{color:var(--acc);text-transform:uppercase;font-size:11px;letter-spacing
 </div>
 
 <footer>
-  <b>Concept mockup — illustrative data</b><br>
-  The Elevated States Project policy atlas. Every layer and the timeline read from one shared dataset (atlas-data.js). Values are best-effort and should be verified against sources (Psychedelic Alpha, NORML, MPP). Educational only, not legal advice.
+  <b>Sources &amp; method</b><br>
+  Every layer and the timeline read from one shared dataset. Click any state to see the sources behind its entry and the date it was last checked. Rankings are graded on a curve within each leaderboard. Educational only — not legal advice.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>

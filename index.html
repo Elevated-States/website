@@ -27,14 +27,37 @@
   .nav-links a:hover{color:var(--gold2);}
   .nav-links .cta{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#3a2a10;padding:8px 16px;border-radius:999px;font-weight:600;}
   /* HERO */
-  .hero{position:relative;overflow:hidden;text-align:center;padding:74px 0 88px;color:#F7F0E4;background:linear-gradient(180deg,var(--twilight2),var(--twilight) 55%,#3a2a52 100%);}
-  .hero .halo{position:absolute;width:560px;height:560px;left:50%;top:-260px;transform:translateX(-50%);background:radial-gradient(circle,rgba(217,178,106,.16),transparent 62%);}
-  .hero .horizon{position:absolute;left:0;right:0;bottom:0;height:100px;background:linear-gradient(180deg,transparent,rgba(250,244,233,.14));}
-  .stars circle{fill:#EAD3A0;}
-  .kick{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#C7B8E6;margin-bottom:14px;}
-  .hero h1{font-family:'Fraunces';font-weight:700;font-size:60px;line-height:1.02;letter-spacing:-.5px;}
-  .hero h1 em{font-style:normal;background:linear-gradient(180deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .hero .tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;color:#EAD3A0;margin-top:16px;}
+  .hero{position:relative;overflow:hidden;text-align:center;color:#F7F0E4;display:flex;align-items:center;justify-content:center;
+        min-height:min(82vh,760px);padding:96px 0 110px;
+        background:radial-gradient(ellipse at 50% 118%,#3a2a5e 0%,var(--twilight) 42%,var(--twilight2) 100%);}
+  .hero .halo{position:absolute;width:560px;height:560px;left:50%;top:-260px;transform:translateX(-50%);background:radial-gradient(circle,rgba(217,178,106,.14),transparent 62%);pointer-events:none;}
+  .hero .horizon{position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(217,178,106,.55),transparent);z-index:3;}
+  /* the map: thirty years of states rising, drawn from atlas-data.js */
+  .hero svg.heromap{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  .hero .state{fill:rgba(255,255,255,.035);stroke:rgba(217,178,106,.16);stroke-width:.6;transition:fill 1.1s ease;}
+  .hero .fog{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 46%,rgba(23,15,46,.74) 0%,rgba(23,15,46,.36) 38%,rgba(23,15,46,0) 70%);}
+  .hero .starfield{position:absolute;inset:0;pointer-events:none;}
+  .hero .starfield i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.15;animation:twinkle var(--d,4s) ease-in-out var(--o,0s) infinite;}
+  @keyframes twinkle{0%,100%{opacity:.08;transform:scale(1)}50%{opacity:.75;transform:scale(1.4)}}
+  .hero .wrap{position:relative;z-index:2;}
+  .kick{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#C7B8E6;margin-bottom:14px;opacity:0;animation:rise .9s ease .2s forwards;}
+  .hero h1{font-family:'Fraunces';font-weight:700;font-size:clamp(42px,6.2vw,74px);line-height:1.02;letter-spacing:-.5px;text-shadow:0 2px 40px rgba(23,15,46,.9);opacity:0;animation:rise 1s ease .45s forwards;}
+  .hero h1 em{font-style:normal;background:linear-gradient(180deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;display:inline-block;}
+  .hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);transform:scaleX(0);animation:underline 1.2s ease 1.3s forwards;}
+  @keyframes underline{to{transform:scaleX(1)}}
+  .hero .orn{opacity:0;animation:rise 1s ease .65s forwards;}
+  .hero .tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(19px,2vw,24px);color:#EAD3A0;margin-top:16px;opacity:0;animation:rise 1s ease .8s forwards;}
+  .hero .btns{opacity:0;animation:rise 1s ease 1.05s forwards;}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .hero .legend{position:absolute;left:26px;bottom:24px;z-index:3;display:flex;gap:16px;font-size:10.5px;color:rgba(199,184,230,.75);letter-spacing:.06em;text-transform:uppercase;}
+  .hero .legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c);}
+  .hero .caption{position:absolute;right:26px;bottom:20px;z-index:3;text-align:right;font-size:10.5px;color:rgba(199,184,230,.7);letter-spacing:.08em;text-transform:uppercase;}
+  .hero .caption .yr{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--gold2);letter-spacing:0;text-transform:none;line-height:1;font-variant-numeric:tabular-nums;opacity:.85;}
+  @media (prefers-reduced-motion:reduce){
+    .hero .starfield i,.kick,.hero h1,.hero .orn,.hero .tag,.hero .btns{animation:none!important;opacity:1!important;}
+    .hero h1 em::after{animation:none;transform:scaleX(1);}
+    .hero .state{transition:none;}
+  }
   .orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0;}
   .orn .l{height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold2));}.orn .l.r{background:linear-gradient(90deg,var(--gold2),transparent);}.orn .d{color:var(--gold2);font-size:12px;}
   .btn{display:inline-block;padding:13px 27px;border-radius:999px;font-weight:600;font-size:14px;margin:22px 7px 0;}
@@ -87,23 +110,33 @@
   footer .cta{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--gold2);margin-bottom:8px;}
   footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin:12px 0;}
   footer .c{font-size:12.5px;color:var(--mute);}
-  @media(max-width:720px){.hero h1{font-size:42px;}.two,.pill3,.atlas,.events{grid-template-columns:1fr;}.atlaspreview iframe{height:420px;}.nav-links{gap:14px;font-size:12px;}.nav-links .about{display:none;}}
-</style></head><body>
+  @media(max-width:720px){.hero{min-height:0;padding:80px 0 104px;}.hero .legend{display:none;}.hero .caption{right:18px;bottom:16px;}.hero .caption .yr{font-size:32px;}.two,.pill3,.atlas,.events{grid-template-columns:1fr;}.atlaspreview iframe{height:640px;}.nav-links{gap:14px;font-size:12px;}.nav-links .about{display:none;}}
+</style><link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="motion.css">
+</head><body>
 <nav><div class="wrap navin">
   <div class="logo">Elevated <em>States</em></div>
   <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="act.html">Take Action</a><a class="about" href="about.html">About</a><a class="cta" href="get-involved.html">Get Involved</a></div>
 </div></nav>
 
-<div class="hero">
+<div class="hero" id="hero">
+  <svg class="heromap" id="heromap" aria-hidden="true"></svg>
+  <div class="fog"></div>
+  <div class="starfield" id="starfield" aria-hidden="true"></div>
   <div class="halo"></div>
-  <svg class="stars" style="position:absolute;inset:0" viewBox="0 0 100 100" preserveAspectRatio="none"><g><circle cx="16" cy="20" r=".24"/><circle cx="82" cy="16" r=".2"/><circle cx="60" cy="26" r=".16"/><circle cx="36" cy="30" r=".2"/><circle cx="90" cy="34" r=".22"/><circle cx="49" cy="14" r=".28"/><circle cx="24" cy="52" r=".16"/><circle cx="88" cy="55" r=".18"/></g></svg>
-  <div class="wrap" style="position:relative">
+  <div class="wrap">
     <div class="kick">Science · Culture · Curiosity</div>
     <h1>The <em>Elevated</em> States Project</h1>
     <div class="orn"><span class="l"></span><span class="d serif">✦</span><span class="l r"></span></div>
     <div class="tag">Psychedelic science, lifted from hype to wonder.</div>
-    <div><a class="btn btn-p" href="tripping-ball-asheville.html">Explore A Tripping Ball</a><a class="btn btn-g" href="atlas.html">See the Atlas</a></div>
+    <div class="btns"><a class="btn btn-p" href="tripping-ball-asheville.html">Explore A Tripping Ball</a><a class="btn btn-g" href="atlas.html">See the Atlas</a></div>
   </div>
+  <div class="legend" aria-hidden="true">
+    <span style="--c:rgba(217,178,106,.35)">Medical cannabis</span>
+    <span style="--c:rgba(217,178,106,.7)">Adult-use</span>
+    <span style="--c:#F7F0E4">Psychedelic reform</span>
+  </div>
+  <div class="caption" aria-live="off"><div class="yr" id="heroyr">1996</div>thirty years of states rising</div>
   <div class="horizon"></div>
 </div>
 
@@ -126,7 +159,7 @@
   <div class="eyebrow">The Policy Atlas</div>
   <h2>Where the country actually stands.</h2>
   <p class="lead">An interactive map of psychedelic and cannabis policy, research, and harm reduction across all 50 states plus D.C. — five leaderboards, a directory of 460+ local organizations, and the small steps each state could take to rise.</p>
-  <div class="atlaspreview"><iframe src="policy-atlas-full-mockup.html" title="Policy Atlas preview" loading="lazy"></iframe></div>
+  <div class="atlaspreview"><iframe src="policy-atlas-full-mockup.html?embed=1" title="Policy Atlas preview" loading="lazy"></iframe></div>
   <div style="text-align:center;margin-top:18px"><a class="btn btn-p" href="atlas.html">Open the Atlas</a></div>
 </div></section>
 
@@ -138,7 +171,7 @@
     <div class="ev featured">
       <div class="evcity">Asheville, NC</div>
       <div class="evdate">Sat · April 17, 2027 · Bicycle Day weekend</div>
-      <div class="evnote">The launch. Founding Circle open now.</div>
+      <div class="evnote">The launch. Founding Circle forming — join the list.</div>
       <a class="evlink" href="tripping-ball-asheville.html">Details &amp; guest list →</a>
     </div>
     <div class="ev">
@@ -166,9 +199,9 @@
   <div class="eyebrow">Why now</div>
   <h2 style="font-family:Fraunces">The moment is here.</h2>
   <div class="stats">
-    <div class="stat"><b>41 states</b><span>now run a medical or adult-use cannabis program.</span></div>
-    <div class="stat"><b>23 states</b><span>host active psychedelic research programs.</span></div>
-    <div class="stat"><b>10 states</b><span>have legalized or decriminalized psilocybin.</span></div>
+    <div class="stat"><b><span data-count="41" data-suffix=" states">0 states</span></b><span>now run a medical or adult-use cannabis program.</span></div>
+    <div class="stat"><b><span data-count="23" data-suffix=" states">0 states</span></b><span>host active psychedelic research programs.</span></div>
+    <div class="stat"><b><span data-count="10" data-suffix=" states">0 states</span></b><span>have legalized or decriminalized psilocybin.</span></div>
   </div>
 </div></div></section>
 
@@ -185,4 +218,10 @@
   <div class="c">The Elevated States Project · shanetmauss@gmail.com</div>
 </div></footer>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}</script>
+<script src="nav.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3" defer></script>
+<script src="atlas-data.js" defer></script>
+<script src="hero.js" defer></script>
+<script src="motion.js" defer></script>
 </body></html>

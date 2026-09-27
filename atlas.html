@@ -86,8 +86,10 @@
   footer{background:var(--twilight2);color:#EAD3A0;padding:34px 0;text-align:center;border-top:1px solid rgba(217,178,106,.22);}
   footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#C7B8E6;margin-bottom:8px;}
   footer .c{font-size:12.5px;color:var(--mute);}
-  @media(max-width:720px){.headlines{grid-template-columns:1fr;}.mapframe iframe{height:560px;}.fitem .stt{width:110px;font-size:14px;}}
-</style></head><body>
+  @media(max-width:720px){.headlines{grid-template-columns:1fr;}.mapframe iframe{height:640px;}.fitem .stt{width:110px;font-size:14px;}}
+</style><link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="motion.css">
+</head><body>
 <nav><div class="wrap navin">
   <div class="logo"><a href="index.html">Elevated <em>States</em></a></div>
   <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="act.html">Take Action</a><a href="get-involved.html">Get Involved</a><a href="about.html">About</a><a href="index.html">Home</a></div>
@@ -98,9 +100,9 @@
   <h1 class="serif">The Policy Atlas</h1>
   <p>Where the country actually stands on psychedelics — policy, research, and harm reduction, state by state.</p>
   <div class="stat-row">
-    <div class="st"><b>50</b><span>states mapped, plus D.C.</span></div>
-    <div class="st"><b>23</b><span>active research states</span></div>
-    <div class="st"><b>4</b><span>legal psilocybin states</span></div>
+    <div class="st"><b data-count="50">0</b><span>states mapped, plus D.C.</span></div>
+    <div class="st"><b data-count="23">0</b><span>active research states</span></div>
+    <div class="st"><b data-count="4">0</b><span>legal psilocybin states</span></div>
   </div>
 </div></div>
 
@@ -108,7 +110,7 @@
   <div class="eyebrow">The interactive map</div>
   <h2>Explore every state.</h2>
   <div class="sub">Switch layers — including five <b>leaderboards</b> (harm reduction, research, therapeutic access, decriminalization, equity), play the time-lapse, and click any state for its full scorecard and the small steps it could take to rise.</div>
-  <div class="mapframe"><iframe src="policy-atlas-full-mockup.html" title="Elevated States Policy Atlas" loading="lazy"></iframe></div>
+  <div class="mapframe"><iframe src="policy-atlas-full-mockup.html?embed=1" title="Elevated States Policy Atlas" loading="lazy"></iframe></div>
   <div class="maplinks">
     <a class="btn" href="act.html">Find my state → do one thing</a>
     <a class="btn-o btn" href="policy-atlas-full-mockup.html" target="_blank">Open full-screen ↗</a>
@@ -248,4 +250,6 @@
 })();
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}</script>
+<script src="nav.js" defer></script>
+<script src="motion.js" defer></script>
 </body></html>
