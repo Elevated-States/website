@@ -1,0 +1,8 @@
+# Old map filename (linked in a few early emails) -> new name
+/policy-atlas-full-mockup.html   /map.html   301
+# About is unpublished for now
+/about.html                      /           302
+# legacy prototypes that no longer exist
+/policy-atlas-timeslider.html    /atlas.html 301
+/drug-policy-elevation-map.html  /atlas.html 301
+/home-mockups-index.html         /           301
