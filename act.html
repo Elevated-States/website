@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Find your state. Do one thing. — The Elevated States Project</title>
-<meta name="description" content="See where your state ranks on evidence-based drug policy and get the single highest-leverage ask — with the letter to your legislator already written.">
+<meta name="description" content="See where your state ranks on evidence-based drug policy and pick a small, winnable next step, with the letter to your legislator already written.">
 <link rel="canonical" href="https://elevatedstatesproject.com/act.html">
 <meta property="og:site_name" content="The Elevated States Project">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://elevatedstatesproject.com/act.html">
 <meta property="og:title" content="Find your state. Do one thing. — The Elevated States Project">
-<meta property="og:description" content="See where your state ranks on evidence-based drug policy and get the single highest-leverage ask — with the letter to your legislator already written.">
+<meta property="og:description" content="See where your state ranks on evidence-based drug policy and pick a small, winnable next step, with the letter to your legislator already written.">
 <meta property="og:image" content="https://elevatedstatesproject.com/og/act.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Find your state. Do one thing. — The Elevated States Project">
-<meta name="twitter:description" content="See where your state ranks on evidence-based drug policy and get the single highest-leverage ask — with the letter to your legislator already written.">
+<meta name="twitter:description" content="See where your state ranks on evidence-based drug policy and pick a small, winnable next step, with the letter to your legislator already written.">
 <meta name="twitter:image" content="https://elevatedstatesproject.com/og/act.jpg">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#241a44">
@@ -59,6 +59,15 @@ select,input[type=email]{padding:12px 15px;border:1px solid var(--line);border-r
 .action .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px}
 .action h3{font-family:'Fraunces';font-size:23px;margin-bottom:8px}
 .action p{font-size:14px;color:#39332c;margin-bottom:12px}
+.pickp{font-size:13.5px;color:var(--mute);margin:-2px 0 12px}
+.steps{display:grid;gap:10px;margin-bottom:14px}
+.stepbtn{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;font-family:inherit;color:var(--ink);transition:border-color .15s,box-shadow .15s,background .15s}
+.stepbtn:hover{border-color:var(--gold2)}
+.stepbtn .num{width:28px;height:28px;border-radius:50%;background:var(--shade);color:var(--gold);font-family:'Fraunces';font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.stepbtn .t{display:block;font-family:'Fraunces';font-weight:700;font-size:17px;line-height:1.2}
+.stepbtn .w{display:block;font-size:13.2px;color:#4a4440;margin-top:4px;line-height:1.45}
+.stepbtn.on{border-color:var(--gold);background:#fffaf0;box-shadow:0 0 0 2px rgba(184,137,60,.18)}
+.stepbtn.on .num{background:var(--gold);color:#fff}
 .msg{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;font-size:13.5px;line-height:1.6;color:#2c2a33;white-space:pre-wrap;max-height:230px;overflow-y:auto;margin-bottom:12px}
 .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
 .done{display:none;background:#eaf3ec;border:1px solid var(--teal);color:var(--teal);border-radius:10px;padding:10px 14px;font-size:13.5px;font-weight:600;margin-top:12px}
@@ -112,9 +121,10 @@ footer .c{font-size:12px;color:var(--mute)}
   </div>
 
   <div class="action">
-    <div class="eyebrow" id="actKick">Your one thing</div>
-    <h3 class="serif" id="actTitle">—</h3>
-    <p id="actWhy"></p>
+    <div class="eyebrow" id="actKick">Small steps forward</div>
+    <h3 class="serif" id="actHead">—</h3>
+    <p class="pickp">Pick the one you'd like to ask for. The letter underneath changes to match.</p>
+    <div class="steps" id="stepList"></div>
     <div class="msg" id="actMsg"></div>
     <div class="row">
       <button class="btn btn-p" id="copyBtn">Copy this message</button>
@@ -172,6 +182,7 @@ footer .c{font-size:12px;color:var(--mute)}
 <script src="atlas-data.js"></script>
 <script src="atlas-scores.js"></script>
 <script src="atlas-orgs.js"></script>
+<script src="atlas-steps.js"></script>
 <script>
 var DC="District of Columbia";
 var NAMES=Object.keys(STATES).sort();
@@ -187,67 +198,28 @@ RANK[DC]=null;
   NAMES.forEach(function(n){var o=document.createElement("option");o.value=n;o.textContent=n;s.appendChild(o);});
 });
 
-// ---- decide the one action for a state ----
-// Concrete statutory gaps come first — they make a specific, winnable ask.
-// Live legislation is used as supporting context, or as the ask when no gap remains.
-function pickAction(n){
-  var a=_pick(n), d=STATES[n];
-  if((d.mom==="high"||d.mom==="med") && d.momN && a.k!=="mom"){
-    a.why+=" It's also worth knowing that "+n+" already has movement on drug policy — "+trimPeriod(d.momN)+" — so this is not a legislature that has closed the subject.";
-  }
-  return a;
+// ---- small steps: the shared list lives in atlas-steps.js (psychedelic-first; syringe services last) ----
+var CURSTEPS=[], CURSTEP=null;
+var NUMWORD=["","One thing","Two things","Three things","Four things"];
+function renderSteps(n){
+  CURSTEPS=(typeof stateSteps==="function"?stateSteps(n):[]).slice(0,3);
+  document.getElementById("actHead").textContent=(NUMWORD[CURSTEPS.length]||"Things")+" "+n+" could do next";
+  var box=document.getElementById("stepList");
+  box.innerHTML=CURSTEPS.map(function(st,i){
+    return '<button type="button" class="stepbtn" data-i="'+i+'"><span class="num">'+(i+1)+'</span><span><span class="t"></span><span class="w"></span></span></button>';
+  }).join("");
+  Array.prototype.forEach.call(box.querySelectorAll(".stepbtn"),function(b,i){
+    b.querySelector(".t").textContent=CURSTEPS[i].title;
+    b.querySelector(".w").textContent=CURSTEPS[i].why;
+    b.addEventListener("click",function(){ pickStep(n,i); });
+  });
+  pickStep(n,0);
 }
-function trimPeriod(s){ return String(s).replace(/\.\s*$/,""); }
-function _pick(n){
-  var d=STATES[n], hx=(typeof HRX!=="undefined"&&HRX[n])?HRX[n]:{};
-  if(d.fts!=="legal"){
-    return {kick:"The cheapest life-saving fix",
-      title:"Legalize fentanyl test strips",
-      why:n+" still treats fentanyl test strips as drug paraphernalia. They cost about a dollar, they tell someone whether the thing in their hand will kill them, and more than twenty states have already removed them from paraphernalia law. This is the least controversial reform on the board.",
-      ask:"remove fentanyl test strips from the state's drug-paraphernalia statute"};
-  }
-  if(d.gsl==="limited"){
-    return {kick:"People die from hesitating",
-      title:"Broaden the Good Samaritan law",
-      why:n+"'s overdose Good Samaritan protections are narrow — they don't cover everyone who might be in the room. When callers fear arrest, they wait, and waiting is what turns an overdose into a death. Broad immunity for anyone who calls 911 costs the state nothing.",
-      ask:"broaden overdose Good Samaritan immunity so nobody hesitates to call 911"};
-  }
-  if(d.ssp==="no"||d.ssp==="limited"){
-    return {kick:"Proven, and still restricted",
-      title:"Authorize syringe services statewide",
-      why:"Syringe service programs are among the most heavily studied interventions in public health — they reduce HIV and hepatitis C transmission without increasing drug use. "+n+" still "+(d.ssp==="no"?"does not authorize them":"restricts them to limited settings")+".",
-      ask:"authorize and fund syringe service programs statewide"};
-  }
-  if(hx.dih==="yes"){
-    return {kick:"A law that kills people",
-      title:"Repeal drug-induced homicide charges",
-      why:n+" allows drug-induced-homicide prosecution. The research is consistent: these laws don't deter supply, but they do stop people from calling 911 when a friend is overdosing. They make Good Samaritan protections meaningless.",
-      ask:"repeal or narrow the state's drug-induced-homicide statute"};
-  }
-  if((d.mom==="high"||d.mom==="med") && d.momN){
-    var m=d.momN.toLowerCase();
-    var pending=/moving|pending|filed|introduce|advanc|proposed|committee|ballot|not yet|considering|study/.test(m);
-    if(pending){
-      return {k:"mom",kick:"Something is moving right now",
-        title:"Back the bill already in play",
-        why:n+"'s harm-reduction basics are in place, and there is legislation in motion — "+trimPeriod(d.momN)+". Bills at this stage are decided by whether legislators hear from people back home. There is no higher-leverage moment than an active bill.",
-        ask:"support the drug-policy and psychedelic reform legislation currently before the legislature"};
-    }
-    return {k:"mom",kick:"Defend the thing that already passed",
-      title:"Protect the program you already have",
-      why:n+" is further along than almost anywhere: "+trimPeriod(d.momN)+". Programs like this get rolled back — "+(n==="Oregon"?"as this state's own 2020 decriminalization measure was, four years after it passed":"Oregon's 2020 decriminalization was undone in four years")+" — and they get rolled back quietly, in budget lines and rule changes rather than headline votes. The useful thing you can do here is tell your legislators, before anyone proposes cutting it, that you want it funded and left alone.",
-      ask:"fully fund and protect the state's existing psychedelic and harm-reduction programs against rollback"};
-  }
-  if(d.psi==="none"){
-    return {kick:"Where the science is going",
-      title:"Open the door to psilocybin research",
-      why:n+" has no psilocybin research program or reform pathway. Meanwhile the FDA has granted breakthrough-therapy designation for psilocybin in depression, and states with research programs are attracting the trials, the funding and the expertise.",
-      ask:"establish a state psilocybin research program or advisory board"};
-  }
-  return {kick:"Keep the lead",
-    title:"Protect and extend what's working",
-    why:n+" is ahead of most of the country — which means the job is defending the gains and funding them properly. Leading states are where reform is proven or reversed.",
-    ask:"protect and fully fund the state's existing harm-reduction and psychedelic-research programs"};
+function pickStep(n,i){
+  CURSTEP=CURSTEPS[i];
+  Array.prototype.forEach.call(document.querySelectorAll("#stepList .stepbtn"),function(b,k){ b.classList.toggle("on",k===i); });
+  document.getElementById("actMsg").textContent=messageFor(n,CURSTEP);
+  document.getElementById("doneMsg").style.display="none";
 }
 
 function messageFor(n,a){
@@ -275,12 +247,7 @@ function show(n){
     });
   }
   document.getElementById("stBoards").innerHTML=bh;
-  var a=pickAction(n);
-  document.getElementById("actKick").textContent=a.kick;
-  document.getElementById("actTitle").textContent=a.title;
-  document.getElementById("actWhy").textContent=a.why;
-  document.getElementById("actMsg").textContent=messageFor(n,a);
-  document.getElementById("doneMsg").style.display="none";
+  renderSteps(n);
   // orgs
   var oc=document.getElementById("orgCard");
   if(typeof ORGS!=="undefined"&&ORGS[n]&&ORGS[n].length){
@@ -353,7 +320,7 @@ document.getElementById("doneBtn").addEventListener("click",function(){
   if(!CUR)return;
   var m=myActions(); m.push({state:CUR,at:Date.now()});
   try{ localStorage.setItem("es_actions",JSON.stringify(m)); }catch(e){}
-  var body=new URLSearchParams({"form-name":"state-action",state:CUR,action:document.getElementById("actTitle").textContent});
+  var body=new URLSearchParams({"form-name":"state-action",state:CUR,action:(CURSTEP?CURSTEP.title:"")});
   fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:body.toString()}).catch(function(){});
   document.getElementById("doneState").textContent=CUR;
   document.getElementById("doneMsg").style.display="block";

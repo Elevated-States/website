@@ -142,6 +142,7 @@
 </div>
 
 <script src="atlas-data.js"></script>
+<script src="atlas-steps.js"></script>
 <script>
 var canL={rec:"Recreational cannabis",med:"Medical cannabis",lowthc:"Low-THC only",illegal:"No cannabis program"};
 var psiL={legal:"Legal psilocybin therapy",decrim:"Psilocybin decriminalized",none:""};
@@ -163,7 +164,7 @@ var TONE={
   level:{label:"GROUNDED",arrow:"◆",newsL:"Holding steady",lead:"has it reasonably wrangled in.",cap:"◆"},
   down:{label:"DELEVATED",arrow:"↓",newsL:"Holding the line",lead:"is sliding back.",cap:"⬇️"}
 };
-function improvementSteps(k){var d=STATES[k],s=[];
+function improvementSteps(k){if(typeof stateSteps==="function")return stateSteps(k).slice(0,2).map(function(x){return x.title.charAt(0).toLowerCase()+x.title.slice(1);});var d=STATES[k],s=[];
   if(d.can==="illegal")s.push("pass a medical-cannabis program");
   else if(d.can==="lowthc")s.push("grow low-THC into a full medical program");
   else if(d.can==="med")s.push("move toward regulated adult-use cannabis");

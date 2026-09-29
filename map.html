@@ -175,6 +175,7 @@ body.embed nav,body.embed footer{display:none}
 <script src="atlas-orgs.js"></script>
 <script src="atlas-ketamine.js"></script>
 <script src="atlas-harm.js"></script>
+<script src="atlas-steps.js"></script>
 <script>
 const CANL={rec:"Recreational legal",med:"Medical only",lowthc:"Low-THC / CBD",illegal:"No broad program"};
 const PSIL={legal:"Legal therapy program",decrim:"Decriminalized / pilot",none:"No reform yet"};
@@ -204,7 +205,7 @@ var NSTATES=RANKABLE.length;
 var RANK=(function(){var ks=RANKABLE.slice().sort(function(a,b){return STATES[b].o-STATES[a].o;});var r={},i,rank=0,prev=null;for(i=0;i<ks.length;i++){if(STATES[ks[i]].o!==prev){rank=i+1;prev=STATES[ks[i]].o;}r[ks[i]]=rank;}r[DCNAME]=null;return r;})();
 function rankStr(n){return RANK[n]==null ? "Not ranked · DC" : "#"+RANK[n]+" of "+NSTATES;}
 // ---- data-driven "small steps to level up" ----
-function improvementSteps(n){var d=STATES[n],s=[];
+function improvementSteps(n){if(typeof stateSteps==="function")return stateSteps(n).slice(0,3).map(function(x){return x.title;});var d=STATES[n],s=[];
  if(d.can==="illegal")s.push("Pass a medical-cannabis program");
  else if(d.can==="lowthc")s.push("Grow low-THC into a full medical program");
  else if(d.can==="med")s.push("Move toward regulated adult-use cannabis");
