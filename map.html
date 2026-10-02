@@ -52,6 +52,17 @@ nav{border-bottom:2px solid var(--line);padding:0 22px;height:60px;display:flex;
 .mapbox svg{width:100%;height:auto;display:block}
 .tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:8px 11px;font-size:12.5px;line-height:1.4;max-width:240px;z-index:5}
 .tip b{font-family:'Archivo Black';text-transform:uppercase;font-size:13px}
+.lx{font-size:12.5px;color:#c4c4bb;line-height:1.5;margin:-1px 0 9px;max-width:760px}
+.lx button{background:none;border:0;color:var(--acc);font:inherit;font-weight:700;cursor:pointer;padding:0;margin-left:5px;white-space:nowrap}
+.lxp h3{font-family:'Archivo Black';text-transform:uppercase;font-size:17px;line-height:1.15;margin:0 0 4px}
+.lxp .lxtag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.lxp .lxk{font-family:'Archivo Black';text-transform:uppercase;font-size:11px;letter-spacing:.06em;color:var(--acc);margin:13px 0 4px}
+.lxp p{font-size:13.5px;line-height:1.6;color:#dcdcd3}
+.lxp ul{margin:4px 0 0 17px;font-size:13px;line-height:1.55;color:#dcdcd3}
+.lxp li{margin-bottom:3px}
+.lxp .lxfine{font-size:11.5px;color:var(--mute);margin-top:8px}
+.lxp .lxback{display:inline-block;margin-bottom:12px;color:var(--acc);font-weight:700;font-size:12.5px;cursor:pointer}
+.lxp .hint{margin-top:16px;border-top:1px solid var(--line);padding-top:12px;font-size:13px}
 .legend{display:flex;gap:13px;flex-wrap:wrap;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--mute);margin-top:9px;align-items:center}
 .legend .sw{width:13px;height:13px;display:inline-block;margin-right:5px;vertical-align:-2px}
 .timeline{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
@@ -141,6 +152,7 @@ body.embed nav,body.embed footer{display:none}
       <h2 id="layerTitle">Policy overview</h2>
       <div class="viewtog"><button class="vbtn on" data-v="relief">Relief</button><button class="vbtn" data-v="flat">Flat</button></div>
     </div>
+    <div class="lx" id="lx"></div>
     <div class="mapbox"><div id="map"></div><div class="tip" id="tip"></div></div>
     <div class="legend" id="legend"></div>
     <div class="timeline" id="timeline">
@@ -216,7 +228,7 @@ function improvementSteps(n){if(typeof stateSteps==="function")return stateSteps
  if(d.gsl!=="yes")s.push("Strengthen the Good Samaritan overdose-immunity law");
  if(d.rsch==="none")s.push("Seed university or clinical psychedelic research");
  else if(d.rsch==="emerging")s.push("Grow research into active clinical-trial sites");
- if(!s.length){s.push("Protect and refine existing programs — expand access and equity");s.push("Keep funding harm reduction and public education");}
+ if(!s.length){s.push("Protect and refine existing programs — expand access");s.push("Keep funding harm reduction and public education");}
  return s.slice(0,3);}
 function sw(c,round){return "<span class='sw' style='background:"+c+(round?";border-radius:50%":"")+"'></span>";}
 function plateFile(n){return "plates/"+n.toLowerCase().replace(/ /g,"_")+".jpg";}
@@ -351,7 +363,7 @@ ES_CATS.forEach(function(c){
 });
 const GROUPS=[
  {h:"Index",items:[["status","Policy overview","conic-gradient(#8B6CFF 0 20%,#B9AEF7 20% 30%,#3FB65C 30% 62%,#8FCB9B 62% 76%,#E0862E 76% 90%,#D6462A 90% 100%)",0],["overall","Overall openness","conic-gradient(#9a7fe0 0 25%,#3FB65C 25% 50%,#E8C23E 50% 75%,#D6462A 75% 100%)",0]]},
- {h:"Leaderboards · 1 of 50",items:[["lb_hr","Harm Reduction","#D63A2F",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0],["lb_equity","Equity & Repair","#C8497A",0]]},
+ {h:"Leaderboards · 1 of 50",items:[["lb_hr","Harm Reduction","#D63A2F",0],["lb_research","Research & Trials","#8B6CFF",0],["lb_medical","Therapeutic Access","#E0862E",0],["lb_decrim","Decriminalization","#2F9E9E",0]]},
  {h:"Cannabis",items:[["cannabis","Cannabis status","#38b25a",0]]},
  {h:"Psychedelics",items:[["psych","Psilocybin","#6a5cff",0],["citydecrim","City decriminalization","#e8ff45",0],["ayahuasca","Religious / ayahuasca","#caa15a",0],["ibogaine","Ibogaine research","#1fd6b4",0],["mdma","MDMA & trials","#e0529c",0]]},
  {h:"Enforcement",items:[["penalty","Possession penalties","#ff4d2e",0]]},
@@ -425,7 +437,60 @@ function showTip(ev,n){
 function dotTip(ev,p){tipShow(ev,"<b>"+p.n+"</b><br><span>"+(layer==="ayahuasca"?"Recognized exemption · "+p.y:"Decriminalized · "+p.y)+"</span>");}
 function tipShow(ev,html){var r=mapDiv.getBoundingClientRect();tip.innerHTML=html;tip.style.opacity=1;var x=ev.clientX-r.left+14,y=ev.clientY-r.top+14;if(x>r.width-240)x=ev.clientX-r.left-250;tip.style.left=x+"px";tip.style.top=y+"px";}
 function pill(t,c){var col=d3.color(c),lum=0.2126*col.r+0.7152*col.g+0.0722*col.b;var txt=lum<110?"#f2ece0":d3.color(c).darker(2.4).formatHex();var bd=lum<70?"border:1px solid rgba(255,255,255,.16);":"";return '<span class="dpill" style="background:'+c+';color:'+txt+';'+bd+'">'+t+'</span>';}
+
+/* ---- Layer explainers: what each view shows, why it matters, how it's scored ---- */
+const LAYER_INFO={
+ status:{what:"Each state colored by its furthest reform: purple where psilocybin is legal for therapy or decriminalized, green where cannabis is legal or medical, amber and red where the law is most restrictive. Gold dots are cities that have decriminalized natural psychedelics.",
+   why:"It's the quickest read on where the country stands today, and on how far apart the most open and most restrictive states are."},
+ overall:{what:"One 0–100 openness score for each state. It's the number behind each state's overall rank.",
+   why:"A single number makes it easy to compare states and to track progress from year to year.",
+   how:["Cannabis: 30","Psilocybin: 25","Harm reduction: 15 (test strips, Good Samaritan, syringe services)","Ibogaine and MDMA access: 10","Psychedelic research: 10","Reform momentum: 10"]},
+ cannabis:{what:"Where cannabis is legal for adults, allowed for medical use, limited to low-THC oils, or not allowed at all.",
+   why:"Most states have already worked through cannabis reform, so it's the baseline for the psychedelic-medicine conversations that come next."},
+ psych:{what:"Where psilocybin, the active compound in psychedelic mushrooms, is available through a legal therapy program, where it's been decriminalized, and where it's still fully prohibited.",
+   why:"The FDA has granted psilocybin breakthrough-therapy status for depression. States that build programs now will be ready if federal approval comes."},
+ citydecrim:{what:"Cities that have made personal use of natural psychedelics, like psilocybin mushrooms, their lowest law-enforcement priority. States are dimmed because this reform happens city by city.",
+   why:"Local votes are often where statewide change starts. Denver decriminalized psilocybin in 2019, and three years later Colorado voters approved a statewide program."},
+ ayahuasca:{what:"States with their own Religious Freedom Restoration Act (RFRA), plus churches that have won legal protection to use ayahuasca in ceremony.",
+   why:"Ceremonial ayahuasca is protected through federal religious-freedom law, not state legalization. In 2006 the U.S. Supreme Court unanimously upheld one church's right to use it."},
+ ibogaine:{what:"States funding or considering research on ibogaine, a plant-based psychedelic being studied for opioid addiction and for veterans with traumatic brain injuries.",
+   why:"Ibogaine research has drawn support from both parties. Texas committed $50 million to it in 2025."},
+ mdma:{what:"States hosting clinical trials of MDMA-assisted therapy, and states with right-to-try laws that could allow earlier access. MDMA is still Schedule I under federal law.",
+   why:"MDMA therapy for PTSD reached the FDA in 2024, and the agency asked for more research before approving it. Trials are how that evidence gets built."},
+ penalty:{what:"A rough guide to what simple cannabis possession can mean in each state, from possible felony charges where cannabis is fully illegal to nothing where adults can use it legally. Exact penalties depend on the amount and on prior offenses.",
+   why:"For the fuller picture, including other drugs and whether old records get cleared, see the Decriminalization leaderboard."},
+ momentum:{what:"How actively reform is moving right now: bills advancing, programs launching, ballot measures building. \"Not yet sourced\" means we haven't verified that state yet.",
+   why:"Rankings show where a state is. Momentum shows where it's heading, and where a few calls to legislators could matter most."}
+};
+function layerInfo(l){
+  if(l.indexOf("lb_")===0){var c=ES_INDEX[l.slice(3)];
+    return {title:c.label,tag:"Leaderboard · 1 of 50",what:c.what||c.blurb,why:c.why,how:c.how,
+      fine:"Each state scores 0–100 and is ranked 1 to 50, graded on a curve. D.C. is shown but not ranked."};}
+  var i=LAYER_INFO[l]||{};
+  return {title:LAYERS[l]?LAYERS[l].t:"",tag:"Map layer",what:i.what||"",why:i.why||"",how:i.how||null,fine:""};
+}
+function renderLx(){
+  var i=layerInfo(layer),el=document.getElementById("lx");
+  if(!el)return;
+  el.innerHTML=i.what?(i.what+'<button id="lxMore" type="button">How this works ›</button>'):"";
+  var b=document.getElementById("lxMore"); if(b)b.addEventListener("click",function(){showLayerInfo(true);});
+}
+function showLayerInfo(fromButton){
+  detailMode="layer";
+  var i=layerInfo(layer);
+  var back=(fromButton&&curState)?'<a class="lxback" id="lxBack">← Back to '+curState+'</a>':'';
+  document.getElementById("detail").innerHTML='<div class="lxp">'+back+
+    '<div class="lxtag">'+i.tag+'</div><h3>'+i.title+'</h3>'+
+    '<div class="lxk">What it shows</div><p>'+i.what+'</p>'+
+    (i.why?'<div class="lxk">Why it matters</div><p>'+i.why+'</p>':'')+
+    (i.how?'<div class="lxk">How the score works</div><ul>'+i.how.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>':'')+
+    (i.fine?'<p class="lxfine">'+i.fine+'</p>':'')+
+    '<p class="hint">Click any state for its full profile across every layer. Switch layers in the rail, or scrub the timeline to watch a wave roll out.</p></div>';
+  var bk=document.getElementById("lxBack"); if(bk)bk.addEventListener("click",function(){openDetail(curState);});
+}
+var curState=null,detailMode="layer";
 function openDetail(n){
+ curState=n;detailMode="state";
  var d=STATES[n],blurb;
  if(d.o>=80)blurb="One of the most permissive states — recreational cannabis and real psychedelic momentum.";
  else if(d.o>=55)blurb="Middle-to-open: recreational or strong medical access, reform still finding footing.";
@@ -448,14 +513,14 @@ function openDetail(n){
   (d.momN?'<div class="drow"><span class="k" style="padding-left:10px">what\'s moving</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.momN+'</span></div>':'')+
   (d.tribal?'<div class="drow"><span class="k">Tribal / local</span><span class="v" style="font-weight:500;color:#b8b8b0">'+d.tribalN+'</span></div>':'')+
   '<div class="steps"><div class="steps-h">Small steps to level up</div>'+improvementSteps(n).map(function(x){return '<div class="step"><span class="ar">→</span><span>'+x+'</span></div>';}).join('')+'</div>'+
-  '<a class="actcta" target="_top" href="act.html?state='+encodeURIComponent(n)+'"><b>Do one thing about it →</b><span>The single highest-leverage ask in '+n+', with the message already written.</span></a>'+
+  '<a class="actcta" target="_top" href="act.html?state='+encodeURIComponent(n)+'"><b>Take a small step →</b><span>Pick one of '+n+'\'s next steps. The letter to your legislator is already written.</span></a>'+
   '<p class="blurb">'+blurb+'</p>'+
   harmBlock(n)+
   orgsBlock(n)+
   ketamineBlock(n)+
   '<div class="src"><b>Sources</b><br>'+(d.verified?d.src+'<br>Last updated: '+d.updated:'Illustrative — not yet sourced (see the data-schema doc)')+'</div>';
 }
-function setLayer(l){layer=l;tl=false;stop();document.getElementById("yr").textContent="—";document.getElementById("layerTitle").textContent=LAYERS[l].t;rail.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",c.dataset.layer===l);});render();}
+function setLayer(l){layer=l;tl=false;stop();document.getElementById("yr").textContent="—";document.getElementById("layerTitle").textContent=LAYERS[l].t;rail.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",c.dataset.layer===l);});render();renderLx();if(!curState||detailMode==="layer")showLayerInfo(!!curState);}
 function clearHi(){highlight=[];render();}
 
 document.querySelectorAll(".vbtn").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".vbtn").forEach(function(x){x.classList.remove("on");});b.classList.add("on");flat=b.dataset.v==="flat";render();});});
@@ -464,6 +529,7 @@ document.getElementById("slider").addEventListener("input",function(e){stop();tl
 document.getElementById("liveBtn").addEventListener("click",function(){tl=false;stop();document.getElementById("yr").textContent="—";render();});
 function stop(){if(timer){clearInterval(timer);timer=null;document.getElementById("play").textContent="▶ Play the wave";}}
 document.getElementById("play").addEventListener("click",function(){if(timer){stop();return;}tl=true;var mn=WAVES[wave].min;if(year>=2026)year=mn;document.getElementById("slider").min=mn;document.getElementById("play").textContent="❚❚ Pause";timer=setInterval(function(){if(year>=2026){stop();return;}year++;document.getElementById("yr").textContent=year;document.getElementById("slider").value=year;render();},800);});
+renderLx();showLayerInfo();
 </script>
 </body>
 </html>

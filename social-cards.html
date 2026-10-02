@@ -175,7 +175,7 @@ function improvementSteps(k){if(typeof stateSteps==="function")return stateSteps
   if(d.gsl!=="yes")s.push("strengthen the Good Samaritan overdose law");
   if(d.rsch==="none")s.push("seed university psychedelic research");
   else if(d.rsch==="emerging")s.push("grow research into active trial sites");
-  if(!s.length){s.push("protect and expand access & equity");s.push("keep funding harm reduction");}
+  if(!s.length){s.push("protect and expand access");s.push("keep funding harm reduction");}
   return s.slice(0,2);
 }
 function statusOf(k){var d=STATES[k]; if(d.psi==="legal")return psiL.legal; if(d.psi==="decrim")return psiL.decrim+" · "+canL[d.can]; return canL[d.can];}
