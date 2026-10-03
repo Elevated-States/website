@@ -112,7 +112,7 @@
         '<div class="m"><small>Podcast</small><b>Big ideas and absurdity with artist Ramin Nazer</b></div></a>';
       return section("psychonautics", "",
         '<div class="banner">' +
-          '<button type="button" class="yt" data-yt="K6BAaylHbI0" aria-label="Play the Psychonautics trailer"><img src="/hub/img/psychonautics.jpg" width="1600" height="900" alt="Psychonautics: A Comic\'s Exploration of Psychedelics" loading="lazy" decoding="async">' +
+          '<button type="button" class="yt" data-yt="K6BAaylHbI0" aria-label="Play the Psychonautics trailer"><img src="/hub/img/psychonautics-poster.jpg" width="1600" height="900" alt="Psychonautics: A Comic\'s Exploration of Psychedelics" loading="lazy" decoding="async">' +
           '<span class="play" aria-hidden="true"></span><span class="over pill"><span class="s">▶ Watch the trailer</span></span></button>' +
         "</div>",
         '<div class="eyebrow">Feature documentary · free on Tubi</div>' +
