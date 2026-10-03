@@ -249,3 +249,8 @@ ol.steps .w{display:block;font-size:14.5px;color:#d6cdea;margin-top:4px}
 @media (max-width:600px){.qrbadge img{width:92px;height:92px}.qrbadge b{font-size:16px}}
 .ribbon{position:absolute;left:12px;top:12px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#2a1d08;background:linear-gradient(180deg,#E8C47E,var(--gold));padding:8px 13px;border-radius:99px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
 @media (min-width:700px){.ribbon{left:18px;top:18px;font-size:13px}}
+/* Freeborn suit section */
+.credit{position:absolute;right:10px;bottom:8px;font-size:11px;color:rgba(255,255,255,.75);background:rgba(10,6,24,.55);padding:3px 8px;border-radius:99px}
+.code{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;padding:14px 16px;border:2px dashed var(--gold2);border-radius:16px;background:rgba(217,178,106,.08)}
+.code span{font-size:14px;font-weight:600;color:#E6DDF2;text-transform:uppercase;letter-spacing:.12em}
+.code b{font-family:'Fraunces',serif;font-weight:800;font-size:34px;letter-spacing:.12em;color:var(--gold3)}

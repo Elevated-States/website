@@ -8,5 +8,5 @@
 /home-mockups-index.html         /           301
 # Springfield table tablets (Oct 3, 2026): short links into tablet mode
 /springfield26/tablet-es     /springfield26/?kiosk=1&show=state,es,ball                 302
-/springfield26/tablet-shane  /springfield26/?kiosk=1&show=trips,psychonautics,hwa       302
+/springfield26/tablet-shane  /springfield26/?kiosk=1&show=trips,psychonautics,hwa,suit  302
 /springfield26/tablet        /springfield26/?kiosk=1                                     302

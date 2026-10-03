@@ -84,7 +84,7 @@
     for (var i = 0; i < n; i++) out += '<i style="left:' + (r() * 100).toFixed(1) + "%;top:" + (r() * 100).toFixed(1) + "%;opacity:" + ((op || 0.2) + r() * 0.5).toFixed(2) + '"></i>';
     return out;
   }
-  var NAV = { trips: "TRIPS", psychonautics: "Psychonautics", es: "Elevated States", ball: "The Ball", hwa: "Here We Are" };
+  var NAV = { trips: "TRIPS", psychonautics: "Psychonautics", es: "Elevated States", ball: "The Ball", hwa: "Here We Are", suit: "The suit" };
 
   /* ---------------- the section library ---------------- */
   var LIB = {
@@ -179,6 +179,16 @@
         "<h2>Here We Are</h2>" +
         '<p class="lede">I talk with scientists about the meanings of life. <b>' + line + "</b></p>" +
         '<div class="btns">' + ext(LINKS.hwaSpotify, "Follow on Spotify", "primary") + ext(LINKS.hwaApple, "Apple Podcasts") + ext(LINKS.hwaYouTube, "YouTube") + "</div>");
+    },
+
+    suit: function () {
+      return section("suit", "",
+        '<div class="banner"><img src="/hub/img/suit-freeborn.jpg" width="1200" height="800" alt="Shane Mauss on stage in a blue patterned Freeborn Design suit" loading="lazy" decoding="async"><span class="credit">Photo: JM Reily</span></div>',
+        '<div class="eyebrow">Custom suits · Freeborn Design</div>' +
+        "<h2>&ldquo;Where did you get that suit?&rdquo;</h2>" +
+        '<p class="lede">It\'s the question I get most after every show. My suits are custom made by <b>Freeborn Design</b>, and they\'re surprisingly affordable. James, the owner, set up a code for my fans. Perfect for weddings, or just being dope.</p>' +
+        '<div class="code"><span>Use code</span><b>TRIP</b><span>for 15% off</span></div>' +
+        '<div class="btns">' + ext("https://wearefreeborn.com/", "Get a suit at Freeborn Design →", "primary") + ext("https://www.instagram.com/freeborn_designs/", "Freeborn on Instagram") + "</div>");
     }
   };
 
@@ -203,7 +213,7 @@
       htxt.appendChild(ig);
     }
 
-    var want = Q.get("show") ? Q.get("show").split(",") : (C.sections || ["trips", "es", "state", "ball", "psychonautics", "hwa"]);
+    var want = Q.get("show") ? Q.get("show").split(",") : (C.sections || ["trips", "es", "state", "ball", "psychonautics", "hwa", "suit"]);
     ORDER = want.map(function (k) { return k.trim(); }).filter(function (k, i, a) { return LIB[k] && a.indexOf(k) === i; });
     renderSections();
 
