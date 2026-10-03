@@ -44,8 +44,10 @@
     { d: "2026-10-26", city: "Eureka Springs, AR", what: "Zombie Apocalypse Medicine Meeting", note: "Oct 26–28", url: "https://www.zombiemed.org/" },
     { d: "2026-11-05", city: "Oklahoma City, OK", what: "Round Earther Show", note: "7 PM · tickets soon", url: "" }
   ];
+  var CONTACT = "shanecomedyfan@gmail.com";            /* public contact on fan-facing pages */
+  var INSTAGRAM = "https://www.instagram.com/shane_mauss";
   var SOCIAL = [
-    ["Instagram", "https://www.instagram.com/shane_mauss"],
+    ["Instagram @shane_mauss", INSTAGRAM],
     ["YouTube", "https://www.youtube.com/@ShaneMauss314"],
     ["Facebook", "https://www.facebook.com/shanecomedyfan"],
     ["Spotify", "https://open.spotify.com/artist/54ee3dUdSbGNlVN1H9WeCE"],
@@ -192,6 +194,14 @@
     if (C.kicker && $("hKick")) $("hKick").textContent = C.kicker;
     if (C.hello && $("hHello")) $("hHello").innerHTML = C.hello;
     if (C.intro && $("hIntro")) $("hIntro").textContent = C.intro;
+    var htxt = document.querySelector(".htxt");
+    if (htxt && !$("igFollow")) {
+      var ig = document.createElement("a");
+      ig.id = "igFollow"; ig.className = "ig"; ig.href = INSTAGRAM; ig.target = "_blank"; ig.rel = "noopener";
+      ig.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg>' +
+        "<span>Follow <b>@shane_mauss</b> on Instagram</span>";
+      htxt.appendChild(ig);
+    }
 
     var want = Q.get("show") ? Q.get("show").split(",") : (C.sections || ["trips", "es", "state", "ball", "psychonautics", "hwa"]);
     ORDER = want.map(function (k) { return k.trim(); }).filter(function (k, i, a) { return LIB[k] && a.indexOf(k) === i; });
@@ -229,7 +239,7 @@
       '<div class="btns">' + ext(LINKS.tour, "All tour dates →") + '<a class="btn primary" href="#list">Get dates near you</a></div></div>';
     var soc = '<div class="social">' + SOCIAL.map(function (s) { return '<a href="' + s[1] + '" target="_blank" rel="noopener">' + s[0] + "</a>"; }).join("") + "</div>";
     return shows + soc + '<p class="made">Shane Mauss · <a href="https://www.shanemauss.com" target="_blank" rel="noopener">shanemauss.com</a> · <a href="/">elevatedstatesproject.com</a><br>' +
-      'Questions or bookings: <a href="mailto:shanetmauss@gmail.com">shanetmauss@gmail.com</a></p>';
+      'Questions or bookings: <a href="mailto:' + CONTACT + '">' + CONTACT + "</a></p>";
   }
 
   function sky() { var s = document.querySelector(".sky"); if (s) s.innerHTML = stars(60, 3, 0.12); }
@@ -310,7 +320,29 @@
   function wireForms() {
     var all = [].map.call(document.querySelectorAll("#oneList [data-topic]"), function (c) { return c.getAttribute("data-topic"); });
     var mini = $("miniList"), f = $("oneList"), ok = $("oneListOk");
+    /* after the one-field signup: an optional ZIP so we can tell them about shows nearby */
+    var lastEmail = "", timer = null, doneBox = $("miniDone"), zipForm = null;
+    if (doneBox) {
+      zipForm = document.createElement("form");
+      zipForm.className = "zipstep"; zipForm.noValidate = true;
+      zipForm.innerHTML = '<label for="zipIn">Want to hear when I\'m playing near you? Add your ZIP code.</label>' +
+        '<div class="row"><input id="zipIn" inputmode="numeric" autocomplete="postal-code" maxlength="10" placeholder="ZIP code"><button type="submit">Add</button></div>';
+      doneBox.appendChild(zipForm);
+      zipForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var z = $("zipIn").value.trim(); if (!z) { $("zipIn").focus(); return; }
+        var b = zipForm.querySelector("button"); b.disabled = true; b.textContent = "Adding…";
+        var d = baseFields(); d.email = lastEmail; d.zip = z; d.source += " · zip";
+        post(d).then(function () {
+          zipForm.innerHTML = '<p class="zipok">Got it. You\'ll hear about shows near ' + esc(z) + ".</p>";
+          if (KIOSK) { clearTimeout(timer); timer = setTimeout(resetForms, 4000); }
+        }).catch(function () { b.disabled = false; b.textContent = "Add"; });
+      });
+    }
     resetForms = function () {
+      clearTimeout(timer);
+      if (zipForm) zipForm.innerHTML = '<label for="zipIn">Want to hear when I\'m playing near you? Add your ZIP code.</label>' +
+        '<div class="row"><input id="zipIn" inputmode="numeric" autocomplete="postal-code" maxlength="10" placeholder="ZIP code"><button type="submit">Add</button></div>';
       if (mini) { mini.reset(); mini.hidden = false; var b1 = mini.querySelector("button"); b1.disabled = false; b1.textContent = "Join my list"; $("miniFine").hidden = false; $("miniDone").hidden = true; }
       if (f) { f.reset(); f.hidden = false; var b2 = f.querySelector('button[type="submit"]'); b2.disabled = false; b2.textContent = "Sign me up"; ok.hidden = true; }
     };
@@ -322,10 +354,11 @@
       var btn = mini.querySelector("button"), old = btn.textContent; btn.textContent = "Adding…"; btn.disabled = true;
       var d = baseFields(); d.email = em.value.trim(); d.interests = all.join(", "); d.source += " · top";
       post(d).then(function () {
+        lastEmail = d.email;
         mini.hidden = true; $("miniFine").hidden = true; $("miniDone").hidden = false;
-        if (KIOSK) setTimeout(resetForms, 6000);
+        if (KIOSK) { clearTimeout(timer); timer = setTimeout(resetForms, 25000); }
         else { var big = document.querySelector('#oneList [name="email"]'); if (big && !big.value) big.value = d.email; }
-      }).catch(function () { btn.textContent = old; btn.disabled = false; alert("That didn't go through. Try the form at the bottom of the page, or email shanetmauss@gmail.com."); });
+      }).catch(function () { btn.textContent = old; btn.disabled = false; alert("That didn't go through. Try the form at the bottom of the page, or email " + CONTACT + "."); });
     });
     /* full form */
     if (f) f.addEventListener("submit", function (e) {
@@ -337,8 +370,8 @@
       var btn = f.querySelector('button[type="submit"]'), old = btn.textContent; btn.textContent = "Signing you up…"; btn.disabled = true;
       var d = {}; new FormData(f).forEach(function (v, k) { d[k] = v; });
       if (KIOSK) d.source = baseFields().source;
-      post(d).then(function () { f.hidden = true; ok.hidden = false; if (KIOSK) setTimeout(resetForms, 6000); })
-        .catch(function () { btn.textContent = old; btn.disabled = false; alert("That didn't go through. Please try again, or email shanetmauss@gmail.com and I'll add you."); });
+      post(d).then(function () { f.hidden = true; ok.hidden = false; if (KIOSK) { clearTimeout(timer); timer = setTimeout(resetForms, 6000); } })
+        .catch(function () { btn.textContent = old; btn.disabled = false; alert("That didn't go through. Please try again, or email " + CONTACT + " and I'll add you."); });
     });
     var sh = $("shareBtn");
     if (sh) sh.addEventListener("click", function () {
