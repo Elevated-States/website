@@ -27,12 +27,12 @@
     secondDose: "https://www.youtube.com/watch?v=Ix-0-BDLBHE",
     psyTubi: "https://tubitv.com/movies/476742/psychonautics-a-comic-s-exploration-of-psychedelics",
     psyPrime: "https://www.amazon.com/Psychonautics-Exploration-Psychedelics-Shane-Mauss/dp/B07P763S4X",
+    psyApple: "https://tv.apple.com/us/movie/psychonautics-a-comics-exploration-of-psychedelics/umc.cmc.70ho4jy8eu7keryq72e2139cf",
     psyPlaylist: "https://www.youtube.com/playlist?list=PLF_vuqm41lQWjty6CfqTXXNu4kFk02a1i",
     mindUnderMatter: "https://www.shanemauss.com/mind-under-matter",
     hwaSpotify: "https://open.spotify.com/show/6ds0A38r6I6TNHl11EVdco",
     hwaApple: "https://podcasts.apple.com/us/podcast/here-we-are/id944770208",
     hwaYouTube: "https://www.youtube.com/@ShaneMauss314",
-    deck: "https://cognitive.cards",
     tour: "https://www.shanemauss.com/tour"
   };
   /* Upcoming shows. Past dates (and the page's own date) hide themselves. */
@@ -82,7 +82,7 @@
     for (var i = 0; i < n; i++) out += '<i style="left:' + (r() * 100).toFixed(1) + "%;top:" + (r() * 100).toFixed(1) + "%;opacity:" + ((op || 0.2) + r() * 0.5).toFixed(2) + '"></i>';
     return out;
   }
-  var NAV = { trips: "TRIPS", psychonautics: "Psychonautics", es: "Elevated States", ball: "The Ball", hwa: "Here We Are", deck: "Blind Spot Deck" };
+  var NAV = { trips: "TRIPS", psychonautics: "Psychonautics", es: "Elevated States", ball: "The Ball", hwa: "Here We Are" };
 
   /* ---------------- the section library ---------------- */
   var LIB = {
@@ -112,13 +112,13 @@
         '<div class="m"><small>Podcast</small><b>Big ideas and absurdity with artist Ramin Nazer</b></div></a>';
       return section("psychonautics", "",
         '<div class="banner">' +
-          '<button type="button" class="yt" data-yt="K6BAaylHbI0" aria-label="Play the Psychonautics trailer"><img src="/hub/img/psychonautics.jpg" width="1400" height="700" alt="" loading="lazy" decoding="async">' +
-          '<span class="play" aria-hidden="true"></span><span class="over"><span class="t">PSYCHONAUTICS</span><span class="s">▶ Watch the trailer</span></span></button>' +
+          '<button type="button" class="yt" data-yt="K6BAaylHbI0" aria-label="Play the Psychonautics trailer"><img src="/hub/img/psychonautics.jpg" width="1600" height="900" alt="Psychonautics: A Comic\'s Exploration of Psychedelics" loading="lazy" decoding="async">' +
+          '<span class="play" aria-hidden="true"></span><span class="over pill"><span class="s">▶ Watch the trailer</span></span></button>' +
         "</div>",
         '<div class="eyebrow">Feature documentary · free on Tubi</div>' +
         '<h2>Psychonautics <span class="h2sub">A Comic\'s Exploration of Psychedelics</span></h2>' +
         '<p class="lede">I set out to show that psychedelics aren\'t as scary as people think, trying a dizzying array of them and sitting down with researchers like James Fadiman, Rick Doblin and Dennis McKenna. Part travelogue, part comedy, part science deep-dive.</p>' +
-        '<div class="btns">' + ext(LINKS.psyTubi, "Watch free on Tubi", "primary") + ext(LINKS.psyPrime, "Prime Video") + "</div>" +
+        '<div class="btns">' + ext(LINKS.psyTubi, "Watch free on Tubi", "primary") + ext(LINKS.psyPrime, "Prime Video") + ext(LINKS.psyApple, "Apple TV") + "</div>" +
         '<h3 class="mini">More psychedelic stories</h3><div class="more">' + cards + "</div>" +
         '<div class="btns">' + ext(LINKS.psyPlaylist, "All my psychedelic videos →") + "</div>");
     },
@@ -164,23 +164,19 @@
     },
 
     hwa: function () {
+      /* relaunch: Thursday, October 8, 2026. Wording switches by itself on and after the day. */
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      var days = Math.round((new Date(2026, 9, 8) - today) / 86400000);
+      var badge = days > 1 ? "Relaunching Thursday, Oct 8" : days === 1 ? "Relaunching tomorrow" : days === 0 ? "Relaunched today" : "New episodes";
+      var line = days > 0 ? "The show relaunches Thursday, October 8, with new episodes. Follow it now and they come straight to you."
+        : days === 0 ? "The show relaunched today with new episodes. Follow it and they come straight to you."
+        : "New episodes are out now.";
       return section("hwa", "",
-        '<div class="banner"><img src="/hub/img/hwa.jpg" width="1200" height="600" alt="Here We Are podcast" loading="lazy" decoding="async"></div>',
-        '<div class="eyebrow">Podcast · 300+ episodes</div>' +
+        '<div class="banner"><img src="/hub/img/hwa.jpg" width="1200" height="600" alt="Here We Are podcast" loading="lazy" decoding="async"><span class="ribbon">' + badge + "</span></div>",
+        '<div class="eyebrow">Science podcast · 300+ episodes</div>' +
         "<h2>Here We Are</h2>" +
-        '<p class="lede">I talk with scientists about the meanings of life.</p>' +
-        '<a class="pick" href="https://www.youtube.com/watch?v=b7XL0Za8Kq0" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/b7XL0Za8Kq0/mqdefault.jpg" alt="" loading="lazy">' +
-        '<span><span class="k">Start here</span><b>The Structure of Reality</b><small>DMT with Dr. Andrew Gallimore · episode 309</small></span></a>' +
-        '<div class="btns">' + ext(LINKS.hwaSpotify, "Spotify", "primary") + ext(LINKS.hwaApple, "Apple Podcasts") + ext(LINKS.hwaYouTube, "YouTube") + "</div>");
-    },
-
-    deck: function () {
-      return section("deck", "",
-        '<div class="banner"><img src="/hub/img/deck.jpg" width="1200" height="630" alt="The Blind Spot Deck: cognitive bias cards" loading="lazy" decoding="async"></div>',
-        '<div class="eyebrow">Card deck · free web app</div>' +
-        "<h2>The Blind Spot Deck</h2>" +
-        '<p class="lede">54 cognitive biases, illustrated as vintage propaganda posters: why your mind gets it wrong, and what it was built for. Draw a card, or take the quiz and see how many biases you can spot.</p>' +
-        '<div class="btns">' + ext(LINKS.deck, "Open the deck →", "primary") + "</div>");
+        '<p class="lede">I talk with scientists about the meanings of life. <b>' + line + "</b></p>" +
+        '<div class="btns">' + ext(LINKS.hwaSpotify, "Follow on Spotify", "primary") + ext(LINKS.hwaApple, "Apple Podcasts") + ext(LINKS.hwaYouTube, "YouTube") + "</div>");
     }
   };
 
@@ -197,7 +193,7 @@
     if (C.hello && $("hHello")) $("hHello").innerHTML = C.hello;
     if (C.intro && $("hIntro")) $("hIntro").textContent = C.intro;
 
-    var want = Q.get("show") ? Q.get("show").split(",") : (C.sections || ["trips", "es", "state", "ball", "hwa", "psychonautics"]);
+    var want = Q.get("show") ? Q.get("show").split(",") : (C.sections || ["trips", "es", "state", "ball", "psychonautics", "hwa"]);
     ORDER = want.map(function (k) { return k.trim(); }).filter(function (k, i, a) { return LIB[k] && a.indexOf(k) === i; });
     renderSections();
 

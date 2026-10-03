@@ -97,10 +97,10 @@ h3.mini{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:
 .banner .yt img{position:static;display:block;height:auto}
 .banner .ytframe{border-radius:0}
 .banner .over{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 14px;background:linear-gradient(180deg,transparent,rgba(5,3,16,.92));font-family:'Fraunces',serif}
+.banner .over.pill{right:auto;padding:0;left:14px;bottom:14px;background:none}
 .banner .yt .play{display:none}
-.banner .over .t{display:block;font-size:30px;font-weight:800;line-height:1;letter-spacing:.06em;color:#fff}
-.banner .over .s{display:inline-block;font-family:'Inter',sans-serif;font-weight:700;font-size:13.5px;color:#2a1d08;background:linear-gradient(180deg,#E8C47E,var(--gold));border-radius:99px;padding:7px 14px;margin-top:10px}
-@media (min-width:700px){.banner .over{padding:60px 28px 20px}.banner .over .t{font-size:44px}}
+.banner .over .s{display:inline-block;box-shadow:0 6px 18px rgba(0,0,0,.45);font-family:'Inter',sans-serif;font-weight:700;font-size:13.5px;color:#2a1d08;background:linear-gradient(180deg,#E8C47E,var(--gold));border-radius:99px;padding:7px 14px;margin-top:10px}
+@media (min-width:700px){.banner .over.pill{left:20px;bottom:20px}}
 
 /* ES banner (live, no image) */
 .esb{aspect-ratio:2.35/1;display:flex;align-items:center;justify-content:center;gap:3.2%;padding:0 6%;container-type:inline-size;
@@ -238,3 +238,5 @@ ol.steps .w{display:block;font-size:14.5px;color:#d6cdea;margin-top:4px}
 @keyframes qrp{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 .toast{position:fixed;left:50%;bottom:160px;transform:translateX(-50%);z-index:41;max-width:90vw;padding:12px 18px;border-radius:99px;background:rgba(15,10,31,.94);border:1px solid var(--gold2);color:#FFF3D6;font-weight:700;font-size:15px;box-shadow:0 8px 28px rgba(0,0,0,.5);text-align:center}
 @media (max-width:600px){.qrbadge img{width:92px;height:92px}.qrbadge b{font-size:16px}}
+.ribbon{position:absolute;left:12px;top:12px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#2a1d08;background:linear-gradient(180deg,#E8C47E,var(--gold));padding:8px 13px;border-radius:99px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+@media (min-width:700px){.ribbon{left:18px;top:18px;font-size:13px}}
