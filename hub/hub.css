@@ -255,3 +255,22 @@ ol.steps .w{display:block;font-size:14.5px;color:#d6cdea;margin-top:4px}
 .code span{font-size:14px;font-weight:600;color:#E6DDF2;text-transform:uppercase;letter-spacing:.12em}
 .code b{font-family:'Fraunces',serif;font-weight:800;font-size:34px;letter-spacing:.12em;color:var(--gold3)}
 .shows .near{display:inline-block;vertical-align:2px;margin-left:6px;font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#2a1d08;background:var(--gold2);padding:3px 8px;border-radius:99px}
+
+/* ---------- featured show: banner at the very top (settings "feature"; hides itself after the show) ---------- */
+.topshow{display:block;text-decoration:none;color:var(--text);background:linear-gradient(90deg,rgba(176,65,143,.42),rgba(91,63,168,.42));border-bottom:1px solid rgba(217,178,106,.5)}
+.topshow .fin{display:grid;grid-template-columns:52px 1fr;gap:4px 12px;align-items:center;padding-top:12px;padding-bottom:12px}
+.topshow .fdate{grid-row:span 2;align-self:start;text-align:center;border:1px solid rgba(217,178,106,.65);border-radius:10px;padding:5px 0;line-height:1.05;background:rgba(10,6,24,.5)}
+.topshow .fdate small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:700}
+.topshow .fdate b{display:block;font-family:'Fraunces',serif;font-size:23px;color:#FFF7E8}
+.topshow .ftxt{display:block;min-width:0}
+.topshow .fk{display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--gold3)}
+.topshow .ft{display:block;font-family:'Fraunces',serif;font-weight:800;font-size:20px;line-height:1.15;color:#FFF7E8;margin-top:2px}
+.topshow .fm{display:block;font-size:13.5px;line-height:1.35;color:#EDE6F7;margin-top:3px}
+.topshow .fb{display:block;font-size:13px;line-height:1.35;color:var(--mute);margin-top:2px}
+.topshow .fbtn{grid-column:2;justify-self:start;padding:9px 16px;font-size:14px;margin-top:6px}
+@media (min-width:700px){
+  .topshow .fin{grid-template-columns:62px 1fr auto;gap:0 18px;padding-top:14px;padding-bottom:14px}
+  .topshow .fdate{grid-row:auto;align-self:center}
+  .topshow .ft{font-size:24px}
+  .topshow .fbtn{grid-column:auto;margin-top:0;padding:12px 20px;font-size:15px}
+}

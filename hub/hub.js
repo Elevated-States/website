@@ -201,6 +201,10 @@
     if (ORDER.indexOf("state") > -1) fillState();
   }
   function build() {
+    /* a featured show at the top of the page (settings "feature") hides itself once its day has passed */
+    [].forEach.call(document.querySelectorAll("[data-until]"), function (el) {
+      if (new Date(el.getAttribute("data-until") + "T23:59:59") < new Date()) el.hidden = true;
+    });
     if (C.kicker && $("hKick")) $("hKick").textContent = C.kicker;
     if (C.hello && $("hHello")) $("hHello").innerHTML = C.hello;
     if (C.intro && $("hIntro")) $("hIntro").textContent = C.intro;
