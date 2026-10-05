@@ -95,7 +95,7 @@ var CITY = {"slug": "hey", "name": "there", "kicker": "Comedian · Science commu
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   document.getElementById("kick").textContent=C.kicker;
   document.getElementById("hello").innerHTML='Hey, <em>'+esc(C.name)+'.</em>';
-  document.getElementById("cta2").textContent=C.state?"Trailers, links, where "+C.state+" stands, and one email list for everything":"Trailers, links, shows near you, and one email list for everything";
+  document.getElementById("cta2").textContent=C.state?"Trailers, links, where "+C.state+" ranks, and one email list for everything":"Trailers, links, shows near you, and one email list for everything";
   var a=7,h="";function r(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}
   for(var i=0;i<120;i++)h+='<i style="left:'+(r()*100).toFixed(1)+'%;top:'+(r()*100).toFixed(1)+'%;opacity:'+(.12+r()*.45).toFixed(2)+'"></i>';
   document.getElementById("stars").innerHTML=h;
@@ -106,8 +106,8 @@ var CITY = {"slug": "hey", "name": "there", "kicker": "Comedian · Science commu
   var SUN='<svg viewBox="0 0 512 512" aria-hidden="true"><defs><clipPath id="hz"><rect x="0" y="0" width="512" height="333"/></clipPath></defs><circle cx="256" cy="333" r="112" fill="#D9B26A" clip-path="url(#hz)"/><rect x="90" y="329" width="330" height="9" rx="4.5" fill="#FAF4E9"/><rect x="102" y="214" width="46" height="14" rx="3" fill="#B8893C" transform="rotate(29 125 221)"/><rect x="80" y="299" width="50" height="14" rx="3" fill="#B8893C"/><rect x="102" y="378" width="46" height="14" rx="3" fill="#B8893C" transform="rotate(-29 125 385)"/></svg>';
   var TILES={
     ball:{pic:'<img src="/hub/img/ball.jpg" alt="">',t:"A Tripping Ball",s:"Asheville, April 17, 2027. Leonard Pickard + a psychedelic orchestra."},
-    es:{pic:'<div class="esb">'+SUN+'<div><div class="t">The <em>Elevated</em><br>States Project</div><div class="i">Psychedelic science, lifted<br>from hype to wonder.</div></div></div>',t:"Elevated States",s:"A free Policy Atlas: where every state stands on psychedelics."},
-    state:{pic:'<div class="mo"><svg id="moMap" viewBox="0 0 960 600" aria-hidden="true"></svg><div><div class="n" id="moRank">#</div><div class="of">of 50</div></div></div>',t:"Where "+C.state+" stands",s:"Three small steps "+C.state+" could take, and the letter to send."},
+    es:{pic:'<div class="esb">'+SUN+'<div><div class="t">The <em>Elevated</em><br>States Project</div><div class="i">Psychedelic science, lifted<br>from hype to wonder.</div></div></div>',t:"Elevated States",s:"Every state, ranked on psychedelic progress, research, and freedom."},
+    state:{pic:'<div class="mo"><svg id="moMap" viewBox="0 0 960 600" aria-hidden="true"></svg><div><div class="n" id="moRank">#</div><div class="of">of 50</div></div></div>',t:"Where "+C.state+" ranks",s:"Three small steps "+C.state+" could take, and the letter to send."},
     trips:{pic:'<img src="/hub/img/trips.jpg" alt="">',t:"TRIPS",s:"My two-part psychedelic comedy special. Free on YouTube."},
     psychonautics:{pic:'<img src="/hub/img/psychonautics-poster.jpg" alt="" style="object-position:50% 40%">',t:"Psychonautics",s:"My documentary about psychedelics. Free on Tubi."},
     hwa:{pic:'<img src="/hub/img/hwa.jpg" alt=""><span class="ribbon">'+hwaRibbon+'</span>',t:"Here We Are",s:"My science podcast. I talk with scientists about the meanings of life."},

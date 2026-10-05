@@ -130,8 +130,10 @@
         '<div class="banner esb"><div class="halo"></div><div class="stars">' + stars(46, 11) + '</div><div class="line"></div>' + sunMark() +
         '<div class="wm"><div class="k">Policy Atlas · Take Action</div><div class="t">The <em>Elevated</em> States Project</div><div class="i">Psychedelic science, lifted from hype to wonder.</div></div></div>',
         '<div class="eyebrow">The Elevated States Project</div>' +
-        "<h2>Where every state actually stands</h2>" +
-        '<p class="lede">A free Policy Atlas of psychedelics, cannabis and harm reduction across all 50 states and D.C., ranked, sourced and dated. Find local groups to join, and send your legislator a letter that\'s already written.</p>' +
+        "<h2>Every state, ranked</h2>" +
+        '<p class="lede">We\'ve ranked every state in order of psychedelic progress, research, and freedom. See where your state lands and why. Find your local psychedelic communities, meet the others, be a part of the change.</p>' +
+        '<a class="miniatlas" href="' + esc(own("/atlas.html")) + '" aria-label="Open the Policy Atlas"><svg id="esMap" viewBox="0 0 960 600" aria-hidden="true"></svg>' +
+        '<span class="lg"><span>Less open</span><i id="esRamp"></i><span>More open</span></span></a>' +
         '<div class="stats"><div><b>50 + D.C.</b><span>states ranked</span></div><div><b>460+</b><span>local groups</span></div><div><b>Every</b><span>claim sourced and dated</span></div></div>' +
         '<div class="btns">' + ownA("/atlas.html", "Explore the Policy Atlas →", "primary") + ownA("/map.html", "Open the map") + ownA("/the-bigger-picture.html", "Legal ≠ safe") + "</div>");
     },
@@ -143,7 +145,7 @@
         '<div class="banner stb"><svg id="stMap" viewBox="0 0 960 600" aria-hidden="true"></svg>' +
         '<div class="rk"><div class="n" id="stRank">#</div><div class="of">of 50</div><div class="s">' + esc(n) + ", on openness to evidence-based drug policy</div></div></div>",
         '<div class="eyebrow">Elevated States · Policy Atlas</div>' +
-        "<h2>Where does <em>" + esc(n) + "</em> stand?</h2>" +
+        "<h2>Where does <em>" + esc(n) + "</em> rank?</h2>" +
         '<div class="chips score" id="stChips"></div>' +
         '<h3 class="mini">Small steps ' + esc(n) + " could take next</h3>" +
         '<ol class="steps" id="stSteps"></ol>' +
@@ -156,10 +158,9 @@
         '<div class="eyebrow">The Elevated States Project presents</div>' +
         "<h2>A Tripping Ball</h2>" +
         '<div class="when">Saturday, April 17, 2027 · Asheville, North Carolina</div>' +
-        '<p class="lede">An enchanted evening where science meets spectacle: comedy, a candlelit dinner, live music and dancing, and a psychedelic chamber orchestra, <b>The Default Mode Orchestra</b>, playing everything from Beethoven to Tame Impala.</p>' +
+        '<p class="lede">Sophistication meets play at A Tripping Ball—an evening of comedy, science, dinner, dancing, and delightfully extravagant attire. Featuring <b>The Default Mode Orchestra</b>, leading researchers, and a conversation with legendary LSD chemist Leonard Pickard, all hosted by comedian Shane Mauss. Dress up, open your mind, and join us for a different kind of ball.</p>' +
         '<div class="feature"><div class="k">Headline conversation</div><div class="t">Leonard Pickard</div>' +
         "<p>The chemist said to have made 90% of the world's LSD. He served 20 years of two life sentences before his release in 2020.</p></div>" +
-        '<p class="host">Hosted by Shane Mauss</p>' +
         '<div class="founding"><span class="badge">Founding Circle</span><div class="t">Be one of the first fifty.</div>' +
         "<p>The Founding Circle gets in below every future price and hears the rest of the lineup first. Tickets aren't on sale yet.</p>" +
         ownA("/tripping-ball-asheville.html#founding", "Join the guest list →", "primary") + "</div>");
@@ -199,6 +200,7 @@
     var main = $("sections");
     main.innerHTML = ORDER.map(function (k) { try { return LIB[k](); } catch (e) { return ""; } }).join("");
     if (ORDER.indexOf("state") > -1) fillState();
+    if (ORDER.indexOf("es") > -1) fillEsMap();
   }
   function build() {
     /* a featured show at the top of the page (settings "feature") hides itself once its day has passed */
@@ -263,6 +265,24 @@
     return new Promise(function (ok, bad) { var s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = bad; document.head.appendChild(s); });
   }
   var mapP = null, dataP = null;
+  /* little atlas in the Elevated States section: every state shaded by overall openness (what act.html ranks on) */
+  function fillEsMap() {
+    if (!$("esMap")) return;
+    if (!mapP) mapP = loadScript("/hub/us-map.js");
+    if (!dataP) dataP = loadScript("/atlas-data.js").then(function () { return loadScript("/atlas-scores.js"); }).then(function () { return loadScript("/atlas-steps.js"); });
+    Promise.all([mapP, dataP]).then(function () {
+      var svg = $("esMap"); if (!svg || !window.US_MAP || typeof STATES === "undefined") return;
+      var names = Object.keys(STATES).filter(function (k) { return k !== "District of Columbia"; });
+      var lo = Infinity, hi = -Infinity; names.forEach(function (k) { lo = Math.min(lo, STATES[k].o); hi = Math.max(hi, STATES[k].o); });
+      var stops = [[43, 31, 92], [150, 84, 170], [238, 206, 140]];
+      function col(v) { var t = Math.max(0, Math.min(1, (v - lo) / (hi - lo))), i = t < .5 ? 0 : 1, u = t < .5 ? t * 2 : (t - .5) * 2;
+        return "rgb(" + stops[i].map(function (x, j) { return Math.round(x + (stops[i + 1][j] - x) * u); }).join(",") + ")"; }
+      var P = US_MAP.paths, out = "";
+      for (var k in P) out += '<path d="' + P[k] + '" fill="' + col(STATES[k] ? STATES[k].o : lo) + '" stroke="#170f2e" stroke-width="1.4"><title>' + esc(k) + "</title></path>";
+      svg.innerHTML = out;
+      var r = $("esRamp"); if (r) r.style.background = "linear-gradient(90deg," + [0, .25, .5, .75, 1].map(function (t) { return col(lo + t * (hi - lo)); }).join(",") + ")";
+    }).catch(function () {});
+  }
   function fillState() {
     var n = C.state;
     if (!mapP) mapP = loadScript("/hub/us-map.js");
