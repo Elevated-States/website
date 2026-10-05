@@ -240,7 +240,7 @@
     var rows = list.map(function (s) {
       var d = new Date(s.d + "T12:00:00");
       var inner = '<div class="d"><small>' + MON[d.getMonth()] + "</small><b>" + d.getDate() + "</b></div>" +
-        '<div class="w"><b>' + esc(s.city) + "</b><span>" + esc(s.what) + (s.note ? " · " + esc(s.note) : "") + "</span></div>" +
+        '<div class="w"><b>' + esc(s.city) + ((C.nearby || []).indexOf(s.city) > -1 ? ' <i class="near">Near you</i>' : "") + "</b><span>" + esc(s.what) + (s.note ? " · " + esc(s.note) : "") + "</span></div>" +
         '<div class="go">' + (s.url ? "Info →" : "") + "</div>";
       return "<li>" + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + inner + "</a>" : "<div>" + inner + "</div>") + "</li>";
     }).join("");
