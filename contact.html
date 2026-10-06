@@ -70,7 +70,7 @@ footer .c{font-size:12px;color:var(--mute)}
 
 <nav><div class="wrap navin">
   <div class="logo"><a href="index.html">Elevated <em>States</em></a></div>
-  <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="act.html">Take Action</a><a href="the-bigger-picture.html">Bigger Picture</a><a class="cta" href="get-involved.html">Get Involved</a></div>
+  <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="news/">News</a><a href="act.html">Take Action</a><a href="the-bigger-picture.html">Bigger Picture</a><a class="cta" href="get-involved.html">Get Involved</a></div>
 </div></nav>
 
 <div class="hero"><div class="halo"></div><div class="wrap" style="position:relative">
@@ -109,7 +109,7 @@ footer .c{font-size:12px;color:var(--mute)}
   <div class="side">
     <div class="card">
       <h3 class="serif">Email</h3>
-      <p><a class="mail" href="mailto:shanetmauss@gmail.com">shanetmauss@gmail.com</a></p>
+      <p><a class="mail" href="mailto:shanecomedyfan@gmail.com">shanecomedyfan@gmail.com</a></p>
     </div>
     <div class="card">
       <h3 class="serif">Faster routes</h3>
@@ -128,8 +128,8 @@ footer .c{font-size:12px;color:var(--mute)}
 </div></div></section>
 
 <footer><div class="wrap">
-  <div class="links"><a href="index.html">Home</a><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="act.html">Take Action</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a></div>
-  <div class="c">The Elevated States Project · shanetmauss@gmail.com</div>
+  <div class="links"><a href="index.html">Home</a><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="news/">News</a><a href="act.html">Take Action</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a></div>
+  <div class="c">The Elevated States Project · shanecomedyfan@gmail.com</div>
 </div></footer>
 
 <script>
@@ -140,7 +140,7 @@ footer .c{font-size:12px;color:var(--mute)}
     var btn=f.querySelector("button"), old=btn.textContent; btn.textContent="Sending…"; btn.disabled=true;
     fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(new FormData(f)).toString()})
       .then(function(r){ if(!r.ok)throw 0; f.style.display="none"; ok.style.display="block"; })
-      .catch(function(){ btn.textContent=old; btn.disabled=false; alert("That didn't send — please email shanetmauss@gmail.com directly."); });
+      .catch(function(){ btn.textContent=old; btn.disabled=false; alert("That didn't send — please email shanecomedyfan@gmail.com directly."); });
   });
 })();
 if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}

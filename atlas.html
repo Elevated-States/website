@@ -111,7 +111,7 @@
 </head><body>
 <nav><div class="wrap navin">
   <div class="logo"><a href="index.html">Elevated <em>States</em></a></div>
-  <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="act.html">Take Action</a><a href="get-involved.html">Get Involved</a><a href="index.html">Home</a></div>
+  <div class="nav-links"><a href="tripping-ball-asheville.html">The Ball</a><a href="news/">News</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="act.html">Take Action</a><a href="get-involved.html">Get Involved</a><a href="index.html">Home</a></div>
 </div></nav>
 
 <div class="hero"><div class="halo"></div><div class="wrap" style="position:relative">
@@ -120,8 +120,8 @@
   <p>Where the country actually stands on psychedelics — policy, research, and harm reduction, state by state.</p>
   <div class="stat-row">
     <div class="st"><b data-count="50">0</b><span>states mapped, plus D.C.</span></div>
-    <div class="st"><b data-count="23">0</b><span>active research states</span></div>
-    <div class="st"><b data-count="4">0</b><span>legal psilocybin states</span></div>
+    <div class="st"><b data-count="23" data-live="rsch">0</b><span>active research states</span></div>
+    <div class="st"><b data-count="4" data-live="psiLegal">0</b><span>legal psilocybin states</span></div>
   </div>
 </div></div>
 
@@ -131,7 +131,7 @@
   <div class="sub">Switch layers — including four <b>leaderboards</b> (harm reduction, research, therapeutic access, decriminalization) — and each one explains what it shows and how it's scored. Play the time-lapse, or click any state for its full scorecard and the small steps it could take to rise.</div>
   <div class="mapframe"><iframe src="map.html?embed=1" title="Elevated States Policy Atlas" loading="lazy"></iframe></div>
   <div class="maplinks">
-    <a class="btn" href="act.html">Find my state → do one thing</a>
+    <a class="btn" href="act.html">Find my state → take a small step</a>
     <a class="btn-o btn" href="map.html" target="_blank">Open full-screen ↗</a>
     <a class="btn-o btn" href="embed.html">Embed this on your site</a>
   </div>
@@ -170,16 +170,20 @@
 <section style="padding-top:0"><div class="wrap"><div class="updates">
   <div class="eyebrow">Updates from around the country</div>
   <h2>What's moving right now.</h2>
-  <div class="sub">The national picture is shifting fast. Here's the headline momentum, plus a live pull of what's in motion in each active state.</div>
+  <div class="sub">The national picture is shifting fast. The headlines from the latest Trip Report, plus a live pull of what's in motion in each active state.</div>
 
+<!-- Written by News/make_news.py from the latest issue; edit the issue, not this block. -->
+<!-- BEGIN news:latest -->
   <div class="headlines">
-    <div class="hl"><div class="tag">Industry</div><p>Eli Lilly places a <b>$3.8B</b> bet on psychedelics — the field's largest pharma investment yet.</p></div>
-    <div class="hl"><div class="tag">Colorado</div><p>Regulated <b>psilocybin healing centers</b> are now operational under the state's Natural Medicine program.</p></div>
-    <div class="hl"><div class="tag">North Carolina</div><p>Lawmakers advance a <b>$4.2M</b> university psychedelic-research bill (Duke / UNC), alongside UNC's $26.9M DARPA program.</p></div>
-    <div class="hl"><div class="tag">Arizona</div><p>The state funds <b>$5M for ibogaine</b> and <b>$5M for psilocybin</b> research — among the largest public commitments yet.</p></div>
-    <div class="hl"><div class="tag">Research</div><p><b>23 states</b> now host active psychedelic research programs — from Johns Hopkins to UW–Madison to UNM's Phase 3 trials.</p></div>
-    <div class="hl"><div class="tag">FDA</div><p>Regulators continue <b>fast-tracking</b> psychedelic therapies, with multiple Phase 3 programs in progress.</p></div>
+    <div class="hl"><div class="tag">Business</div><p>Eli Lilly bets up to $3.8 billion on psychedelics — the biggest deal the field has ever seen</p></div>
+    <div class="hl"><div class="tag">Science / FDA</div><p>The FDA finalized its psychedelic rulebook — and the whole game now turns on one hard problem</p></div>
+    <div class="hl"><div class="tag">Science</div><p>Compass's psilocybin cleared its second big trial — and the debate is now about magnitude, not whether it "works"</p></div>
+    <div class="hl"><div class="tag">Science</div><p>The uncomfortable paper: blinding fails in more than 90% of psychedelic trials</p></div>
+    <div class="hl"><div class="tag">Veterans</div><p>The VA and HHS formally teamed up on psychedelic therapy for veterans</p></div>
+    <div class="hl"><div class="tag">Congress &amp; the States</div><p>Washington nibbles, the states leap: ibogaine, a defense-bill rider, and Oregon's squeeze</p></div>
   </div>
+  <p class="newslink" style="margin-top:14px;font-size:14px"><a href="news/2026-08-09/" style="font-weight:600;color:#2b6a53;border-bottom:1px solid #2b6a53">Read The Trip Report No. 1 · Week of August 3, 2026 →</a> &nbsp;·&nbsp; <a href="news/" style="color:var(--mute)">All issues</a></p>
+<!-- END news:latest -->
 
   <div style="margin-top:26px" class="eyebrow">On the move · by state</div>
   <div class="feed" id="feed"></div>
@@ -187,13 +191,14 @@
 </div></div></section>
 
 <footer><div class="wrap">
-  <div class="links"><a href="index.html">Home</a><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="act.html">Take Action</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a></div>
-  <div class="c">The Elevated States Project · shanetmauss@gmail.com</div>
+  <div class="links"><a href="index.html">Home</a><a href="tripping-ball-asheville.html">The Ball</a><a href="atlas.html">The Atlas</a><a href="news/">News</a><a href="act.html">Take Action</a><a href="the-bigger-picture.html">Bigger Picture</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a></div>
+  <div class="c">The Elevated States Project · shanecomedyfan@gmail.com</div>
 </div></footer>
 
 <script src="atlas-data.js"></script>
 <script src="atlas-scores.js"></script>
 <script src="atlas-orgs.js"></script>
+<script src="counts.js"></script>
 <script>
 /* ---- Scoreboard: 4 tabbed leaderboards, each with an explainer ---- */
 (function(){

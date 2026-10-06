@@ -1,7 +1,7 @@
 {
   "name": "The Elevated States Project — Policy Atlas",
   "short_name": "Policy Atlas",
-  "description": "How every US state actually treats drugs — and one thing you can do about yours.",
+  "description": "How every US state actually treats drugs — and the small steps yours could take next.",
   "start_url": "act.html",
   "scope": "./",
   "display": "standalone",
