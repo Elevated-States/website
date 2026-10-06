@@ -1,7 +1,7 @@
 // Elevated States Project — offline shell.
 // Strategy: network-first for HTML (so policy data is never stale),
 // stale-while-revalidate for the data files, cache-first for fonts.
-const V = "es-v8";
+const V = "es-v9";
 const SHELL = ["act.html","atlas.html","the-bigger-picture.html","index.html",
                "atlas-data.js","atlas-scores.js","atlas-orgs.js","atlas-harm.js","atlas-steps.js","manifest.json"];
 

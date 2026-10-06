@@ -1,1 +1,45 @@
-{"issue": null, "stories": []}
+{
+ "issue": "1",
+ "date": "2026-10-06",
+ "label": "September 22 – October 6, 2026",
+ "headline": "Washington hit the gas and the brakes in the same fortnight",
+ "url": "https://elevatedstatesproject.com/news/2026-10-06/",
+ "stories": [
+  {
+   "tag": "Congress & the States",
+   "title": "The House psychedelics caucus put a federal plan on paper"
+  },
+  {
+   "tag": "FDA",
+   "title": "The FDA asked how psychedelic therapy should actually be delivered, and the public answered"
+  },
+  {
+   "tag": "DEA",
+   "title": "The DEA tries again to ban five psychedelics, including one the FDA just fast-tracked"
+  },
+  {
+   "tag": "Oregon",
+   "title": "Oregon blinked on doubling its psilocybin fees, and the budget hole is still there"
+  },
+  {
+   "tag": "California",
+   "title": "California's first state money for psychedelic research goes to veterans"
+  },
+  {
+   "tag": "",
+   "title": "Can psychedelic trials be blinded after all? Four researchers say try harder"
+  },
+  {
+   "tag": "",
+   "title": "A shorter yardstick for \"did it change you?\""
+  },
+  {
+   "tag": "",
+   "title": "Psychedelic users were more likely to be vegetarian. Don't read it as cause."
+  },
+  {
+   "tag": "",
+   "title": "The VA's big psilocybin trial is progress. Independent labs want in too."
+  }
+ ]
+}

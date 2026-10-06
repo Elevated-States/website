@@ -91,7 +91,7 @@ var STEP_LEADS = {
    why:"Oklahoma's Breakthrough Therapy Act (HB 3834) authorizes ibogaine clinical trials starting November 2026. A law needs funding and follow-through to become treatment.",
    ask:"fund and implement the ibogaine clinical trials authorized by HB 3834"},
  "Oregon": {covers:["ready"], title:"Protect the psilocybin services program",
-   why:"Oregon was first to license psilocybin services, and the program is running. This state's own 2020 decriminalization was rolled back in four years, so protection isn't hypothetical.",
+   why:"Oregon was first to license psilocybin services, and the program is running on a shortfall: regulators dropped a fee doubling in September 2026 and the 2027 legislature decides how to fund it. The state's own 2020 decriminalization was rolled back in four years, so protection isn't hypothetical.",
    ask:"fully fund the state's psilocybin services program and protect it from rollback"},
  "Rhode Island": {covers:["ready"], title:"Restart statewide psilocybin reform",
    why:"Brown University runs active psychedelic research, but statewide psilocybin reform has stalled. Stalled bills restart when legislators hear from voters.",
