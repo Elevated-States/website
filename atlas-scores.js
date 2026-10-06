@@ -1,22 +1,24 @@
 /* ============================================================
    ELEVATED STATES PROJECT — ATLAS CATEGORY SCORES
    ------------------------------------------------------------
-   Turns the atlas into five 1-of-51 leaderboards. Each index is a
+   Turns the atlas into four 1-of-50 leaderboards. Each index is a
    transparent 0-100 score computed from sourced fields, then ranked
    #1..#51 (competition ranking; ties share a rank). Ketamine is
    intentionally excluded from scoring — it is legal medically in all
    50 states, so it has zero variance and cannot differentiate states.
 
    Reads STATES from atlas-data.js (must load first) plus the three
-   sourced data tables below (naloxone/DIH, decriminalization, equity).
+   sourced data tables below (naloxone/DIH, decriminalization, record clearing).
 
    ---- SCORING RUBRICS (max 100 each) ----
    HARM REDUCTION : fentanyl test strips 20 · syringe services 20 ·
      Good Samaritan 20 · naloxone access 20 · (minus) drug-induced-homicide 20
    RESEARCH       : program tier 50 · named institutions 36 · MDMA/psi bonus 14
    THERAPEUTIC    : cannabis access 45 · legal/decrim psilocybin 38 · MDMA access 17
-   DECRIMINALIZATION : hard-drug possession penalty 50 · cannabis possession 30 · psychedelics decriminalized 20
-   EQUITY & REPAIR : expungement 45 · social-equity licensing 27 · revenue reinvestment 28
+   DECRIMINALIZATION : hard-drug possession penalty 40 · cannabis possession 25 ·
+     psychedelics 15 · clearing old records 20
+   (Oct 2026: the separate Equity & Repair board was folded into Decriminalization.
+    Only record clearing is scored now; equity licensing and reinvestment are not.)
 
    Sources per state are carried in each table's "src" for the scorecard.
    Educational only, not legal advice.
@@ -136,7 +138,8 @@ var DEC = {
 "Wyoming":{decrim:"defelonized",cannPos:"illegal",src:"WY 35-7-1031(c) 1st/2nd (uncertain); no medical"}
 };
 
-/* --- Equity & repair: expungement (expunge) + social-equity licensing (equity) + revenue reinvestment (reinvest) ---
+/* --- Record clearing (expunge) — scored inside DECRIMINALIZATION since Oct 2026.
+   The equity / reinvest columns are kept for reference only; they are no longer scored. ---
    Sources: Marijuana Policy Project, Collateral Consequences Resource Center,
    Last Prisoner Project, state regulators. "na" = no comprehensive market to score. */
 var EQ = {
@@ -212,29 +215,47 @@ function esMedical(n){var s=STATES[n]||{},v=0;
   v+=(s.psi==="legal")?38:(s.psi==="decrim")?13:0;
   v+=(s.mdma==="rtt")?17:(s.mdma==="trial")?9:0;
   return Math.min(v,100);}
-function esDecrim(n){var d=DEC[n]||{},s=STATES[n]||{},v=0;
-  v+=(d.decrim==="decrim")?50:(d.decrim==="defelonized")?28:0;      // hard-drug possession penalty
-  v+=(d.cannPos==="legal")?30:(d.cannPos==="decrim")?18:(d.cannPos==="medical-only")?7:0; // cannabis possession
-  v+=(s.psi==="legal")?20:(s.psi==="decrim")?12:0;                  // psychedelics decriminalized (breaks the reform-leader tie)
-  return v;}
-function esEquity(n){var e=EQ[n]||{},v=0;
-  v+=(e.expunge==="automatic")?45:(e.expunge==="petition")?20:0;
-  v+=(e.equity==="yes")?27:0;
-  v+=(e.reinvest==="yes")?28:0;
+function esDecrim(n){var d=DEC[n]||{},s=STATES[n]||{},e=EQ[n]||{},v=0;
+  v+=(d.decrim==="decrim")?40:(d.decrim==="defelonized")?22:0;      // hard-drug possession penalty
+  v+=(d.cannPos==="legal")?25:(d.cannPos==="decrim")?15:(d.cannPos==="medical-only")?6:0; // cannabis possession
+  v+=(s.psi==="legal")?15:(s.psi==="decrim")?9:0;                   // psychedelics
+  v+=(e.expunge==="automatic")?20:(e.expunge==="petition")?8:0;     // clearing old records
   return v;}
 
 /* ---------------- categories + computed ranks ---------------- */
 var ES_CATS = [
  {key:"hr",       label:"Harm Reduction",    fn:esHR,       tbl:HRX, color:"#D63A2F",
-  blurb:"Naloxone access, syringe services, fentanyl test strips and Good Samaritan protection — minus drug-induced-homicide laws that deter 911 calls."},
+  blurb:"Naloxone access, 911 Good Samaritan protection, drug-checking test strips and syringe services, minus drug-induced-homicide laws that deter 911 calls.",
+  what:"Whether state law helps keep people alive and safer when drugs are in the picture.",
+  why:"These are low-cost tools with strong evidence behind them. Naloxone reverses opioid overdoses, test strips reveal fentanyl before anyone takes it, and Good Samaritan laws make it safe to call 911 for a friend.",
+  how:["Naloxone access: 20 (strong) or 10 (moderate)",
+       "Good Samaritan 911 protection: 20 (broad) or 10 (limited)",
+       "Drug-checking test strips legal: 20",
+       "Syringe services: 20 (authorized) or 10 (limited)",
+       "No drug-induced-homicide law: 20 (10 if limited). These laws make people afraid to call 911."]},
  {key:"research", label:"Research & Trials",  fn:esResearch, tbl:null, color:"#8B6CFF",
-  blurb:"Active psychedelic research: university programs, named institutions, and MDMA/psilocybin trials."},
+  blurb:"Active psychedelic research: university programs, named institutions, and MDMA/psilocybin trials.",
+  what:"How actively the state is studying psychedelic medicine at its universities and medical centers.",
+  why:"Research is how a new treatment earns trust, and it's the step that brings skeptics along, especially when the work focuses on veterans and first responders.",
+  how:["Research activity: 50 (active programs) or 25 (emerging)",
+       "Named research institutions: 12 each, up to 36",
+       "Bonus: MDMA trial site 8, legal psilocybin program 6"]},
  {key:"medical",  label:"Therapeutic Access", fn:esMedical,  tbl:null, color:"#E0862E",
-  blurb:"What a patient can actually access today: cannabis, legal or decriminalized psilocybin, and MDMA access. (Ketamine excluded — legal everywhere.)"},
+  blurb:"What a patient can actually access today: cannabis, legal or decriminalized psilocybin, and MDMA access. (Ketamine excluded — legal everywhere.)",
+  what:"What a patient can legally get in the state today.",
+  why:"When a treatment works, patients shouldn't have to cross state lines or wait years to get it.",
+  how:["Cannabis: 45 (adult use), 32 (medical) or 13 (low-THC only)",
+       "Psilocybin: 38 (legal program) or 13 (decriminalized)",
+       "MDMA: 17 (right-to-try access) or 9 (trial site)",
+       "Ketamine isn't scored. It's legal medically in every state, so it doesn't separate one state from another."]},
  {key:"decrim",   label:"Decriminalization", fn:esDecrim,   tbl:DEC, color:"#2F9E9E",
-  blurb:"The criminal penalty for personal possession — a jail cell versus a fine — across hard drugs, cannabis, and psychedelics."},
- {key:"equity",   label:"Equity & Repair",   fn:esEquity,   tbl:EQ,  color:"#C8497A",
-  blurb:"Repairing the drug war: record expungement, social-equity business licensing, and reinvestment of revenue into harmed communities."}
+  blurb:"How the law treats people for personal possession — a jail cell or a fine — and whether old records get cleared.",
+  what:"How the law treats people caught with drugs for personal use, and whether old records get cleared.",
+  why:"A possession conviction can follow someone into every job and apartment application long after the sentence ends. States as different as Pennsylvania and Michigan now clear eligible records automatically.",
+  how:["Hard-drug possession: 40 (decriminalized) or 22 (a misdemeanor instead of a felony)",
+       "Cannabis possession: 25 (legal), 15 (decriminalized) or 6 (medical only)",
+       "Psychedelics: 15 (legal program) or 9 (decriminalized)",
+       "Clearing old records: 20 (automatic) or 8 (by petition)"]}
 ];
 
 var ES_DC = "District of Columbia";   // scored & shown, but excluded from the rankings
@@ -252,7 +273,7 @@ var ES_INDEX = {};
     var rank={},prev=null,r=0;
     for(var i=0;i<ks.length;i++){if(sc[ks[i]]!==prev){r=i+1;prev=sc[ks[i]];}rank[ks[i]]=r;}
     rank[ES_DC]=null;   // DC: not ranked
-    ES_INDEX[c.key]={label:c.label,blurb:c.blurb,color:c.color,score:sc,rank:rank,order:ks};
+    ES_INDEX[c.key]={label:c.label,blurb:c.blurb,what:c.what,why:c.why,how:c.how,color:c.color,score:sc,rank:rank,order:ks};
   });
 })();
 
