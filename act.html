@@ -254,10 +254,10 @@ function show(n){
     oc.style.display="block";
     var pri={reform:0,harm:1,community:2,research:3,veterans:4,education:5,church:6};
     var list=ORGS[n].slice().sort(function(a,b){return (pri[a.cat]==null?9:pri[a.cat])-(pri[b.cat]==null?9:pri[b.cat]);}).slice(0,6);
-    document.getElementById("orgSub").textContent=ORGS[n].length+" organizations are working on this in "+n+". These are a place to start.";
+    document.getElementById("orgSub").textContent=ORGS[n].length+" local organizations are working on this in "+n+". These are a place to start.";
     document.getElementById("orgList").innerHTML=list.map(function(o){
       return '<div class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a><div class="m">'+(o.city&&o.city!=="Statewide"?o.city:"Statewide")+(o.note?" · "+o.note:"")+'</div></div>';
-    }).join("");
+    }).join("")+(typeof NATIONAL_ORGS!=="undefined"&&NATIONAL_ORGS.length?'<div class="org"><a href="atlas.html#national-groups">Plus '+NATIONAL_ORGS.length+' national groups that work in every state →</a></div>':'');
   } else { oc.style.display="none"; }
   document.getElementById("alertState").value=n;
   renderMine();

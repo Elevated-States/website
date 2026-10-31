@@ -245,7 +245,8 @@ function orgsBlock(n){
   });
   h+='</div>';
  });
- return h+'<div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">Verified live 2026 · not an endorsement. Suggest an org via Get Involved.</div></div>';
+ var nn=(typeof NATIONAL_ORGS!=="undefined")?NATIONAL_ORGS.length:0;
+ return h+(nn?'<div class="orggrp"><span class="org"><a href="atlas.html#national-groups">Plus '+nn+' national groups that work in every state →</a></span></div>':'')+'<div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">Re-checked Oct 2026 · not an endorsement. Spot a wrong link? Tell us via Contact.</div></div>';
 }
 // ---- ketamine clinics block ----
 function ketamineBlock(n){
