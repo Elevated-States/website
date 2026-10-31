@@ -1,9 +1,11 @@
 // Elevated States Project — offline shell.
 // Strategy: network-first for HTML (so policy data is never stale),
 // stale-while-revalidate for the data files, cache-first for fonts.
-const V = "es-v9";
+// A versioned data URL (atlas-orgs.js?v=...) skips the stale copy on the first visit after a deploy:
+// bump the ?v= in atlas.html, map.html, act.html and SHELL together, and bump V.
+const V = "es-v10";
 const SHELL = ["act.html","atlas.html","the-bigger-picture.html","index.html",
-               "atlas-data.js","atlas-scores.js","atlas-orgs.js","atlas-harm.js","atlas-steps.js","manifest.json"];
+               "atlas-data.js","atlas-scores.js","atlas-orgs.js?v=20261031","atlas-harm.js","atlas-steps.js","manifest.json"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(V).then((c) => c.addAll(SHELL).catch(() => {})).then(() => self.skipWaiting()));
