@@ -211,7 +211,7 @@ function render(){
   var climb=(t==="up")?("Keep climbing: "+steps.join("; ")+".")
            :(t==="level")?("To rise even higher: "+steps.join("; ")+".")
            :("How "+state+" climbs the rankings: "+steps.join("; ")+".");
-  var cap=T.cap+" "+T.label+": "+state+" "+T.lead+"\n\n"+(d.momN||"")+"\n\nOpenness rank #"+RANK[state]+" of "+NST+" · "+statusOf(state)+".\n\n"+climb+"\n\nEach year the most-elevated state earns A Tripping Ball. Want it to be yours? Climb the rankings — follow along and tell your reps. #psychedelics #drugpolicy #harmreduction #"+state.replace(/\s+/g,"")+" #ElevatedStates";
+  var cap=T.cap+" "+T.label+": "+state+" "+T.lead+"\n\n"+(d.momN||"")+"\n\nOpenness rank #"+RANK[state]+" of "+NST+" · "+statusOf(state)+".\n\n"+climb+"\n\nEach year the most-elevated state earns The Tripping Ball. Want it to be yours? Climb the rankings — follow along and tell your reps. #psychedelics #drugpolicy #harmreduction #"+state.replace(/\s+/g,"")+" #ElevatedStates";
   document.getElementById("caption").textContent=cap;
   setPlate();
 }

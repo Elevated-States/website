@@ -154,11 +154,11 @@
 
     ball: function () {
       return section("ball", "",
-        '<div class="banner"><img src="/hub/img/ball.jpg" width="1600" height="800" alt="A Tripping Ball. Saturday, April 17, 2027. Asheville, North Carolina." loading="lazy" decoding="async"></div>',
+        '<div class="banner"><img src="/hub/img/ball.jpg" width="1600" height="800" alt="The Tripping Ball. Saturday, April 17, 2027. Asheville, North Carolina." loading="lazy" decoding="async"></div>',
         '<div class="eyebrow">The Elevated States Project presents</div>' +
-        "<h2>A Tripping Ball</h2>" +
+        "<h2>The Tripping Ball</h2>" +
         '<div class="when">Saturday, April 17, 2027 · Asheville, North Carolina</div>' +
-        '<p class="lede">Sophistication meets play at A Tripping Ball—an evening of comedy, science, dinner, dancing, and delightfully extravagant attire. Featuring <b>The Default Mode Orchestra</b>, leading researchers, and a conversation with legendary LSD chemist Leonard Pickard, all hosted by comedian Shane Mauss. Dress up, open your mind, and join us for a different kind of ball.</p>' +
+        '<p class="lede">Sophistication meets play at The Tripping Ball—an evening of comedy, science, dinner, dancing, and delightfully extravagant attire. Featuring <b>The Default Mode Orchestra</b>, leading researchers, and a conversation with legendary LSD chemist Leonard Pickard, all hosted by comedian Shane Mauss. Dress up, open your mind, and join us for a different kind of ball.</p>' +
         '<div class="feature"><div class="k">Headline conversation</div><div class="t">Leonard Pickard</div>' +
         "<p>The chemist said to have made 90% of the world's LSD. He served 20 years of two life sentences before his release in 2020.</p></div>" +
         '<div class="founding"><span class="badge">Founding Circle</span><div class="t">Be one of the first fifty.</div>' +

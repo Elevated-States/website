@@ -3,7 +3,7 @@
 // stale-while-revalidate for the data files, cache-first for fonts.
 // A versioned data URL (atlas-orgs.js?v=...) skips the stale copy on the first visit after a deploy:
 // bump the ?v= in atlas.html, map.html, act.html and SHELL together, and bump V.
-const V = "es-v11";
+const V = "es-v12";
 const SHELL = ["act.html","atlas.html","the-bigger-picture.html","index.html",
                "atlas-data.js","atlas-scores.js","atlas-orgs.js?v=20261101","atlas-harm.js","atlas-steps.js","manifest.json"];
 
