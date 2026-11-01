@@ -9,6 +9,7 @@
    2026-10: the link is the org's own site (or its own chapter
    page), the group shows recent activity, and nothing listed
    sells, distributes or helps people obtain drugs. Educational only.
+   Checked monthly; last updated 2026-11 (runbook: Directory upkeep/README.md).
 
    ORGS[state] = [ {n:name, cat, city, u:url, note}, ... ]
    NATIONAL_ORGS = [ {n, cat, city, u, note}, ... ]
@@ -55,7 +56,9 @@ var ORGS = {
 "Arkansas":[
  {n:"Northwest Arkansas Harm Reduction",cat:"harm",city:"Fayetteville",u:"https://www.nwaharmreduction.org/",note:"NWA naloxone and harm-reduction outreach"},
  {n:"Arkansas Opioid Recovery Partnership",cat:"harm",city:"Statewide",u:"https://www.arorp.org/",note:"Opioid-settlement grants, free naloxone, ReviveAR overdose app"},
- {n:"UAMS Psychiatric Research Institute",cat:"research",city:"Little Rock",u:"https://psychiatry.uams.edu/",note:"University addiction and behavioral-health research"}
+ {n:"UAMS Psychiatric Research Institute",cat:"research",city:"Little Rock",u:"https://psychiatry.uams.edu/",note:"University addiction and behavioral-health research"},
+ {n:"Natural State Mental Health",cat:"reform",city:"Statewide",u:"https://naturalstatemh.org/",note:"Physician-led coalition drafting a 2027 bill for supervised psilocybin therapy"},
+ {n:"Psychedelic Society of Arkansas (PSoAR)",cat:"community",city:"Statewide",u:"https://psoar.org/",note:"Education nights, integration circles; chapters in NWA, Eureka Springs, Little Rock"}
 ],
 "California":[
  {n:"DOPE Project (National Harm Reduction Coalition)",cat:"harm",city:"San Francisco",u:"https://harmreduction.org/our-work/action/dope-project-san-francisco/",note:"Naloxone distribution and overdose-prevention training, SF"},
