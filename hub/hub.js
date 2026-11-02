@@ -134,7 +134,7 @@
         '<p class="lede">We\'ve ranked every state in order of psychedelic progress, research, and freedom. See where your state lands and why. Find your local psychedelic communities, meet the others, be a part of the change.</p>' +
         '<a class="miniatlas" href="' + esc(own("/atlas.html")) + '" aria-label="Open the Policy Atlas"><svg id="esMap" viewBox="0 0 960 600" aria-hidden="true"></svg>' +
         '<span class="lg"><span>Less open</span><i id="esRamp"></i><span>More open</span></span></a>' +
-        '<div class="stats"><div><b>50 + D.C.</b><span>states ranked</span></div><div><b>400+</b><span>local &amp; national groups</span></div><div><b>Every</b><span>claim sourced and dated</span></div></div>' +
+        '<div class="stats"><div><b>50 + D.C.</b><span>states ranked</span></div><div><b>500+</b><span>local &amp; national groups</span></div><div><b>Every</b><span>claim sourced and dated</span></div></div>' +
         '<div class="btns">' + ownA("/atlas.html", "Explore the Policy Atlas →", "primary") + ownA("/map.html", "Open the map") + ownA("/the-bigger-picture.html", "Legal ≠ safe") + "</div>");
     },
 
