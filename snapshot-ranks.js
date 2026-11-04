@@ -16,13 +16,17 @@ eval(code);
 const S = global.STATES, KS = Object.keys(S);
 
 // --- competition ranking by openness (o); #1 = most open ---
-const sorted = KS.slice().sort((a, b) => S[b].o - S[a].o);
+// D.C. is scored but not ranked, the same as on the site (ranks are out of the 50 states).
+const DC = "District of Columbia";
+const sorted = KS.filter(k => k !== DC).sort((a, b) => S[b].o - S[a].o);
 const ranks = {}, openness = {};
 let rank = 0, prev = null;
 sorted.forEach((k, i) => {
   if (S[k].o !== prev) { rank = i + 1; prev = S[k].o; }
-  ranks[k] = rank; openness[k] = S[k].o;
+  ranks[k] = rank;
 });
+KS.forEach(k => { openness[k] = S[k].o; });
+if (S[DC]) ranks[DC] = null;
 
 const now = new Date();
 const label = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");

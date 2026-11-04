@@ -3,11 +3,11 @@
 // stale-while-revalidate for the data files, cache-first for fonts.
 // A versioned data URL (atlas-orgs.js?v=...) skips the stale copy on the first visit after a deploy:
 // bump the ?v= in atlas.html, map.html, act.html and SHELL together, and bump V.
-// atlas-data.js is versioned the same way (atlas.html, map.html, act.html, index.html, embed.html,
-// social-cards.html and SHELL): bump its ?v= whenever the state data changes.
-const V = "es-v15";
+// atlas-data.js, atlas-scores.js and atlas-steps.js are versioned the same way (atlas.html, map.html, act.html, index.html, embed.html,
+// social-cards.html and SHELL): bump their ?v= whenever the state data or the small steps change.
+const V = "es-v16";
 const SHELL = ["act.html","atlas.html","the-bigger-picture.html","index.html",
-               "atlas-data.js?v=20261103","atlas-scores.js","atlas-orgs.js?v=20261103","atlas-harm.js","atlas-steps.js","manifest.json"];
+               "atlas-data.js?v=20261103-2","atlas-scores.js?v=20261103-2","atlas-orgs.js?v=20261103","atlas-harm.js","atlas-steps.js?v=20261103-2","manifest.json"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(V).then((c) => c.addAll(SHELL).catch(() => {})).then(() => self.skipWaiting()));

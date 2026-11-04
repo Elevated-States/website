@@ -68,6 +68,18 @@ select,input[type=email]{padding:12px 15px;border:1px solid var(--line);border-r
 .stepbtn .w{display:block;font-size:13.2px;color:#4a4440;margin-top:4px;line-height:1.45}
 .stepbtn.on{border-color:var(--gold);background:#fffaf0;box-shadow:0 0 0 2px rgba(184,137,60,.18)}
 .stepbtn.on .num{background:var(--gold);color:#fff}
+.stepbtn .tier{display:inline-block;font-family:'Inter',system-ui,sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:20px;padding:2px 8px;margin-left:8px;vertical-align:middle;position:relative;top:-2px}
+.tier.quick{background:#e8f3ec;color:#2c5e46}.tier.bigger{background:#f6ecd8;color:#8a5a12}.tier.long{background:#ece8f6;color:#4b3f84}
+.stepbtn .meta{display:block;font-size:12px;color:var(--mute);margin-top:6px;line-height:1.45}
+.stepbtn .meta b{color:#4a4440;font-weight:600}
+.stepbtn .worth{display:block;font-size:12px;color:#2c5e46;font-weight:600;margin-top:3px}
+.stepinfo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2px 0 14px}
+.stepinfo .box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5;color:#39332c}
+.stepinfo .box h4{font-family:'Fraunces';font-size:14.5px;margin-bottom:6px;color:var(--ink)}
+.stepinfo .box ul{margin:0;padding-left:17px}
+.stepinfo .box li{margin-bottom:3px}
+.stepinfo .box a{color:#2c5e46;border-bottom:1px dotted rgba(44,94,70,.4)}
+@media (max-width:640px){.stepinfo{grid-template-columns:1fr}}
 .msg{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;font-size:13.5px;line-height:1.6;color:#2c2a33;white-space:pre-wrap;max-height:230px;overflow-y:auto;margin-bottom:12px}
 .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
 .done{display:none;background:#eaf3ec;border:1px solid var(--teal);color:var(--teal);border-radius:10px;padding:10px 14px;font-size:13.5px;font-weight:600;margin-top:12px}
@@ -125,6 +137,7 @@ footer .c{font-size:12px;color:var(--mute)}
     <h3 class="serif" id="actHead">—</h3>
     <p class="pickp">Pick the one you'd like to ask for. The letter underneath changes to match.</p>
     <div class="steps" id="stepList"></div>
+    <div class="stepinfo" id="stepInfo"></div>
     <div class="msg" id="actMsg"></div>
     <div class="row">
       <button class="btn btn-p" id="copyBtn">Copy this message</button>
@@ -179,10 +192,10 @@ footer .c{font-size:12px;color:var(--mute)}
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
-<script src="atlas-data.js?v=20261103"></script>
-<script src="atlas-scores.js"></script>
+<script src="atlas-data.js?v=20261103-2"></script>
+<script src="atlas-scores.js?v=20261103-2"></script>
 <script src="atlas-orgs.js?v=20261103"></script>
-<script src="atlas-steps.js"></script>
+<script src="atlas-steps.js?v=20261103-2"></script>
 <script>
 var DC="District of Columbia";
 var NAMES=Object.keys(STATES).sort();
@@ -201,16 +214,24 @@ RANK[DC]=null;
 // ---- small steps: the shared list lives in atlas-steps.js (psychedelic-first; syringe services last) ----
 var CURSTEPS=[], CURSTEP=null;
 var NUMWORD=["","One thing","Two things","Three things","Four things"];
+function esc2(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function renderSteps(n){
   CURSTEPS=(typeof stateSteps==="function"?stateSteps(n):[]).slice(0,3);
   document.getElementById("actHead").textContent=(NUMWORD[CURSTEPS.length]||"Things")+" "+n+" could do next";
   var box=document.getElementById("stepList");
   box.innerHTML=CURSTEPS.map(function(st,i){
-    return '<button type="button" class="stepbtn" data-i="'+i+'"><span class="num">'+(i+1)+'</span><span><span class="t"></span><span class="w"></span></span></button>';
+    var tier=(typeof STEP_TIERS!=="undefined"&&STEP_TIERS[st.tier])?'<span class="tier '+st.tier+'">'+STEP_TIERS[st.tier]+'</span>':'';
+    var who=typeof stepWhoText==="function"?stepWhoText(st):"";
+    var isDraft=st.bill&&/draft/i.test(st.bill.status||"");
+    var bill=st.bill&&st.bill.number?' · <b>Bill:</b> '+(isDraft?'being drafted':esc2(st.bill.number)+(st.bill.status?' ('+esc2(st.bill.status)+')':'')):'';
+    var worth=typeof stepWorthText==="function"?stepWorthText(n,st):"";
+    return '<button type="button" class="stepbtn" data-i="'+i+'"><span class="num">'+(i+1)+'</span><span>'+
+      '<span class="t">'+esc2(st.title)+tier+'</span><span class="w">'+esc2(st.why)+'</span>'+
+      '<span class="meta"><b>Who decides:</b> '+esc2(who)+bill+'</span>'+
+      (worth?'<span class="worth">Worth: '+esc2(worth)+'</span>':'')+
+      '</span></button>';
   }).join("");
   Array.prototype.forEach.call(box.querySelectorAll(".stepbtn"),function(b,i){
-    b.querySelector(".t").textContent=CURSTEPS[i].title;
-    b.querySelector(".w").textContent=CURSTEPS[i].why;
     b.addEventListener("click",function(){ pickStep(n,i); });
   });
   pickStep(n,0);
@@ -220,18 +241,31 @@ function pickStep(n,i){
   Array.prototype.forEach.call(document.querySelectorAll("#stepList .stepbtn"),function(b,k){ b.classList.toggle("on",k===i); });
   document.getElementById("actMsg").textContent=messageFor(n,CURSTEP);
   document.getElementById("doneMsg").style.display="none";
+  var info=document.getElementById("stepInfo"), st=CURSTEP||{};
+  if(typeof stepWhen==="function"&&info){
+    var when=stepWhen(n,st), allies=stepAllies(n,st,3), more=stepMore(n,st);
+    var draft=st.bill&&/draft/i.test(st.bill.status||"");
+    var billLine=st.bill&&st.bill.number?(draft?esc2(st.bill.title||"Being drafted"):(st.bill.url?'<a href="'+esc2(st.bill.url)+'" target="_blank" rel="noopener">'+esc2(st.bill.number)+'</a>':esc2(st.bill.number))+(st.bill.title?': '+esc2(st.bill.title):'')):'';
+    var h='<div class="box"><h4>When and where</h4>'+(when?'<div>'+esc2(when)+'</div>':'')+(billLine?'<div style="margin-top:6px"><b>The bill:</b> '+billLine+'</div>':'')+
+      (st.source?'<div style="margin-top:6px;font-size:12px"><a href="'+esc2(st.source)+'" target="_blank" rel="noopener">Source</a></div>':'')+'</div>';
+    h+='<div class="box"><h4>More ways to help</h4><ul>'+more.map(function(x){return '<li>'+esc2(x)+'</li>';}).join('')+'</ul>'+
+      (allies.length?'<h4 style="margin-top:10px">Already working on this</h4><ul>'+allies.map(function(o){return '<li><a href="'+esc2(o.u)+'" target="_blank" rel="noopener">'+esc2(o.n)+'</a></li>';}).join('')+'</ul>':'')+'</div>';
+    info.innerHTML=h;
+  }
+  var rep=document.getElementById("repLink"), who=(st.decider||{}).who;
+  if(rep){
+    if(who==="city"||who==="county"){rep.style.display="none";}
+    else if(who==="council"){rep.style.display="";rep.href="https://dccouncil.gov/councilmembers/";rep.textContent="Find your councilmember →";}
+    else {rep.style.display="";rep.href="https://openstates.org/find_your_legislator/";rep.textContent="Find your legislator →";}
+  }
 }
 
 function messageFor(n,a){
-  var d=STATES[n], r=RANK[n];
-  return "Dear [Representative / Senator],\n\n"+
-  "I'm a constituent writing about drug policy in "+n+".\n\n"+
-  "I've been looking at how our state compares nationally. "+
-  (r?("On overall openness to evidence-based drug policy, "+n+" currently ranks #"+r+" of 50."):(n+" is tracked alongside the fifty states."))+
-  "\n\nI'm asking you to "+a.ask+".\n\n"+
-  "This isn't about being permissive. It's about the gap between what the evidence shows and what our laws say. Alcohol and tobacco — both legal — kill vastly more Americans every year than the substances we police hardest. Policy that ignores that gap doesn't keep anyone safer.\n\n"+
-  "Could you tell me your position on this, and whether you'd support such a measure this session?\n\n"+
-  "Thank you for your time.\n\n[Your name]\n[Your address — so they know you vote in their district]";
+  if(typeof stepLetter==="function") return stepLetter(n,a,RANK[n]);
+  var r=RANK[n];
+  return "Dear [Representative / Senator],\n\nI'm a constituent writing about drug policy in "+n+".\n\n"+
+  (r?("On overall openness to evidence-based drug policy, "+n+" currently ranks #"+r+" of 50."):"")+
+  "\n\nI'm asking you to "+a.ask+".\n\nCould you tell me your position on this, and whether you'd support such a measure this session?\n\nThank you for your time.\n\n[Your name]\n[Your address — so they know you vote in their district]";
 }
 
 var CUR=null;
