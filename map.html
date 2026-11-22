@@ -184,7 +184,7 @@ body.embed nav,body.embed footer{display:none}
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="atlas-data.js?v=20261103-2"></script>
 <script src="atlas-scores.js?v=20261103-2"></script>
-<script src="atlas-orgs.js?v=20261103"></script>
+<script src="atlas-orgs.js?v=20261122"></script>
 <script src="atlas-ketamine.js"></script>
 <script src="atlas-harm.js"></script>
 <script src="atlas-steps.js?v=20261103-2"></script>
@@ -241,7 +241,7 @@ function orgsBlock(n){
   if(!by[cat])return;
   h+='<div class="orggrp"><div class="orggh">'+ORG_CATS[cat].label+'</div>';
   by[cat].forEach(function(o){
-   h+='<span class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>'+(o.city&&o.city!=="Statewide"?' <span class="oc">· '+o.city+'</span>':(o.city==="Statewide"?' <span class="oc">· statewide</span>':''))+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
+   h+='<span class="org">'+(o.u?'<a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>':o.n)+(o.city&&o.city!=="Statewide"?' <span class="oc">· '+o.city+'</span>':(o.city==="Statewide"?' <span class="oc">· statewide</span>':''))+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
   });
   h+='</div>';
  });
@@ -254,7 +254,7 @@ function ketamineBlock(n){
  var list=KETAMINE[n];
  var h='<div class="orgwrap" style="border-left-color:#29b6d8"><div class="steps-h" style="color:#8fd8e6">Local practitioners · '+list.length+' in-person providers</div><div class="orggrp">';
  list.forEach(function(o){
-  h+='<span class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>'+(o.city?' <span class="oc">· '+o.city+'</span>':'')+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
+  h+='<span class="org">'+(o.u?'<a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>':o.n)+(o.city?' <span class="oc">· '+o.city+'</span>':'')+(o.note?'<br><span class="oc">'+o.note+'</span>':'')+'</span>';
  });
  return h+'</div><div class="oc" style="margin-top:8px;font-size:10.5px;color:#8a8a82">In-person clinics, verified 2026. Informational only — not an endorsement or medical advice.</div></div>';
 }

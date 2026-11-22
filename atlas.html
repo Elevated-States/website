@@ -202,7 +202,7 @@
 
 <script src="atlas-data.js?v=20261103-2"></script>
 <script src="atlas-scores.js?v=20261103-2"></script>
-<script src="atlas-orgs.js?v=20261103"></script>
+<script src="atlas-orgs.js?v=20261122"></script>
 <script src="counts.js"></script>
 <script>
 /* ---- Scoreboard: 4 tabbed leaderboards, each with an explainer ---- */
@@ -241,7 +241,7 @@
   sel.innerHTML="<option value=''>Choose a state…</option>"+(NAT.length?"<option value='"+NATKEY+"'>National groups ("+NAT.length+")</option>":"")+states.map(function(s){return "<option value='"+s+"'>"+s+" ("+ORGS[s].length+")</option>";}).join("");
   chips.innerHTML="<button class='catchip on' data-c=''>All categories</button>"+ORG_CAT_ORDER.map(function(c){return "<button class='catchip' data-c='"+c+"' style=''>"+ORG_CATS[c].label+"</button>";}).join("");
   function card(o,st){var col=ORG_CATS[o.cat].color;
-    return "<div class='orgcard' style='border-left-color:"+col+"'><h4><a href='"+o.u+"' target='_blank' rel='noopener'>"+o.n+" <span class='ext'>↗</span></a></h4><div class='orgmeta' style='color:"+col+"'>"+ORG_CATS[o.cat].label+(o.city?" · "+o.city:"")+(st?" · "+st:"")+"</div>"+(o.note?"<p>"+o.note+"</p>":"")+"</div>";}
+    return "<div class='orgcard' style='border-left-color:"+col+"'><h4>"+(o.u?"<a href='"+o.u+"' target='_blank' rel='noopener'>"+o.n+" <span class='ext'>↗</span></a>":o.n)+"</h4><div class='orgmeta' style='color:"+col+"'>"+ORG_CATS[o.cat].label+(o.city?" · "+o.city:"")+(st?" · "+st:"")+"</div>"+(o.note?"<p>"+o.note+"</p>":"")+"</div>";}
   function matchCat(o){return !curCat||o.cat===curCat;}
   function matchQ(o,st){if(!query)return true;var q=query.toLowerCase();return (o.n+" "+(o.city||"")+" "+(o.note||"")+" "+st).toLowerCase().indexOf(q)>=0;}
   function grouped(list){var by={},h="";list.filter(matchCat).forEach(function(o){(by[o.cat]=by[o.cat]||[]).push(o);});

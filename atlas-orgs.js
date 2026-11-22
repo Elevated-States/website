@@ -11,7 +11,7 @@
    sells, distributes or helps people obtain drugs. Educational only.
    Checked monthly; last updated 2026-11 (runbook: Directory upkeep/README.md).
 
-   ORGS[state] = [ {n:name, cat, city, u:url, note}, ... ]
+   ORGS[state] = [ {n:name, cat, city, u:url, note}, ... ]  (u may be left out while a group's site is down; pages then show the name without a link)
    NATIONAL_ORGS = [ {n, cat, city, u, note}, ... ]
    cat ∈ reform | harm | research | community | veterans | church | education
    ============================================================ */
@@ -40,7 +40,9 @@ var ORGS = {
  {n:"Megan's Place (Homer Exchange)",cat:"harm",city:"Homer",u:"https://sphosp.org/health-wellness/recovery-support",note:"Monthly volunteer syringe exchange, naloxone, HIV/HCV testing"},
  {n:"Recover Alaska",cat:"harm",city:"Anchorage",u:"https://recoveralaska.org",note:"Statewide alcohol harm-reduction and recovery coalition"},
  {n:"iKnowMine (ANTHC)",cat:"education",city:"Anchorage",u:"https://iknowmine.org",note:"Youth health education, mailed harm-reduction supplies"},
- {n:"UAA Center for Behavioral Health Research & Services",cat:"research",city:"Anchorage",u:"https://iseralaska.org/cbhrs",note:"University substance-misuse and behavioral-health research"}
+ {n:"UAA Center for Behavioral Health Research & Services",cat:"research",city:"Anchorage",u:"https://iseralaska.org/cbhrs",note:"University substance-misuse and behavioral-health research"},
+ {n:"Alaska Entheogenic Awareness Council (AKEAC)",cat:"community",city:"Anchorage",u:"https://www.akeac49.org/",note:"Education and advocacy on entheogenic plant medicines; monthly speaker series; puts on Arctic Visions, Alaska's annual psychedelic conference at UAA"},
+ {n:"Natural Medicine Alaska",cat:"reform",city:"Anchorage",note:"Indigenous-led campaign behind the Alaska Natural Medicine Act, modeled on Colorado's; missed the 2026 ballot, now aiming for 2028"}
 ],
 "Arizona":[
  {n:"Sonoran Prevention Works",cat:"harm",city:"Tempe",u:"https://spwaz.org/",note:"Statewide syringe access, naloxone, user advocacy"},

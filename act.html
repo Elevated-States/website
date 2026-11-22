@@ -194,7 +194,7 @@ footer .c{font-size:12px;color:var(--mute)}
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 <script src="atlas-data.js?v=20261103-2"></script>
 <script src="atlas-scores.js?v=20261103-2"></script>
-<script src="atlas-orgs.js?v=20261103"></script>
+<script src="atlas-orgs.js?v=20261122"></script>
 <script src="atlas-steps.js?v=20261103-2"></script>
 <script>
 var DC="District of Columbia";
@@ -249,7 +249,7 @@ function pickStep(n,i){
     var h='<div class="box"><h4>When and where</h4>'+(when?'<div>'+esc2(when)+'</div>':'')+(billLine?'<div style="margin-top:6px"><b>The bill:</b> '+billLine+'</div>':'')+
       (st.source?'<div style="margin-top:6px;font-size:12px"><a href="'+esc2(st.source)+'" target="_blank" rel="noopener">Source</a></div>':'')+'</div>';
     h+='<div class="box"><h4>More ways to help</h4><ul>'+more.map(function(x){return '<li>'+esc2(x)+'</li>';}).join('')+'</ul>'+
-      (allies.length?'<h4 style="margin-top:10px">Already working on this</h4><ul>'+allies.map(function(o){return '<li><a href="'+esc2(o.u)+'" target="_blank" rel="noopener">'+esc2(o.n)+'</a></li>';}).join('')+'</ul>':'')+'</div>';
+      (allies.length?'<h4 style="margin-top:10px">Already working on this</h4><ul>'+allies.map(function(o){return '<li>'+(o.u?'<a href="'+esc2(o.u)+'" target="_blank" rel="noopener">'+esc2(o.n)+'</a>':esc2(o.n))+'</li>';}).join('')+'</ul>':'')+'</div>';
     info.innerHTML=h;
   }
   var rep=document.getElementById("repLink"), who=(st.decider||{}).who;
@@ -290,7 +290,7 @@ function show(n){
     var list=ORGS[n].slice().sort(function(a,b){return (pri[a.cat]==null?9:pri[a.cat])-(pri[b.cat]==null?9:pri[b.cat]);}).slice(0,6);
     document.getElementById("orgSub").textContent=ORGS[n].length+" local organizations are working on this in "+n+". These are a place to start.";
     document.getElementById("orgList").innerHTML=list.map(function(o){
-      return '<div class="org"><a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a><div class="m">'+(o.city&&o.city!=="Statewide"?o.city:"Statewide")+(o.note?" · "+o.note:"")+'</div></div>';
+      return '<div class="org">'+(o.u?'<a href="'+o.u+'" target="_blank" rel="noopener">'+o.n+'</a>':o.n)+'<div class="m">'+(o.city&&o.city!=="Statewide"?o.city:"Statewide")+(o.note?" · "+o.note:"")+'</div></div>';
     }).join("")+(typeof NATIONAL_ORGS!=="undefined"&&NATIONAL_ORGS.length?'<div class="org"><a href="atlas.html#national-groups">Plus '+NATIONAL_ORGS.length+' national groups that work in every state →</a></div>':'');
   } else { oc.style.display="none"; }
   document.getElementById("alertState").value=n;
