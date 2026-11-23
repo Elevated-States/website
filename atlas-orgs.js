@@ -41,8 +41,8 @@ var ORGS = {
  {n:"Recover Alaska",cat:"harm",city:"Anchorage",u:"https://recoveralaska.org",note:"Statewide alcohol harm-reduction and recovery coalition"},
  {n:"iKnowMine (ANTHC)",cat:"education",city:"Anchorage",u:"https://iknowmine.org",note:"Youth health education, mailed harm-reduction supplies"},
  {n:"UAA Center for Behavioral Health Research & Services",cat:"research",city:"Anchorage",u:"https://iseralaska.org/cbhrs",note:"University substance-misuse and behavioral-health research"},
- {n:"Alaska Entheogenic Awareness Council (AKEAC)",cat:"community",city:"Anchorage",u:"https://www.akeac49.org/",note:"Education and advocacy on entheogenic plant medicines; monthly speaker series; puts on Arctic Visions, Alaska's annual psychedelic conference at UAA"},
- {n:"Natural Medicine Alaska",cat:"reform",city:"Anchorage",note:"Indigenous-led campaign behind the Alaska Natural Medicine Act, modeled on Colorado's; missed the 2026 ballot, now aiming for 2028"}
+ {n:"Alaska Entheogenic Awareness Council (AKEAC)",cat:"community",city:"Anchorage",u:"https://www.akeac49.org/",note:"Entheogen education and advocacy; monthly speakers; runs the Arctic Visions conference"},
+ {n:"Natural Medicine Alaska",cat:"reform",city:"Anchorage",u:"",note:"Indigenous-led campaign for the Alaska Natural Medicine Act, aiming for the 2028 ballot"}
 ],
 "Arizona":[
  {n:"Sonoran Prevention Works",cat:"harm",city:"Tempe",u:"https://spwaz.org/",note:"Statewide syringe access, naloxone, user advocacy"},
@@ -54,7 +54,6 @@ var ORGS = {
  {n:"Arizona Psychedelic Society",cat:"community",city:"Phoenix",u:"https://www.meetup.com/arizona-psychedelic-society/",note:"Educational events, socials, psychedelic-science awareness"},
  {n:"Phoenix Psychedelic Society",cat:"community",city:"Phoenix",u:"https://phoenixpsychedelic.org/",note:"Free integration circles and talks, mostly online"},
  {n:"Southwest Recovery Alliance",cat:"harm",city:"Phoenix",u:"https://www.southwestrecoveryalliance.com/",note:"Peer-led harm reduction, mobile syringe services, advocacy"},
- {n:"Psychedelic Association of Arizona (PAAZ)",cat:"reform",city:"Statewide",u:"https://paaz.org/",note:"Nonprofit pushing for legal access to psychedelic-assisted therapy in Arizona"},
  {n:"Tucson Psychedelic Society",cat:"community",city:"Tucson",u:"https://www.meetup.com/tucson-psychedelic-society/",note:"Community meetups on psychedelic education, legalization and responsible use"}
 ],
 "Arkansas":[
@@ -73,7 +72,6 @@ var ORGS = {
  {n:"UCSF Neuroscape Psychedelics Division",cat:"research",city:"San Francisco",u:"https://neuroscape.ucsf.edu/psychedelics/",note:"Clinical psychedelic and neuroimaging research"},
  {n:"Stanford Psychedelic Science Group",cat:"research",city:"Stanford",u:"https://med.stanford.edu/spsg.html",note:"Psilocybin, MDMA, ketamine research and education"},
  {n:"Aware Project: Rethinking Psychedelics",cat:"community",city:"Los Angeles",u:"https://awareproject.org",note:"Southern California psychedelic education society"},
- {n:"San Francisco Psychedelic Society",cat:"community",city:"San Francisco",u:"https://psychedelicsocietysf.org",note:"Integration circles and community events"},
  {n:"PsychedeLiA",cat:"community",city:"Los Angeles",u:"https://www.psychedeliaintegration.org",note:"LA integration circles and workshops since 2016"},
  {n:"Queer Psychedelic Society",cat:"community",city:"San Diego",u:"https://www.queerpsychedelicsociety.com",note:"LGBTQ-focused psychedelic community and events"},
  {n:"California NORML",cat:"reform",city:"San Francisco",u:"https://www.canorml.org/",note:"State cannabis-consumer advocacy since 1972; lobbying and legal info"},
@@ -96,26 +94,21 @@ var ORGS = {
  {n:"The Works Program",cat:"harm",city:"Boulder",u:"https://bouldercounty.gov/families/disease/the-works-program/",note:"Free anonymous Boulder County syringe access"},
  {n:"Access Point — Colorado Health Network",cat:"harm",city:"Denver",u:"https://coloradohealthnetwork.org/prevention-health-education/access-point/",note:"Statewide syringe exchange and overdose prevention"},
  {n:"CU Denver Center for Psychedelic Research",cat:"research",city:"Denver",u:"https://clas.ucdenver.edu/psychedelic-research/",note:"Transdisciplinary psychedelic science and public health"},
- {n:"University of Colorado Psychedelic Research Consortium",cat:"research",city:"Aurora",u:"https://medschool.cuanschutz.edu/psychiatry/BBICen/psychedelic-research-consortium",note:"CU Anschutz and CU Denver joint psychedelic research consortium"},
  {n:"Naropa University Psychedelic Studies Minor",cat:"education",city:"Boulder",u:"https://www.naropa.edu/academics/undergraduate-academics/psychedelic-studies-minor-at-naropa-university/",note:"Undergraduate minor in psychedelic studies"},
  {n:"The Nowak Society",cat:"community",city:"Boulder",u:"https://www.thenowaksociety.org/",note:"Nonprofit hosting Psychedelic Professionals meetups statewide"},
  {n:"Next Chapter",cat:"veterans",city:"Colorado Springs",u:"https://nextchapterco.org/",note:"No-cost counseling and support for veterans and families"},
  {n:"Colorado Consortium for Prescription Drug Misuse Prevention",cat:"education",city:"Aurora",u:"https://corxconsortium.org/",note:"Statewide drug education, naloxone, prevention"},
- {n:"ACT on Drugs",cat:"education",city:"Thornton",u:"https://actondrugs.org/",note:"Drug-education nonprofit by former forensic chemist"},
- {n:"Aspen Psychedelic Resource Center",cat:"education",city:"Aspen",u:"https://aspenpsychedelicresourcecenter.org/",note:"Nonprofit psychedelic education; hosts Aspen Psychedelic Symposium"},
- {n:"Colorado Psychedelic Society",cat:"community",city:"Boulder",u:"https://www.meetup.com/coloradopsychedelicsociety/",note:"Boulder Meetup group for psychedelic education, integration and Prop 122 discussion"}
+ {n:"Aspen Psychedelic Resource Center",cat:"education",city:"Aspen",u:"https://aspenpsychedelicresourcecenter.org/",note:"Nonprofit psychedelic education; hosts Aspen Psychedelic Symposium"}
 ],
 "Connecticut":[
  {n:"Connecticut Harm Reduction Alliance",cat:"harm",city:"Hartford",u:"https://www.ghhrc.org",note:"Statewide syringe services, naloxone, outreach"},
  {n:"Yale Program for Psychedelic Science",cat:"research",city:"New Haven",u:"https://medicine.yale.edu/psychiatry/research/clinics-and-programs/psychedelic/",note:"Psilocybin studies in depression, OCD and headache; MDMA in PTSD"},
- {n:"ACLU of Connecticut",cat:"reform",city:"Hartford",u:"https://www.acluct.org",note:"Opposes criminal prohibition of drugs"},
  {n:"Alliance for Living",cat:"harm",city:"New London",u:"https://www.allianceforliving.org",note:"New London syringe services, HIV/HCV testing and housing help"},
  {n:"Greater Bridgeport Area Prevention Program (GBAPP)",cat:"harm",city:"Bridgeport",u:"https://www.gbapp.org/",note:"Bridgeport HIV nonprofit offering free Narcan with training and HIV and Hep C testing"}
 ],
 "Delaware":[
  {n:"Brandywine Counseling & Community Services",cat:"harm",city:"Wilmington",u:"https://www.brandywinecounseling.org",note:"Delaware syringe services and treatment provider"},
  {n:"atTAcK addiction",cat:"harm",city:"Newark",u:"https://www.attackaddiction.org",note:"Overdose awareness and community naloxone"},
- {n:"UD Center for Drug & Health Studies",cat:"research",city:"Newark",u:"https://cdhs.udel.edu",note:"University substance-use and health-policy research"},
  {n:"Delaware Center for Justice",cat:"reform",city:"Wilmington",u:"https://www.dcjustice.org",note:"Criminal-legal reform advocacy and reentry services"},
  {n:"AIDS Delaware",cat:"harm",city:"Wilmington",u:"https://www.aidsdelaware.org",note:"HIV testing, PrEP, case management and education"},
  {n:"Help Is Here Delaware",cat:"harm",city:"Statewide",u:"https://www.helpisherede.com",note:"State hub: free naloxone, test strips, harm reduction vending"}
@@ -156,7 +149,6 @@ var ORGS = {
 ],
 "Hawaii":[
  {n:"Hawaii Health & Harm Reduction Center",cat:"harm",city:"Honolulu",u:"https://www.hhhrc.org/",note:"Statewide syringe exchange, naloxone, prevention"},
- {n:"Drug Policy Forum of Hawai'i",cat:"reform",city:"Honolulu",u:"https://www.facebook.com/DrugPolicyForumHI/",note:"Longtime statewide drug-policy reform advocacy"},
  {n:"Hawai'i Alliance for Cannabis Reform",cat:"reform",city:"Honolulu",u:"https://www.legalizehawaii.org/",note:"Coalition to end cannabis prohibition"},
  {n:"The Clarity Project",cat:"reform",city:"Honolulu",u:"https://www.clarityproject.org/",note:"Citizen initiative expanding psilocybin-therapy access"},
  {n:"Kumukahi Health + Wellness (formerly Hawaii Island HIV/AIDS Foundation)",cat:"harm",city:"Hilo",u:"https://www.kumukahihealth.org/",note:"Hawai'i Island syringe exchange, Narcan training, HIV/HCV testing"},
@@ -164,7 +156,6 @@ var ORGS = {
 ],
 "Idaho":[
  {n:"Kind Idaho",cat:"reform",city:"Boise",u:"https://www.kindidaho.org/",note:"Cannabis patient advocacy; 2026 ballot initiative"},
- {n:"Idaho Harm Reduction Project",cat:"harm",city:"Boise",u:"https://www.idahoharmreductionproject.org/",note:"Syringe exchange, mailed naloxone, found-syringe pickup"},
  {n:"Idaho Psychedelic Society",cat:"community",city:"Boise",u:"https://www.idahopsychedelicsociety.org/",note:"Education, discussion, and community"},
  {n:"Boise State Institute for the Study of Behavioral Health & Addiction",cat:"research",city:"Boise",u:"https://www.boisestate.edu/healthsciences-instituteforthestudyofaddiction/",note:"Addiction research, training, and Idaho's RADAR prevention center"},
  {n:"Project ECHO Idaho",cat:"education",city:"Moscow",u:"https://www.uidaho.edu/health-medical-professions/idaho-underserved-rural-medical/echo",note:"Clinician training on opioids and substance use"},
@@ -197,10 +188,8 @@ var ORGS = {
  {n:"Damien Center",cat:"harm",city:"Indianapolis",u:"https://damien.org/community-health/safer-steps",note:"HIV care hub; Safer Steps syringe exchange, naloxone and safer-use kits"}
 ],
 "Iowa":[
- {n:"Iowa Harm Reduction Coalition",cat:"harm",city:"Des Moines",u:"https://www.iowaharmreductioncoalition.org/",note:"Statewide syringe access, naloxone, user health"},
  {n:"Naloxone Iowa",cat:"harm",city:"Statewide",u:"https://www.naloxoneiowa.org/",note:"Statewide naloxone finder and overdose training"},
  {n:"University of Iowa Psychedelics Research Program",cat:"research",city:"Iowa City",u:"https://psychedelics.lab.uiowa.edu/",note:"Psilocybin and ketamine for alcohol-use disorder"},
- {n:"YSS (Youth & Shelter Services)",cat:"education",city:"Ames",u:"https://www.yss.org/",note:"Youth prevention education, counseling, Ember youth addiction treatment"},
  {n:"Steps of Hope Iowa",cat:"harm",city:"Statewide",u:"https://stepsofhopeiowa.org/",note:"Free naloxone boxes in 26 Iowa counties; family support and a yearly overdose walk"},
  {n:"Substance Misuse Committee of Linn County",cat:"harm",city:"Cedar Rapids",u:"https://smclinn.org/",note:"Seven free naloxone and harm-reduction vending machines across Linn County"}
 ],
@@ -223,17 +212,14 @@ var ORGS = {
 "Louisiana":[
  {n:"Trystereo",cat:"harm",city:"New Orleans",u:"https://trystereo.org/",note:"Harm-reduction supplies, naloxone, wound care, trainings"},
  {n:"CrescentCare — Overdose Prevention",cat:"harm",city:"New Orleans",u:"https://www.crescentcare.org/service/overdose-prevention/",note:"Clinic; syringe access and overdose prevention"},
- {n:"Odyssey House Louisiana",cat:"harm",city:"New Orleans",u:"https://www.ohlinc.org/",note:"Addiction treatment and harm-reduction services"},
  {n:"ULM HERO Program",cat:"harm",city:"Monroe",u:"https://ulm.edu/hero/",note:"University harm-reduction education and naloxone"},
  {n:"Northeast Delta Human Services Authority",cat:"harm",city:"Monroe",u:"https://nedeltahsa.org/services/opioid-recovery/",note:"12-parish public agency; overdose prevention, peer support, MAT"},
  {n:"LEAD New Orleans",cat:"reform",city:"New Orleans",u:"https://leadneworleans.org/",note:"Law-enforcement diversion instead of drug arrests"},
  {n:"Women With A Vision",cat:"harm",city:"New Orleans",u:"https://www.wwav-no.org/",note:"Harm reduction, drug-policy and decriminalization advocacy for women"},
- {n:"Acadiana CARES",cat:"harm",city:"Lafayette",u:"https://www.acadianacares.org/",note:"HIV/HCV care, PrEP, residential and outpatient substance-use treatment"},
  {n:"Psychedelic Society of New Orleans",cat:"community",city:"New Orleans",u:"https://www.psychedelicsocietynola.com/",note:"Membership society with monthly discussion groups, film nights and community gatherings"}
 ],
 "Maine":[
  {n:"Maine Access Points",cat:"harm",city:"Statewide",u:"https://www.maineaccesspoints.org",note:"Naloxone, overdose prevention, harm reduction"},
- {n:"Health Equity Alliance (HEAL)",cat:"harm",city:"Bangor",u:"https://www.mainehealthequity.org",note:"Safer-use supplies, naloxone, HIV care and homeless services"},
  {n:"Maine OPTIONS Initiative",cat:"harm",city:"Statewide",u:"https://knowyouroptions.me",note:"State overdose outreach: county liaisons, naloxone, safer-use info"},
  {n:"Coastal Recovery Community Center",cat:"harm",city:"Rockland",u:"https://www.rocklandrecovery.org/",note:"Peer recovery center with syringe exchange, Narcan training and harm-reduction supplies"},
  {n:"Maine Recovery Access Project (ME-RAP)",cat:"harm",city:"Augusta",u:"https://www.me-rap.org/",note:"Statewide recovery advocacy; Augusta access center offering naloxone and harm reduction"},
@@ -264,7 +250,6 @@ var ORGS = {
  {n:"Entheogen Melanin Collective",cat:"community",city:"Boston",u:"https://emcollective.org",note:"Melanated-led psychedelic education, integration and healing community"},
  {n:"Safer Psychedelics Association of New England (SPAN)",cat:"harm",city:"Boston",u:"https://spanbase.org",note:"Free psychedelic safety and harm-reduction education and trainings"},
  {n:"MassCann (Massachusetts Cannabis Reform Coalition)",cat:"reform",city:"Statewide",u:"https://www.masscann.org",note:"Grassroots cannabis reform coalition; runs the Boston Freedom Rally"},
- {n:"ACLU of Massachusetts",cat:"reform",city:"Boston",u:"https://www.aclum.org/",note:"Civil-liberties group working to decriminalize substance use disorders"},
  {n:"Massachusetts Organization for Addiction Recovery (MOAR)",cat:"community",city:"Boston",u:"https://www.moar-recovery.org/",note:"Statewide recovery advocacy: policy forums, Action for Recovery meetings, events"},
  {n:"Recovery Research Institute (Mass General)",cat:"research",city:"Boston",u:"https://www.recoveryanswers.org/",note:"Mass General addiction-recovery research institute; plain-language research bulletin"},
  {n:"Health in Justice Action Lab (Northeastern University)",cat:"research",city:"Boston",u:"https://www.healthinjustice.org/",note:"Law and public-health research on drug-induced homicide laws, harm reduction and policing"}
@@ -274,12 +259,8 @@ var ORGS = {
  {n:"Grand Rapids Red Project",cat:"harm",city:"Grand Rapids",u:"https://www.redproject.org",note:"Syringe services, naloxone, HIV testing, mobile unit, recovery coaching"},
  {n:"Harm Reduction Michigan",cat:"harm",city:"Traverse City",u:"https://harmreductionmi.org",note:"Naloxone boxes, syringe access, drug checking across northern Michigan"},
  {n:"Michigan Overdose Prevention Coalition",cat:"harm",city:"Statewide",u:"https://mioverdoseprevention.com",note:"Grassroots overdose-prevention advocacy"},
- {n:"Detroit Recovery Project",cat:"harm",city:"Detroit",u:"https://www.recovery4detroit.com",note:"Peer recovery, street outreach, HIV/HCV testing, overdose training"},
  {n:"Michigan OPEN",cat:"harm",city:"Ann Arbor",u:"https://michigan-open.org",note:"Naloxone, safer-use supplies, overdose education"},
- {n:"NEXT Distro Michigan",cat:"harm",city:"Statewide",u:"https://nextdistro.org/michigan",note:"Mail-based naloxone and harm-reduction supplies"},
  {n:"Michigan Psychedelic Center (M-PsyC)",cat:"research",city:"Ann Arbor",u:"https://michiganpsychedelic.med.umich.edu",note:"U-M clinical and neuroscience psychedelic center"},
- {n:"Wayne State Addiction Psychiatry",cat:"research",city:"Detroit",u:"https://psychiatry.med.wayne.edu/addiction-psychiatry",note:"Addiction psychiatry fellowship; Substance Abuse Research Division"},
- {n:"Eisenberg Family Depression Center",cat:"research",city:"Ann Arbor",u:"https://depressioncenter.org",note:"U-M depression research exploring novel treatments"},
  {n:"Face Addiction Now",cat:"education",city:"Clinton Township",u:"https://faceaddictionnow.org",note:"Hope Not Handcuffs, naloxone, street outreach, family support"},
  {n:"Vivent Health — Metro Detroit",cat:"harm",city:"Highland Park",u:"https://viventhealth.org/locations/metro-detroit/",note:"Syringe services, naloxone, test strips, HIV care; Ypsilanti site too"},
  {n:"Michigan NORML",cat:"reform",city:"Statewide",u:"https://www.minorml.org/",note:"State NORML affiliate advocating for cannabis consumer and patient rights"},
@@ -288,9 +269,7 @@ var ORGS = {
 "Minnesota":[
  {n:"Southside Harm Reduction Services",cat:"harm",city:"Minneapolis",u:"https://shrs.org",note:"Syringe services, safe-use supplies, overdose prevention"},
  {n:"Steve Rummler HOPE Network",cat:"harm",city:"St. Paul",u:"https://steverummlerhopenetwork.org",note:"Naloxone distribution and overdose-prevention advocacy"},
- {n:"Valhalla Place",cat:"harm",city:"Woodbury",u:"https://valhallaplace.com",note:"Addiction treatment; naloxone and syringe access"},
  {n:"Rural AIDS Action Network",cat:"harm",city:"St. Cloud",u:"https://raan.org",note:"Syringe exchanges, naloxone, HIV testing, rural MN"},
- {n:"NUWAY Alliance",cat:"harm",city:"Minneapolis",u:"https://nuway.org",note:"Nonprofit residential addiction and mental health treatment"},
  {n:"The Aliveness Project",cat:"harm",city:"Minneapolis",u:"https://aliveness.org",note:"HIV services, syringe access, overdose prevention"},
  {n:"Native American Community Clinic",cat:"harm",city:"Minneapolis",u:"https://nacc-healthcare.org",note:"Native-led clinic offering harm reduction"},
  {n:"PLURderapolis",cat:"harm",city:"Minneapolis",u:"https://plurderapolis.org",note:"Rave harm-reduction booths, Narcan and test-strip education"},
@@ -311,8 +290,8 @@ var ORGS = {
 "Mississippi":[
  {n:"End It For Good",cat:"reform",city:"Jackson",u:"https://enditforgood.com",note:"Nonprofit for health-based drug-policy reform"},
  {n:"Mississippi Harm Reduction",cat:"harm",city:"Jackson",u:"https://msharmreduction.org",note:"Free naloxone, recovery housing, HIV prevention"},
- {n:"Ole Miss Marijuana Research Project (NCNPR)",cat:"research",city:"University",u:"https://pharm.olemiss.edu/marijuana/",note:"Longtime federally licensed cannabis research"},
- {n:"National Center for Cannabis Research & Education",cat:"research",city:"University",u:"https://olemiss.edu/nccre/",note:"Ole Miss national cannabis research/education center"},
+ {n:"Ole Miss Marijuana Research Project (NCNPR)",cat:"research",city:"Oxford",u:"https://pharm.olemiss.edu/marijuana/",note:"Longtime federally licensed cannabis research"},
+ {n:"National Center for Cannabis Research & Education",cat:"research",city:"Oxford",u:"https://olemiss.edu/nccre/",note:"Ole Miss national cannabis research/education center"},
  {n:"Make Mississippi OD Free",cat:"harm",city:"Statewide",u:"https://odfree.org/",note:"Statewide overdose-prevention campaign with free naloxone kit requests and OD alerts"}
 ],
 "Missouri":[
@@ -320,7 +299,6 @@ var ORGS = {
  {n:"Taylor Family Institute for Innovative Psychiatric Research",cat:"research",city:"St. Louis",u:"https://taylorfamilyinstitute.wustl.edu/",note:"Psychiatric drug discovery and novel therapeutics"},
  {n:"SLU Addiction Medicine Fellowship",cat:"education",city:"St. Louis",u:"https://www.slu.edu/medicine/family-medicine/fellowships/addiction-medicine.php",note:"Addiction-medicine fellowship incl. harm-reduction training"},
  {n:"MoNetwork (Missouri Network)",cat:"harm",city:"St. Louis",u:"https://www.monetwork.org",note:"Wound care, peer support, street outreach"},
- {n:"Assisted Recovery Centers of America",cat:"harm",city:"St. Louis",u:"https://www.arcamidwest.com",note:"Addiction treatment, naloxone vending machines"},
  {n:"No MO Deaths",cat:"harm",city:"Statewide",u:"https://nomodeaths.org",note:"Statewide naloxone and Medication-First access"},
  {n:"PreventEd",cat:"education",city:"St. Louis",u:"https://prevented.org",note:"Drug education, Narcan distribution, advocacy"},
  {n:"Vivent Health — St. Louis",cat:"harm",city:"St. Louis",u:"https://viventhealth.org/locations/st-louis-locust-street/",note:"Harm-reduction services, naloxone, HIV testing and primary care"},
@@ -358,7 +336,6 @@ var ORGS = {
  {n:"SOS Recovery Community Organization",cat:"community",city:"Dover",u:"https://sosrco.org",note:"Peer recovery centers and syringe service provider"},
  {n:"HIV/HCV Resource Center",cat:"harm",city:"Lebanon",u:"http://www.h2rc.org",note:"Upper Valley mobile syringe services, HIV/HCV testing and care"},
  {n:"Revive Recovery Resource Center",cat:"community",city:"Nashua",u:"https://www.reviverecovery.org",note:"Peer recovery center running Greater Nashua syringe services (SSANA)"},
- {n:"MWV Supports Recovery Coalition",cat:"community",city:"Conway",u:"https://mwvsupportsrecovery.org",note:"Recovery community center and Mt. Washington Valley syringe services"},
  {n:"Merrimack Valley Assistance Program (MVAP)",cat:"harm",city:"Manchester",u:"https://mvap.org/",note:"HIV services nonprofit with a syringe exchange and naloxone for enrolled clients"}
 ],
 "New Jersey":[
@@ -381,10 +358,8 @@ var ORGS = {
  {n:"New Mexico Harm Reduction Collaborative",cat:"harm",city:"Albuquerque",u:"https://www.nmhrc.org/",note:"Syringe services, overdose prevention, drug checking"},
  {n:"Alianza of New Mexico",cat:"harm",city:"Las Cruces",u:"https://www.alianzaofnewmexico.org/",note:"Syringe services, free Narcan, drug checking"},
  {n:"The Mountain Center",cat:"harm",city:"Santa Fe",u:"https://themountaincenter.org/",note:"Clean needles, naloxone, behavioral health"},
- {n:"Santa Fe Recovery Center",cat:"community",city:"Santa Fe",u:"https://www.sfrecovery.org/",note:"Detox, residential and outpatient treatment, MAT; Santa Fe and Gallup"},
  {n:"Santa Fe Psychedelic Society",cat:"community",city:"Santa Fe",u:"https://santafepsychedelicsociety.com/",note:"Peer-led education, dialogue, integration"},
- {n:"UNM Center on Alcohol, Substance use & Addictions",cat:"research",city:"Albuquerque",u:"https://casaa.unm.edu/",note:"NIH-funded addiction and substance-use research"},
- {n:"UNM Dept. of Psychiatry & Behavioral Sciences",cat:"research",city:"Albuquerque",u:"https://hsc.unm.edu/medicine/departments/psychiatry/",note:"Behavioral health, addiction, treatment research"}
+ {n:"UNM Center on Alcohol, Substance use & Addictions",cat:"research",city:"Albuquerque",u:"https://casaa.unm.edu/",note:"NIH-funded addiction and substance-use research"}
 ],
 "New York":[
  {n:"OnPoint NYC",cat:"harm",city:"New York",u:"https://onpointnyc.org",note:"Nation's first overdose prevention centers"},
@@ -403,7 +378,7 @@ var ORGS = {
  {n:"New York State Harm Reduction Association (NYSHRA)",cat:"harm",city:"Binghamton",u:"https://nyshra.org/",note:"Statewide coalition of harm reduction groups: policy advocacy, town halls, conference"},
  {n:"The Psychedelic Assembly",cat:"community",city:"New York",u:"https://www.thepsychedelicassembly.com/",note:"Member-supported NYC community group hosting psychedelic culture and education events"},
  {n:"Truth Pharm",cat:"harm",city:"Binghamton",u:"https://truthpharm.org/",note:"Overdose awareness, harm-reduction education and opioid-settlement advocacy in Binghamton"},
- {n:"Harlem United",cat:"harm",city:"New York City",u:"https://www.harlemunited.org/",note:"HIV care, housing and harm reduction nonprofit with one of NYC's first syringe exchanges"}
+ {n:"Harlem United",cat:"harm",city:"New York",u:"https://www.harlemunited.org/",note:"HIV care, housing and harm reduction nonprofit with one of NYC's first syringe exchanges"}
 ],
 "North Carolina":[
  {n:"NC Harm Reduction Coalition",cat:"harm",city:"Raleigh",u:"https://www.nchrc.org/",note:"Statewide harm reduction, overdose prevention, advocacy"},
@@ -428,7 +403,6 @@ var ORGS = {
  {n:"The ONE Program (Opioid & Naloxone Education)",cat:"harm",city:"Fargo",u:"https://one-program.org",note:"NDSU pharmacy overdose-prevention; tribal & statewide"},
  {n:"NDSU Center for Collaboration & Advancement in Pharmacy",cat:"research",city:"Fargo",u:"https://www.ndsu.edu/centers/cap",note:"Opioid/naloxone and hepatitis-C research"},
  {n:"Fargo Cass Public Health Harm Reduction Division",cat:"harm",city:"Fargo",u:"https://fargond.gov/city-government/departments/fargo-cass-public-health/harm-reduction-division",note:"Syringe services, harm reduction center, outreach, withdrawal care"},
- {n:"Heartview Foundation",cat:"harm",city:"Bismarck",u:"https://heartview.org/",note:"Nonprofit addiction treatment and opioid treatment program"},
  {n:"Bismarck-Burleigh Public Health — Substance Abuse Prevention",cat:"harm",city:"Bismarck",u:"https://www.bismarcknd.gov/1867/Substance-Abuse-Prevention",note:"Free Narcan training for groups, medication disposal bags"}
 ],
 "Ohio":[
@@ -436,7 +410,7 @@ var ORGS = {
  {n:"The SOAR Initiative",cat:"harm",city:"Columbus",u:"https://thesoarinitiative.org/",note:"Bad-batch alerts, outreach, free naloxone and test-strip directory"},
  {n:"Equitas Health Safe Point",cat:"harm",city:"Columbus",u:"https://safepointohio.org/",note:"Syringe exchange, naloxone, HIV and hep C testing"},
  {n:"Northwest Ohio Safe Services (NOSS)",cat:"harm",city:"Toledo",u:"https://lucascountyhealth.com/lc-opiate-coalition/syringe-services/",note:"Syringe exchange, naloxone, overdose supplies"},
- {n:"Project DAWN",cat:"harm",city:"Columbus",u:"https://odh.ohio.gov/know-our-programs/project-dawn/",note:"Statewide naloxone distribution, 100+ sites"},
+ {n:"Project DAWN",cat:"harm",city:"Columbus",u:"https://odh.ohio.gov/know-our-programs/project-dawn/project-dawn",note:"Statewide naloxone distribution, 100+ sites"},
  {n:"OSU Center for Psychedelic Drug Research & Education",cat:"research",city:"Columbus",u:"https://www.cpdre.org/",note:"Psychedelic trials, public-health research, certificate"},
  {n:"Cincinnati Psychedelic Society",cat:"community",city:"Cincinnati",u:"https://www.meetup.com/cincinnati-psychedelic-society/",note:"Education and peer support meetups"},
  {n:"Entheogenic Society of Greater Dayton",cat:"community",city:"Dayton",u:"https://www.meetup.com/entheogenic-society-of-greater-dayton/",note:"Monthly discussion, integration, safety education"},
@@ -458,7 +432,6 @@ var ORGS = {
  {n:"Save Lives Oregon",cat:"harm",city:"Portland",u:"https://www.savelivesoregon.org/",note:"Statewide naloxone and harm-reduction supply network"},
  {n:"HIV Alliance",cat:"harm",city:"Eugene",u:"https://hivalliance.org/",note:"Syringe services and overdose prevention, Lane County"},
  {n:"White Bird Clinic",cat:"harm",city:"Eugene",u:"https://whitebirdclinic.org/harm-reduction/",note:"Harm reduction center: safer-use supplies, test strips, treatment"},
- {n:"The Everly Project",cat:"harm",city:"Portland",u:"https://www.everlyproject.org/",note:"Mobile harm reduction for houseless community"},
  {n:"Open Psychedelic Evaluation Nexus (OHSU)",cat:"research",city:"Portland",u:"https://openpsychedelicscience.org/",note:"OHSU-housed research on safety and outcomes of Oregon's legal psilocybin services"},
  {n:"Portland Psychedelic Society",cat:"community",city:"Portland",u:"https://www.portlandpsychedelic.org/",note:"Nonprofit integration circles and education"},
  {n:"Portland Psychedelic Society Action Fund",cat:"reform",city:"Portland",u:"https://www.yesfornaturalmedicine.org/",note:"Led Portland's 2026 psychedelic low-priority ordinance; statewide push next"},
@@ -472,7 +445,6 @@ var ORGS = {
  {n:"Prevention Point Pittsburgh",cat:"harm",city:"Pittsburgh",u:"https://www.pppgh.org",note:"Western PA syringe access and naloxone"},
  {n:"Savage Sisters Recovery",cat:"harm",city:"Philadelphia",u:"https://www.savagesisters.org",note:"Kensington harm reduction, outreach, recovery housing"},
  {n:"Unity Recovery",cat:"community",city:"Philadelphia",u:"https://www.unityrecovery.org",note:"Free peer recovery support for all pathways of recovery"},
- {n:"Project SAFE",cat:"harm",city:"Philadelphia",u:"https://www.projectsafephilly.org",note:"Peer harm reduction for women, queer and trans people in Kensington"},
  {n:"Pennsylvania Recovery Organizations Alliance (PRO-A)",cat:"community",city:"Harrisburg",u:"https://pro-a.org",note:"Statewide recovery advocacy, peer workforce training and anti-stigma work"},
  {n:"Philadelphia Substance Use Prevention & Harm Reduction (SUPHR)",cat:"harm",city:"Philadelphia",u:"https://www.substanceusephilly.com",note:"City harm reduction: naloxone, test strips, drug-checking alerts, overdose data"},
  {n:"Lancaster Psychedelic Community",cat:"community",city:"Lancaster",u:"https://www.meetup.com/meetup-group-lp-community/",note:"Monthly in-person psychedelic discussion and support meetup"},
@@ -486,7 +458,6 @@ var ORGS = {
 "Rhode Island":[
  {n:"Project Weber/RENEW",cat:"harm",city:"Providence",u:"https://weberrenew.org",note:"Runs nation's first state-sanctioned overdose prevention center"},
  {n:"RICARES",cat:"community",city:"Providence",u:"https://www.ricares.org",note:"Recovery advocacy, peer support, policy reform"},
- {n:"Brown University Health Psilocybin for OCD Research Program",cat:"research",city:"Providence",u:"https://www.brownhealth.org/magic-mushrooms",note:"Pilot studying psilocybin for treatment-resistant OCD"},
  {n:"Rhode Island Public Health Institute",cat:"education",city:"Providence",u:"https://www.riphi.org",note:"Public-health nonprofit: HIV/HCV, overdose-crisis research, LGBTQ+ clinic"},
  {n:"Prevent Overdose RI",cat:"harm",city:"Statewide",u:"https://preventoverdoseri.org",note:"State overdose task force hub: naloxone by mail, data and local resources"},
  {n:"People, Place & Health Collective (Brown University)",cat:"research",city:"Providence",u:"https://pphcollective.org",note:"Brown public-health lab studying overdose, drug use and overdose prevention centers"},
@@ -517,7 +488,6 @@ var ORGS = {
  {n:"Metro Drug Coalition",cat:"education",city:"Knoxville",u:"https://metrodrug.org/",note:"Prevention, overdose education, Narcan distribution"},
  {n:"TN Assoc. of Alcohol, Drug & Addiction Services",cat:"education",city:"Nashville",u:"https://www.taadas.org/",note:"Addiction education, clearinghouse, policy advocacy"},
  {n:"Vanderbilt Division of Addiction Psychiatry",cat:"research",city:"Nashville",u:"https://www.vumc.org/addiction-psychiatry/research",note:"Addiction psychiatry research labs on alcohol, opioids and stress"},
- {n:"UTHSC Center for Addiction Science",cat:"research",city:"Memphis",u:"https://www.uthsc.edu/medicine/addiction-science/index.php",note:"University addiction research and treatment"},
  {n:"Hellbender Harm Reduction",cat:"harm",city:"Knoxville",u:"https://www.hellbenderharmreduction.org/",note:"Mail-based naloxone for Tennessee residents; state-listed syringe program"},
  {n:"Tennessee NORML",cat:"reform",city:"Statewide",u:"https://tnnorml.org/",note:"Official state NORML chapter working for medical cannabis reform in Tennessee"}
 ],
@@ -548,7 +518,6 @@ var ORGS = {
 ],
 "Vermont":[
  {n:"Psychedelic Society of Vermont",cat:"community",city:"Stowe",u:"https://vermontpsychedelic.org",note:"Clinician-led psychedelic education group; annual Soulquinox Summit"},
- {n:"Vermont CARES",cat:"harm",city:"Burlington",u:"https://www.facebook.com/vtcares/",note:"HIV/HCV harm reduction, syringe services, naloxone"},
  {n:"AIDS Project of Southern Vermont",cat:"harm",city:"Brattleboro",u:"https://www.aidsprojectsouthernvermont.org",note:"Syringe services, naloxone, HIV/HCV testing in Windham and Bennington"},
  {n:"Vermont NORML",cat:"reform",city:"Statewide",u:"https://normlvt.org/",note:"Vermont's NORML chapter: cannabis policy analysis, bill summaries and advocacy"}
 ],
@@ -562,7 +531,6 @@ var ORGS = {
  {n:"Strength in Peers",cat:"community",city:"Harrisonburg",u:"https://strengthinpeers.org",note:"Peer-run recovery support and state-authorized syringe services, Shenandoah Valley"}
 ],
 "Washington":[
- {n:"SSDP — UW Chapter",cat:"reform",city:"Seattle",u:"https://www.instagram.com/ssdp.uw/",note:"Student drug-policy reform and harm reduction"},
  {n:"Psychedelic Medicine Alliance of Washington",cat:"reform",city:"Seattle",u:"https://pmaw.org/",note:"Local entheogen decrim resolutions; statewide access advocacy"},
  {n:"People's Harm Reduction Alliance",cat:"harm",city:"Seattle",u:"https://phra.org/",note:"Peer-run syringe access, naloxone, test strips"},
  {n:"Dave Purchase Project",cat:"harm",city:"Tacoma",u:"https://www.davepurchaseproject.org/",note:"Nation's first legal needle exchange; Pierce County"},
@@ -571,9 +539,7 @@ var ORGS = {
  {n:"WSU Alcohol & Drug Addiction Research Program",cat:"research",city:"Pullman",u:"https://adarp.wsu.edu/",note:"State-funded grants and seminars for WSU addiction research"},
  {n:"Tacoma Psychedelic Society",cat:"community",city:"Tacoma",u:"https://www.tacomapsychedelicsociety.org/",note:"Integration circles, book club, local entheogen-decrim advocacy"},
  {n:"Seattle Psychedelic Healing & Spirituality",cat:"community",city:"Seattle",u:"https://www.meetup.com/seattle-psychedelic-healing-and-spirituality-community/",note:"Psychedelic Advocacy Network meetup; online talks and integration circles"},
- {n:"Entheo Society of Washington",cat:"reform",city:"Seattle",u:"https://entheosocietywa.org/",note:"Entheogen decriminalization advocacy, town halls and education"},
  {n:"Hepatitis Education Project",cat:"harm",city:"Seattle",u:"https://www.hep.org/",note:"Syringe services, hep C testing and care coordination"},
- {n:"Key Peninsula Psychedelic Society",cat:"community",city:"Key Peninsula",u:"https://www.kppsychedelic.org/",note:"Psychedelic society hosting monthly community meetings and public education talks"},
  {n:"LEAD Seattle · King County",cat:"reform",city:"Seattle",u:"https://leadkingcounty.org/",note:"Original LEAD program: police diversion to case management instead of drug arrests"},
  {n:"Olympia Psychedelics Society & Integration Circle",cat:"community",city:"Olympia",u:"https://www.meetup.com/olympia-psychedelics-integration-circle/",note:"Monthly peer psychedelic integration circle plus society talks; no use at meetings"},
  {n:"REACH Washington (Responsible Entheogen Access & Community Healing)",cat:"reform",city:"Statewide",u:"https://www.reachwa.org/",note:"Statewide coalition pushing a natural-psychedelics safe-access bill; lobby days, education"},
@@ -586,7 +552,7 @@ var ORGS = {
  {n:"Cabell-Huntington Health Department",cat:"harm",city:"Huntington",u:"https://cabellhealth.org/clinical-services/overdose-and-infectious-disease-prevention-program/",note:"Naloxone, syringe services, disease prevention"},
  {n:"West Virginia Drug Intervention Institute",cat:"education",city:"Dunbar",u:"https://www.wvdii.org/",note:"Naloxone, ONEbox kits, drug-safety education"},
  {n:"WVU Rockefeller Neuroscience Institute",cat:"research",city:"Morgantown",u:"https://wvumedicine.org/our-care/institutes/rni/",note:"Addiction neuroscience; deep-brain stimulation for OUD"},
- {n:"Marshall Univ. Joan C. Edwards School of Medicine",cat:"research",city:"Huntington",u:"https://jcesom.marshall.edu/",note:"Addiction-medicine fellowship and substance-use research"},
+ {n:"Marshall Univ. Joan C. Edwards School of Medicine",cat:"research",city:"Huntington",u:"https://jcesom.marshall.edu/residents-fellows/programs/addiction-medicine-fellowship/",note:"Addiction-medicine fellowship and substance-use research"},
  {n:"ACLU of West Virginia",cat:"reform",city:"Charleston",u:"https://www.acluwv.org/",note:"Litigates drug-policy and criminal-justice reform"},
  {n:"Recovery Point West Virginia",cat:"community",city:"Huntington",u:"https://recoverypointwv.org/",note:"Free peer-led recovery housing and support"},
  {n:"West Virginia Collegiate Recovery Network (WVCRN)",cat:"harm",city:"Statewide",u:"https://www.wvcollegiaterecovery.com/",note:"Campus peer recovery network that distributes naloxone and trains overdose response"}
@@ -640,7 +606,7 @@ var NATIONAL_ORGS = [
  {n:"North American Syringe Exchange Network (NASEN)",cat:"harm",city:"Tacoma, WA",u:"https://nasen.org",note:"Directory and supply buyers club for US syringe services programs"},
  {n:"Remedy Alliance / For The People",cat:"harm",city:"Berkeley, CA",u:"https://remedyallianceftp.org",note:"Low-cost naloxone buyers club for community harm reduction programs"},
  {n:"SafeSpot Overdose Hotline",cat:"harm",city:"Online",u:"https://safe-spot.me/",note:"Free 24/7 national hotline (800-972-0590) that spots people using alone and sends help"},
- {n:"UNC Street Drug Analysis Lab",cat:"harm",city:"Chapel Hill, NC",u:"https://www.streetsafe.supply",note:"Mail-in lab drug checking for US harm reduction programs; free to user unions"},
+ {n:"UNC Street Drug Analysis Lab",cat:"harm",city:"Chapel Hill, NC",u:"https://www.opioiddata.org/",note:"Mail-in lab drug checking for US harm reduction programs; free to user unions"},
  {n:"Zendo Project",cat:"harm",city:"San Francisco, CA",u:"https://zendoproject.org",note:"Psychedelic peer support at festivals and training in psychedelic care"},
  {n:"Etheridge Foundation",cat:"research",city:"Online",u:"https://www.etheridgefoundation.org/",note:"Funds research on psychedelic and plant-medicine treatments for opioid use disorder"},
  {n:"Heffter Research Institute",cat:"research",city:"Greenwich, CT",u:"https://www.heffter.org",note:"Funds psilocybin research; backed many landmark clinical studies"},
@@ -649,14 +615,11 @@ var NATIONAL_ORGS = [
  {n:"Usona Institute",cat:"research",city:"Madison, WI",u:"https://www.usonainstitute.org",note:"Nonprofit medical research org running psilocybin and 5-MeO-DMT trials"},
  {n:"Blacks in Psychedelics",cat:"community",city:"Online",u:"https://www.meetup.com/blacks-in-psychedelics/",note:"Monthly online discussion group on psychedelics for people of African descent"},
  {n:"People of Color Psychedelic Collective",cat:"community",city:"New York, NY",u:"https://www.pocpc.org",note:"Supports people of color through psychedelic education, healing and justice"},
- {n:"Plant Parenthood",cat:"community",city:"Online",u:"https://www.plantph.com/",note:"Community for parents interested in psychedelics: webinars, integration circles, chapters"},
  {n:"Psychedelic Support",cat:"community",city:"Online",u:"https://psychedelic.support",note:"Directory of integration groups and providers, plus online courses"},
  {n:"Psychedelics in Recovery",cat:"community",city:"Online",u:"https://www.psychedelicsinrecovery.org",note:"Twelve-step fellowship meetings, online and in person, on psychedelics and recovery"},
- {n:"Heroic Hearts Project",cat:"veterans",city:"New York, NY",u:"https://heroicheartsproject.org",note:"Veteran-led psychedelic retreat programs, research and advocacy"},
  {n:"The Wisdom Dojo",cat:"veterans",city:"Online",u:"https://thewisdomdojo.org/",note:"Meditation training and peer community for veterans integrating psychedelic therapy"},
  {n:"Veteran Mental Health Leadership Coalition (VMHLC)",cat:"veterans",city:"Online",u:"https://www.vmhlc.org",note:"Veteran-member coalition pushing for access to psychedelic therapies"},
  {n:"VETS (Veterans Exploring Treatment Solutions)",cat:"veterans",city:"Southlake, TX",u:"https://vetsolutions.org",note:"Grants and coaching for veterans' psychedelic therapy, plus VA policy advocacy"},
- {n:"Council on Spiritual Practices",cat:"church",city:"San Francisco, CA",u:"https://www.csp.org",note:"Religious-freedom and research advocacy for entheogenic spiritual practice"},
  {n:"Chacruna Institute for Psychedelic Plant Medicines",cat:"education",city:"San Francisco, CA",u:"https://chacruna.net",note:"Plant-medicine education, Indigenous reciprocity and psychedelic justice"},
  {n:"Erowid Center",cat:"education",city:"Online",u:"https://www.erowid.org",note:"Long-running online library of drug information and experience reports"},
  {n:"Intercollegiate Psychedelics Network",cat:"education",city:"Online",u:"https://www.intercollegiatepsychedelics.net",note:"Student and early-career network: talks, mentorship and PsychedelX"},
